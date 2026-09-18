@@ -1442,7 +1442,7 @@ export default function AdminPanelPage() {
 
     const rawEditingGallery = Array.isArray(editingProduct.gallery) && editingProduct.gallery.length > 0 ? editingProduct.gallery : []
     const cleanEditingGallery = rawEditingGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
-    const defaultCover = 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+    const defaultCover = DEFAULT_FALLBACK_IMAGE
     const finalGallery =
       cleanEditingGallery.length > 0
         ? cleanEditingGallery
@@ -1477,7 +1477,7 @@ export default function AdminPanelPage() {
     const defaultCover =
       (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990') ? newProduct.image : null) ||
       (newProduct.gallery && newProduct.gallery.find((g) => !g.includes('photo-1618354691373-d851c5c3a990'))) ||
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+      DEFAULT_FALLBACK_IMAGE
 
     const gallery =
       newProduct.gallery && newProduct.gallery.length > 0

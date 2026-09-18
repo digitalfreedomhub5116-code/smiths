@@ -92,12 +92,13 @@ function getSupabaseClient() {
   const supabaseUrl =
     process.env.SUPABASE_URL ||
     process.env.VITE_SUPABASE_URL ||
-    'https://sooedjbqgrdjtwiobjpr.supabase.co'
+    'https://znvqgluajmxgdvyfnkzu.supabase.co'
   const supabaseKey =
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
     process.env.SUPABASE_ANON_KEY ||
     process.env.VITE_SUPABASE_ANON_KEY ||
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvb2VkamJxZ3JkanR3aW9ianByIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3NDU1NzksImV4cCI6MjEwNDMyMTU3OX0.dgKiyPzjtiTTFFVH8QhpWHI3QTXAOelwiBBBngboGiI'
+    process.env.VITE_SUPABASE_PUBLISHABLE_KEY ||
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpudnFnbHVham14Z2R2eWZua3p1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MDQxMjksImV4cCI6MjEwNTI4MDEyOX0.IqDzvx_MNHanK1lD4xxZO7qcyM7aZi5NfFxjyb-NCDE'
 
   if (supabaseUrl && supabaseKey) {
     return createClient(supabaseUrl, supabaseKey)

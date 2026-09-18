@@ -1,5 +1,5 @@
 import { supabase, isSupabaseConfigured } from './supabase'
-import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData'
+import { MOCK_PRODUCTS, GENRES, buildProductReviews, DEFAULT_JEWELLERY_IMAGE } from '../data/productsData'
 
 const LOCAL_STORAGE_ORDERS_KEY = 'smiths_jewellery_orders'
 const LOCAL_STORAGE_USER_KEY = 'smiths_jewellery_user'
@@ -121,11 +121,11 @@ export async function getProducts(options = {}) {
 
           const fallbackGallery = cleanRowGallery.length > 0
             ? cleanRowGallery
-            : (mock?.gallery || (mock?.image ? [mock.image] : ['https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg']))
+            : (mock?.gallery || (mock?.image ? [mock.image] : [DEFAULT_JEWELLERY_IMAGE]))
 
           const coverImage = (row.image && !row.image.includes('photo-1618354691373-d851c5c3a990'))
             ? row.image
-            : fallbackGallery[0] || mock?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+            : fallbackGallery[0] || mock?.image || DEFAULT_JEWELLERY_IMAGE
 
           return {
             ...mock,
@@ -241,11 +241,11 @@ export async function getProductBySlugOrId(identifier) {
 
         const fallbackGallery = cleanGallery.length > 0
           ? cleanGallery
-          : (mock?.gallery || (mock?.image ? [mock.image] : ['https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg']))
+          : (mock?.gallery || (mock?.image ? [mock.image] : [DEFAULT_JEWELLERY_IMAGE]))
 
         const coverImage = (data.image && !data.image.includes('photo-1618354691373-d851c5c3a990'))
           ? data.image
-          : fallbackGallery[0] || mock?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+          : fallbackGallery[0] || mock?.image || DEFAULT_JEWELLERY_IMAGE
 
         return {
           ...mock,
@@ -1393,7 +1393,7 @@ export function getLocalCart() {
     const isShirt = typeof item.image === 'string' && item.image.includes('photo-1618354691373-d851c5c3a990')
     if (isShirt || !item.image) {
       const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(item.id) || m.slug === item.slug || (item.name && m.name && m.name.toLowerCase() === item.name.toLowerCase()))
-      const authenticCover = mock?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+      const authenticCover = mock?.image || DEFAULT_JEWELLERY_IMAGE
       const authenticGallery = mock?.gallery || [authenticCover]
       return {
         ...item,
@@ -1476,7 +1476,7 @@ export async function loadAccountCart(userId = null) {
       const isShirt = typeof item.image === 'string' && item.image.includes('photo-1618354691373-d851c5c3a990')
       if (isShirt || !item.image) {
         const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(item.id) || m.slug === item.slug || (item.name && m.name && m.name.toLowerCase() === item.name.toLowerCase()))
-        const authenticCover = mock?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+        const authenticCover = mock?.image || DEFAULT_JEWELLERY_IMAGE
         const authenticGallery = mock?.gallery || [authenticCover]
         return {
           ...item,
@@ -1797,7 +1797,7 @@ export async function sendTestWhatsAppNotification(phone, apiKey) {
     `⏰ Connected At: ${new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' })}`
 
   // Use Supabase Edge Function to read response and report back to UI
-  const edgeUrl = 'https://sooedjbqgrdjtwiobjpr.supabase.co/functions/v1/send-whatsapp-notification'
+  const edgeUrl = 'https://znvqgluajmxgdvyfnkzu.supabase.co/functions/v1/send-whatsapp-notification'
   const res = await fetch(edgeUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -1932,7 +1932,7 @@ export async function sendTestEmailNotification(email) {
     created_at: new Date().toISOString(),
   }
 
-  const edgeUrl = 'https://sooedjbqgrdjtwiobjpr.supabase.co/functions/v1/send-order-email'
+  const edgeUrl = 'https://znvqgluajmxgdvyfnkzu.supabase.co/functions/v1/send-order-email'
   const res = await fetch(edgeUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
