@@ -175,11 +175,11 @@ export default function CategoryPage() {
       <div className="min-h-screen bg-obsidian text-cream flex flex-col justify-between">
         <Navbar />
         <div className="mx-auto max-w-xl text-center px-4 py-32">
-          <h1 className="font-heading text-4xl font-bold text-cream">Universe Not Found</h1>
-          <p className="mt-3 text-cream-muted">The requested keychain category does not exist.</p>
+          <h1 className="font-heading text-4xl font-bold text-cream">Collection Not Found</h1>
+          <p className="mt-3 text-cream-muted">The requested jewellery collection does not exist.</p>
           <Link
             to="/"
-            className="btn-gold inline-flex items-center gap-2 mt-6 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest"
+            className="btn-silver inline-flex items-center gap-2 mt-6 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Home
           </Link>
@@ -209,7 +209,7 @@ export default function CategoryPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-obsidian/70 to-transparent" />
         </div>
 
-        {/* Content (Eyebrow tags removed) */}
+        {/* Content */}
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
           {/* Back to Home Button */}
           <Link
@@ -217,26 +217,26 @@ export default function CategoryPage() {
             className="group mb-6 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-obsidian/80 px-4 py-2 text-xs font-semibold text-cream backdrop-blur-md transition-all hover:border-gold hover:bg-gold hover:text-obsidian"
           >
             <ArrowLeft className="h-3.5 w-3.5 transition-transform group-hover:-translate-x-1" />
-            <span>All Universes</span>
+            <span>All Collections</span>
           </Link>
 
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
               <h1 className="font-heading text-4xl font-bold tracking-tight text-cream sm:text-5xl lg:text-6xl">
-                {genre.label} Outframed Keychains
+                {genre.label} Collection
               </h1>
               <p className="mt-2 max-w-xl text-sm leading-relaxed text-cream-muted sm:text-base">
-                Explore hand-finished antique gold keychains breaking boundaries across the {genre.label} universe.
+                Explore handcrafted 925 sterling silver and fine accessories in our {genre.label.toLowerCase()} collection.
               </p>
             </div>
 
             <div className="rounded-xl border border-gold/20 bg-charcoal/80 px-4 py-2.5 backdrop-blur-sm self-start sm:self-end">
               <span className="text-xs text-cream-muted/70 block">
-                {products.length > 0 ? 'Total Artifacts' : 'Collection Status'}
+                {products.length > 0 ? 'Total Pieces' : 'Collection Status'}
               </span>
               <span className="font-heading text-lg font-bold text-gold flex items-center gap-1.5">
                 {products.length > 0 ? (
-                  `${products.length} Designs`
+                  `${products.length} Pieces`
                 ) : (
                   <>
                     <Sparkles className="h-4 w-4 text-gold animate-pulse" />
@@ -262,26 +262,26 @@ export default function CategoryPage() {
           ) : (
             /* Coming Soon Showcase - Clean Text */
             <div className="my-8 mx-auto max-w-2xl rounded-3xl border border-gold/25 bg-charcoal/80 p-8 sm:p-14 text-center shadow-2xl backdrop-blur-md relative overflow-hidden">
-              {/* Background ambient gold glow */}
+              {/* Background ambient glow */}
               <div className="absolute -top-24 -left-24 w-64 h-64 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
 
               {/* Heading & Subtitle */}
               <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-cream leading-tight">
-                We Are Crafting the {genre.label} Keychains
+                Curating the {genre.label} Collection
               </h2>
               <p className="mt-4 max-w-lg mx-auto text-base sm:text-lg leading-relaxed text-cream-muted/90">
-                We are crafting the <span className="text-gold font-semibold">{genre.label}</span> keychains. Do wait for the next drop!
+                We are meticulously crafting new <span className="text-gold font-semibold">{genre.label}</span> designs. Stay tuned for the upcoming drop!
               </p>
 
               {/* Action Buttons */}
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Link
                   to="/"
-                  className="btn-gold inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest shadow-lg shadow-gold/20"
+                  className="btn-silver inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest shadow-lg shadow-gold/20"
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  <span>Browse All Keychains</span>
+                  <span>Browse All Jewellery</span>
                 </Link>
                 {otherGenres.length > 0 && (
                   <button
@@ -291,7 +291,7 @@ export default function CategoryPage() {
                     }}
                     className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-charcoal px-6 py-3 text-xs font-bold uppercase tracking-widest text-gold transition-colors hover:bg-gold hover:text-obsidian"
                   >
-                    <span>Explore Other Universes</span>
+                    <span>Explore Other Collections</span>
                     <ArrowRight className="h-4 w-4" />
                   </button>
                 )}
@@ -300,10 +300,10 @@ export default function CategoryPage() {
           )}
 
 
-          {/* Other Universes Switcher */}
+          {/* Other Collections Switcher */}
           <div id="explore-other-genres" className="mt-20 pt-10 border-t border-gold/15">
             <h3 className="font-heading text-xl font-bold text-cream mb-4">
-              Explore More Universes
+              Explore More Collections
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
               {otherGenres.map((og) => {
@@ -322,7 +322,7 @@ export default function CategoryPage() {
                         {og.label}
                       </span>
                       <span className="text-[11px] text-cream-muted/60">
-                        {ogCount > 0 ? `${ogCount} Designs` : 'Coming Soon'}
+                        {ogCount > 0 ? `${ogCount} Pieces` : 'Coming Soon'}
                       </span>
                     </div>
                     <ArrowRight className="h-4 w-4 text-cream-muted/50 group-hover:text-gold group-hover:translate-x-1 transition-all" />

@@ -37,7 +37,7 @@ export default function ShippingPolicyPage() {
             Shipping & Delivery Policy
           </h1>
           <p className="mt-4 text-sm sm:text-base text-cream-muted leading-relaxed max-w-2xl">
-            Everything you need to know about our additive manufacturing queue, artisan hand-finishing, packaging standards, and express courier transit across 29,000+ Indian pincodes.
+            Everything you need to know about our silver craftsmanship, artisan hand-polishing, luxury gift packaging standards, and express courier transit across 29,000+ Indian pincodes.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-gold/80">
             <span>Last Updated: September 2026</span>
@@ -56,7 +56,7 @@ export default function ShippingPolicyPage() {
             </div>
             <h2 className="font-heading text-base font-bold text-cream">24–48 Hr Dispatch</h2>
             <p className="text-xs text-cream-muted mt-1.5 leading-relaxed">
-              3D printed, quality-inspected, and packed within 24 to 48 hours of order confirmation.
+              Handcrafted, quality-inspected, and packed within 24 to 48 hours of order confirmation.
             </p>
           </div>
 
@@ -76,7 +76,7 @@ export default function ShippingPolicyPage() {
             </div>
             <h2 className="font-heading text-base font-bold text-cream">Shockproof Shield</h2>
             <p className="text-xs text-cream-muted mt-1.5 leading-relaxed">
-              Cushioned luxury gift boxes ensuring zero transit damage to fine outframed edges.
+              Signature midnight velvet gift boxes ensuring zero transit damage to fine silver craftsmanship.
             </p>
           </div>
         </div>
@@ -86,10 +86,10 @@ export default function ShippingPolicyPage() {
           <section className="space-y-3">
             <h2 className="font-heading text-xl font-bold text-cream flex items-center gap-2">
               <span className="text-gold font-mono text-base">01.</span>
-              <span>Order Processing & Additive Queue</span>
+              <span>Order Processing & Workshop Queue</span>
             </h2>
             <p>
-              Each Outframe Labs keychain is fabricated using multi-layer precision additive 3D manufacturing, followed by meticulous hand-finishing, antique gold lustering, and curing.
+              Each Smiths Jewellery piece is crafted using 925 sterling silver, followed by meticulous hand-polishing, rhodium lustering, and gemstone inspection.
             </p>
             <p>
               Orders confirmed before 2:00 PM IST on working business days enter the print queue on the same day. Standard turnaround from queue entry to courier handover is 24 to 48 hours. During limited drop windows or high-volume festive seasons, please allow up to 72 hours for careful artisanal inspection before dispatch.
@@ -157,8 +157,8 @@ export default function ShippingPolicyPage() {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gold shrink-0" />
                 <span className="text-cream font-medium">Dispatch Desk Email:</span>
-                <a href="mailto:support@outframelabs.in" className="text-gold font-bold hover:underline font-mono">
-                  support@outframelabs.in
+                <a href="mailto:support@smithsjewellery.com" className="text-gold font-bold hover:underline font-mono">
+                  support@smithsjewellery.com
                 </a>
               </div>
             </div>

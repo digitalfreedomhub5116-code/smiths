@@ -1,219 +1,373 @@
 import { REVIEWS_POOL } from './reviewsData.js'
 
+export const DEFAULT_JEWELLERY_IMAGE =
+  'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
+
 const DUMMY_GALLERY = [
-  'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg',
-  'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/iron-man-1-cover.jpg',
-  'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-cover.jpg',
-  'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-cover.jpg',
+  'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
+  'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80',
+  'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=900&q=80',
+  'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
 ]
 
 export const GENRES = [
   {
-    id: 'MARVEL',
-    label: 'Marvel',
-    slug: 'marvel-outframed-keychains',
-    image: 'https://images.unsplash.com/photo-1635863138275-d9b33299680b?w=900&q=80',
+    id: 'NECKLACES',
+    label: 'Necklaces',
+    slug: 'necklaces',
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
+    tagline: 'Handcrafted 925 Sterling Silver Pendants & Chokers',
   },
   {
-    id: 'DC',
-    label: 'DC',
-    slug: 'dc-outframed-keychains',
-    image: 'https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=900&q=80',
+    id: 'BRACELETS',
+    label: 'Bracelets',
+    slug: 'bracelets',
+    image: 'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
+    tagline: 'Lustrous Tennis Chains, Bangles & Polished Cuffs',
   },
   {
-    id: 'ANIME',
-    label: 'Anime',
-    slug: 'anime-outframed-keychains',
-    image: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=900&q=80',
+    id: 'EARRINGS',
+    label: 'Earrings',
+    slug: 'earrings',
+    image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
+    tagline: 'Crystal Drops, Solitaire Studs & Huggie Hoops',
   },
   {
-    id: 'CARS',
-    label: 'Cars',
-    slug: 'cars-outframed-keychains',
-    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=80',
+    id: 'RINGS',
+    label: 'Rings',
+    slug: 'rings',
+    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=80',
+    tagline: 'Sterling Silver Bands & Solitaire Statement Rings',
   },
   {
-    id: 'VALORANT',
-    label: 'Valorant',
-    slug: 'valorant-outframed-keychains',
-    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&q=80',
+    id: 'SCARFS',
+    label: 'Scarfs',
+    slug: 'scarfs',
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=900&q=80',
+    tagline: 'Pure Mulberry Silk & Cashmere-Touch Stoles',
+  },
+  {
+    id: 'COMBOS',
+    label: 'Combos',
+    slug: 'combos',
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80',
+    tagline: 'Curated Gift Sets in Velvet Presentation Boxes',
   },
 ]
 
-const CHARACTER_DESCRIPTIONS = {
-  'Iron Man': 'Bring the genius billionaire Avenger everywhere with the Iron Man Outframed Keychain. Featuring the iconic Mark LXXXV helmet and arc core bursting outward beyond a solid antique gold frame, this handcrafted piece turns everyday keys into a wearable Marvel collectible.',
-  'Spider-Man': 'Swing through the city with the Spider-Man Outframed Keychain. Capturing Peter Parker dynamic web-slinging pose protruding past the frame in warm antique gold patina, it brings the ultimate neighborhood superhero to your daily carry.',
-  'Thor': 'Channel the power of thunder with the Thor Outframed Keychain. Forged with Mjolnir and Asgardian lightning runes breaking over the gold frame border, this piece carries true mythical weight.',
-  'Hulk': 'Unleash raw strength with the Hulk Outframed Keychain. Sculpted with the colossal fists and raging silhouette smashing through the antique gold boundary, built to withstand daily drops.',
-  'Captain America': 'Carry the First Avenger legacy with the Captain America Outframed Keychain. Showcasing the star-spangled vibranium shield bursting past the frame in antique gold finish.',
-  'Batman': 'Embrace Gotham nocturnal vigilante with the Dark Knight Batman Outframed Keychain. Precision-contoured with the bat cowl and cowl ears piercing through the metallic border in shadowed antique gold.',
-  'Superman': 'Display the Kryptonian House of El hope crest with the Superman Outframed Keychain. 3D embossed with the iconic S-shield soaring past the frame in rich gold alloy tone.',
-  'Porsche': 'Engineered for motorsport purists, the Porsche Outframed Keychain captures the aerodynamic swan-neck GT3 wing and widebody rear track breaking out of frame in timeless antique gold.',
-  'Mustang': 'Capture pure American muscle with the Mustang Outframed Keychain. Sculpted with the galloping pony and aggressive front hood vents roaring past the outer frame.',
-  'BMW': 'Celebrate Bavarian performance heritage with the BMW M Outframed Keychain. Features the aggressive twin-kidney grille and M-power silhouette breaking through the antique gold border.',
-  'Ferrari': 'Italian passion meets artisan craft in the Ferrari Outframed Keychain. Showcasing the prancing stallion aerodynamic curves leaping out from the antique gold frame.',
-  'Jett': 'Unleash the wind storm with the Jett Outframed Keychain. Designed with Jett signature aerodynamic kunai blade extending past the frame, this piece is built for Valorant clutch players.',
-  'Reyna': 'Embrace Radiant dominance with the Reyna Empress Outframed Keychain. Detailed with the terrifying soul orb eye and dark gold tendrils stretching beyond the boundary.',
-  'Sage': 'Provide balance and protection with the Sage Outframed Keychain. Sculpted with the crystalline healing orb motif breaking through the antique gold frame.',
-  'Chamber': 'Dine in luxury with the Chamber Outframed Keychain. Inspired by the French weapons designer bespoke gold card silhouette and Tour de Force sniper motif.',
-  'Clove': 'Defy mortality with the Clove Outframed Keychain. Featuring immortal butterfly wings and mischievous controller energy fluttering past the gold frame border.',
-  'Naruto': 'Channel the yellow flash of the Hidden Leaf with the Naruto Outframed Keychain. Detailed with the Flying Raijin teleportation kunai blade protruding through the antique gold frame.',
-  'Luffy': 'Set sail for the Grand Line with the Luffy Outframed Keychain. Features the iconic straw hat and Gear silhouette stretching outward beyond the antique gold frame.',
-  'Ichigo': 'Awaken your inner soul reaper with the Ichigo Outframed Keychain. Features the Tensa Zangetsu sword guard and hollow mask horn protruding past the border.',
-  'Goku': 'Go beyond your limits with the Goku Outframed Keychain. Capturing Super Saiyan flowing hair and Kamehameha stance bursting past the antique gold frame.',
-  'Aizen': 'Rule the Espada with the Aizen Outframed Keychain. Crafted with the Hogyoku emblem and calm sinister silhouette breaking beyond normal limits in antique gold.',
-  'Madara': 'Witness true power with the Madara Uchiha Outframed Keychain. Featuring the eternal Mangekyo Sharingan and gunbai fan bursting through the antique gold boundary.',
-  'Doflamingo': 'Rule Dressrosa with the Doflamingo Outframed Keychain. Designed with the feathered coat texture and razor thread strings slicing right through the frame.',
-  'Gojo': 'Command the limitless with the Satoru Gojo Outframed Keychain. Features the six-eyes blindfold emblem and infinite void domain seals breaking beyond bounds in antique gold.',
-  'Sukuna': 'Embrace the King of Curses with the Ryomen Sukuna Outframed Keychain. Features malevolent shrine markings and cleaved demonic claws bursting outward in antique gold.',
+const JEWELLERY_DESCRIPTIONS = {
+  'Luxe Solitaire Silver Pendant':
+    'Command timeless attention with the Luxe Solitaire Silver Pendant. Sculpted in authentic 925 hallmarked sterling silver and crowned with a brilliant round-cut AAA cubic zirconia that dances under every ray of light. Finished in high-luster rhodium for lasting tarnish resistance.',
+  'Celestial Crescent Moon Choker':
+    'Embrace celestial poetry with the Crescent Moon Choker. Delicately curved polished silver rests gracefully along the collarbone, accented with micro-pave crystals that mimic starry constellations. A dreamlike centerpiece for both everyday charm and evening soirees.',
+  'Sterling Silver Figaro Chain':
+    'Rooted in classic Italian silversmith heritage, this solid sterling silver Figaro chain blends alternating oval and elongated links with precision beveled edges. Designed for enduring strength, effortless layering, and high-shine sophistication.',
+  'Gothic Starlight Silver Locket':
+    'Keep your dearest memories close with the Gothic Starlight Silver Locket. Hand-etched starburst engravings on an antique polished silver medallion frame open smoothly with a secure magnetic clasp. Built for heirloom longevity.',
+  'Radiant Tennis Silver Bracelet':
+    'The pinnacle of modern glamour. Featuring a seamless infinity line of hand-set AAA diamond-grade cubic zirconia stones set into solid 925 silver prongs with an ultra-secure double-latch safety clasp.',
+  'Minimalist Polished Silver Cuff':
+    'Pure architectural symmetry. Forged from cold-rolled solid silver, this open-ended cuff flexes gently to contour your wrist perfectly. High-mirror finish gives it an immaculate liquid chrome glow.',
+  'Silver Cuban Link Chain Bracelet':
+    'Bold, weighty, and unapologetically stylish. Interlocking flat-beveled silver links drape comfortably around the wrist, secured with a custom Smiths engraved box lock.',
+  'Aurora Crystal Teardrop Earrings':
+    'Catching every glance with graceful motion, the Aurora Teardrop Earrings showcase faceted crystal briolettes suspended from slender sterling silver hooks. Feather-light and hypoallergenic.',
+  'Classic Princess-Cut Solitaire Studs':
+    'The quintessential silver stud. Square princess-cut stones held securely in four-prong 925 silver basket mounts. Features comfortable friction backs that keep them centered all day.',
+  'Midnight Silver Huggie Hoops':
+    'Chic, snug-fitting hoops embedded with a row of shimmering pavé crystals. Engineered with a smooth snap-click closure that will never catch on clothes or hair.',
+  'Eternal Wave Sterling Silver Band':
+    'Inspired by the fluid rhythm of ocean waves, this contoured silver ring features alternating polished and brushed silver textures. Ergonomically shaped for seamless 24/7 comfort.',
+  'Crown Solitaire CZ Silver Ring':
+    'Regal and majestic. A six-prong elevated crown setting elevates a hand-faceted solitaire stone above a pavé encrusted 925 silver band.',
+  'Monogram Silver Silk Satin Scarf':
+    'Crafted from 100% pure Mulberry silk with hand-rolled hems, this lustrous scarf features an ethereal silver-toned geometric monogram. Drapes with fluid elegance across the shoulders or neck.',
+  'Midnight Cashmere Touch Winter Scarf':
+    'Ultra-soft brushed wool and cashmere blend with subtle silver metallic thread weaving throughout the fringe. Wraps you in warmth while delivering refined luxury aesthetics.',
+  'The Royal Silver Ensemble':
+    'The definitive luxury pairing. Combines our bestselling Luxe Solitaire Silver Pendant with matching Princess-Cut Solitaire Studs, nestled inside a signature Smiths velvet presentation box.',
+  'Signature Luxe Gift Box':
+    'The ultimate gesture of affection. Uniting the Minimalist Polished Silver Cuff and the Monogram Silver Silk Scarf inside a ribbon-tied velvet gift box complete with an authenticity certificate.',
 }
 
 const RAW_PRODUCTS = [
-  // ── MARVEL ── (₹299)
+  // ── NECKLACES ──
   {
     id: 1,
-    name: 'Iron Man',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 11,
-    rating: 4.7,
+    name: 'Luxe Solitaire Silver Pendant',
+    genre: 'NECKLACES',
+    price: 1299,
+    originalPrice: 2599,
+    reviewCount: 19,
+    rating: 4.9,
     badCount: 2,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/gallery-1789010822520-6i1jc9.jpg',
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/gallery-1789010822520-6i1jc9.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/gallery-1789010913395-igqx67.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/iron-man-1-gallery-3.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/gallery-1789010815984-z7nf0u.jpg',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
+      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80',
+      'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=900&q=80',
     ],
   },
   {
     id: 2,
-    name: 'Spider-Man',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 13,
+    name: 'Celestial Crescent Moon Choker',
+    genre: 'NECKLACES',
+    price: 1499,
+    originalPrice: 2999,
+    reviewCount: 15,
     rating: 4.8,
-    badCount: 2,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-cover.jpg',
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/spider-man-2-gallery-3.jpg',
+      'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=900&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
     ],
   },
   {
     id: 3,
-    name: 'Thor',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 9,
-    rating: 4.6,
+    name: 'Sterling Silver Figaro Chain',
+    genre: 'NECKLACES',
+    price: 1099,
+    originalPrice: 2199,
+    reviewCount: 11,
+    rating: 4.7,
     badCount: 2,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/thor-3-cover.jpg',
+    image: 'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/thor-3-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/thor-3-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/thor-3-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/thor-3-gallery-3.jpg',
+      'https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=900&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
     ],
   },
   {
     id: 4,
-    name: 'Hulk',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 7,
-    rating: 4.7,
-    badCount: 1,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/hulk-4-cover.jpg',
-    gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/hulk-4-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/hulk-4-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/hulk-4-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/hulk-4-gallery-3.jpg',
-    ],
-  },
-  {
-    id: 5,
-    name: 'Captain America',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 15,
-    rating: 4.8,
+    name: 'Gothic Starlight Silver Locket',
+    genre: 'NECKLACES',
+    price: 1699,
+    originalPrice: 3399,
+    reviewCount: 23,
+    rating: 4.9,
     badCount: 2,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-cover.jpg',
+    image: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/captain-america-5-gallery-3.jpg',
+      'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=900&q=80',
+      'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=900&q=80',
     ],
   },
 
-  // ── DC ── (₹299)
+  // ── BRACELETS ──
+  {
+    id: 5,
+    name: 'Radiant Tennis Silver Bracelet',
+    genre: 'BRACELETS',
+    price: 1399,
+    originalPrice: 2799,
+    reviewCount: 17,
+    rating: 4.9,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
+      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900&q=80',
+    ],
+  },
   {
     id: 6,
-    name: 'Batman',
-    genre: 'DC',
-    price: 299,
-    originalPrice: 599,
+    name: 'Minimalist Polished Silver Cuff',
+    genre: 'BRACELETS',
+    price: 899,
+    originalPrice: 1799,
     reviewCount: 13,
-    rating: 4.9,
+    rating: 4.7,
     badCount: 2,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg',
+    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-gallery-3.jpg',
+      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900&q=80',
+      'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
     ],
   },
   {
     id: 7,
-    name: 'Superman',
-    genre: 'DC',
-    price: 299,
-    originalPrice: 599,
-    reviewCount: 9,
+    name: 'Silver Cuban Link Chain Bracelet',
+    genre: 'BRACELETS',
+    price: 1199,
+    originalPrice: 2399,
+    reviewCount: 15,
+    rating: 4.8,
+    badCount: 2,
+    image: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=900&q=80',
+      'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
+    ],
+  },
+
+  // ── EARRINGS ──
+  {
+    id: 8,
+    name: 'Aurora Crystal Teardrop Earrings',
+    genre: 'EARRINGS',
+    price: 999,
+    originalPrice: 1999,
+    reviewCount: 21,
     rating: 4.8,
     badCount: 1,
-    image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/superman-7-cover.jpg',
+    image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
     gallery: [
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/superman-7-cover.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/superman-7-gallery-1.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/superman-7-gallery-2.jpg',
-      'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/superman-7-gallery-3.jpg',
+      'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
+      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=900&q=80',
+    ],
+  },
+  {
+    id: 9,
+    name: 'Classic Princess-Cut Solitaire Studs',
+    genre: 'EARRINGS',
+    price: 799,
+    originalPrice: 1599,
+    reviewCount: 25,
+    rating: 4.9,
+    badCount: 2,
+    image: 'https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1635767798638-3e25273a8236?w=900&q=80',
+      'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
+    ],
+  },
+  {
+    id: 10,
+    name: 'Midnight Silver Huggie Hoops',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1699,
+    reviewCount: 14,
+    rating: 4.7,
+    badCount: 2,
+    image: 'https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=900&q=80',
+      'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
+    ],
+  },
+
+  // ── RINGS ──
+  {
+    id: 11,
+    name: 'Eternal Wave Sterling Silver Band',
+    genre: 'RINGS',
+    price: 749,
+    originalPrice: 1499,
+    reviewCount: 16,
+    rating: 4.8,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=80',
+      'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900&q=80',
+    ],
+  },
+  {
+    id: 12,
+    name: 'Crown Solitaire CZ Silver Ring',
+    genre: 'RINGS',
+    price: 999,
+    originalPrice: 1999,
+    reviewCount: 22,
+    rating: 4.9,
+    badCount: 2,
+    image: 'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1603561591411-07134e71a2a9?w=900&q=80',
+      'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=900&q=80',
+    ],
+  },
+
+  // ── SCARFS ──
+  {
+    id: 13,
+    name: 'Monogram Silver Silk Satin Scarf',
+    genre: 'SCARFS',
+    price: 1199,
+    originalPrice: 2399,
+    reviewCount: 13,
+    rating: 4.9,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=900&q=80',
+      'https://images.unsplash.com/photo-1584030373081-f37b7bb4fa8e?w=900&q=80',
+    ],
+  },
+  {
+    id: 14,
+    name: 'Midnight Cashmere Touch Winter Scarf',
+    genre: 'SCARFS',
+    price: 1399,
+    originalPrice: 2799,
+    reviewCount: 11,
+    rating: 4.8,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=900&q=80',
+      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=900&q=80',
+    ],
+  },
+
+  // ── COMBOS ──
+  {
+    id: 15,
+    name: 'The Royal Silver Ensemble',
+    genre: 'COMBOS',
+    price: 1999,
+    originalPrice: 3999,
+    reviewCount: 29,
+    rating: 5.0,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80',
+      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80',
+      'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
+    ],
+  },
+  {
+    id: 16,
+    name: 'Signature Luxe Gift Box',
+    genre: 'COMBOS',
+    price: 2399,
+    originalPrice: 4799,
+    reviewCount: 19,
+    rating: 4.9,
+    badCount: 1,
+    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=900&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=900&q=80',
+      'https://images.unsplash.com/photo-1611591475152-478311394c8b?w=900&q=80',
+      'https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=900&q=80',
     ],
   },
 ]
 
 export function buildProductReviews(product = {}) {
   const reviews = []
-  const count = Number(product.reviewCount) || 11
+  const count = Number(product.reviewCount) || 12
   const badTarget = Number(product.badCount) || 2
   const numId = Number(product.id) || 1
 
-  // Add bad reviews first (1 to 5 as specified)
+  // Add critical reviews first (1 to 2)
   for (let i = 0; i < badTarget && i < REVIEWS_POOL.critical.length; i++) {
     const pick = REVIEWS_POOL.critical[(numId + i) % REVIEWS_POOL.critical.length]
     reviews.push({
       id: `bad-${numId}-${i}`,
       name: pick.name,
       rating: pick.rating,
-      date: `${(i + 2)} days ago`,
+      date: `${i + 2} days ago`,
       text: pick.text,
       verified: true,
     })
   }
 
-  // Genre specific positive reviews if available
-  const genre = product.genre || 'MARVEL'
+  // Category specific positive reviews
+  const genre = product.genre || 'NECKLACES'
   const genreList = REVIEWS_POOL.genreSpecific[genre] || []
   if (genreList.length > 0 && reviews.length < count) {
     const genreReview = genreList[numId % genreList.length]
@@ -221,20 +375,20 @@ export function buildProductReviews(product = {}) {
       id: `genre-${numId}`,
       name: genreReview.name,
       rating: 5,
-      date: "Just now",
+      date: 'Just now',
       text: genreReview.text,
       verified: true,
     })
   }
 
-  // Fill remaining with positive general reviews
+  // Fill remaining with general reviews
   let posIndex = (numId * 3) % REVIEWS_POOL.positive.length
   while (reviews.length < count) {
     const item = REVIEWS_POOL.positive[posIndex % REVIEWS_POOL.positive.length]
     reviews.push({
       id: `pos-${numId}-${reviews.length}`,
       name: item.name,
-      rating: (reviews.length % 4 === 0) ? 4 : 5,
+      rating: reviews.length % 4 === 0 ? 4 : 5,
       date: `${(reviews.length + 1) * 2} days ago`,
       text: item.text,
       verified: true,
@@ -247,14 +401,18 @@ export function buildProductReviews(product = {}) {
 
 export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const reviews = buildProductReviews(p)
-  const slug = `${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-outframed-keychain`
-  const fullName = `${p.name} Outframed Keychain`
-  const description = CHARACTER_DESCRIPTIONS[p.name] || `Antique gold ${p.name} outframed keychain crafted for collectors.`
+  const slug = `${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
+  const fullName = `${p.name} - Smiths Jewellery`
+  const description =
+    JEWELLERY_DESCRIPTIONS[p.name] ||
+    `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`
 
-  const originalPrice = p.originalPrice || 599
+  const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.name === 'Iron Man' || p.name === 'Hulk' || p.id === 1 || p.id === 4
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15
+
+  const isScarf = p.genre === 'SCARFS'
 
   return {
     ...p,
@@ -263,21 +421,31 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
     originalPrice,
     discountPercent,
     isBestseller,
-    image: p.image || DUMMY_GALLERY[0],
-    gallery: Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : (p.image ? [p.image] : DUMMY_GALLERY),
+    image: p.image || DEFAULT_JEWELLERY_IMAGE,
+    gallery:
+      Array.isArray(p.gallery) && p.gallery.length > 0
+        ? p.gallery
+        : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: [
-      'Each keychain is made from bio degradable PLA material.',
-      'Strong and durable keyring',
-      'Antique gold finish',
-      'Durable.',
-      'Dimensions: 64mm * 43mm',
-    ],
-    dimensions: '64mm * 43mm',
-    material: 'Biodegradable PLA',
-    finish: 'Antique Gold Finish',
-    keyring: 'Strong and Durable Keyring',
-    durability: 'Durable Impact Resistant Structure',
+    features: isScarf
+      ? [
+          '100% Pure Mulberry Silk / Cashmere blend texture',
+          'Hand-rolled and stitched edges',
+          'Breathable, lightweight and rich drape',
+          'Arrives in Smiths Signature Gift Packaging',
+        ]
+      : [
+          'Crafted from certified 925 Sterling Silver',
+          'Triple Rhodium Plated for enduring tarnish resistance',
+          'AAA Grade brilliant cubic zirconia stones',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free',
+          'Includes Velvet Presentation Box & Authenticity Certificate',
+        ],
+    dimensions: isScarf ? '90cm x 90cm' : 'Adjustable Length / Standard Comfort Fit',
+    material: isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
+    finish: isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
+    keyring: 'Hypoallergenic Security Clasp',
+    durability: 'Tarnish-Resistant Daily Wear',
     reviews,
   }
 })

@@ -1,5 +1,5 @@
 /**
- * Image Optimizer Utility for Outframe Labs
+ * Image Optimizer Utility for Smiths Jewellery
  * 
  * Routes Supabase Storage image URLs through Supabase's image transformation CDN endpoint:
  *   /storage/v1/object/public/...  -->  /storage/v1/render/image/public/...?width=...&quality=...

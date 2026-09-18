@@ -134,7 +134,7 @@ export default async function handler(req, res) {
 
     if (!action && req.url && req.url.includes('?')) {
       try {
-        const parsedUrl = new URL(req.url, 'https://outframelabs.in')
+        const parsedUrl = new URL(req.url, 'https://smithsjewellery.in')
         action = action || parsedUrl.searchParams.get('action')
         orderParam = orderParam || parsedUrl.searchParams.get('orderId') || parsedUrl.searchParams.get('order_id')
         shipmentParam = shipmentParam || parsedUrl.searchParams.get('shipmentId') || parsedUrl.searchParams.get('shipment_id')
@@ -358,7 +358,7 @@ export default async function handler(req, res) {
 
     const rawPhone = String(order.customer_phone || rawAddress.phone || '').replace(/[^0-9]/g, '')
     const phone = rawPhone.slice(-10) // Clean 10-digit Indian mobile number
-    const email = order.customer_email || rawAddress.email || 'orders@outframelabs.com'
+    const email = order.customer_email || rawAddress.email || 'orders@smithsjewellery.com'
 
     const streetAddress = (rawAddress.street_address || rawAddress.address || '').trim()
     const city = (rawAddress.city || '').trim()
@@ -403,43 +403,43 @@ export default async function handler(req, res) {
     const orderItems = order.order_items || order.items || []
     const formattedItems = orderItems.length > 0
       ? orderItems.map((it, idx) => ({
-          name: it.name || it.product_name || 'Outframed 3D Keychain',
-          sku: it.sku || `OFL-KC-${it.product_id || it.id || idx + 1}`,
+          name: it.name || it.product_name || 'Smiths Silver Jewellery Piece',
+          sku: it.sku || `SMT-JW-${it.product_id || it.id || idx + 1}`,
           units: Number(it.quantity || 1),
-          selling_price: Number(it.price || 299),
+          selling_price: Number(it.price || 1299),
           discount: 0,
           tax: 0,
-          hsn: 39269099, // Standard HSN code for 3D printed plastic keychains & collectables
+          hsn: 71131120, // Standard HSN code for Silver Jewellery
         }))
       : [
           {
-            name: 'Outframed Antique Gold 3D Keychain',
-            sku: 'OFL-KC-01',
+            name: 'Smiths 925 Sterling Silver Jewellery Piece',
+            sku: 'SMT-JW-01',
             units: 1,
-            selling_price: Number(order.total_amount || 299),
+            selling_price: Number(order.total_amount || 1299),
             discount: 0,
             tax: 0,
-            hsn: 39269099,
+            hsn: 71131120,
           },
         ]
 
     // 6. Format Order Data into Shiprocket Custom Order Payload
-    // Package dimensions hardcoded per specification: Length: 10cm, Width: 10cm, Height: 5cm, Weight: 0.1kg
+    // Package dimensions: Length: 12cm, Width: 12cm, Height: 6cm, Weight: 0.15kg
     const pickupLocationId =
       process.env.PICKUP_LOCATION_ID ||
       process.env.SHIPROCKET_PICKUP_LOCATION ||
       'Home'
 
-    const orderNumber = order.order_number || `OFL-${order.id}`
+    const orderNumber = order.order_number || `SMT-${order.id}`
     const paymentMethod = (order.payment_method || '').toUpperCase() === 'COD' ? 'COD' : 'Prepaid'
-    const totalAmount = Number(order.total_amount || order.subtotal || 299)
+    const totalAmount = Number(order.total_amount || order.subtotal || 1299)
 
     const shiprocketPayload = {
       order_id: orderNumber,
       order_date: formatShiprocketDate(order.created_at),
       pickup_location: pickupLocationId,
       channel_id: process.env.SHIPROCKET_CHANNEL_ID || '12100778',
-      comment: 'Outframe Labs Collector Keychain Drop - Handle with Care',
+      comment: 'Smiths Jewellery - Luxury Silver Jewellery, Handle with Care',
       billing_customer_name: firstName,
       billing_last_name: lastName,
       billing_address: streetAddress,
@@ -726,7 +726,7 @@ async function updateDatabaseWithAwb({
         shipment_id: targetShipmentId,
         status: 'SHIPPED',
         activity: `AWB Generated (${awbCode}) via ${courierPartner}. Handed over to courier partner.`,
-        location: 'Outframe Labs Fulfillment Hub, Bengaluru',
+        location: 'Smiths Jewellery Fulfillment Hub, Mumbai',
         event_time: nowIso,
       })
     }

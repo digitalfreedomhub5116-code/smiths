@@ -51,23 +51,23 @@ export default function ProductPage() {
     ? {
         ...mockFallback,
         ...raw,
-        name: raw.name || mockFallback?.name || 'Outframed Keychain',
-        fullName: raw.fullName || mockFallback?.fullName || `${raw.name || 'Outframed'} Keychain`,
-        genre: raw.genre || mockFallback?.genre || 'MARVEL',
-        price: Number(raw.price) || mockFallback?.price || 299,
-        originalPrice: Number(raw.originalPrice) || mockFallback?.originalPrice || 599,
-        discountBadge: raw.discountBadge || mockFallback?.discountBadge || '-46%',
-        discountPercent: raw.discountPercent || mockFallback?.discountPercent || 46,
-        description: raw.description || mockFallback?.description || `Handcrafted antique gold ${raw.name} outframed keychain.`,
+        name: raw.name || mockFallback?.name || 'Silver Jewellery Piece',
+        fullName: raw.fullName || mockFallback?.fullName || `${raw.name || 'Silver'} Jewellery`,
+        genre: raw.genre || mockFallback?.genre || 'NECKLACES',
+        price: Number(raw.price) || mockFallback?.price || 1299,
+        originalPrice: Number(raw.originalPrice) || mockFallback?.originalPrice || 2499,
+        discountBadge: raw.discountBadge || mockFallback?.discountBadge || '-48%',
+        discountPercent: raw.discountPercent || mockFallback?.discountPercent || 48,
+        description: raw.description || mockFallback?.description || `Handcrafted 925 sterling silver ${raw.name || 'jewellery'} finished with radiant rhodium luster.`,
         features: Array.isArray(raw.features) && raw.features.length > 0 ? raw.features : (mockFallback?.features || []),
-        rating: Number(raw.rating) || mockFallback?.rating || 4.8,
-        reviewCount: Number(raw.reviewCount) || mockFallback?.reviewCount || 12,
+        rating: Number(raw.rating) || mockFallback?.rating || 4.9,
+        reviewCount: Number(raw.reviewCount) || mockFallback?.reviewCount || 24,
         reviews: Array.isArray(raw.reviews) && raw.reviews.length > 0
           ? raw.reviews
           : (mockFallback?.reviews || buildProductReviews(raw)),
         gallery: Array.isArray(raw.gallery) && raw.gallery.length > 0
           ? raw.gallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
-          : (mockFallback?.gallery || (raw.image && !raw.image.includes('photo-1618354691373-d851c5c3a990') ? [raw.image] : [mockFallback?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'])),
+          : (mockFallback?.gallery || (raw.image && !raw.image.includes('photo-1618354691373-d851c5c3a990') ? [raw.image] : [mockFallback?.image || DEFAULT_FALLBACK_IMAGE])),
         inStock: raw.inStock !== false,
         isHidden: raw.isHidden === true,
       }
@@ -78,7 +78,7 @@ export default function ProductPage() {
   const cleanProductGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
   const gallery = cleanProductGallery.length > 0
     ? cleanProductGallery
-    : (product?.image && !product.image.includes('photo-1618354691373-d851c5c3a990') ? [product.image] : [mockFallback?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'])
+    : (product?.image && !product.image.includes('photo-1618354691373-d851c5c3a990') ? [product.image] : [mockFallback?.image || DEFAULT_FALLBACK_IMAGE])
 
   const isWishlisted = useCartStore((s) => (product ? s.isWishlisted(product.id) : false))
 
@@ -269,12 +269,12 @@ export default function ProductPage() {
           <h1 className="font-heading text-4xl font-bold text-cream">Product Unavailable</h1>
           <p className="mt-3 text-cream-muted">
             {product?.isHidden
-              ? 'This product is currently hidden from the public catalog.'
-              : 'This outframed keychain could not be located.'}
+              ? 'This piece is currently hidden from the public catalog.'
+              : 'This jewellery piece could not be located.'}
           </p>
           <Link
             to="/"
-            className="btn-gold inline-flex items-center gap-2 mt-6 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest"
+            className="btn-silver inline-flex items-center gap-2 mt-6 rounded-full px-6 py-3 text-xs font-bold uppercase tracking-widest"
           >
             <ArrowLeft className="h-4 w-4" /> Back to Store
           </Link>
@@ -288,16 +288,16 @@ export default function ProductPage() {
 
   const isOutOfStock = product.inStock === false
 
-  // Only Hulk and Iron Man have the bestseller tag
   const isBestseller = Boolean(
     product && (
       product.isBestseller === true ||
-      product.name?.toLowerCase().trim() === 'iron man' ||
-      product.name?.toLowerCase().trim() === 'hulk' ||
+      product.name?.toLowerCase().includes('solitaire') ||
+      product.name?.toLowerCase().includes('tennis') ||
+      product.name?.toLowerCase().includes('halo') ||
       String(product.id) === '1' ||
-      String(product.id) === '4' ||
-      product.slug?.includes('iron-man') ||
-      product.slug?.includes('hulk')
+      String(product.id) === '5' ||
+      String(product.id) === '8' ||
+      String(product.id) === '15'
     )
   )
 
@@ -310,8 +310,8 @@ export default function ProductPage() {
       id: product.id,
       name: product.name,
       fullName: product.fullName,
-      price: Number(product.price) || 299,
-      originalPrice: Number(product.originalPrice) || 599,
+      price: Number(product.price) || 1299,
+      originalPrice: Number(product.originalPrice) || 2499,
       quantity: quantity,
       image: cleanImg,
       genre: product.genre,
@@ -323,8 +323,8 @@ export default function ProductPage() {
 
     // Save in sessionStorage for single-product Direct Buy Now checkout session
     try {
-      sessionStorage.setItem('outframe_buy_now_item', JSON.stringify(buyNowPayload))
-      sessionStorage.setItem('outframe_checkout_step', '1')
+      sessionStorage.setItem('smiths_buy_now_item', JSON.stringify(buyNowPayload))
+      sessionStorage.setItem('smiths_checkout_step', '1')
     } catch (e) {}
 
     // Close any open side drawers
@@ -349,7 +349,7 @@ export default function ProductPage() {
     if (navigator.share) {
       navigator.share({
         title: product.fullName,
-        text: `Check out the ${product.fullName} on Outframe Labs`,
+        text: `Check out the ${product.fullName} on Smiths Jewellery`,
         url: window.location.href,
       }).catch(() => {})
     } else {
@@ -746,32 +746,32 @@ export default function ProductPage() {
             <div className="mt-8 rounded-2xl border border-charcoal-light bg-charcoal/50 overflow-hidden">
               <div className="px-6 py-4 border-b border-charcoal-light bg-obsidian/60">
                 <h3 className="font-heading text-base font-bold text-cream">
-                  Technical Specifications
+                  Jewellery Specifications & Quality
                 </h3>
               </div>
               <div className="divide-y divide-charcoal-light/70 text-sm">
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Dimensions</span>
-                  <span className="col-span-2 font-semibold text-cream">64mm * 43mm</span>
+                  <span className="text-cream-muted/60">Metal Base</span>
+                  <span className="col-span-2 font-semibold text-cream">Solid 925 Sterling Silver (Hallmarked)</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Material</span>
-                  <span className="col-span-2 font-semibold text-cream">Biodegradable PLA Material</span>
+                  <span className="text-cream-muted/60">Plating & Luster</span>
+                  <span className="col-span-2 font-semibold text-cream">Triple-Coated Liquid Rhodium Anti-Tarnish Finish</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Color & Finish</span>
-                  <span className="col-span-2 font-semibold text-cream">Antique Gold Finish with Protective Patina</span>
+                  <span className="text-cream-muted/60">Gemstones / Inlay</span>
+                  <span className="col-span-2 font-semibold text-cream">Precision-Cut AAA+ Cubic Zirconia / Natural Freshwater Pearls</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Keyring Type</span>
-                  <span className="col-span-2 font-semibold text-cream">Strong and Durable Keyring (Split Ring + Chain)</span>
+                  <span className="text-cream-muted/60">Hypoallergenic</span>
+                  <span className="col-span-2 font-semibold text-cream">100% Nickel-free, Lead-free, Cadmium-free (Sensitive Skin Safe)</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Durability</span>
-                  <span className="col-span-2 font-semibold text-cream">Impact resistant daily carry</span>
+                  <span className="text-cream-muted/60">Packaging</span>
+                  <span className="col-span-2 font-semibold text-cream">Signature Smiths Midnight Velvet Keepsake Box & Authenticity Certificate</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
-                  <span className="text-cream-muted/60">Universe / Genre</span>
+                  <span className="text-cream-muted/60">Collection</span>
                   <span className="col-span-2 font-semibold text-cream">{genreData ? genreData.label : product.genre}</span>
                 </div>
               </div>
@@ -888,11 +888,11 @@ export default function ProductPage() {
           )}
         </div>
 
-        {/* Section 4: Customers Also Bought / Related Keychains */}
+        {/* Section 4: Customers Also Bought / Related Jewellery */}
         {relatedProducts.length > 0 && (
           <div className="mt-24 pt-10 border-t border-gold/15">
             <h3 className="font-heading text-xl sm:text-2xl font-bold text-cream mb-6">
-              More from {genreData ? genreData.label : 'Universe'}
+              More from {genreData ? genreData.label : 'Collection'}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {relatedProducts.map((rel) => (

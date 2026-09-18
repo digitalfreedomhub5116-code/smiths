@@ -40,8 +40,8 @@ export default function Navbar({ visible = true }) {
         <div className="flex h-16 items-center justify-between sm:h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <span className="font-heading text-xl font-bold tracking-[0.2em] text-cream transition-colors group-hover:text-gold sm:text-2xl">
-              OUTFRAME
+            <span className="font-heading text-lg sm:text-xl font-bold tracking-[0.22em] text-cream transition-colors group-hover:text-silver">
+              SMITHS <span className="font-serif italic text-silver font-normal text-sm sm:text-base tracking-widest text-silver-light">Jewellery</span>
             </span>
           </Link>
 
@@ -51,13 +51,13 @@ export default function Navbar({ visible = true }) {
               onClick={() => handleNavClick('#genres')}
               className="text-sm font-medium text-cream-muted transition-colors hover:text-gold tracking-wide"
             >
-              UNIVERSES
+              COLLECTIONS
             </button>
             <button
               onClick={() => handleNavClick('#products')}
               className="text-sm font-medium text-cream-muted transition-colors hover:text-gold tracking-wide"
             >
-              ALL PRODUCTS
+              ALL JEWELLERY
             </button>
             <Link
               to="/track-order"
@@ -153,13 +153,13 @@ export default function Navbar({ visible = true }) {
               onClick={() => handleNavClick('#genres')}
               className="text-left text-sm font-medium text-cream-muted transition-colors hover:text-gold tracking-wide py-1"
             >
-              UNIVERSES
+              COLLECTIONS
             </button>
             <button
               onClick={() => handleNavClick('#products')}
               className="text-left text-sm font-medium text-cream-muted transition-colors hover:text-gold tracking-wide py-1"
             >
-              ALL PRODUCTS
+              ALL JEWELLERY
             </button>
             <button
               onClick={() => {

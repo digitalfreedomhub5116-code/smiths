@@ -68,7 +68,7 @@ export default function CheckoutPage() {
   // Single-product Buy Now session check
   const [buyNowItem, setBuyNowItem] = useState(() => {
     try {
-      const raw = sessionStorage.getItem('outframe_buy_now_item')
+      const raw = sessionStorage.getItem('smiths_buy_now_item')
       return raw ? JSON.parse(raw) : null
     } catch (e) {
       return null
@@ -85,12 +85,12 @@ export default function CheckoutPage() {
   const handleItemQuantityChange = (itemId, newQty) => {
     if (isBuyNowMode) {
       if (newQty <= 0) {
-        try { sessionStorage.removeItem('outframe_buy_now_item') } catch (e) {}
+        try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
         setBuyNowItem(null)
       } else {
         const updated = { ...buyNowItem, quantity: newQty }
         setBuyNowItem(updated)
-        try { sessionStorage.setItem('outframe_buy_now_item', JSON.stringify(updated)) } catch (e) {}
+        try { sessionStorage.setItem('smiths_buy_now_item', JSON.stringify(updated)) } catch (e) {}
       }
     } else {
       updateQuantity(itemId, newQty)
@@ -100,7 +100,7 @@ export default function CheckoutPage() {
   // Remove item helper for both Buy Now and regular cart
   const handleItemRemove = (itemId) => {
     if (isBuyNowMode) {
-      try { sessionStorage.removeItem('outframe_buy_now_item') } catch (e) {}
+      try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
       setBuyNowItem(null)
     } else {
       removeItem(itemId)
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
   // Stepper: 1: 'address', 2: 'payment', 3: 'confirm'
   const [currentStep, setCurrentStepState] = useState(() => {
     try {
-      const saved = Number(sessionStorage.getItem('outframe_checkout_step'))
+      const saved = Number(sessionStorage.getItem('smiths_checkout_step'))
       return saved >= 1 && saved <= 3 ? saved : 1
     } catch (e) {
       return 1
@@ -120,7 +120,7 @@ export default function CheckoutPage() {
   const setCurrentStep = (step) => {
     setCurrentStepState(step)
     try {
-      sessionStorage.setItem('outframe_checkout_step', String(step))
+      sessionStorage.setItem('smiths_checkout_step', String(step))
     } catch (e) {}
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -128,11 +128,11 @@ export default function CheckoutPage() {
   // Synchronize on mount to ensure Buy Now items and step 1 are guaranteed
   useEffect(() => {
     try {
-      const raw = sessionStorage.getItem('outframe_buy_now_item')
+      const raw = sessionStorage.getItem('smiths_buy_now_item')
       if (raw) {
         setBuyNowItem(JSON.parse(raw))
       }
-      const savedStep = Number(sessionStorage.getItem('outframe_checkout_step'))
+      const savedStep = Number(sessionStorage.getItem('smiths_checkout_step'))
       if (savedStep >= 1 && savedStep <= 3) {
         setCurrentStepState(savedStep)
       } else {
@@ -144,8 +144,8 @@ export default function CheckoutPage() {
   // Terminate checkout session completely and return to store
   const handleCancelCheckout = () => {
     try {
-      sessionStorage.removeItem('outframe_checkout_step')
-      sessionStorage.removeItem('outframe_buy_now_item')
+      sessionStorage.removeItem('smiths_checkout_step')
+      sessionStorage.removeItem('smiths_buy_now_item')
     } catch (e) {}
     setBuyNowItem(null)
     setCurrentStepState(1)
@@ -156,8 +156,8 @@ export default function CheckoutPage() {
   // Terminate checkout session and open normal side cart drawer on store
   const handleOpenCartFromCheckout = () => {
     try {
-      sessionStorage.removeItem('outframe_checkout_step')
-      sessionStorage.removeItem('outframe_buy_now_item')
+      sessionStorage.removeItem('smiths_checkout_step')
+      sessionStorage.removeItem('smiths_buy_now_item')
     } catch (e) {}
     setBuyNowItem(null)
     setCurrentStepState(1)
@@ -173,12 +173,12 @@ export default function CheckoutPage() {
     const handleRestart = () => {
       setCurrentStepState(1)
       try {
-        sessionStorage.setItem('outframe_checkout_step', '1')
+        sessionStorage.setItem('smiths_checkout_step', '1')
       } catch (e) {}
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    window.addEventListener('outframe_restart_checkout', handleRestart)
-    return () => window.removeEventListener('outframe_restart_checkout', handleRestart)
+    window.addEventListener('smiths_restart_checkout', handleRestart)
+    return () => window.removeEventListener('smiths_restart_checkout', handleRestart)
   }, [])
 
   // Auth state
@@ -197,7 +197,7 @@ export default function CheckoutPage() {
   const [addresses, setAddresses] = useState([])
   const [selectedAddressId, setSelectedAddressIdState] = useState(() => {
     try {
-      return sessionStorage.getItem('outframe_selected_address_id') || null
+      return sessionStorage.getItem('smiths_selected_address_id') || null
     } catch (e) {
       return null
     }
@@ -206,8 +206,8 @@ export default function CheckoutPage() {
   const setSelectedAddressId = (id) => {
     setSelectedAddressIdState(id)
     try {
-      if (id) sessionStorage.setItem('outframe_selected_address_id', String(id))
-      else sessionStorage.removeItem('outframe_selected_address_id')
+      if (id) sessionStorage.setItem('smiths_selected_address_id', String(id))
+      else sessionStorage.removeItem('smiths_selected_address_id')
     } catch (e) {}
   }
 
@@ -233,7 +233,7 @@ export default function CheckoutPage() {
   // Step 2 & 3 state (Persistent payment method)
   const [paymentMethod, setPaymentMethodState] = useState(() => {
     try {
-      return sessionStorage.getItem('outframe_payment_method') || 'COD'
+      return sessionStorage.getItem('smiths_payment_method') || 'COD'
     } catch (e) {
       return 'COD'
     }
@@ -242,7 +242,7 @@ export default function CheckoutPage() {
   const setPaymentMethod = (method) => {
     setPaymentMethodState(method)
     try {
-      sessionStorage.setItem('outframe_payment_method', method)
+      sessionStorage.setItem('smiths_payment_method', method)
     } catch (e) {}
   }
 
@@ -294,7 +294,7 @@ export default function CheckoutPage() {
 
       if (addrs && addrs.length > 0) {
         // Prioritize previously selected address from session, or default, or first
-        const savedId = sessionStorage.getItem('outframe_selected_address_id')
+        const savedId = sessionStorage.getItem('smiths_selected_address_id')
         const matched = savedId && addrs.find((a) => String(a.id) === String(savedId))
         if (matched) {
           setSelectedAddressIdState(matched.id)
@@ -561,9 +561,9 @@ export default function CheckoutPage() {
           key: razorpayKey,
           amount: amountPaise,
           currency: 'INR',
-          name: 'OUTFRAME LABS',
-          description: `Outframed Antique Gold Keychains (${items.reduce((s, it) => s + it.quantity, 0)} items)`,
-          image: typeof window !== 'undefined' && window.location?.origin ? `${window.location.origin}/favicon.png` : 'https://outframelabs.in/favicon.png',
+          name: 'SMITHS JEWELLERY',
+          description: `Smiths Silver Jewellery (${items.reduce((s, it) => s + it.quantity, 0)} items)`,
+          image: typeof window !== 'undefined' && window.location?.origin ? `${window.location.origin}/favicon.png` : '/favicon.png',
           prefill: {
             name: selectedAddress.full_name,
             email: currentUser?.email || '',
@@ -572,10 +572,10 @@ export default function CheckoutPage() {
           notes: {
             shipping_city: selectedAddress.city,
             shipping_pincode: selectedAddress.pincode,
-            order_source: 'outframelabs.in',
+            order_source: 'smithsjewellery.in',
           },
           theme: {
-            color: '#CFB53B',
+            color: '#E2E8F0',
             backdrop_color: 'rgba(10, 10, 10, 0.94)',
           },
           modal: {
@@ -598,12 +598,12 @@ export default function CheckoutPage() {
               const order = await createOrder(paidPayload)
               trackOrderCompleted(order)
               if (isBuyNowMode) {
-                try { sessionStorage.removeItem('outframe_buy_now_item') } catch (e) {}
+                try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
                 setBuyNowItem(null)
               } else {
                 useCartStore.getState().clearCart()
               }
-              try { sessionStorage.removeItem('outframe_checkout_step') } catch (e) {}
+              try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
               closeCart()
               navigate(
                 `/order-confirmed?orderId=${order.order_number}&total=${totalAmount}&method=PREPAID&paymentId=${encodeURIComponent(
@@ -622,21 +622,23 @@ export default function CheckoutPage() {
 
         const rzp = new window.Razorpay(options)
         rzp.on('payment.failed', function (resp) {
-          console.warn('Razorpay payment failed or cancelled:', resp.error)
-          setOrderError(resp.error?.description || 'Payment was unsuccessful or cancelled. Please try again or choose Cash on Delivery.')
+          console.error('Razorpay payment failed:', resp.error)
+          setOrderError(
+            resp.error?.description || 'Payment was declined by your bank or UPI app. Please retry or choose Cash on Delivery.'
+          )
           setIsSubmittingOrder(false)
         })
-
         rzp.open()
+        return
       } catch (err) {
         console.error('Razorpay initialization error:', err)
-        setOrderError(err.message || 'Unable to open Razorpay gateway. Please try Cash on Delivery.')
+        setOrderError(err.message || 'Payment failed to initialize.')
         setIsSubmittingOrder(false)
+        return
       }
-      return
     }
 
-    // ── CASH ON DELIVERY (COD) FLOW ──
+    // CASH ON DELIVERY (COD) FLOW
     try {
       const orderPayload = {
         ...basePayload,
@@ -649,12 +651,12 @@ export default function CheckoutPage() {
 
       // Clear cart locally and from account (if regular cart checkout)
       if (isBuyNowMode) {
-        try { sessionStorage.removeItem('outframe_buy_now_item') } catch (e) {}
+        try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
         setBuyNowItem(null)
       } else {
         useCartStore.getState().clearCart()
       }
-      try { sessionStorage.removeItem('outframe_checkout_step') } catch (e) {}
+      try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
       closeCart()
 
       // Redirect to Order Confirmed
@@ -681,7 +683,7 @@ export default function CheckoutPage() {
             <ArrowLeft className="h-4 w-4" />
             <span>Return to Store</span>
           </button>
-          <span className="font-heading text-base font-bold tracking-widest text-cream">OUTFRAME</span>
+          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITHS</span>
           <button
             type="button"
             onClick={handleCancelCheckout}
@@ -695,21 +697,21 @@ export default function CheckoutPage() {
           <div className="h-16 w-16 mx-auto rounded-full bg-charcoal flex items-center justify-center border border-gold/20 mb-4">
             <ShoppingBag className="h-8 w-8 text-gold/60" />
           </div>
-          <h2 className="font-heading text-2xl font-bold text-cream">Your Cart is Empty</h2>
+          <h2 className="font-heading text-2xl font-bold text-cream">Your Bag is Empty</h2>
           <p className="mt-2 text-sm text-cream-muted/70">
-            Please add an outframed antique gold keychain to proceed with checkout.
+            Please add a jewellery piece to proceed with checkout.
           </p>
           <button
             type="button"
             onClick={handleCancelCheckout}
-            className="btn-gold inline-flex items-center gap-2 mt-6 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-widest cursor-pointer"
+            className="btn-silver inline-flex items-center gap-2 mt-6 rounded-full px-8 py-3.5 text-xs font-bold uppercase tracking-widest cursor-pointer"
           >
-            Explore Drops
+            Explore Jewellery
           </button>
         </div>
 
         <div className="border-t border-charcoal-light py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Outframe Labs. All rights reserved.
+          © 2026 Smiths Jewellery. All rights reserved.
         </div>
       </div>
     )
@@ -730,7 +732,7 @@ export default function CheckoutPage() {
             <ArrowLeft className="h-4 w-4" />
             <span>Return to Store</span>
           </button>
-          <span className="font-heading text-base font-bold tracking-widest text-cream">OUTFRAME</span>
+          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITHS</span>
           <button
             type="button"
             onClick={handleCancelCheckout}
@@ -875,7 +877,7 @@ export default function CheckoutPage() {
         </div>
 
         <div className="border-t border-charcoal-light py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Outframe Labs. All rights reserved.
+          © 2026 Smiths Jewellery. All rights reserved.
         </div>
       </div>
     )
@@ -908,7 +910,7 @@ export default function CheckoutPage() {
             {/* Brand Title */}
             <div className="flex items-center gap-2">
               <span className="font-heading text-base font-extrabold tracking-[0.2em] text-cream">
-                OUTFRAME
+                SMITHS
               </span>
             </div>
 
@@ -1113,7 +1115,7 @@ export default function CheckoutPage() {
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-heading text-xs font-bold text-cream truncate">
-                        {item.name} Outframed Keychain
+                        {item.fullName || `${item.name} Fine Jewellery`}
                       </h4>
                       <p className="text-[11px] text-gold font-semibold">₹{item.price}</p>
                       {/* Quantity Controls */}
@@ -1231,7 +1233,7 @@ export default function CheckoutPage() {
               <div className="rounded-2xl border border-gold/20 bg-charcoal/80 p-6 space-y-4 animate-fade-in-up">
                 <div className="flex items-center justify-between pb-3 border-b border-charcoal-light">
                   <h3 className="font-heading text-lg font-bold text-cream">
-                    {authMode === 'signup' ? 'Create Outframe Account' : 'Sign in to Outframe Labs'}
+                    {authMode === 'signup' ? 'Create Smiths Account' : 'Sign in to Smiths Jewellery'}
                   </h3>
                   <button
                     onClick={() => setIsAuthFormOpen(false)}
@@ -1835,7 +1837,7 @@ export default function CheckoutPage() {
                 Select a payment method
               </h1>
               <p className="mt-1 text-xs text-cream-muted/70">
-                Choose how you want to pay for your antique gold outframed keychains.
+                Choose how you want to pay for your handcrafted silver jewellery.
               </p>
             </div>
 
@@ -1877,7 +1879,7 @@ export default function CheckoutPage() {
                     </span>
                   </div>
                   <p className="text-[11px] text-cream-muted/70 mt-0.5">
-                    Pay securely in cash when your keychain arrives at your door.
+                    Pay securely in cash when your jewellery arrives at your door.
                   </p>
                 </div>
               </label>
@@ -1930,7 +1932,7 @@ export default function CheckoutPage() {
             {/* Price Preview Box */}
             <div className="rounded-2xl border border-charcoal-light bg-charcoal/60 p-4 space-y-2 text-xs">
               <div className="flex justify-between text-cream-muted">
-                <span>Items Total ({items.length} keychains):</span>
+                <span>Items Total ({items.length} {items.length === 1 ? 'piece' : 'pieces'}):</span>
                 <span className="font-mono text-cream font-semibold">₹{subtotal}</span>
               </div>
               <div className="flex justify-between text-cream-muted items-center">
@@ -2087,7 +2089,7 @@ export default function CheckoutPage() {
                     />
                     <div className="flex-1 min-w-0 text-left">
                       <p className="font-heading text-xs sm:text-sm font-bold text-cream truncate">
-                        {item.name} Outframed Keychain
+                        {item.fullName || `${item.name} Fine Jewellery`}
                       </p>
                       <p className="text-[11px] text-cream-muted/60">
                         Qty: <strong className="text-cream">{item.quantity}</strong> × ₹{item.price}

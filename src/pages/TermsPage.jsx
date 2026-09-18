@@ -31,13 +31,13 @@ export default function TermsPage() {
         <header className="border-b border-gold/20 pb-8 mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-xs font-mono font-semibold uppercase tracking-wider mb-4">
             <Scale className="w-3.5 h-3.5 text-gold" />
-            <span>Official Collector Agreement</span>
+            <span>Official Client Agreement</span>
           </div>
           <h1 className="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-cream">
             Terms of Service & Usage Agreement
           </h1>
           <p className="mt-4 text-sm sm:text-base text-cream-muted leading-relaxed max-w-2xl">
-            Governing the access, registration, authentication, and purchasing of artisanal outframed antique gold keychains crafted by Outframe Labs.
+            Governing the access, registration, authentication, and purchasing of fine 925 sterling silver jewellery crafted by Smiths Jewellery.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-gold/80">
             <span>Effective Date: September 2026</span>
@@ -60,7 +60,7 @@ export default function TermsPage() {
                 Binding Legal Agreement Upon Account Access & Orders
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-cream-muted leading-relaxed">
-                <strong className="text-gold font-bold">PLEASE READ CAREFULLY:</strong> By accessing, browsing, registering an account, authenticating via email OTP or Google Sign-In, or placing an order (prepaid or Cash on Delivery) with Outframe Labs, you expressly, voluntarily, and unconditionally agree to be legally bound by every provision, covenant, and restriction contained within these Terms of Service. If you do not agree with any clause of these terms, you must immediately discontinue use of this platform and abstain from placing orders.
+                <strong className="text-gold font-bold">PLEASE READ CAREFULLY:</strong> By accessing, browsing, registering an account, authenticating via email OTP or Google Sign-In, or placing an order (prepaid or Cash on Delivery) with Smiths Jewellery, you expressly, voluntarily, and unconditionally agree to be legally bound by every provision, covenant, and restriction contained within these Terms of Service. If you do not agree with any clause of these terms, you must immediately discontinue use of this platform and abstain from placing orders.
               </p>
             </div>
           </div>
@@ -72,10 +72,10 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-heading text-xl font-bold text-cream flex items-center gap-2">
               <span className="text-gold font-mono text-base">01.</span>
-              <span>Account Creation, Authentication & Collector Obligations</span>
+              <span>Account Creation, Authentication & Client Obligations</span>
             </h2>
             <p>
-              By creating an account, logging in, or maintaining an active profile on Outframe Labs, you warrant that you are at least 18 years of age (or possess valid parental/guardian supervision if a minor) and that all information submitted during account registration and checkout is truthful, accurate, and up to date.
+              By creating an account, logging in, or maintaining an active profile on Smiths Jewellery, you warrant that you are at least 18 years of age (or possess valid parental/guardian supervision if a minor) and that all information submitted during account registration and checkout is truthful, accurate, and up to date.
             </p>
             <p>
               You assume full legal and operational responsibility for maintaining the confidentiality of your login credentials, magic link tokens, and browser session access. Any activity originating from your authenticated session or verified mobile telephone number shall be deemed authorized by you. If you suspect unauthorized access to your account, you must immediately contact our studio support helpline at <strong className="text-gold font-mono">7470012222</strong>.
@@ -86,16 +86,16 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-heading text-xl font-bold text-cream flex items-center gap-2">
               <span className="text-gold font-mono text-base">02.</span>
-              <span>Intellectual Property & Proprietary 3D Designs</span>
+              <span>Intellectual Property & Proprietary Designs</span>
             </h2>
             <p>
-              Outframe Labs conceives, engineers, and fabricates proprietary dimensional art artifacts. All multi-depth 3D models, computer-aided design (CAD) blueprints, stereolithography (STL/3MF) slices, layered framing architectures, antique gold patination techniques, product photography, editorial typography, brand hallmarks, and digital user interfaces are the proprietary intellectual property of Outframe Labs.
+              Smiths Jewellery conceives, crafts, and presents proprietary silver jewellery designs. All custom CAD models, casting molds, rhodium finishing techniques, hallmark engravings, product photography, editorial typography, brand hallmarks, and digital user interfaces are the proprietary intellectual property of Smiths Jewellery.
             </p>
             <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-300">
               <strong className="font-bold text-rose-200 uppercase tracking-wider block mb-1">
                 Strict Prohibition Against Duplication & Resale:
               </strong>
-              You may not scan, reverse-engineer, extract mesh data from, 3D print for commercial distribution, mold, cast, clone, or counterfeit any Outframe Labs physical keychain or digital asset without prior explicit written commercial licensing signed by our executive directors.
+              You may not mold, cast, clone, copy, or counterfeit any Smiths Jewellery physical piece or digital asset without prior explicit written commercial licensing signed by our executive directors.
             </div>
           </section>
 
@@ -103,13 +103,13 @@ export default function TermsPage() {
           <section className="space-y-3">
             <h2 className="font-heading text-xl font-bold text-cream flex items-center gap-2">
               <span className="text-gold font-mono text-base">03.</span>
-              <span>Artisanal 3D Print Tolerances & Hand-Finished Aesthetics</span>
+              <span>Solid 925 Sterling Silver & Hand-Finished Tolerances</span>
             </h2>
             <p>
-              Unlike generic injection-molded plastics mass-produced in automated factories, every single Outframe Labs keychain is fabricated using precision additive manufacturing on calibrated high-temp nozzles, followed by manual micro-deburring and hand-applied antique gold metallic patination.
+              Unlike generic mass-produced fast-fashion alloys, every single Smiths Jewellery piece is crafted using genuine 925 sterling silver, followed by meticulous hand-polishing, rhodium anti-tarnish plating, and precision gemstone setting.
             </p>
             <p>
-              As a collector, you understand and celebrate that additive manufacturing inherently features microscopic layer increments, organic surface texturing, and subtle hand-burnished metallic luster gradients. These characteristics are hallmarks of bespoke craft and individual authenticity; they do not constitute defects, blemishes, or non-conformance.
+              As a client, you understand and celebrate that handcrafted fine jewellery inherently exhibits microscopic artisanal tolerances and subtle hand-burnished metallic luster gradients. These characteristics are hallmarks of authentic smithing and purity; they do not constitute defects or non-conformance.
             </p>
           </section>
 
@@ -123,7 +123,7 @@ export default function TermsPage() {
               All prices displayed on the store are denominated in Indian National Rupees (INR - ₹) and include all statutory taxes unless explicitly broken down on the checkout summary. We reserve the absolute right to revise catalog pricing, apply drop-exclusive discounts, or discontinue product lines without prior announcement.
             </p>
             <p>
-              In the event that an item is listed at an incorrect price due to typographical or technological system failure, Outframe Labs reserves the right to decline, halt, or cancel orders placed for such mispriced items, with prompt issuance of an immediate 100% refund.
+              In the event that an item is listed at an incorrect price due to typographical or technological system failure, Smiths Jewellery reserves the right to decline, halt, or cancel orders placed for such mispriced items, with prompt issuance of an immediate 100% refund.
             </p>
           </section>
 
@@ -134,7 +134,7 @@ export default function TermsPage() {
               <span>Cash on Delivery (COD) Rules & Strict Anti-Fraud Policy</span>
             </h2>
             <p>
-              To provide maximum accessibility across India, Outframe Labs offers Cash on Delivery (COD) on eligible domestic postal pin codes. By choosing Cash on Delivery:
+              To provide maximum accessibility across India, Smiths Jewellery offers Cash on Delivery (COD) on eligible domestic postal pin codes. By choosing Cash on Delivery:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-2 text-cream-muted">
               <li>
@@ -144,7 +144,7 @@ export default function TermsPage() {
                 You agree to pay the exact invoiced cash or digital courier UPI amount upon physical handover of the parcel.
               </li>
               <li>
-                <strong className="text-rose-400">Willful Rejection Policy:</strong> Because our keychains are bespoke crafted on-demand and courier forward/return freight incurs substantial real costs, deliberate or frivolous rejection of verified COD packages at doorstep delivery constitutes bad faith. We reserve the right to immediately blacklist offending addresses and telephone numbers across all our networks and pursue statutory delivery freight recovery.
+                <strong className="text-rose-400">Willful Rejection Policy:</strong> Because our jewellery pieces are handcrafted and courier forward/return freight incurs substantial real costs, deliberate or frivolous rejection of verified COD packages at doorstep delivery constitutes bad faith. We reserve the right to immediately blacklist offending addresses and telephone numbers across all our networks and pursue statutory delivery freight recovery.
               </li>
             </ul>
           </section>
@@ -156,10 +156,10 @@ export default function TermsPage() {
               <span>Fulfillment, Dispatch SLAs & Courier Logistics</span>
             </h2>
             <p>
-              Orders are typically queued for 3D additive manufacturing, curing, hand-finishing, and multi-point quality inspection within 24 to 48 working hours. Once packaged in our shockproof presentation boxes, parcels are handed over to national express logistics aggregators (Shiprocket / Delhivery / BlueDart / DTDC / Xpressbees).
+              Orders are typically queued for crafting, hand-polishing, rhodium lustering, and multi-point quality inspection within 24 to 48 working hours. Once packaged in our signature midnight velvet presentation boxes, parcels are handed over to national express logistics aggregators (Shiprocket / Delhivery / BlueDart / DTDC / Xpressbees).
             </p>
             <p>
-              Standard transit timelines range between 3 to 7 business days depending on destination geography (Metropolitan cities versus remote northeast/island regions). Outframe Labs provides real-time digital tracking links and Air Waybill (AWB) numbers. Delays caused by force majeure, severe weather disruptions, festive courier backlog, or regional transit restrictions lie outside our direct control, and buyers agree not to hold the Studio liable for carrier delays once custody is transferred.
+              Standard transit timelines range between 3 to 7 business days depending on destination geography (Metropolitan cities versus remote northeast/island regions). Smiths Jewellery provides real-time digital tracking links and Air Waybill (AWB) numbers. Delays caused by force majeure, severe weather disruptions, festive courier backlog, or regional transit restrictions lie outside our direct control, and buyers agree not to hold the Studio liable for carrier delays once custody is transferred.
             </p>
           </section>
 
@@ -170,7 +170,7 @@ export default function TermsPage() {
               <span>Damaged in Transit & Unboxing Video Protocol</span>
             </h2>
             <p>
-              Because each collectible keychain is produced on-demand, we do not accept returns for subjective &ldquo;change of mind&rdquo; or customer remorse.
+              Because each jewellery piece is curated and finished with utmost precision, we do not accept returns for subjective &ldquo;change of mind&rdquo; or customer remorse.
             </p>
             <p>
               However, we guarantee complete replacement protection against transit damage or incorrect model dispatch under our strict Unboxing Verification Protocol:
@@ -184,7 +184,7 @@ export default function TermsPage() {
                 In the rare event of transit breakage or packaging compromise, customers MUST record an unedited, continuous, single-shot video beginning from the uncut, sealed exterior courier mailer bag, clearly showing the shipping label, package opening, and defect inspection.
               </p>
               <p className="text-cream-muted">
-                Submit the unboxing recording within 48 hours of delivery to <strong className="text-gold">support@outframelabs.in</strong> or WhatsApp helpline <strong className="text-gold">7470012222</strong>. Verified damage claims will receive an immediate free replacement dispatched with express air priority.
+                Submit the unboxing recording within 48 hours of delivery to <strong className="text-gold">support@smithsjewellery.com</strong> or WhatsApp helpline <strong className="text-gold">7470012222</strong>. Verified damage claims will receive an immediate free replacement dispatched with express air priority.
               </p>
             </div>
           </section>
@@ -196,10 +196,10 @@ export default function TermsPage() {
               <span>Order Cancellation by Customer or Seller</span>
             </h2>
             <p>
-              <strong>Customer Cancellations:</strong> Orders may be cancelled by the customer only prior to the allocation of an Air Waybill (AWB) and before print queue execution. Once an order enters printing or has been handed to courier logistics, cancellations cannot be accepted.
+              <strong>Customer Cancellations:</strong> Orders may be cancelled by the customer only prior to the allocation of an Air Waybill (AWB) and dispatch handover. Once an order enters final preparation or has been handed to courier logistics, cancellations cannot be accepted.
             </p>
             <p>
-              <strong>Seller Cancellations:</strong> Outframe Labs reserves the right to cancel any order if verification checks fail, suspected fraudulent payment patterns arise, the shipping address is undeliverable by all courier partners, or product availability ceases. In all seller-initiated cancellations, the buyer will receive an immediate notification and 100% full refund to the original payment source within 24–48 hours.
+              <strong>Seller Cancellations:</strong> Smiths Jewellery reserves the right to cancel any order if verification checks fail, suspected fraudulent payment patterns arise, the shipping address is undeliverable by all courier partners, or product availability ceases. In all seller-initiated cancellations, the buyer will receive an immediate notification and 100% full refund to the original payment source within 24–48 hours.
             </p>
           </section>
 
@@ -210,10 +210,10 @@ export default function TermsPage() {
               <span>Limitation of Liability & Indemnification</span>
             </h2>
             <p>
-              To the fullest extent permissible under Indian jurisprudence, Outframe Labs, its founders, artisans, engineers, and supply chain partners shall not be held liable for any incidental, consequential, special, or indirect damages arising out of the use, misuse, or inability to use our products or web interface. Our total aggregate liability for any claim arising under these terms shall strictly not exceed the total rupee amount paid by the customer for the specific order giving rise to the claim.
+              To the fullest extent permissible under Indian jurisprudence, Smiths Jewellery, its founders, silversmiths, artisans, and supply chain partners shall not be held liable for any incidental, consequential, special, or indirect damages arising out of the use, misuse, or inability to use our products or web interface. Our total aggregate liability for any claim arising under these terms shall strictly not exceed the total rupee amount paid by the customer for the specific order giving rise to the claim.
             </p>
             <p>
-              You agree to indemnify, defend, and hold harmless Outframe Labs from and against any third-party claims, liabilities, losses, damages, or legal expenses resulting from your violation of these Terms or your infringement of any rights of a third party.
+              You agree to indemnify, defend, and hold harmless Smiths Jewellery from and against any third-party claims, liabilities, losses, damages, or legal expenses resulting from your violation of these Terms or your infringement of any rights of a third party.
             </p>
           </section>
 
@@ -224,7 +224,7 @@ export default function TermsPage() {
               <span>Governing Law & Exclusive Legal Jurisdiction</span>
             </h2>
             <p>
-              These Terms of Service and any contractual relationship formed between Outframe Labs and the collector shall be governed exclusively by, and interpreted strictly in accordance with, the laws of the Republic of India.
+              These Terms of Service and any contractual relationship formed between Smiths Jewellery and the client shall be governed exclusively by, and interpreted strictly in accordance with, the laws of the Republic of India.
             </p>
             <p>
               Any legal dispute, arbitration, claim, or controversy arising directly or indirectly out of these terms, order fulfillment, or product condition shall be submitted to the exclusive jurisdiction of the competent judicial courts located in Maharashtra, India.
@@ -251,8 +251,8 @@ export default function TermsPage() {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gold shrink-0" />
                 <span className="text-cream font-medium">Official Legal & Support Email:</span>
-                <a href="mailto:support@outframelabs.in" className="text-gold font-bold hover:underline font-mono">
-                  support@outframelabs.in
+                <a href="mailto:support@smithsjewellery.com" className="text-gold font-bold hover:underline font-mono">
+                  support@smithsjewellery.com
                 </a>
               </div>
               <div className="flex items-center gap-3 text-xs text-cream-muted">

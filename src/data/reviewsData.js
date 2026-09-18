@@ -5,64 +5,62 @@
 export const REVIEWS_POOL = {
   // Common positive Indian casual reviews
   positive: [
-    { name: "Aarav Sharma", text: "bhai quality is genuinely crazy heavy solid metal looks so sick on my bullet keys" },
-    { name: "Rohan Nair", text: "yaar antique gold finish is top tier looks 10x better than pictures" },
-    { name: "Kunal Verma", text: "received in 3 days packaging was luxury level brother loved it" },
-    { name: "Aditya Patel", text: "proper solid brass feel not that cheap plastic stuff totally worth 499" },
-    { name: "Siddharth Rao", text: "looks unreal in person everyone in college is asking where i got it" },
-    { name: "Varun Malhotra", text: "insane detailing on the metal proper heavy antique finish" },
-    { name: "Pranav Iyer", text: "super happy with the purchase looks dope on my car key" },
-    { name: "Ankit Deshmukh", text: "bro this is next level stuff finishing is so clean" },
-    { name: "Devendra Joshi", text: "mast product hai worth every single rupee" },
-    { name: "Harshit Sen", text: "fast delivery and solid build quality will buy more" },
-    { name: "Nikhil Kulkarni", text: "gold patina looks so authentic feels like actual antique piece" },
-    { name: "Gautam Mehta", text: "gifted to my brother he went crazy seeing this" },
-    { name: "Suraj Yadav", text: "solid weight to it looks very classy and premium" },
-    { name: "Manish Reddy", text: "metal detailing is sharp and clean feels heavy in pocket" },
-    { name: "Vivek Choudhary", text: "proper antique vibe loving the solid feel on my bike keys" },
+    { name: "Pooja Sharma", text: "silver shine is genuinely top tier looks so royal and feels like real 925 sterling silver" },
+    { name: "Rhea Nair", text: "rhodium finish is crazy clean sparkles 10x better than pictures" },
+    { name: "Ananya Verma", text: "received in 3 days packaging was luxury velvet box sister loved it" },
+    { name: "Aditya Patel", text: "proper solid silver feel not that cheap coated metal totally worth the price" },
+    { name: "Sneha Rao", text: "looks unreal in person everyone at party was asking where i got it" },
+    { name: "Meera Malhotra", text: "insane detailing on the silver setting proper premium weight" },
+    { name: "Priyanka Iyer", text: "super happy with the purchase looks stunning for daily wear" },
+    { name: "Tanvi Deshmukh", text: "next level craftsmanship polish is mirror finish" },
+    { name: "Divya Joshi", text: "mast product hai worth every single rupee" },
+    { name: "Ishaan Sen", text: "fast delivery and solid build quality gifted to my fiance" },
+    { name: "Nandini Kulkarni", text: "anti tarnish coating is legit wearing it daily without any discoloration" },
+    { name: "Kavya Mehta", text: "gifted to my mom she went emotional seeing the velvet box" },
+    { name: "Shreya Yadav", text: "solid weight to it looks very classy and elegant" },
+    { name: "Rohan Reddy", text: "clean edges and high polish feels very luxurious in hand" },
+    { name: "Ritu Choudhary", text: "proper luxury brand aesthetic loving the timeless silver vibe" },
   ],
 
-  // Specific positive reviews per genre
+  // Specific positive reviews per category
   genreSpecific: {
-    MARVEL: [
-      { name: "Kabir Roy", text: "iron man arc detailing is so clean proper stark tech look" },
-      { name: "Tushar Bansal", text: "spiderman web design popping out looks fire in real" },
-      { name: "Aakash Pandey", text: "thor hammer finish is heavy and feels like real mjolnir metal" },
-      { name: "Rahul Saxena", text: "captain shield edge is sharp looks amazing on my car keys" },
+    NECKLACES: [
+      { name: "Natasha Roy", text: "pendant sparkle is so dazzling catches light from every angle" },
+      { name: "Simran Bansal", text: "chain length is perfect and clasp is solid sterling silver" },
+      { name: "Aarushi Pandey", text: "choker sits so gracefully on the neckline got tons of compliments" },
+      { name: "Riddhima Saxena", text: "layered chain looks high fashion and feels lightweight" },
     ],
-    DC: [
-      { name: "Yashwant Singhania", text: "batarang shape is lethal looks damn menacing in antique gold" },
-      { name: "Karan Johar", text: "superman shield looks royal properly detailed metal" },
-      { name: "Rishi Kapoor", text: "gotham dark knight vibe is 100 percent there" },
+    BRACELETS: [
+      { name: "Tara Singhania", text: "tennis bracelet clasp has double safety lock cz stones look like real diamonds" },
+      { name: "Kritika Johar", text: "silver cuff fits perfectly on the wrist very chic minimal look" },
+      { name: "Avani Kapoor", text: "cuban link is bold and shining premium weight on wrist" },
     ],
-    CARS: [
-      { name: "Armaan Malik", text: "porsche rear wing profile is crazy accurate car guys will love this" },
-      { name: "Dhruv Mittal", text: "bmw grill cut is so sharp perfect companion for my car keys" },
-      { name: "Sanjay Singhal", text: "mustang silhouette looks aggressive in antique gold" },
-      { name: "Sameer Merchant", text: "ferrari curve is beautiful proper heavy metallic piece" },
+    EARRINGS: [
+      { name: "Diya Malik", text: "studs are hypoallergenic no irritation even after wearing 14 hours" },
+      { name: "Anushka Mittal", text: "crystal drops have royal sway perfect for wedding functions" },
+      { name: "Sanya Singhal", text: "hoops are lightweight and easy to wear all day" },
     ],
-    VALORANT: [
-      { name: "Reyansh Bhatt", text: "jett blade storm kunai looks just like in game clutch finish" },
-      { name: "Ayush Khurana", text: "reyna eye detailing has wicked dark gold vibe" },
-      { name: "Shubham Gill", text: "sage orb emblem is clean radiant rank keychain" },
-      { name: "Tanmay Bhatia", text: "chamber card aesthetic is rich and classy" },
+    RINGS: [
+      { name: "Mansi Bhatt", text: "solitaire setting is flawless stone looks massive and brilliant" },
+      { name: "Palak Khurana", text: "wave band is so comfortable smooth inner finish" },
     ],
-    ANIME: [
-      { name: "Chirag Agrawal", text: "naruto kunai formula carved so well anime fans must buy" },
-      { name: "Mohit Chauhan", text: "luffy gear silhouette is legendary one piece fans go for it" },
-      { name: "Abhishek Nambiar", text: "gojo infinite void seal looks majestic in gold" },
-      { name: "Ritvik Sen", text: "sukuna fingers motif is dark and crazy cool" },
-      { name: "Naveen Prasad", text: "ichigo bankai sword guard looks super authentic" },
+    SCARFS: [
+      { name: "Bhavna Gill", text: "pure silk touch is buttery smooth rich sheen and drape" },
+      { name: "Sunita Bhatia", text: "monogram print is sophisticated pairs with formal and casual outfits" },
+    ],
+    COMBOS: [
+      { name: "Ragini Agrawal", text: "gift combo packaging is breathtaking velvet box with certificate" },
+      { name: "Radhika Chauhan", text: "best anniversary gift set both necklace and earrings match seamlessly" },
     ],
   },
 
   // Realistic bad / critical reviews (NO hyphens, commas, periods)
   critical: [
-    { name: "Deepak Mehra", rating: 2, text: "delivery guy took 5 days to deliver courier service was very slow" },
-    { name: "Saurabh Tiwari", rating: 3, text: "key ring was bit tight took time to insert my bike key" },
-    { name: "Mayank Mishra", rating: 2, text: "size is little smaller than what i imagined from photos quality is okay though" },
-    { name: "Chetan Bhagat", rating: 3, text: "outer box had small dent while shipping keychain was safe inside" },
-    { name: "Anand Ahuja", rating: 2, text: "took almost a week to reach bangalore delivery service need improvement" },
-    { name: "Pankaj Tripathi", rating: 3, text: "wish the ring chain was little bit longer otherwise metal finish is good" },
+    { name: "Deepak Mehra", rating: 2, text: "courier executive took 4 days to deliver in pune" },
+    { name: "Saurabh Tiwari", rating: 3, text: "gift bag handle had slight wrinkle inside shipping carton" },
+    { name: "Mayank Mishra", rating: 3, text: "chain size is delicate needs gentle handling otherwise shine is top" },
+    { name: "Chetan Bhagat", rating: 3, text: "outer brown cardboard had small corner press gift box inside was safe" },
+    { name: "Anand Ahuja", rating: 2, text: "took nearly 5 days to reach hyderabad delivery speed could be faster" },
+    { name: "Pankaj Tripathi", rating: 3, text: "wish there was a silver polishing cloth included in standard box" },
   ],
 }

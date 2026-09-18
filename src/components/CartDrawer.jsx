@@ -115,8 +115,8 @@ export default function CartDrawer() {
       return
     }
     try {
-      sessionStorage.removeItem('outframe_buy_now_item')
-      sessionStorage.setItem('outframe_checkout_step', '1')
+      sessionStorage.removeItem('smiths_buy_now_item')
+      sessionStorage.setItem('smiths_checkout_step', '1')
     } catch (e) {}
     closeCart()
     navigate('/checkout')
@@ -126,8 +126,8 @@ export default function CartDrawer() {
     setCurrentUser(user)
     setIsAuthOpen(false)
     try {
-      sessionStorage.removeItem('outframe_buy_now_item')
-      sessionStorage.setItem('outframe_checkout_step', '1')
+      sessionStorage.removeItem('smiths_buy_now_item')
+      sessionStorage.setItem('smiths_checkout_step', '1')
     } catch (e) {}
     closeCart()
     navigate('/checkout')
@@ -199,16 +199,16 @@ export default function CartDrawer() {
             <div className="flex h-full flex-col items-center justify-center text-center">
               <ShoppingBag className="mb-4 h-16 w-16 text-charcoal-light" strokeWidth={1} />
               <p className="font-heading text-lg font-semibold text-cream-muted/60">
-                Your cart is empty
+                Your bag is empty
               </p>
               <p className="mt-1 text-sm text-cream-muted/40">
-                Grab a handcrafted collector 3D keychain.
+                Discover handcrafted 925 sterling silver jewellery.
               </p>
               <button
                 onClick={closeCart}
                 className="mt-6 rounded-full border border-gold/30 px-6 py-2.5 text-sm font-medium text-gold transition-all hover:bg-gold/10"
               >
-                Explore Drops
+                Explore Jewellery
               </button>
             </div>
           ) : (

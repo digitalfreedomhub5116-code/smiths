@@ -135,7 +135,7 @@ export default function OrderConfirmedPage() {
 
             {/* Thank you subtitle */}
             <p className="mt-2 text-sm text-cream-muted/80 fade-in-up-1">
-              Thank you for shopping with Outframe Labs!
+              Thank you for choosing Smiths Jewellery!
             </p>
 
             {/* Summary Card */}
@@ -235,7 +235,7 @@ export default function OrderConfirmedPage() {
 
         {/* Footer */}
         <footer className="border-t border-charcoal-light py-4 text-center text-xs text-cream-muted/40 fade-in-up-4">
-          © 2026 Outframe Labs. All rights reserved.
+          © 2026 Smiths Jewellery. All rights reserved.
         </footer>
       </div>
     </>

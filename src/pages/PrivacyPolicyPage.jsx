@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
             Privacy Policy & Data Security
           </h1>
           <p className="mt-4 text-sm sm:text-base text-cream-muted leading-relaxed max-w-2xl">
-            Outframe Labs is fiercely committed to safeguarding the confidentiality, integrity, and sovereign privacy of every collector who visits our store.
+            Smiths Jewellery is fiercely committed to safeguarding the confidentiality, integrity, and sovereign privacy of every client who visits our store.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-gold/80">
             <span>Last Revised: September 2026</span>
@@ -60,7 +60,7 @@ export default function PrivacyPolicyPage() {
                 Our Non-Negotiable Privacy Promise: Zero Data Sharing
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-cream-muted leading-relaxed">
-                Your personal details, contact numbers, delivery addresses, and purchasing patterns belong exclusively to you. <strong className="text-gold font-semibold">Outframe Labs will NEVER sell, rent, monetize, loan, trade, or distribute your personal data to any external advertising agency, data broker, corporate aggregator, or third-party marketer.</strong> Your contact details may only be used internally by Outframe Labs to notify you regarding orders, shipping updates, and exclusive limited-edition drops.
+                Your personal details, contact numbers, delivery addresses, and purchasing patterns belong exclusively to you. <strong className="text-gold font-semibold">Smiths Jewellery will NEVER sell, rent, monetize, loan, trade, or distribute your personal data to any external advertising agency, data broker, corporate aggregator, or third-party marketer.</strong> Your contact details may only be used internally by Smiths Jewellery to notify you regarding orders, shipping updates, and exclusive limited-edition collections.
               </p>
             </div>
           </div>
@@ -75,10 +75,10 @@ export default function PrivacyPolicyPage() {
               <span>Scope & General Principles</span>
             </h2>
             <p>
-              This Privacy Policy applies comprehensively to all visitors, registered account holders, and purchasing customers of Outframe Labs (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;, or &ldquo;the Studio&rdquo;) via our website, mobile interfaces, subdomains, and associated interactive communication channels.
+              This Privacy Policy applies comprehensively to all visitors, registered account holders, and purchasing customers of Smiths Jewellery (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;, or &ldquo;the Studio&rdquo;) via our website, mobile interfaces, subdomains, and associated interactive communication channels.
             </p>
             <p>
-              By accessing, browsing, interacting with, registering an account on, or submitting an order through Outframe Labs, you acknowledge the terms set forth herein and consent to the lawful processing, storage, and internal application of your information in absolute compliance with applicable Indian data protection frameworks, the Information Technology Act, 2000, and standard global cybersecurity best practices.
+              By accessing, browsing, interacting with, registering an account on, or submitting an order through Smiths Jewellery, you acknowledge the terms set forth herein and consent to the lawful processing, storage, and internal application of your information in absolute compliance with applicable Indian data protection frameworks, the Information Technology Act, 2000, and standard global cybersecurity best practices.
             </p>
           </section>
 
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
               <span>Information We Collect From You</span>
             </h2>
             <p>
-              In order to craft, verify, and safely dispatch bespoke outframed keychains to your doorstep, we collect only strictly necessary information under the following categories:
+              In order to craft, verify, and safely dispatch fine silver jewellery and accessories to your doorstep, we collect only strictly necessary information under the following categories:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-2 text-cream-muted">
               <li>
@@ -99,7 +99,7 @@ export default function PrivacyPolicyPage() {
                 <strong className="text-cream">Account Authentication Data:</strong> When logging in through Google OAuth or magic email credentials, we securely receive your primary identity token, display name, and avatar URL provided by Google API services. We never receive or store your personal Google passwords.
               </li>
               <li>
-                <strong className="text-cream">Transaction & Order Records:</strong> Detailed logs of items purchased, customized finishes selected (such as Antique Gold finish), subtotal and shipping calculations, chosen payment method (Cash on Delivery or Prepaid), assigned Order Numbers, Air Waybill (AWB) tracking codes, and cancellation history.
+                <strong className="text-cream">Transaction & Order Records:</strong> Detailed logs of items purchased, customized finishes selected (such as Rhodium luster), subtotal and shipping calculations, chosen payment method (Cash on Delivery or Prepaid), assigned Order Numbers, Air Waybill (AWB) tracking codes, and cancellation history.
               </li>
               <li>
                 <strong className="text-cream">Technical & Device Telemetry:</strong> Anonymized IP addresses, approximate geographic region (for pincode verification), browser family, screen resolution, operating system, and session timestamps collected to optimize site performance and prevent automated fraud.
@@ -130,10 +130,10 @@ export default function PrivacyPolicyPage() {
               <div className="rounded-xl border border-charcoal-light bg-charcoal/60 p-4">
                 <div className="flex items-center gap-2 text-gold font-bold text-xs uppercase tracking-wider mb-2">
                   <Bell className="w-4 h-4 text-gold" />
-                  <span>Exclusive Drop Marketing</span>
+                  <span>Exclusive Collection Marketing</span>
                 </div>
                 <p className="text-xs text-cream-muted">
-                  Sending notifications about new collectible drops, restocks, upcoming universes, and secret collector discount codes via email, WhatsApp, or SMS directly from Outframe Labs.
+                  Sending notifications about new collection drops, restocks, upcoming designs, and secret client privilege codes via email, WhatsApp, or SMS directly from Smiths Jewellery.
                 </p>
               </div>
 
@@ -153,7 +153,7 @@ export default function PrivacyPolicyPage() {
                   <span>Studio Quality Optimization</span>
                 </div>
                 <p className="text-xs text-cream-muted">
-                  Reviewing aggregate design popularity to schedule 3D print queues, nozzle calibration, and inventory restocking for popular universes (Marvel, DC, Anime, Cars, Valorant).
+                  Reviewing aggregate jewellery popularity to manage silver smithing, finishing queues, and inventory restocking for popular collections (Necklaces, Bracelets, Earrings, Rings, Scarfs, Combos).
                 </p>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function PrivacyPolicyPage() {
               <span>Absolute Prohibition of Third-Party Data Sharing</span>
             </h2>
             <p>
-              We firmly reject the modern monetization of user data. Under no scenario does Outframe Labs sell, license, lease, syndicate, exchange, or broker customer names, phone numbers, or email lists to third-party telemarketers, lead aggregators, or external advertisement networks.
+              We firmly reject the modern monetization of user data. Under no scenario does Smiths Jewellery sell, license, lease, syndicate, exchange, or broker customer names, phone numbers, or email lists to third-party telemarketers, lead aggregators, or external advertisement networks.
             </p>
             <p>
               The only external entities that ever receive partial customer data are:
@@ -191,7 +191,7 @@ export default function PrivacyPolicyPage() {
               <span>Payment Security & Non-Retention of Financial Credentials</span>
             </h2>
             <p>
-              Outframe Labs does NOT store, inspect, process, or retain any debit card numbers, credit card numbers, CVV codes, net banking passwords, or UPI personal identification numbers (PINs) on our servers or databases.
+              Smiths Jewellery does NOT store, inspect, process, or retain any debit card numbers, credit card numbers, CVV codes, net banking passwords, or UPI personal identification numbers (PINs) on our servers or databases.
             </p>
             <p>
               All online digital payments are conducted through tokenized, bank-grade encrypted channels governed by the Reserve Bank of India (RBI) and PCI-DSS (Payment Card Industry Data Security Standard) Level 1 certified payment processors.
@@ -216,7 +216,7 @@ export default function PrivacyPolicyPage() {
           <section className="space-y-3">
             <h2 className="font-heading text-xl font-bold text-cream flex items-center gap-2">
               <span className="text-gold font-mono text-base">07.</span>
-              <span>Data Retention & The Collector&apos;s Right to be Forgotten</span>
+              <span>Data Retention & The Client&apos;s Right to be Forgotten</span>
             </h2>
             <p>
               We retain account and order fulfillment records only for as long as necessary to satisfy accounting regulations, warranty commitments, transit claims, and customer service requests.
@@ -238,7 +238,7 @@ export default function PrivacyPolicyPage() {
               <span>Studio Helpline & Grievance Contact</span>
             </h2>
             <p>
-              Should you have any questions, clarifications, privacy requests, or grievances concerning how your data is handled at Outframe Labs, our dedicated privacy desk is directly reachable:
+              Should you have any questions, clarifications, privacy requests, or grievances concerning how your data is handled at Smiths Jewellery, our dedicated privacy desk is directly reachable:
             </p>
             <div className="rounded-2xl border border-gold/30 bg-charcoal/80 p-6 space-y-3">
               <div className="flex items-center gap-3">
@@ -251,8 +251,8 @@ export default function PrivacyPolicyPage() {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gold shrink-0" />
                 <span className="text-cream font-medium">Official Grievance Email:</span>
-                <a href="mailto:support@outframelabs.in" className="text-gold font-bold hover:underline font-mono">
-                  support@outframelabs.in
+                <a href="mailto:support@smithsjewellery.com" className="text-gold font-bold hover:underline font-mono">
+                  support@smithsjewellery.com
                 </a>
               </div>
               <div className="flex items-center gap-3 text-xs text-cream-muted">

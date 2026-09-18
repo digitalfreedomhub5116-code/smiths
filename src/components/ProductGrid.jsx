@@ -218,7 +218,7 @@ export default function ProductGrid() {
           <div className="mt-16 flex flex-col items-center gap-2 text-center">
             <div className="h-px w-24 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
             <p className="mt-2 text-xs text-cream-muted/50 tracking-wider uppercase">
-              All {catalog.length} artifacts revealed
+              All {catalog.length} creations revealed
             </p>
           </div>
         )}

@@ -1,4 +1,4 @@
-﻿import React from 'react'
+import React from 'react'
 
 export class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Outframe Labs UI Exception:', error, errorInfo)
+    console.error('Smiths Jewellery UI Exception:', error, errorInfo)
   }
 
   handleReset = () => {

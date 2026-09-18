@@ -1,7 +1,7 @@
 /**
- * Outframe Labs Analytics & Event Tracking Engine
+ * Smiths Jewellery Analytics & Event Tracking Engine
  * Integrates with:
- * 1. Supabase Database (Real-time live visitor and funnel data for Outframe Labs Admin Panel)
+ * 1. Supabase Database (Real-time live visitor and funnel data for Smiths Jewellery Admin Panel)
  * 2. Microsoft Clarity (Session recordings, heatmaps, AI summaries)
  */
 import { supabase } from './supabase'
@@ -107,10 +107,10 @@ export function trackPageView(pagePath) {
  */
 export function trackProductView(product) {
   if (!product) return
-  const productName = product.fullName || product.name || 'Outframed Keychain'
+  const productName = product.fullName || product.name || 'Silver Jewellery Piece'
   clarityTag('product_viewed', productName)
   clarityTag('product_id', String(product.id || ''))
-  clarityTag('product_price', String(product.price || 299))
+  clarityTag('product_price', String(product.price || 1299))
   if (product.genre) {
     clarityTag('product_genre', product.genre)
   }
@@ -120,7 +120,7 @@ export function trackProductView(product) {
     productId: product.id,
     productName: productName,
     metadata: {
-      price: product.price || 299,
+      price: product.price || 1299,
       genre: product.genre || 'OTHER',
     },
   })
@@ -131,7 +131,7 @@ export function trackProductView(product) {
  */
 export function trackAddToCart(product, quantity = 1) {
   if (!product) return
-  const productName = product.fullName || product.name || 'Outframed Keychain'
+  const productName = product.fullName || product.name || 'Silver Jewellery Piece'
   clarityTag('last_cart_item', productName)
   clarityTag('cart_qty', String(quantity))
   clarityEvent('add_to_cart')
@@ -141,8 +141,8 @@ export function trackAddToCart(product, quantity = 1) {
     productName: productName,
     metadata: {
       quantity,
-      price: product.price || 299,
-      total: (Number(product.price || 299)) * quantity,
+      price: product.price || 1299,
+      total: (Number(product.price || 1299)) * quantity,
     },
   })
 }
@@ -152,10 +152,10 @@ export function trackAddToCart(product, quantity = 1) {
  */
 export function trackBuyNow(product, quantity = 1) {
   if (!product) return
-  const productName = product.fullName || product.name || 'Outframed Keychain'
+  const productName = product.fullName || product.name || 'Silver Jewellery Piece'
   clarityTag('buy_now_product', productName)
   clarityTag('buy_now_qty', String(quantity))
-  clarityTag('buy_now_price', String(Number(product.price || 299) * quantity))
+  clarityTag('buy_now_price', String(Number(product.price || 1299) * quantity))
   clarityEvent('click_buy_now')
 
   logDatabaseEvent('buy_now', {
@@ -292,21 +292,21 @@ export async function fetchAnalyticsSummary(timeRange = 'today') {
         pageViewsCount++
       } else if (evName === 'product_view') {
         productViewsCount++
-        const pName = event.product_name || 'Outframed Keychain'
+        const pName = event.product_name || 'Silver Jewellery Piece'
         if (!productStats[pName]) {
           productStats[pName] = { name: pName, productId: event.product_id, views: 0, buyNow: 0, addToCart: 0 }
         }
         productStats[pName].views++
       } else if (evName === 'buy_now') {
         buyNowCount++
-        const pName = event.product_name || 'Outframed Keychain'
+        const pName = event.product_name || 'Silver Jewellery Piece'
         if (!productStats[pName]) {
           productStats[pName] = { name: pName, productId: event.product_id, views: 0, buyNow: 0, addToCart: 0 }
         }
         productStats[pName].buyNow++
       } else if (evName === 'add_to_cart') {
         addToCartCount++
-        const pName = event.product_name || 'Outframed Keychain'
+        const pName = event.product_name || 'Silver Jewellery Piece'
         if (!productStats[pName]) {
           productStats[pName] = { name: pName, productId: event.product_id, views: 0, buyNow: 0, addToCart: 0 }
         }
@@ -341,10 +341,10 @@ export async function fetchAnalyticsSummary(timeRange = 'today') {
       },
       {
         id: 'product_views',
-        name: '2. Viewed Keychains',
+        name: '2. Viewed Jewellery',
         count: productViewsCount,
         pctOfTotal: totalVisitors > 0 ? Math.min(100, Math.round((productViewsCount / baseFunnel) * 100)) : 0,
-        subtext: 'Opened keychain product pages',
+        subtext: 'Opened jewellery product pages',
       },
       {
         id: 'intent',
@@ -415,3 +415,5 @@ export async function fetchAnalyticsSummary(timeRange = 'today') {
     }
   }
 }
+
+export const getAnalyticsSummary = fetchAnalyticsSummary

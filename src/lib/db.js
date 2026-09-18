@@ -1,9 +1,9 @@
 import { supabase, isSupabaseConfigured } from './supabase'
 import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData'
 
-const LOCAL_STORAGE_ORDERS_KEY = 'outframe_labs_orders'
-const LOCAL_STORAGE_USER_KEY = 'outframe_labs_user'
-const LOCAL_STORAGE_ADDRESSES_KEY = 'outframe_labs_addresses'
+const LOCAL_STORAGE_ORDERS_KEY = 'smiths_jewellery_orders'
+const LOCAL_STORAGE_USER_KEY = 'smiths_jewellery_user'
+const LOCAL_STORAGE_ADDRESSES_KEY = 'smiths_jewellery_addresses'
 
 // Helper for local storage
 const getLocalData = (key, fallback = []) => {
@@ -23,10 +23,10 @@ const setLocalData = (key, value) => {
   }
 }
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'outframe_labs_products'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products'
 
 // ── 0. CLOUD STORAGE (SUPABASE BUCKET: product-images) ──
-export async function uploadProductImage(fileOrBlobOrDataUrl, prefix = 'keychain') {
+export async function uploadProductImage(fileOrBlobOrDataUrl, prefix = 'jewellery') {
   if (!fileOrBlobOrDataUrl) throw new Error('No image provided')
 
   // If already a remote web URL, return it directly
@@ -132,11 +132,11 @@ export async function getProducts(options = {}) {
             ...row,
             id: Number(row.id) || row.id,
             name: row.name,
-            fullName: row.full_name || `${row.name} Outframed Keychain`,
+            fullName: row.full_name || `${row.name} - Smiths Jewellery`,
             slug: row.slug || mock?.slug,
             genre: row.genre || mock?.genre,
             price: Number(row.price),
-            originalPrice: Number(row.original_price || mock?.originalPrice || 459),
+            originalPrice: Number(row.original_price || mock?.originalPrice || 2599),
             image: coverImage,
             gallery: fallbackGallery,
             inStock: row.is_active !== false,
@@ -144,22 +144,22 @@ export async function getProducts(options = {}) {
             rating: Number(row.rating) || mock?.rating || 4.8,
             reviewCount: Number(row.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
             reviews: Array.isArray(row.reviews) && row.reviews.length > 0 ? row.reviews : fallbackReviews,
-            description: row.description || mock?.description || `Handcrafted antique gold ${row.name} outframed keychain.`,
+            description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery.`,
             features: Array.isArray(row.features) && row.features.length > 0 ? row.features : (mock?.features || [
-              'Each keychain is made from bio degradable PLA material.',
-              'Strong and durable keyring',
-              'Antique gold finish',
-              'Durable.',
-              'Dimensions: 64mm * 43mm',
+              'Crafted from certified 925 Sterling Silver',
+              'Triple Rhodium Plated for enduring tarnish resistance',
+              'AAA Grade brilliant cubic zirconia stones',
+              '100% Hypoallergenic — Nickel-Free and Lead-Free',
+              'Includes Velvet Presentation Box & Authenticity Certificate',
             ]),
-            dimensions: row.dimensions || mock?.dimensions || '64mm * 43mm',
-            material: row.material || mock?.material || 'Biodegradable PLA',
-            finish: row.finish || mock?.finish || 'Antique Gold Finish',
-            keyring: 'Strong and Durable Keyring',
-            durability: 'Durable Impact Resistant Structure',
+            dimensions: row.dimensions || mock?.dimensions || 'Standard Comfort Fit',
+            material: row.material || mock?.material || '925 Sterling Silver',
+            finish: row.finish || mock?.finish || 'High-Luster Rhodium & Polished Silver',
+            keyring: 'Hypoallergenic Security Clasp',
+            durability: 'Tarnish-Resistant Daily Wear',
             discountBadge: mock?.discountBadge || '-50%',
             discountPercent: mock?.discountPercent || 50,
-            isBestseller: mock?.isBestseller ?? (Number(row.id) === 1 || Number(row.id) === 4),
+            isBestseller: mock?.isBestseller ?? (Number(row.id) === 1 || Number(row.id) === 5),
           }
         })
         mapped.sort((a, b) => Number(a.id) - Number(b.id))
@@ -252,11 +252,11 @@ export async function getProductBySlugOrId(identifier) {
           ...data,
           id: Number(data.id) || data.id,
           name: data.name,
-          fullName: data.full_name || `${data.name} Outframed Keychain`,
+          fullName: data.full_name || `${data.name} - Smiths Jewellery`,
           image: coverImage,
           gallery: fallbackGallery,
           reviews: Array.isArray(data.reviews) && data.reviews.length > 0 ? data.reviews : fallbackReviews,
-          description: data.description || mock?.description || `Handcrafted antique gold ${data.name} outframed keychain.`,
+          description: data.description || mock?.description || `Handcrafted 925 sterling silver ${data.name} from Smiths Jewellery.`,
           features: Array.isArray(data.features) && data.features.length > 0 ? data.features : (mock?.features || []),
           rating: Number(data.rating) || mock?.rating || 4.8,
           reviewCount: Number(data.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
@@ -278,7 +278,7 @@ export async function getProductBySlugOrId(identifier) {
 
 export async function saveProduct(product) {
   const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(product.id) || m.slug === product.slug)
-  const defaultFallback = mock?.image || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+  const defaultFallback = mock?.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
   const rawGallery = Array.isArray(product.gallery) && product.gallery.length > 0 ? product.gallery : []
   const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
   const finalGallery = cleanGallery.length > 0 ? cleanGallery : [product.image || defaultFallback]
@@ -299,9 +299,9 @@ export async function saveProduct(product) {
 
   if (isSupabaseConfigured && supabase) {
     try {
-      const cleanName = product.name || 'Outframed Keychain'
-      const slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-outframed-keychain`
-      const fullName = product.fullName || `${cleanName} Outframed Keychain`
+      const cleanName = product.name || 'Silver Jewellery Piece'
+      const slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
+      const fullName = product.fullName || `${cleanName} - Smiths Jewellery`
       const isHidden = product.isHidden === true
       const isActive = product.inStock !== false
 
@@ -310,10 +310,10 @@ export async function saveProduct(product) {
         name: cleanName,
         full_name: fullName,
         slug: slug,
-        genre: product.genre || 'MARVEL',
-        price: Number(product.price) || 299,
-        original_price: Number(product.originalPrice || product.original_price || 599),
-        description: product.description || `Handcrafted antique gold ${cleanName} keychain.`,
+        genre: product.genre || 'NECKLACES',
+        price: Number(product.price) || 1299,
+        original_price: Number(product.originalPrice || product.original_price || 2599),
+        description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
         image: primaryImage,
         gallery: finalGallery,
         is_active: isActive,
@@ -371,7 +371,7 @@ export async function deleteProductFromDb(productId) {
 
 // ── 2. ORDERS & SHIPROCKET LIVE TRACKING ──
 export async function createOrder(orderPayload) {
-  const orderNumber = 'OFL-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000)
+  const orderNumber = 'SMT-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000)
   const estimatedDelivery = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString()
 
   const initialTrackingEvents = [
@@ -379,14 +379,14 @@ export async function createOrder(orderPayload) {
       id: 'evt-1',
       status: 'PLACED',
       activity: 'Order placed & payment verified',
-      location: 'Outframe Online Store',
+      location: 'Smiths Online Store',
       event_time: new Date().toISOString(),
     },
     {
       id: 'evt-2',
       status: 'CONFIRMED',
-      activity: 'Order confirmed: Keychain queued for 3D printing & antique gold patina finishing',
-      location: 'Outframe Workshop, Bengaluru',
+      activity: 'Order confirmed: Jewellery queued for velvet gift box packaging & authenticity certification',
+      location: 'Smiths Studio, Bengaluru',
       event_time: new Date(Date.now() + 1000 * 60 * 5).toISOString(),
     },
   ]
@@ -493,7 +493,7 @@ export async function createOrder(orderPayload) {
             return {
               order_id: orderRecord.id,
               product_id: !isNaN(pid) && pid >= 1 && pid <= 25 ? pid : null,
-              product_name: it.name || 'Keychain',
+              product_name: it.name || 'Silver Jewellery',
               quantity: it.quantity || 1,
               price: it.price || 0,
               image: it.image || '',
@@ -527,7 +527,7 @@ export async function createOrder(orderPayload) {
               order_id: orderRecord.id,
               status: evt.status || 'PLACED',
               activity: evt.activity || 'Order placed',
-              location: evt.location || 'Outframe Online Store',
+              location: evt.location || 'Smiths Online Store',
               event_time: evt.event_time || new Date().toISOString(),
             }))
             const { error: trkErr } = await supabase.from('tracking_events').insert(trkRows)
@@ -705,7 +705,7 @@ export function advanceOrderStatus(orderNumber) {
     }
 
     const activityMap = {
-      PACKED: { activity: 'Keychain carefully inspected and sealed in antique gold collectors tin box', location: 'Outframe Fulfillment Hub, Bengaluru' },
+      PACKED: { activity: 'Jewellery piece carefully inspected, certified, and sealed in signature velvet gift box', location: 'Smiths Fulfillment Hub, Bengaluru' },
       SHIPPED: { activity: 'Handed over to courier partner (Delhivery Air)', location: 'Bengaluru Sort Facility' },
       IN_TRANSIT: { activity: 'Package in transit between distribution hubs', location: 'National Sorting Center' },
       OUT_FOR_DELIVERY: { activity: 'Out for delivery with courier delivery executive', location: order.shipping_address?.city || 'Local Delivery Hub' },
@@ -1375,7 +1375,7 @@ export function initAuthListener(onUserChange) {
 }
 
 // ── 6. PERSISTENT ACCOUNT CART ──
-const LOCAL_STORAGE_CART_KEY = 'outframe_labs_cart'
+const LOCAL_STORAGE_CART_KEY = 'smiths_jewellery_cart'
 
 export function getLocalCart() {
   const current = getCurrentCustomer()
@@ -1589,7 +1589,7 @@ export async function getUserOrders(user = null) {
 }
 
 // ── 8. AUTOMATED ADMIN NOTIFICATIONS (INSTANT GMAIL & WHATSAPP) ──
-const LOCAL_STORAGE_NOTIFICATION_SETTINGS_KEY = 'outframe_admin_notification_settings'
+const LOCAL_STORAGE_NOTIFICATION_SETTINGS_KEY = 'smiths_admin_notification_settings'
 export const DEFAULT_ADMIN_WHATSAPP = '918530085116'
 export const DEFAULT_ADMIN_EMAIL = 'digitalfreedomhub5116@gmail.com'
 
@@ -1689,8 +1689,8 @@ export function formatOrderWhatsAppMessage(order) {
   // Format line items
   const items = Array.isArray(order.items) && order.items.length > 0 ? order.items : []
   const itemsText = items.length > 0
-    ? items.map((it) => `• ${it.quantity || 1}x ${it.name || it.product_name || 'Antique Gold Keychain'} (₹${it.price || 0})`).join('\n')
-    : '• 1x Keychain'
+    ? items.map((it) => `• ${it.quantity || 1}x ${it.name || it.product_name || 'Silver Jewellery Piece'} (₹${it.price || 0})`).join('\n')
+    : '• 1x Silver Piece'
 
   const total = order.total_amount || order.subtotal || 0
   const isPrepaid = order.payment_method === 'PREPAID' || !!order.razorpay_payment_id
@@ -1704,11 +1704,11 @@ export function formatOrderWhatsAppMessage(order) {
   })
 
   // Deep-link to admin panel orders tab filtered to this order
-  const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://outframelabs.com'
+  const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smithsjewellery.com'
   const adminUrl = `${origin}/admin-panel-access?tab=orders&search=${encodeURIComponent(orderNum)}`
 
   return (
-    `🚨 *NEW ORDER RECEIVED - Outframe Labs* 🚨\n\n` +
+    `🚨 *NEW ORDER RECEIVED - Smiths Jewellery* 🚨\n\n` +
     `📦 *Order:* ${orderNum}\n` +
     `👤 *Customer:* ${custName}\n` +
     `📞 *Phone:* ${custPhone}\n` +
@@ -1790,7 +1790,7 @@ export async function sendTestWhatsAppNotification(phone, apiKey) {
   }
 
   const testMessage =
-    `✅ *Outframe Labs WhatsApp Notification Connected!*\n\n` +
+    `✅ *Smiths Jewellery WhatsApp Notification Connected!*\n\n` +
     `🎉 Your automated order alert system is now active.\n` +
     `Whenever a customer places an order, you will receive full customer details, ordered products, and a direct link to generate the AWB.\n\n` +
     `📱 Admin Phone: +${cleanPhone}\n` +
@@ -1852,7 +1852,7 @@ export async function sendAdminOrderEmail(order) {
     }
 
     // 2. Direct browser FormSubmit fallback
-    const orderNum = order.order_number || 'OFL-' + Date.now().toString().slice(-4)
+    const orderNum = order.order_number || 'SMT-' + Date.now().toString().slice(-4)
     const total = order.total_amount || order.subtotal || 0
     const razorpayId = order.razorpay_payment_id || order.razorpayPaymentId || ''
     const isPrepaid = order.payment_method === 'PREPAID' || !!razorpayId
@@ -1861,11 +1861,11 @@ export async function sendAdminOrderEmail(order) {
       : `Prepaid (Razorpay Verified${razorpayId ? ` · Ref: ${razorpayId}` : ''})`
     const items = Array.isArray(order.items) && order.items.length > 0 ? order.items : []
     const itemsText = items.length > 0
-      ? items.map((i) => `• ${i.quantity || 1}x ${i.name || i.product_name || 'Keychain'} (₹${i.price || 0})`).join('\n')
-      : '• 1x Keychain'
+      ? items.map((i) => `• ${i.quantity || 1}x ${i.name || i.product_name || 'Silver Jewellery'} (₹${i.price || 0})`).join('\n')
+      : '• 1x Silver Jewellery'
     const addr = order.shipping_address || {}
     const fullAddr = [addr.address_line, addr.landmark, addr.city, addr.state, addr.pincode].filter(Boolean).join(', ')
-    const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://outframelabs.com'
+    const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smithsjewellery.com'
     const adminLink = `${origin}/admin-panel-access?tab=orders&search=${encodeURIComponent(orderNum)}`
 
     const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`, {
@@ -1875,7 +1875,7 @@ export async function sendAdminOrderEmail(order) {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        _subject: `🚨 NEW ORDER #${orderNum} - ₹${total} (${isPrepaid ? 'PREPAID / PAID' : 'COD'}) - Outframe Labs`,
+        _subject: `🚨 NEW ORDER #${orderNum} - ₹${total} (${isPrepaid ? 'PREPAID / PAID' : 'COD'}) - Smiths Jewellery`,
         _template: 'table',
         _captcha: 'false',
         'Order Number': orderNum,
@@ -1922,12 +1922,12 @@ export async function sendTestEmailNotification(email) {
       pincode: '400063',
     },
     items: [
-      { name: 'Porsche 911 GT3 RS Antique Gold Keychain', quantity: 1, price: 499 },
-      { name: 'BMW M Heritage Keychain', quantity: 1, price: 499 },
+      { name: 'Aura Silver Choker Necklace', quantity: 1, price: 1299 },
+      { name: 'Celeste Silver Tennis Bracelet', quantity: 1, price: 1499 },
     ],
-    subtotal: 998,
+    subtotal: 2798,
     shipping_fee: 0,
-    total_amount: 998,
+    total_amount: 2798,
     payment_method: 'COD',
     created_at: new Date().toISOString(),
   }

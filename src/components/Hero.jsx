@@ -9,34 +9,42 @@ export default function Hero() {
       {/* Background Graphic */}
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-black">
         <img
-          src="/hero-bg.jpg"
-          alt="Outframe Labs - Spider-Man breaking out of frame"
-          className="h-full w-full object-contain md:object-cover md:object-center filter contrast-105"
+          src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1600&q=85"
+          alt="Smiths Jewellery — Fine 925 Sterling Silver & Luxury Accessories"
+          className="h-full w-full object-cover object-center filter contrast-105 brightness-90"
           loading="eager"
         />
-        {/* Soft Vignettes & Gradients for seamless black blending */}
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
+        {/* Soft Vignettes & Gradients for seamless obsidian black blending */}
+        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/70 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/90 via-black/50 to-transparent" />
       </div>
 
-      {/* Decorative Gold Side Accents */}
-      <div className="absolute left-4 top-1/3 hidden h-32 w-px bg-gradient-to-b from-transparent via-gold/50 to-transparent sm:block sm:left-8" />
-      <div className="absolute right-4 top-1/3 hidden h-32 w-px bg-gradient-to-b from-transparent via-gold/50 to-transparent sm:block sm:right-8" />
+      {/* Decorative Silver Side Accents */}
+      <div className="absolute left-4 top-1/3 hidden h-32 w-px bg-gradient-to-b from-transparent via-silver/50 to-transparent sm:block sm:left-8" />
+      <div className="absolute right-4 top-1/3 hidden h-32 w-px bg-gradient-to-b from-transparent via-silver/50 to-transparent sm:block sm:right-8" />
 
       {/* Content Positioned Elegantly over Bottom */}
       <div
         ref={ref}
         className="relative z-10 mx-auto max-w-4xl px-5 text-center sm:px-8"
       >
+        <span
+          className={`text-xs sm:text-sm font-semibold tracking-[0.3em] text-silver-dark uppercase mb-3 inline-block transition-all duration-700 ${
+            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          ✦ 925 Sterling Silver & Fine Accessories ✦
+        </span>
+
         {/* Headline */}
         <h1
           className={`font-heading text-4xl font-extrabold tracking-tight text-cream sm:text-6xl lg:text-7xl transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          Break the{' '}
-          <span className="bg-gradient-to-r from-gold via-yellow-200 to-gold bg-clip-text text-transparent">
-            Boundary.
+          Timeless{' '}
+          <span className="bg-gradient-to-r from-white via-silver-light to-silver-dark bg-clip-text text-transparent">
+            Radiance.
           </span>
         </h1>
 
@@ -46,9 +54,9 @@ export default function Hero() {
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          Antique gold keychains that refuse to stay in the frame.
+          Fine 925 sterling silver necklaces, bracelets, earrings, luxury silk scarfs, and curated gift combos.
           <br className="hidden sm:block" />
-          Crafted for those who carry something extraordinary.
+          Crafted with luminous rhodium finish for everlasting shine.
         </p>
 
         {/* CTA Buttons */}
@@ -59,23 +67,23 @@ export default function Hero() {
         >
           <a
             href="#genres"
-            className="btn-gold inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-xl shadow-gold/20 hover:shadow-gold/40"
+            className="btn-silver inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-xl shadow-silver/15 hover:shadow-silver/30"
           >
-            Explore Universes
+            Explore Collections
           </a>
           <a
             href="#products"
-            className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-obsidian/70 px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-cream backdrop-blur-md transition-all hover:border-gold hover:bg-gold/10 hover:text-gold"
+            className="inline-flex items-center gap-2 rounded-full border border-silver/40 bg-obsidian/70 px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest text-cream backdrop-blur-md transition-all hover:border-silver hover:bg-silver/10 hover:text-white"
           >
-            View All Keychains
+            View All Jewellery
           </a>
         </div>
       </div>
 
       {/* Scroll Down Indicator */}
       <div className="relative z-10 mt-6 flex justify-center animate-bounce text-cream-muted/50">
-        <a href="#genres" aria-label="Scroll to genres">
-          <ChevronDown className="h-5 w-5 hover:text-gold transition-colors" />
+        <a href="#genres" aria-label="Scroll to collections">
+          <ChevronDown className="h-5 w-5 hover:text-silver transition-colors" />
         </a>
       </div>
     </section>

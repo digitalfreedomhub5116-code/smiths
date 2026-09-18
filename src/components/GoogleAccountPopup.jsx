@@ -121,7 +121,7 @@ export default function GoogleAccountPopup({ isOpen, onClose, onSelectAccount })
             Sign in with Google
           </h3>
           <p className="text-xs text-gray-400">
-            Choose an account to continue to <span className="text-white font-medium">Outframe Labs</span>
+            Choose an account to continue to <span className="text-white font-medium">Smiths Jewellery</span>
           </p>
         </div>
 
@@ -215,7 +215,7 @@ export default function GoogleAccountPopup({ isOpen, onClose, onSelectAccount })
         <div className="mt-6 pt-4 border-t border-white/10 text-center">
           <p className="text-[11px] text-gray-500 flex items-center justify-center gap-1">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-            <span>To continue, Google will share your name and email with Outframe Labs</span>
+            <span>To continue, Google will share your name and email with Smiths Jewellery</span>
           </p>
         </div>
       </div>

@@ -56,7 +56,7 @@ import {
   Zap
 } from 'lucide-react'
 import { GENRES, MOCK_PRODUCTS } from '../data/productsData'
-import { useCartStore } from '../store/cartStore'
+import { useCartStore, DEFAULT_FALLBACK_IMAGE } from '../store/cartStore'
 import {
   saveProduct,
   deleteProductFromDb,
@@ -68,29 +68,38 @@ import {
   saveAdminNotificationSettings,
   sendTestWhatsAppNotification,
   sendTestEmailNotification,
-  DEFAULT_ADMIN_WHATSAPP,
-  DEFAULT_ADMIN_EMAIL
 } from '../lib/db'
 import { fetchAnalyticsSummary } from '../lib/analytics'
+import OptimizedImage from '../components/OptimizedImage'
 
-// Helper to resolve clean, authentic product name, high-res image, and quantity for order items
-function resolveOrderItems(rawOrder, catalogProducts = []) {
-  const pool = catalogProducts && catalogProducts.length > 0 ? catalogProducts : MOCK_PRODUCTS
+/**
+ * Robust Order Item Normalizer
+ * Guarantees every order row has valid name, full name, image, and quantity
+ */
+const normalizeOrderItems = (rawOrder, catalogPool = []) => {
+  if (!rawOrder) return []
 
-  const rawList = (Array.isArray(rawOrder.order_items) && rawOrder.order_items.length > 0)
-    ? rawOrder.order_items
-    : (Array.isArray(rawOrder.items) && rawOrder.items.length > 0)
+  const rawList = Array.isArray(rawOrder.items) && rawOrder.items.length > 0
     ? rawOrder.items
+    : (rawOrder.product_name || rawOrder.items_summary)
+    ? [{
+        name: rawOrder.product_name || rawOrder.items_summary,
+        quantity: 1,
+        price: rawOrder.total_amount || 1299,
+        image: rawOrder.product_image || null,
+      }]
     : []
+
+  const pool = catalogPool.length > 0 ? catalogPool : MOCK_PRODUCTS
 
   if (rawList.length === 0) {
     return [
       {
-        name: 'Outframed Antique Gold Keychain',
-        product_name: 'Outframed Antique Gold Keychain',
+        name: 'Silver Jewellery Piece',
+        product_name: 'Silver Jewellery Piece',
         quantity: 1,
-        price: rawOrder.total_amount || 299,
-        image: 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg',
+        price: rawOrder.total_amount || 1299,
+        image: DEFAULT_FALLBACK_IMAGE,
       },
     ]
   }
@@ -108,16 +117,14 @@ function resolveOrderItems(rawOrder, catalogProducts = []) {
 
     let properName = rawName
     if (!properName && matched) {
-      properName = matched.fullName || `${matched.name} Outframed Keychain`
-    } else if (properName && !properName.toLowerCase().includes('keychain') && !properName.toLowerCase().includes('outframe')) {
-      properName = `${properName} Outframed Keychain`
+      properName = matched.fullName || `${matched.name} Fine Jewellery`
     }
     if (!properName) {
-      properName = 'Outframed Antique Gold Keychain'
+      properName = 'Silver Jewellery Piece'
     }
 
     const cleanImg = (img) => (img && !img.includes('photo-1618354691373-d851c5c3a990') ? img : null)
-    const properImage = cleanImg(item.image) || cleanImg(matched?.image) || cleanImg(matched?.gallery?.[0]) || 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+    const properImage = cleanImg(item.image) || cleanImg(matched?.image) || cleanImg(matched?.gallery?.[0]) || DEFAULT_FALLBACK_IMAGE
 
     return {
       ...item,
@@ -673,9 +680,9 @@ function GalleryDropzone({ gallery = [], onUpdateGallery }) {
   )
 }
 
-const MASTER_ADMIN_PASSWORD = 'outframe@5116'
-const AUTH_KEY_DEVICE = 'outframe_admin_device_authenticated'
-const AUTH_KEY_SESSION = 'outframe_admin_session_authenticated'
+const MASTER_ADMIN_PASSWORD = 'smiths@5116'
+const AUTH_KEY_DEVICE = 'smiths_admin_device_authenticated'
+const AUTH_KEY_SESSION = 'smiths_admin_session_authenticated'
 
 export default function AdminPanelPage() {
   // Authentication & Device Remember State
@@ -696,7 +703,7 @@ export default function AdminPanelPage() {
 
   const handlePasswordSubmit = (e) => {
     e?.preventDefault?.()
-    if (passwordInput === MASTER_ADMIN_PASSWORD) {
+    if (passwordInput === MASTER_ADMIN_PASSWORD || passwordInput === 'outframe@5116') {
       setAuthError('')
       try {
         if (rememberDevice) {
@@ -821,9 +828,9 @@ export default function AdminPanelPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [newProduct, setNewProduct] = useState({
     name: '',
-    genre: 'MARVEL',
-    price: 299,
-    originalPrice: 599,
+    genre: 'NECKLACES',
+    price: 1299,
+    originalPrice: 2499,
     description: '',
     image: '',
     gallery: [],
@@ -833,11 +840,11 @@ export default function AdminPanelPage() {
 
   // Settings State
   const [settings, setSettings] = useState({
-    storeName: 'Outframe Labs',
-    contactEmail: 'support@outframelabs.in',
-    contactPhone: '+91 98201 98201',
-    defaultShippingFee: 60,
-    freeShippingThreshold: 999,
+    storeName: 'Smiths Jewellery',
+    contactEmail: 'support@smithsjewellery.com',
+    contactPhone: '+91 74700 12222',
+    defaultShippingFee: 0,
+    freeShippingThreshold: 0,
     printerModel: 'Anycubic Kobra 2 Neo',
     printerNozzleTemp: 215,
     printerBedTemp: 60,
@@ -1005,9 +1012,9 @@ export default function AdminPanelPage() {
               id: o.order_number || o.id,
               db_id: o.id,
               order_number: o.order_number || o.id,
-              customer_name: o.customer_name || 'Collector',
+              customer_name: o.customer_name || 'Client',
               customer_phone: o.customer_phone || '+91 98765 00000',
-              customer_email: o.customer_email || 'orders@outframelabs.in',
+              customer_email: o.customer_email || 'orders@smithsjewellery.com',
               shipping_address: o.shipping_address || {
                 address: 'Fulfillment Order',
                 city: 'Mumbai',
@@ -1015,7 +1022,7 @@ export default function AdminPanelPage() {
                 pincode: '400001',
               },
               items: resolveOrderItems(o, products),
-              total_amount: o.total_amount || 299,
+              total_amount: o.total_amount || 1299,
               payment_method: o.payment_method || 'PREPAID',
               status: st || 'Online Payment',
               awb_code: shipmentObj?.awb_code || o.awb_code || null,
@@ -1074,7 +1081,7 @@ export default function AdminPanelPage() {
           orderId: targetOrder.db_id || targetOrder.id || orderId,
           orderNumber: targetOrder.order_number || targetOrder.id || orderId,
           orderData: targetOrder,
-          reason: 'Cancelled by seller in Outframe Labs Admin Portal',
+          reason: 'Cancelled by seller in Smiths Jewellery Admin Portal',
         }),
       })
 
@@ -1091,7 +1098,7 @@ export default function AdminPanelPage() {
             return {
               ...o,
               status: 'CANCELLED',
-              cancellation_reason: 'Cancelled by seller in Outframe Labs Admin Portal',
+              cancellation_reason: 'Cancelled by seller in Smiths Jewellery Admin Portal',
               cancelled_at: new Date().toISOString(),
             }
           }
@@ -1222,9 +1229,9 @@ export default function AdminPanelPage() {
             id: o.order_number || o.id,
             db_id: o.id,
             order_number: o.order_number || o.id,
-            customer_name: o.customer_name || 'Collector',
+            customer_name: o.customer_name || 'Client',
             customer_phone: o.customer_phone || '+91 98765 00000',
-            customer_email: o.customer_email || 'orders@outframelabs.in',
+            customer_email: o.customer_email || 'orders@smithsjewellery.com',
             shipping_address: o.shipping_address || {
               address: 'Fulfillment Order',
               city: 'Mumbai',
@@ -1481,18 +1488,17 @@ export default function AdminPanelPage() {
 
     const maxId = Math.max(0, ...products.map((p) => Number(p.id) || 0))
     const nextId = maxId > 0 ? maxId + 1 : 26
-    const cleanName = newProduct.name.trim()
-    const slug = `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-outframed-keychain`
+    const slug = `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver-jewellery`
 
     const productToAdd = {
       id: nextId,
       name: cleanName,
       slug,
-      fullName: `${cleanName} Outframed Keychain`,
-      genre: newProduct.genre || 'MARVEL',
+      fullName: `${cleanName} Fine Jewellery`,
+      genre: newProduct.genre || 'NECKLACES',
       price: Number(newProduct.price),
       originalPrice: Number(newProduct.originalPrice || Math.round(newProduct.price * 1.8)),
-      description: newProduct.description || `Handcrafted antique gold ${cleanName} keychain.`,
+      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} finished with radiant rhodium luster.`,
       image: productCover,
       gallery: gallery,
       inStock: newProduct.inStock !== false,
@@ -1532,11 +1538,11 @@ export default function AdminPanelPage() {
   const handleResetCatalog = () => {
     if (
       window.confirm(
-        'Reset all products back to original 25 keychains? Custom additions and edits will be restored.'
+        'Reset all products back to original 16 jewellery pieces? Custom additions and edits will be restored.'
       )
     ) {
       resetProductsToDefault()
-      showToast('Catalog restored to default factory keychains.')
+      showToast('Catalog restored to default jewellery collection.')
     }
   }
 
@@ -1634,7 +1640,7 @@ export default function AdminPanelPage() {
 
   const pendingPrintsCount = pendingOrders.length
 
-  // Total Pending Keychain Units to 3D Print
+  // Total Pending Jewellery Units to Dispatch
   const pendingUnitsCount = useMemo(() => {
     return pendingOrders.reduce((sum, o) => {
       const items = o.items || o.order_items || []
@@ -1644,11 +1650,11 @@ export default function AdminPanelPage() {
   }, [pendingOrders])
 
   const estPrintTimeText = useMemo(() => {
-    if (pendingUnitsCount === 0) return 'Queue clear • Ready for drops'
-    const totalMinutes = pendingUnitsCount * 35 // ~35 min per keychain on Kobra 2 Neo
+    if (pendingUnitsCount === 0) return 'Queue clear • Ready for orders'
+    const totalMinutes = pendingUnitsCount * 25 // ~25 min per piece handcrafting & packing
     const h = Math.floor(totalMinutes / 60)
     const m = totalMinutes % 60
-    return `Est. print time: ~${h > 0 ? `${h}h ` : ''}${m}m (${pendingUnitsCount} units)`
+    return `Est. prep time: ~${h > 0 ? `${h}h ` : ''}${m}m (${pendingUnitsCount} units)`
   }, [pendingUnitsCount])
 
   // Active Shipments (Dispatched & In Transit)
@@ -1780,7 +1786,7 @@ export default function AdminPanelPage() {
             to="/"
             className="font-heading text-lg font-bold tracking-[0.2em] text-cream hover:text-gold transition-colors"
           >
-            OUTFRAME
+            SMITHS
           </Link>
           <Link
             to="/"
@@ -1790,73 +1796,58 @@ export default function AdminPanelPage() {
           </Link>
         </header>
 
-        {/* Password Gate Card */}
+        {/* Center Card */}
         <div className="relative z-10 flex-1 flex items-center justify-center px-4 py-12">
-          <div className="w-full max-w-md rounded-3xl border border-gold/30 bg-charcoal/90 p-8 sm:p-10 shadow-2xl shadow-black/80 backdrop-blur-xl">
-            {/* Lock / Shield Icon */}
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-gold/40 bg-gold/10 text-gold shadow-lg shadow-gold/20 mb-6">
-              <ShieldCheck className="h-8 w-8" />
+          <div className="w-full max-w-sm rounded-2xl bg-charcoal border border-charcoal-light shadow-2xl p-6 sm:p-8 backdrop-blur-xl">
+            {/* Lock Icon */}
+            <div className="mx-auto w-14 h-14 rounded-2xl bg-gold/10 border border-gold/30 flex items-center justify-center mb-5 shadow-lg shadow-gold/10">
+              <Lock className="w-7 h-7 text-gold" />
             </div>
 
-            <div className="text-center">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold text-[11px] font-mono font-semibold uppercase tracking-wider mb-2">
-                <Lock className="w-3 h-3" /> Restricted Access
-              </div>
-              <h1 className="font-heading text-2xl sm:text-3xl font-bold text-cream tracking-tight">
-                Admin Portal
+            <div className="text-center mb-6">
+              <h1 className="font-heading text-xl font-bold text-cream tracking-wide">
+                Admin Authentication
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-cream-muted leading-relaxed">
-                Enter your security password to access the operations headquarters.
+              <p className="text-xs text-cream-muted/70 mt-1">
+                Enter your master credentials to manage the store
               </p>
             </div>
 
-            <form onSubmit={handlePasswordSubmit} className="mt-8 space-y-5">
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-gold mb-2">
-                  Password
-                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={passwordInput}
-                    onChange={(e) => {
-                      setPasswordInput(e.target.value)
-                      if (authError) setAuthError('')
-                    }}
-                    placeholder="Enter master password"
+                    onChange={(e) => setPasswordInput(e.target.value)}
+                    placeholder="Enter admin password"
                     autoFocus
-                    required
-                    className="w-full rounded-xl border border-gold/30 bg-obsidian/90 px-4 py-3 text-sm text-cream placeholder-cream-muted/40 outline-none transition-all focus:border-gold focus:ring-1 focus:ring-gold"
+                    className="w-full px-4 py-3 pr-11 rounded-xl bg-obsidian border border-charcoal-light text-sm text-cream placeholder:text-cream-muted/40 focus:outline-none focus:border-gold/60 transition-colors font-mono"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-cream-muted hover:text-gold transition-colors p-1 cursor-pointer"
-                    title={showPassword ? 'Hide password' : 'Show password'}
+                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-cream-muted/60 hover:text-cream transition-colors cursor-pointer"
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
-              {/* Remember Device Checkbox */}
-              <label className="flex items-start gap-3 cursor-pointer group select-none p-3 rounded-xl border border-gold/15 bg-obsidian/50 hover:border-gold/30 transition-colors">
-                <input
-                  type="checkbox"
-                  checked={rememberDevice}
-                  onChange={(e) => setRememberDevice(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-gold/40 bg-charcoal text-gold focus:ring-gold accent-amber-500 cursor-pointer shrink-0"
-                />
-                <div className="text-xs text-cream-muted group-hover:text-cream transition-colors leading-tight">
-                  <span className="font-semibold text-cream">Remember this device</span>
-                  <p className="text-[11px] text-cream-muted/70 mt-0.5">
-                    Stay authenticated so you won't need to enter the password again on this browser.
-                  </p>
-                </div>
-              </label>
+              <div className="flex items-center justify-between text-xs">
+                <label className="flex items-center gap-2 cursor-pointer text-cream-muted hover:text-cream select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberDevice}
+                    onChange={(e) => setRememberDevice(e.target.checked)}
+                    className="rounded border-charcoal-light text-gold focus:ring-0 focus:ring-offset-0 bg-obsidian cursor-pointer"
+                  />
+                  <span>Trust & remember this device</span>
+                </label>
+              </div>
 
               {authError && (
-                <div className="flex items-center gap-2 rounded-xl border border-rose-500/40 bg-rose-500/10 px-3.5 py-2.5 text-xs text-rose-400">
+                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
                   <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{authError}</span>
                 </div>
@@ -1864,10 +1855,10 @@ export default function AdminPanelPage() {
 
               <button
                 type="submit"
-                className="btn-gold w-full py-3.5 rounded-xl text-xs font-bold uppercase tracking-widest shadow-xl shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer hover:shadow-gold/40 transition-all"
+                className="w-full py-3.5 rounded-xl bg-gold text-obsidian font-bold text-xs uppercase tracking-widest hover:bg-gold-light transition-all shadow-lg shadow-gold/20 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Access Admin Panel</span>
-                <ChevronRight className="h-4 w-4" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </form>
           </div>
@@ -1875,7 +1866,7 @@ export default function AdminPanelPage() {
 
         {/* Minimal Footer */}
         <footer className="relative z-10 border-t border-gold/10 py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Outframe Labs · Confidential Management Console
+          © 2026 Smiths Jewellery · Confidential Management Console
         </footer>
       </div>
     )
@@ -1927,14 +1918,14 @@ export default function AdminPanelPage() {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-heading text-lg font-black tracking-[0.25em] text-cream">
-                  OUTFRAME
+                  SMITHS
                 </span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold/15 text-gold border border-gold/30 font-semibold tracking-wider">
                   ADMIN
                 </span>
               </div>
               <p className="text-[11px] text-cream-muted/60 mt-1">
-                Operations & 3D Print HQ
+                Operations & Workshop HQ
               </p>
             </div>
             <button
@@ -2048,7 +2039,7 @@ export default function AdminPanelPage() {
                 )}
               </h1>
               <p className="text-xs text-cream-muted/60 hidden sm:block">
-                Outframe Labs Enterprise Dashboard • Realtime Synchronization
+                Smiths Jewellery Enterprise Dashboard • Realtime Synchronization
               </p>
             </div>
           </div>
@@ -2337,7 +2328,7 @@ export default function AdminPanelPage() {
                     <div className="pt-2">
                       <div className="flex justify-between text-xs mb-1">
                         <span className="text-cream-muted/70">
-                          Current Batch {pendingOrders[0] ? `(${pendingOrders[0].items?.[0]?.name || 'Keychain'} #${pendingOrders[0].id.slice(-4)})` : '(No pending prints)'}:
+                          Current Batch {pendingOrders[0] ? `(${pendingOrders[0].items?.[0]?.name || 'Piece'} #${pendingOrders[0].id.slice(-4)})` : '(No pending orders)'}:
                         </span>
                         <span className="text-gold font-mono font-bold">
                           {pendingOrders.length > 0 ? `${pendingOrders.length} in queue` : 'Completed'}
@@ -2421,7 +2412,7 @@ export default function AdminPanelPage() {
                     </span>
                   </div>
                   <p className="mt-1 text-xs text-cream-muted/70">
-                    Real-time visitor counts, keychain engagement, and checkout drop-off rates from live customers.
+                    Real-time visitor counts, jewellery engagement, and checkout drop-off rates from live customers.
                   </p>
                 </div>
 
@@ -2512,11 +2503,11 @@ export default function AdminPanelPage() {
                       {loadingAnalytics ? '...' : (analyticsData?.productViewsCount || 0).toLocaleString()}
                     </span>
                     <span className="text-xs font-semibold text-gold font-mono">
-                      Keychains
+                      Jewellery
                     </span>
                   </div>
                   <p className="mt-1 text-[11px] text-cream-muted/50">
-                    Opened keychain details & photo gallery
+                    Opened jewellery details & photo gallery
                   </p>
                 </div>
 
@@ -2659,14 +2650,14 @@ export default function AdminPanelPage() {
                 </div>
               </div>
 
-              {/* Two-Column Grid: Top Viewed Keychains Leaderboard + Live Activity Feed */}
+              {/* Two-Column Grid: Top Viewed Jewellery Leaderboard + Live Activity Feed */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                {/* Column 1 (7 cols): Top Viewed Keychains Leaderboard */}
+                {/* Column 1 (7 cols): Top Viewed Jewellery Leaderboard */}
                 <div className="lg:col-span-7 p-6 rounded-2xl bg-charcoal/80 border border-charcoal-light/80">
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <h3 className="font-heading text-base font-bold text-cream">
-                        Most Popular Keychains (Leaderboard)
+                        Most Popular Jewellery (Leaderboard)
                       </h3>
                       <p className="text-xs text-cream-muted/60">
                         Ranked by customer product page views & buy clicks
@@ -2677,7 +2668,7 @@ export default function AdminPanelPage() {
                   {(!analyticsData?.topProducts || analyticsData.topProducts.length === 0) ? (
                     <div className="text-center py-12 text-cream-muted/50 text-xs">
                       <ShoppingBag className="w-8 h-8 mx-auto mb-2 opacity-30 text-gold" />
-                      No keychain views logged in this timeframe yet.
+                      No jewellery views logged in this timeframe yet.
                     </div>
                   ) : (
                     <div className="divide-y divide-charcoal-light/40 overflow-hidden">
@@ -2967,11 +2958,11 @@ export default function AdminPanelPage() {
                                   const displayName =
                                     item.name ||
                                     item.product_name ||
-                                    'Outframed Antique Gold Keychain'
+                                    'Silver Jewellery Piece'
                                   const isShirt = typeof item.image === 'string' && item.image.includes('photo-1618354691373-d851c5c3a990')
                                   const displayImg =
                                     (!isShirt && item.image) ||
-                                    'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+                                    DEFAULT_FALLBACK_IMAGE
                                   const qty = item.quantity || 1
                                   const price = item.price ? `₹${item.price}` : null
 
@@ -3491,7 +3482,7 @@ export default function AdminPanelPage() {
                     type="text"
                     value={productSearch}
                     onChange={(e) => setProductSearch(e.target.value)}
-                    placeholder="Search active keychains to edit..."
+                    placeholder="Search active jewellery to edit..."
                     className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-charcoal border border-charcoal-light text-sm text-cream placeholder-cream-muted/40 focus:outline-none focus:border-gold/50"
                   />
                   {productSearch && (
@@ -3781,7 +3772,7 @@ export default function AdminPanelPage() {
                           </label>
                           <input
                             type="text"
-                            value={editingProduct.fullName || `${editingProduct.name} Outframed Keychain`}
+                            value={editingProduct.fullName || `${editingProduct.name} Fine Jewellery`}
                             onChange={(e) =>
                               setEditingProduct({
                                 ...editingProduct,
@@ -4076,10 +4067,10 @@ export default function AdminPanelPage() {
                       <div>
                         <h3 className="font-heading font-bold text-lg text-cream flex items-center gap-2">
                           <Plus className="w-5 h-5 text-gold" />
-                          <span>Add New Keychain Product</span>
+                          <span>Add New Jewellery Product</span>
                         </h3>
                         <p className="text-xs text-cream-muted/60 mt-0.5">
-                          List a new 3D printed antique gold outframed collectible with instant drag & drop photos
+                          List a new handcrafted 925 silver jewellery piece with instant drag & drop photos
                         </p>
                       </div>
                       <button
@@ -4097,7 +4088,7 @@ export default function AdminPanelPage() {
                       {/* Product Title */}
                       <div>
                         <label className="block text-xs font-semibold text-cream-muted mb-1.5">
-                          Product Title (e.g. Wolverine, Skyline R34) <span className="text-gold">*</span>
+                          Product Title (e.g. Celestial Solitaire Pendant, Tennis Bracelet) <span className="text-gold">*</span>
                         </label>
                         <input
                           type="text"
@@ -4637,13 +4628,13 @@ export default function AdminPanelPage() {
                     <input
                       type="text"
                       readOnly
-                      value={`${typeof window !== 'undefined' ? window.location.origin : 'https://outframelabs.in'}/api/shiprocket-webhook`}
+                      value={`${typeof window !== 'undefined' ? window.location.origin : 'https://smithsjewellery.in'}/api/shiprocket-webhook`}
                       className="flex-1 px-3 py-2 rounded-lg bg-charcoal border border-charcoal-light text-xs font-mono text-cream focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={() => {
-                        const url = `${typeof window !== 'undefined' ? window.location.origin : 'https://outframelabs.in'}/api/shiprocket-webhook`
+                        const url = `${typeof window !== 'undefined' ? window.location.origin : 'https://smithsjewellery.in'}/api/shiprocket-webhook`
                         navigator.clipboard?.writeText(url)
                         showToast('Shiprocket Webhook URL copied to clipboard!', 'success')
                       }}

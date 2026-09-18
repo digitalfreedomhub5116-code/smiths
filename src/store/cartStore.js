@@ -2,9 +2,9 @@ import { create } from 'zustand'
 import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData'
 import { getLocalCart, saveCartToAccount, saveProduct, deleteProductFromDb } from '../lib/db'
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'outframe_labs_products'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products'
 
-export const DEFAULT_FALLBACK_IMAGE = 'https://sooedjbqgrdjtwiobjpr.supabase.co/storage/v1/object/public/product-images/batman-6-cover.jpg'
+export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
 
 export const resolveProductImage = (item, catalog = []) => {
   if (!item) return DEFAULT_FALLBACK_IMAGE
@@ -57,19 +57,19 @@ const loadInitialProducts = () => {
             image: coverImage,
             gallery: fallbackGallery,
             reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-            description: p.description || mock?.description || `Handcrafted antique gold ${p.name} outframed keychain.`,
+            description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`,
             features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
-              'Each keychain is made from bio degradable PLA material.',
-              'Strong and durable keyring',
-              'Antique gold finish',
-              'Durable.',
-              'Dimensions: 64mm * 43mm',
+              'Crafted from certified 925 Sterling Silver',
+              'Triple Rhodium Plated for enduring tarnish resistance',
+              'AAA Grade brilliant cubic zirconia stones',
+              '100% Hypoallergenic — Nickel-Free and Lead-Free',
+              'Includes Velvet Presentation Box & Authenticity Certificate',
             ]),
             rating: Number(p.rating) || mock?.rating || 4.8,
             reviewCount: Number(p.reviewCount) || mock?.reviewCount || fallbackReviews.length || 12,
             discountBadge: p.discountBadge || mock?.discountBadge || '-50%',
             discountPercent: p.discountPercent || mock?.discountPercent || 50,
-            isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 4),
+            isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 5),
             inStock: p.inStock !== false,
             isHidden: p.isHidden === true,
           }
@@ -120,19 +120,19 @@ export const useCartStore = create((set, get) => ({
         image: coverImage,
         gallery: fallbackGallery,
         reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-        description: p.description || mock?.description || `Handcrafted antique gold ${p.name} outframed keychain.`,
+        description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} finished with radiant rhodium luster.`,
         features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
-          'Each keychain is made from bio degradable PLA material.',
-          'Strong and durable keyring',
-          'Antique gold finish',
-          'Durable.',
-          'Dimensions: 64mm * 43mm',
+          'Solid 925 Sterling Silver with anti-tarnish rhodium plating',
+          'Hypoallergenic, nickel-free and lead-free for sensitive skin',
+          'Signature Smiths midnight velvet keepsake box included',
+          'Authenticity certificate with purity guarantee',
+          'Handcrafted precision polish and luster',
         ]),
         rating: Number(p.rating) || mock?.rating || 4.8,
         reviewCount: Number(p.reviewCount) || mock?.reviewCount || fallbackReviews.length || 12,
         discountBadge: p.discountBadge || mock?.discountBadge || '-50%',
         discountPercent: p.discountPercent || mock?.discountPercent || 50,
-        isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 4),
+        isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 5),
         inStock: p.inStock !== false,
         isHidden: p.isHidden === true,
       }
@@ -147,7 +147,7 @@ export const useCartStore = create((set, get) => ({
         ...item,
         image: cleanImg,
         gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-        fullName: match?.fullName || item.fullName || `${item.name} Outframed Keychain`,
+        fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
       }
     })
 
@@ -159,7 +159,7 @@ export const useCartStore = create((set, get) => ({
         ...item,
         image: cleanImg,
         gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-        fullName: match?.fullName || item.fullName || `${item.name} Outframed Keychain`,
+        fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
       }
     })
 
@@ -181,11 +181,11 @@ export const useCartStore = create((set, get) => ({
           p.slug ||
           `${(updatedProduct.name || p.name)
             .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')}-outframed-keychain`
+            .replace(/[^a-z0-9]+/g, '-')}-silver`
         const fullName =
           updatedProduct.fullName ||
           p.fullName ||
-          `${updatedProduct.name || p.name} Outframed Keychain`
+          `${updatedProduct.name || p.name} - Smiths Jewellery`
 
         const fallbackReviews = p.reviews || mock?.reviews || buildProductReviews(p)
         const fallbackGallery = Array.isArray(updatedProduct.gallery) && updatedProduct.gallery.length > 0
@@ -255,11 +255,11 @@ export const useCartStore = create((set, get) => ({
     const maxId = Math.max(0, ...existing.map((p) => Number(p.id) || 0))
     const generatedId = newProduct.id ? Number(newProduct.id) : (maxId > 0 ? maxId + 1 : 26)
 
-    const cleanName = newProduct.name || 'Outframed Keychain'
+    const cleanName = newProduct.name || 'Silver Jewellery Piece'
     const slug =
       newProduct.slug ||
-      `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-outframed-keychain`
-    const fullName = newProduct.fullName || `${cleanName} Outframed Keychain`
+      `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
+    const fullName = newProduct.fullName || `${cleanName} - Smiths Jewellery`
     const defaultCover =
       (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990') ? newProduct.image : null) ||
       (newProduct.gallery && newProduct.gallery.find((g) => !g.includes('photo-1618354691373-d851c5c3a990'))) ||
@@ -276,32 +276,32 @@ export const useCartStore = create((set, get) => ({
       name: cleanName,
       slug,
       fullName,
-      genre: newProduct.genre || 'MARVEL',
-      price: Number(newProduct.price) || 299,
-      originalPrice: Number(newProduct.originalPrice || 599),
-      description: newProduct.description || `Handcrafted antique gold ${cleanName} keychain.`,
+      genre: newProduct.genre || 'NECKLACES',
+      price: Number(newProduct.price) || 1299,
+      originalPrice: Number(newProduct.originalPrice || 2599),
+      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
       image: productCover,
       gallery: gallery,
       reviewCount: 7,
       rating: 4.8,
       inStock: newProduct.inStock !== false,
       isHidden: newProduct.isHidden === true,
-      dimensions: newProduct.dimensions || '64mm * 43mm',
-      material: newProduct.material || 'Biodegradable PLA',
-      finish: newProduct.finish || 'Antique Gold Finish',
-      keyring: newProduct.keyring || 'Strong and Durable Keyring',
-      durability: newProduct.durability || 'Durable Impact Resistant Structure',
+      dimensions: newProduct.dimensions || 'Standard Comfort Fit',
+      material: newProduct.material || '925 Sterling Silver',
+      finish: newProduct.finish || 'High-Luster Rhodium & Polished Silver',
+      keyring: 'Hypoallergenic Security Clasp',
+      durability: 'Tarnish-Resistant Daily Wear',
       features: [
-        'Each keychain is made from bio degradable PLA material.',
-        'Strong and durable keyring',
-        'Antique gold finish',
-        'Durable.',
-        'Dimensions: 64mm * 43mm',
+        'Crafted from certified 925 Sterling Silver',
+        'Triple Rhodium Plated for enduring tarnish resistance',
+        'AAA Grade brilliant cubic zirconia stones',
+        '100% Hypoallergenic — Nickel-Free and Lead-Free',
+        'Includes Velvet Presentation Box & Authenticity Certificate',
       ],
       reviews: buildProductReviews({
         id: generatedId,
         name: cleanName,
-        genre: newProduct.genre || 'MARVEL',
+        genre: newProduct.genre || 'NECKLACES',
         reviewCount: 7,
         badCount: 1,
       }),
@@ -311,7 +311,7 @@ export const useCartStore = create((set, get) => ({
     set({ products: nextProducts })
     persistProducts(nextProducts)
 
-    // Persist globally to Supabase + visibility and availability tables
+    // Persist globally to Supabase if available
     saveProduct(productWithDefaults).catch((err) => console.warn('Sync new product to db failed:', err))
 
     return productWithDefaults
@@ -383,7 +383,7 @@ export const useCartStore = create((set, get) => ({
         ...item,
         image: cleanImg,
         gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : (item.gallery || [cleanImg]),
-        fullName: item.fullName || match?.fullName || `${item.name} Outframed Keychain`,
+        fullName: item.fullName || match?.fullName || `${item.name} - Smiths Jewellery`,
       }
     })
     set({ items: sanitized })
@@ -418,7 +418,7 @@ export const useCartStore = create((set, get) => ({
         ...product,
         image: cleanImg,
         gallery: cleanGallery,
-        fullName: product.fullName || match?.fullName || `${product.name} Outframed Keychain`,
+        fullName: product.fullName || match?.fullName || `${product.name} - Smiths Jewellery`,
       }
 
       // Add product & trigger glowing highlight animation on navbar heart!
@@ -459,7 +459,7 @@ export const useCartStore = create((set, get) => ({
       ...product,
       image: cleanImg,
       gallery: cleanGallery,
-      fullName: product.fullName || match?.fullName || `${product.name} Outframed Keychain`,
+      fullName: product.fullName || match?.fullName || `${product.name} - Smiths Jewellery`,
     }
 
     const existing = get().items.find((item) => item.id === product.id)

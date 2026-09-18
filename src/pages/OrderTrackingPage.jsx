@@ -49,7 +49,7 @@ export default function OrderTrackingPage() {
   const [searchLoading, setSearchLoading] = useState(false)
   const [notFound, setNotFound] = useState(false)
 
-  // 6 Checkpoints matching Outframe Labs fulfillment pipeline
+  // 6 Checkpoints matching Smiths Jewellery fulfillment pipeline
   const STAGES = [
     {
       key: 'PLACED',
@@ -62,14 +62,14 @@ export default function OrderTrackingPage() {
       key: 'CONFIRMED',
       step: '02',
       label: 'Confirmed & Crafted',
-      desc: 'Keychain 3D sculpted with authentic Antique Gold PLA Patina finish',
+      desc: 'Jewellery piece handcrafted and polished with radiant rhodium luster',
       icon: Sparkles,
     },
     {
       key: 'PACKED',
       step: '03',
-      label: 'Packed in Collector Tin',
-      desc: 'Carefully inspected and sealed',
+      label: 'Packed in Velvet Box',
+      desc: 'Carefully inspected, sealed with authenticity certificate in signature midnight velvet box',
       icon: Package,
     },
     {
@@ -240,7 +240,7 @@ export default function OrderTrackingPage() {
             Orders & Live Tracking
           </h1>
           <p className="mt-2 text-xs sm:text-sm text-cream-muted/80">
-            Track your 3D-sculpted antique gold keychains step-by-step from studio crafting to doorstep delivery.
+            Track your handcrafted 925 sterling silver jewellery step-by-step from studio crafting to doorstep delivery.
           </p>
 
           {/* Search Form */}
@@ -357,13 +357,13 @@ export default function OrderTrackingPage() {
               <ShoppingBag className="h-12 w-12 text-gold/60 mx-auto" />
               <h3 className="font-heading text-lg font-bold text-cream">No orders placed yet</h3>
               <p className="text-xs text-cream-muted/70 max-w-sm mx-auto">
-                Once you place an order for our antique gold outframed keychains, you can track every step of crafting, packing, and courier delivery here.
+                Once you place an order for our 925 sterling silver jewellery, you can track every step of crafting, packing, and courier delivery here.
               </p>
               <Link
                 to="/"
                 className="btn-gold inline-flex items-center gap-2 mt-3 rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-wider"
               >
-                <span>Explore Drops</span>
+                <span>Explore Collections</span>
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </div>
@@ -505,8 +505,8 @@ function OrderCard({
                 <Package className="h-8 w-8" />
               </div>
               <div>
-                <h3 className="font-heading text-base font-bold text-cream">Outframed Keychain</h3>
-                <p className="text-xs text-cream-muted">Antique Gold Finish</p>
+                <h3 className="font-heading text-base font-bold text-cream">Silver Jewellery Piece</h3>
+                <p className="text-xs text-cream-muted">925 Sterling Silver</p>
               </div>
             </div>
           ) : (
@@ -534,7 +534,7 @@ function OrderCard({
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
                     <h3 className="font-heading text-base sm:text-lg font-bold text-cream tracking-tight truncate">
-                      {item.name || item.product_name || 'Outframed Keychain'}
+                      {item.name || item.product_name || 'Silver Jewellery Piece'}
                     </h3>
                     <span className="font-heading text-sm font-bold text-gold shrink-0">
                       ₹{item.price * (item.quantity || 1)}
@@ -546,7 +546,7 @@ function OrderCard({
                     <span>·</span>
                     <span>₹{item.price} each</span>
                     <span>·</span>
-                    <span className="text-gold font-medium">Antique Gold Finish</span>
+                    <span className="text-gold font-medium">925 Sterling Silver</span>
                   </div>
 
                   {/* Below that: Status of the product */}
@@ -652,7 +652,7 @@ function OrderCard({
                 </span>
                 <div className="flex items-center gap-3">
                   <a
-                    href={`mailto:support@outframelabs.in?subject=Help with Cancelled Order ${order.order_number}`}
+                    href={`mailto:support@smithsjewellery.com?subject=Help with Cancelled Order ${order.order_number}`}
                     className="inline-flex items-center gap-1.5 text-gold hover:underline font-semibold cursor-pointer"
                   >
                     <Headphones className="h-3.5 w-3.5" />
@@ -663,7 +663,7 @@ function OrderCard({
                     to="/"
                     className="text-cream hover:text-gold transition-colors font-semibold"
                   >
-                    Explore Other Drops →
+                    Explore Other Collections →
                   </Link>
                 </div>
               </div>
@@ -678,7 +678,7 @@ function OrderCard({
                 <div className="pt-1">
                   <span className="font-mono text-xs text-gold font-bold italic">01</span>
                   <h5 className="font-heading text-sm font-bold text-cream">Order Placed</h5>
-                  <p className="text-xs text-cream-muted/70">Order confirmed on Outframe Labs</p>
+                  <p className="text-xs text-cream-muted/70">Order confirmed on Smiths Jewellery</p>
                 </div>
               </div>
 

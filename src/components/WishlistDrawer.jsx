@@ -95,13 +95,13 @@ export default function WishlistDrawer() {
                 Your wishlist is empty
               </p>
               <p className="mt-1 max-w-xs text-xs sm:text-sm text-cream-muted/50 leading-relaxed">
-                Tap the heart on any keychain card to save your favourite outframed artifacts.
+                Tap the heart on any item card to save your favourite jewellery designs.
               </p>
               <button
                 onClick={closeWishlist}
                 className="mt-6 rounded-full border border-gold/40 px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-gold transition-all hover:bg-gold hover:text-obsidian"
               >
-                Explore Keychains
+                Explore Jewellery
               </button>
             </div>
           ) : (
@@ -134,7 +134,7 @@ export default function WishlistDrawer() {
                           onClick={() => handleProductClick(item.slug)}
                           className="font-heading text-sm font-bold text-cream hover:text-gold cursor-pointer transition-colors line-clamp-1"
                         >
-                          {item.fullName || `${item.name} Outframed Keychain`}
+                          {item.fullName || `${item.name} Fine Jewellery`}
                         </h4>
                         <button
                           onClick={() => toggleWishlist(item)}

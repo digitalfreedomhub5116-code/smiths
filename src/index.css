@@ -2,16 +2,25 @@
 
 /* ── Custom Design Tokens ── */
 @theme {
-  --color-obsidian: #0B0B0B;
-  --color-charcoal: #1A1A1A;
-  --color-charcoal-light: #252525;
-  --color-gold: #CFB53B;
-  --color-gold-dark: #B89B2F;
-  --color-cream: #F5F0E8;
-  --color-cream-muted: #C8C2B8;
+  --color-obsidian: #080808;
+  --color-charcoal: #121316;
+  --color-charcoal-light: #1E2229;
+
+  /* Silver & Platinum Tokens */
+  --color-silver: #E2E8F0;
+  --color-silver-light: #F8FAFC;
+  --color-silver-dark: #94A3B8;
+  --color-silver-muted: #64748B;
+
+  /* Map gold tokens to silver so existing utility classes adopt luxury silver */
+  --color-gold: #E2E8F0;
+  --color-gold-dark: #94A3B8;
+  --color-cream: #F8FAFC;
+  --color-cream-muted: #94A3B8;
 
   --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 }
 
 /* ── Base Styles ── */
@@ -36,7 +45,7 @@
   }
 
   ::selection {
-    background-color: var(--color-gold);
+    background-color: var(--color-silver);
     color: var(--color-obsidian);
   }
 }
@@ -53,7 +62,7 @@
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-gold);
+  background: var(--color-silver);
 }
 
 /* ── Animations ── */
@@ -98,26 +107,26 @@
 @keyframes heart-pulse-glow {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(207, 181, 59, 0.7);
+    box-shadow: 0 0 0 0 rgba(226, 232, 240, 0.7);
   }
   20% {
     transform: scale(1.35) rotate(-6deg);
-    box-shadow: 0 0 20px 8px rgba(207, 181, 59, 0.6);
+    box-shadow: 0 0 20px 8px rgba(226, 232, 240, 0.6);
   }
   40% {
     transform: scale(1.15) rotate(6deg);
-    box-shadow: 0 0 28px 12px rgba(207, 181, 59, 0.4);
+    box-shadow: 0 0 28px 12px rgba(226, 232, 240, 0.4);
   }
   60% {
     transform: scale(1.25) rotate(-3deg);
-    box-shadow: 0 0 18px 6px rgba(207, 181, 59, 0.3);
+    box-shadow: 0 0 18px 6px rgba(226, 232, 240, 0.3);
   }
   80% {
     transform: scale(1.08);
   }
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(207, 181, 59, 0);
+    box-shadow: 0 0 0 0 rgba(226, 232, 240, 0);
   }
 }
 
@@ -149,22 +158,25 @@
 
 /* ── Glassmorphism Navbar ── */
 .navbar-glass {
-  background: rgba(11, 11, 11, 0.72);
+  background: rgba(8, 8, 8, 0.82);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(207, 181, 59, 0.08);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.12);
 }
 
-/* ── Gold Shimmer Button ── */
-.btn-gold {
+/* ── Silver Shimmer Button ── */
+.btn-gold,
+.btn-silver {
   position: relative;
-  background: linear-gradient(135deg, #CFB53B 0%, #E6CA65 50%, #B89B2F 100%);
-  color: #0B0B0B;
+  background: linear-gradient(135deg, #F1F5F9 0%, #FFFFFF 45%, #CBD5E1 80%, #94A3B8 100%);
+  color: #080808;
   font-weight: 700;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
-.btn-gold::after {
+.btn-gold::after,
+.btn-silver::after {
   content: '';
   position: absolute;
   top: -50%;
@@ -174,21 +186,25 @@
   background: linear-gradient(
     60deg,
     transparent 30%,
-    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.6) 50%,
     transparent 70%
   );
   transform: rotate(30deg);
   transition: transform 0.6s ease;
   pointer-events: none;
 }
-.btn-gold:hover::after {
+.btn-gold:hover::after,
+.btn-silver:hover::after {
   transform: rotate(30deg) translate(50%, 50%);
 }
-.btn-gold:hover {
+.btn-gold:hover,
+.btn-silver:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(207, 181, 59, 0.35);
+  box-shadow: 0 8px 24px rgba(226, 232, 240, 0.3);
+  filter: brightness(1.05);
 }
-.btn-gold:active {
+.btn-gold:active,
+.btn-silver:active {
   transform: translateY(0);
 }
 
@@ -206,8 +222,9 @@
 }
 
 /* ── Text Gradient ── */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #CFB53B 0%, #F5F0E8 50%, #B89B2F 100%);
+.text-gold-gradient,
+.text-silver-gradient {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 40%, #94A3B8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
