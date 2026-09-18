@@ -19,7 +19,11 @@ import { initAuthListener, loadAccountCart, initProductSync } from './lib/db'
 function AnalyticsRouteTracker() {
   const location = useLocation()
   useEffect(() => {
-    if (!location.pathname.startsWith('/admin') && !location.pathname.startsWith('/auth')) {
+    if (
+      !location.pathname.startsWith('/admin') &&
+      !location.pathname.startsWith('/auth') &&
+      !location.pathname.startsWith('/smita')
+    ) {
       trackPageView(location.pathname)
     }
   }, [location.pathname])
@@ -76,6 +80,7 @@ export default function App() {
         <Route path="/track-order/:orderId" element={<OrderTrackingPage />} />
         <Route path="/admin-panel-access" element={<AdminPanelPage />} />
         <Route path="/admin" element={<AdminPanelPage />} />
+        <Route path="/smita" element={<AdminPanelPage />} />
         <Route path="/auth/callback" element={<AuthCallbackPage />} />
         <Route path="/product/:productIdOrSlug" element={<ProductPage />} />
         <Route path="/privacy" element={<PrivacyPolicyPage />} />
