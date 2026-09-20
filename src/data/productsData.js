@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'JC-KE-88':
+    'Command timeless charm with the JC-KE-88 Pearl Heart Bow Drop Earrings. Handcrafted with an open-heart motif encrusted in delicate micro-pearls suspended from polished 18K gold prongs, leading down into a lustrous white enamel ribbon bow drop with sleek gold perimeter detailing. Hypoallergenic, featherlight, and engineered for modern Korean elegance.',
   'Infinity Double Pearl Drop Earrings':
     'Grace your collection with the Infinity Double Pearl Drop Earrings. Featuring an architectural gold-vermeil figure-8 infinity loop cradling two radiant white pearls — a delicate round stud pearl at the top transitioning into an exquisite lustrous pearl below. Hypoallergenic, feather-light, and sculpted for timeless day-to-night glamour.',
   'Aura Criss-Cross Pearl Stud Earrings':
@@ -206,6 +208,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 19,
+    name: 'JC-KE-88',
+    sku: 'JC-KE-88',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 28,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-88/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-88/hero-satin-pair.jpg',
+      '/images/products/jc-ke-88/model-worn.jpg',
+      '/images/products/jc-ke-88/detail-held.jpg',
+      '/images/products/jc-ke-88/macro-satin-detail.jpg',
+      '/images/products/jc-ke-88/packaging-display.jpg',
+    ],
+  },
   {
     id: 18,
     name: 'Infinity Double Pearl Drop Earrings',
@@ -452,11 +473,12 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
   const isInfinityPearl = p.name === 'Infinity Double Pearl Drop Earrings' || p.id === 18
+  const isJcKe88 = p.name === 'JC-KE-88' || p.id === 19
 
   return {
     ...p,
@@ -471,7 +493,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isInfinityPearl
+    features: isJcKe88
+      ? [
+          'SKU: JC-KE-88 — Korean designer open-heart & ribbon bow drop silhouette',
+          'Hand-set micro pearl heart stud with lustrous white enamel bow',
+          'Warm 18K Gold finish over certified 925 Sterling Silver core',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Comfort-fit stud post backings with secure friction clutch',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isInfinityPearl
       ? [
           'SKU: JC-KE-98 — Sculptural figure-8 infinity twist silhouette',
           'Dual luminous pearl composition (top stud & lower drop)',
@@ -503,16 +534,18 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isInfinityPearl
+    dimensions: isJcKe88
+      ? '22mm x 16mm / Ultra-Lightweight (3.1g per pair)'
+      : isInfinityPearl
       ? '24mm x 12mm / Ultra-Lightweight (3.4g per pair)'
       : isAuraEarrings
       ? '18mm x 14mm / Ultra-Lightweight (3.2g per pair)'
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: (isInfinityPearl || isAuraEarrings) ? '18K Gold Plated 925 Sterling Silver & Luminous Pearls' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
-    finish: (isInfinityPearl || isAuraEarrings) ? 'High-Polish Warm Gold with Gloss Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isInfinityPearl || isAuraEarrings) ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
+    material: (isJcKe88 || isInfinityPearl || isAuraEarrings) ? '18K Gold Plated 925 Sterling Silver, Pearls & Enamel' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
+    finish: (isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'High-Polish Warm Gold with Gloss Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
+    keyring: (isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
     reviews,
   }
