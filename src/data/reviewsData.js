@@ -36,6 +36,7 @@ export const REVIEWS_POOL = {
       { name: "Avani Kapoor", text: "cuban link is bold and shining premium weight on wrist" },
     ],
     EARRINGS: [
+      { name: "Suhani Bhatnagar", text: "figure 8 double pearl design is so elegant and classy shines like real gold" },
       { name: "Pooja Singhania", text: "criss cross gold setting with the triangular iridescent pearl is unreal looks so expensive" },
       { name: "Diya Malik", text: "studs are hypoallergenic no irritation even after wearing 14 hours" },
       { name: "Anushka Mittal", text: "crystal drops have royal sway perfect for wedding functions" },

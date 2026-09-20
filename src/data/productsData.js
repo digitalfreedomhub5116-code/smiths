@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'Infinity Double Pearl Drop Earrings':
+    'Grace your collection with the Infinity Double Pearl Drop Earrings. Featuring an architectural gold-vermeil figure-8 infinity loop cradling two radiant white pearls — a delicate round stud pearl at the top transitioning into an exquisite lustrous pearl below. Hypoallergenic, feather-light, and sculpted for timeless day-to-night glamour.',
   'Aura Criss-Cross Pearl Stud Earrings':
     'Command timeless elegance with the Aura Criss-Cross Pearl Stud Earrings (SKU: JC-KE-92). Sculpted with modern architectural symmetry, these earrings pair warm 18K gold polished crossover bars with a luminous rounded trillion-cut iridescent pearl cabochon. Capturing light from every perspective with an opalescent rainbow glow, this signature piece is featherlight, hypoallergenic, and finished with high-luster rhodium and gold plating for lasting radiance.',
   'Luxe Solitaire Silver Pendant':
@@ -204,6 +206,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 18,
+    name: 'Infinity Double Pearl Drop Earrings',
+    sku: 'JC-KE-98',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 36,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/infinity-pearl-double/hero-pair.jpg',
+    gallery: [
+      '/images/products/infinity-pearl-double/hero-pair.jpg',
+      '/images/products/infinity-pearl-double/detail-left.jpg',
+      '/images/products/infinity-pearl-double/detail-right.jpg',
+      '/images/products/infinity-pearl-double/macro-twist.jpg',
+      '/images/products/infinity-pearl-double/lifestyle-silk.jpg',
+    ],
+  },
   {
     id: 17,
     name: 'Aura Criss-Cross Pearl Stud Earrings',
@@ -431,10 +452,11 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
+  const isInfinityPearl = p.name === 'Infinity Double Pearl Drop Earrings' || p.id === 18
 
   return {
     ...p,
@@ -449,7 +471,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isAuraEarrings
+    features: isInfinityPearl
+      ? [
+          'SKU: JC-KE-98 — Sculptural figure-8 infinity twist silhouette',
+          'Dual luminous pearl composition (top stud & lower drop)',
+          '18K Warm Gold finish over certified 925 Sterling Silver core',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Comfort-fit post backings with secure friction closure',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isAuraEarrings
       ? [
           'SKU: JC-KE-92 — Signature Korean crossover architectural silhouette',
           'Luminous rounded trillion-cut iridescent mother-of-pearl cabochon',
@@ -472,10 +503,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isAuraEarrings ? '18mm x 14mm / Ultra-Lightweight (3.2g per pair)' : isScarf ? '90cm x 90cm' : 'Adjustable Length / Standard Comfort Fit',
-    material: isAuraEarrings ? '18K Gold Plated 925 Sterling Silver & Iridescent Pearl' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
-    finish: isAuraEarrings ? 'High-Polish Warm Gold with Opalescent Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
-    keyring: isAuraEarrings ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
+    dimensions: isInfinityPearl
+      ? '24mm x 12mm / Ultra-Lightweight (3.4g per pair)'
+      : isAuraEarrings
+      ? '18mm x 14mm / Ultra-Lightweight (3.2g per pair)'
+      : isScarf
+      ? '90cm x 90cm'
+      : 'Adjustable Length / Standard Comfort Fit',
+    material: (isInfinityPearl || isAuraEarrings) ? '18K Gold Plated 925 Sterling Silver & Luminous Pearls' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
+    finish: (isInfinityPearl || isAuraEarrings) ? 'High-Polish Warm Gold with Gloss Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
+    keyring: (isInfinityPearl || isAuraEarrings) ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
     reviews,
   }
