@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData'
 import { getLocalCart, saveCartToAccount, saveProduct, deleteProductFromDb } from '../lib/db'
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
 
 export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
 
@@ -37,7 +37,7 @@ const loadInitialProducts = () => {
     if (raw) {
       const parsed = JSON.parse(raw)
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed.map((p) => {
+        const mapped = parsed.map((p) => {
           const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(p.id) || m.slug === p.slug)
           const fallbackReviews = mock?.reviews || buildProductReviews(p)
           const rawGallery = Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : []
@@ -73,7 +73,18 @@ const loadInitialProducts = () => {
             inStock: p.inStock !== false,
             isHidden: p.isHidden === true,
           }
-        }).sort((a, b) => Number(a.id) - Number(b.id))
+        })
+
+        // Merge any mock products missing from local storage
+        const missingMocks = MOCK_PRODUCTS.filter(
+          (m) => !mapped.some((item) => String(item.id) === String(m.id) || item.slug === m.slug)
+        ).map((m) => ({
+          ...m,
+          inStock: m.inStock !== false,
+          isHidden: false,
+        }))
+
+        return [...mapped, ...missingMocks].sort((a, b) => Number(a.id) - Number(b.id))
       }
     }
   } catch (e) {

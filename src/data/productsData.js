@@ -29,8 +29,8 @@ export const GENRES = [
     id: 'EARRINGS',
     label: 'Earrings',
     slug: 'earrings',
-    image: 'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=900&q=80',
-    tagline: 'Crystal Drops, Solitaire Studs & Huggie Hoops',
+    image: '/images/products/jc-ke-92/model-worn.jpg',
+    tagline: 'Criss-Cross Pearl Studs, Solitaires & Huggie Hoops',
   },
   {
     id: 'RINGS',
@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'Aura Criss-Cross Pearl Stud Earrings':
+    'Command timeless elegance with the Aura Criss-Cross Pearl Stud Earrings (SKU: JC-KE-92). Sculpted with modern architectural symmetry, these earrings pair warm 18K gold polished crossover bars with a luminous rounded trillion-cut iridescent pearl cabochon. Capturing light from every perspective with an opalescent rainbow glow, this signature piece is featherlight, hypoallergenic, and finished with high-luster rhodium and gold plating for lasting radiance.',
   'Luxe Solitaire Silver Pendant':
     'Command timeless attention with the Luxe Solitaire Silver Pendant. Sculpted in authentic 925 hallmarked sterling silver and crowned with a brilliant round-cut AAA cubic zirconia that dances under every ray of light. Finished in high-luster rhodium for lasting tarnish resistance.',
   'Celestial Crescent Moon Choker':
@@ -91,9 +93,30 @@ const JEWELLERY_DESCRIPTIONS = {
 }
 
 const RAW_PRODUCTS = [
-  // ── NECKLACES ──
+  // ── MAIN FLAGSHIP PRODUCT: EARRINGS (SKU: JC-KE-92) ──
   {
     id: 1,
+    name: 'Aura Criss-Cross Pearl Stud Earrings',
+    sku: 'JC-KE-92',
+    genre: 'EARRINGS',
+    price: 799,
+    originalPrice: 1699,
+    reviewCount: 42,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-92/hero-studio.jpg',
+    gallery: [
+      '/images/products/jc-ke-92/hero-studio.jpg',
+      '/images/products/jc-ke-92/model-worn.jpg',
+      '/images/products/jc-ke-92/detail-held.jpg',
+      '/images/products/jc-ke-92/macro-focus.jpg',
+      '/images/products/jc-ke-92/lifestyle-reference.jpg',
+    ],
+  },
+
+  // ── NECKLACES ──
+  {
+    id: 17,
     name: 'Luxe Solitaire Silver Pendant',
     genre: 'NECKLACES',
     price: 1299,
@@ -413,6 +436,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15
 
   const isScarf = p.genre === 'SCARFS'
+  const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 1
 
   return {
     ...p,
@@ -427,7 +451,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isScarf
+    features: isAuraEarrings
+      ? [
+          'SKU: JC-KE-92 — Signature Korean crossover architectural silhouette',
+          'Luminous rounded trillion-cut iridescent mother-of-pearl cabochon',
+          'Warm 18K Gold finish over certified 925 Sterling Silver base',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Comfort-fit post backings with secure silicone friction clutch',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isScarf
       ? [
           '100% Pure Mulberry Silk / Cashmere blend texture',
           'Hand-rolled and stitched edges',
@@ -441,10 +474,10 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isScarf ? '90cm x 90cm' : 'Adjustable Length / Standard Comfort Fit',
-    material: isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
-    finish: isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
-    keyring: 'Hypoallergenic Security Clasp',
+    dimensions: isAuraEarrings ? '18mm x 14mm / Ultra-Lightweight (3.2g per pair)' : isScarf ? '90cm x 90cm' : 'Adjustable Length / Standard Comfort Fit',
+    material: isAuraEarrings ? '18K Gold Plated 925 Sterling Silver & Iridescent Pearl' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
+    finish: isAuraEarrings ? 'High-Polish Warm Gold with Opalescent Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
+    keyring: isAuraEarrings ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
     reviews,
   }

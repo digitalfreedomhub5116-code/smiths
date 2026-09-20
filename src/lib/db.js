@@ -23,7 +23,7 @@ const setLocalData = (key, value) => {
   }
 }
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
 
 // ── 0. CLOUD STORAGE (SUPABASE BUCKET: product-images) ──
 export async function uploadProductImage(fileOrBlobOrDataUrl, prefix = 'jewellery') {
