@@ -159,9 +159,16 @@ export async function getProducts(options = {}) {
             durability: 'Tarnish-Resistant Daily Wear',
             discountBadge: mock?.discountBadge || '-50%',
             discountPercent: mock?.discountPercent || 50,
-            isBestseller: mock?.isBestseller ?? (Number(row.id) === 1 || Number(row.id) === 5),
+            isBestseller: mock?.isBestseller ?? (Number(row.id) === 1 || Number(row.id) === 5 || Number(row.id) === 17),
           }
         })
+        // Ensure any local mock products (including newly added designs) are merged if missing from DB
+        const missingFromDb = MOCK_PRODUCTS.filter(
+          (m) => !mapped.some((item) => String(item.id) === String(m.id) || item.slug === m.slug)
+        )
+        if (missingFromDb.length > 0) {
+          mapped.push(...missingFromDb)
+        }
         mapped.sort((a, b) => Number(a.id) - Number(b.id))
         // Update persistent local cache
         setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, mapped)

@@ -93,30 +93,9 @@ const JEWELLERY_DESCRIPTIONS = {
 }
 
 const RAW_PRODUCTS = [
-  // ── MAIN FLAGSHIP PRODUCT: EARRINGS (SKU: JC-KE-92) ──
-  {
-    id: 1,
-    name: 'Aura Criss-Cross Pearl Stud Earrings',
-    sku: 'JC-KE-92',
-    genre: 'EARRINGS',
-    price: 799,
-    originalPrice: 1699,
-    reviewCount: 42,
-    rating: 4.9,
-    badCount: 1,
-    image: '/images/products/jc-ke-92/hero-studio.jpg',
-    gallery: [
-      '/images/products/jc-ke-92/hero-studio.jpg',
-      '/images/products/jc-ke-92/model-worn.jpg',
-      '/images/products/jc-ke-92/detail-held.jpg',
-      '/images/products/jc-ke-92/macro-focus.jpg',
-      '/images/products/jc-ke-92/lifestyle-reference.jpg',
-    ],
-  },
-
   // ── NECKLACES ──
   {
-    id: 17,
+    id: 1,
     name: 'Luxe Solitaire Silver Pendant',
     genre: 'NECKLACES',
     price: 1299,
@@ -225,6 +204,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 17,
+    name: 'Aura Criss-Cross Pearl Stud Earrings',
+    sku: 'JC-KE-92',
+    genre: 'EARRINGS',
+    price: 799,
+    originalPrice: 1699,
+    reviewCount: 42,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-92/hero-studio.jpg',
+    gallery: [
+      '/images/products/jc-ke-92/hero-studio.jpg',
+      '/images/products/jc-ke-92/model-worn.jpg',
+      '/images/products/jc-ke-92/detail-held.jpg',
+      '/images/products/jc-ke-92/macro-focus.jpg',
+      '/images/products/jc-ke-92/lifestyle-reference.jpg',
+    ],
+  },
   {
     id: 8,
     name: 'Aurora Crystal Teardrop Earrings',
@@ -433,10 +431,10 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17
 
   const isScarf = p.genre === 'SCARFS'
-  const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 1
+  const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
 
   return {
     ...p,
