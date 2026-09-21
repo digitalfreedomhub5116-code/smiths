@@ -76,6 +76,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Command bold two-tone sophistication with the JC-KE-82 Gold Dome & Textured Silver Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver, each earring pairs a luminous high-polish 18K gold vermeil dome stud with a striking hand-etched radiating silver fan drop reminiscent of a cascading seashell. The mesmerizing contrasting metals create a modern architectural statement that transitions effortlessly from daywear to black-tie elegance. Hypoallergenic and featherlight with secure comfort-fit stud posts.',
   'JC-KE-77':
     'Elevate your signature look with the JC-KE-77 Black Enamel & Pavé Crystal Bow Stud Earrings. Sculpted in certified 925 hallmarked sterling silver with a luminous 18K gold vermeil finish, each earring showcases an oversized dimensional ribbon bow motif hand-set with brilliant round-cut cubic zirconia crystals along every edge. Deep black glossy enamel fills each petal panel for dramatic contrast and a couture finish. A solitaire round CZ gleams at the bow center knot. Hypoallergenic, featherlight, and perfect for bold day-to-evening glamour.',
+  'JC-KE-1':
+    'Bloom with botanical romance wearing the JC-KE-1 Pink Tulip Pearl & Pavé Earrings. Sculpted in certified 925 hallmarked sterling silver with a warm 18K gold vermeil finish, each earring showcases a delicate blush-pink baroque pearl tulip bud — its petals gently furled — resting above a lustrous round freshwater pearl drop. Two lush green enamel marquise leaves cascade from the golden stem, while a pavé-encrusted horseshoe loop glitters with hand-set AAA cubic zirconia crystals below. An enchanting garden-in-bloom masterpiece, hypoallergenic and featherlight for effortless all-day elegance.',
   'JC-KE-88':
     'Command timeless charm with the JC-KE-88 Pearl Heart Bow Drop Earrings. Handcrafted with an open-heart motif encrusted in delicate micro-pearls suspended from polished 18K gold prongs, leading down into a lustrous white enamel ribbon bow drop with sleek gold perimeter detailing. Hypoallergenic, featherlight, and engineered for modern Korean elegance.',
   'Infinity Double Pearl Drop Earrings':
@@ -228,6 +230,24 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 30,
+    name: 'JC-KE-1',
+    sku: 'JC-KE-1',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 47,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-1/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-1/hero-satin-pair.jpg',
+      '/images/products/jc-ke-1/detail-held.jpg',
+      '/images/products/jc-ke-1/model-worn.jpg',
+      '/images/products/jc-ke-1/model-portrait.jpg',
+    ],
+  },
   {
     id: 29,
     name: 'JC-KE-77',
@@ -682,7 +702,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -698,6 +718,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe83 = p.name === 'JC-KE-83' || p.id === 27
   const isJcKe82 = p.name === 'JC-KE-82' || p.id === 28
   const isJcKe77 = p.name === 'JC-KE-77' || p.id === 29
+  const isJcKe1 = p.name === 'JC-KE-1' || p.id === 30
 
   return {
     ...p,
@@ -712,7 +733,17 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe77
+    features: isJcKe1
+      ? [
+          'SKU: JC-KE-1 — Botanical tulip bud motif with blush baroque pearl & green enamel leaves',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold vermeil',
+          'Hand-selected blush-pink baroque pearl tulip bud & lustrous round freshwater pearl drop',
+          'Glossy vivid green enamel marquise leaf pair on golden stem',
+          'Pavé horseshoe loop set with hand-placed AAA cubic zirconia crystals',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe77
       ? [
           'SKU: JC-KE-77 — Oversized dimensional ribbon bow with black enamel & pavé CZ',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
@@ -843,7 +874,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe77
+    dimensions: isJcKe1
+      ? '28mm x 14mm / Ultra-Lightweight (4.0g per pair)'
+      : isJcKe77
       ? '22mm x 20mm / Ultra-Lightweight (3.8g per pair)'
       : isJcKe82
       ? '32mm x 18mm / Ultra-Lightweight (4.2g per pair)'
@@ -872,7 +905,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe77
+    material: isJcKe1
+      ? '18K Gold Plated 925 Sterling Silver, Pink Baroque Pearl & Green Enamel'
+      : isJcKe77
       ? '18K Gold Plated 925 Sterling Silver, Black Enamel & CZ'
       : isJcKe82
       ? '18K Gold Plated 925 Sterling Silver & Rhodium Silver'
@@ -889,7 +924,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe77
+    finish: isJcKe1
+      ? 'Warm 18K Gold Vermeil, Blush Baroque Pearl & Glossy Green Enamel'
+      : isJcKe77
       ? 'High-Polish Warm Gold, Glossy Black Enamel & Diamond Pavé'
       : isJcKe82
       ? 'High-Mirror Warm Gold Dome & Brushed Rhodium Fan'
@@ -906,7 +943,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
