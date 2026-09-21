@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'JC-KE-91':
+    'Channel royal refinement with the JC-KE-91 Pavé Bow Teardrop Pearl Earrings. Sculpted in radiant 18K gold vermeil over certified 925 hallmarked sterling silver, each earring showcases a delicate bow motif that flows into an open teardrop halo encrusted with shimmering pavé-set cubic zirconia crystals. Nestled within the teardrop cradle is a floating, high-luster round white freshwater pearl that radiates iridescent brilliance. Complete with hypoallergenic stud backings for seamless, lightweight day-to-evening elegance.',
   'JC-KE-85':
     'Captivate every gaze with the JC-KE-85 Pavé Crystal Ribbon Bow Drop Earrings. Masterfully sculpted in warm 18K gold over certified 925 hallmarked sterling silver, each earring features a dimensional ribbon bow motif densely handset with brilliant diamond-cut cubic zirconia crystals. Suspended beneath are dual articulated pavé tennis ribbons that cascade with fluid kinetic sparkle at every turn. Hypoallergenic, featherlight, and engineered for unforgettable day-to-night glamour.',
   'JC-KE-36':
@@ -218,6 +220,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 25,
+    name: 'JC-KE-91',
+    sku: 'JC-KE-91',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 36,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-91/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-91/hero-satin-pair.jpg',
+      '/images/products/jc-ke-91/macro-satin-detail.jpg',
+      '/images/products/jc-ke-91/model-worn.jpg',
+      '/images/products/jc-ke-91/detail-held.jpg',
+      '/images/products/jc-ke-91/packaging-display.jpg',
+    ],
+  },
   {
     id: 24,
     name: 'JC-KE-85',
@@ -578,7 +599,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -589,6 +610,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe86 = p.name === 'JC-KE-86' || p.id === 22
   const isJcKe36 = p.name === 'JC-KE-36' || p.id === 23
   const isJcKe85 = p.name === 'JC-KE-85' || p.id === 24
+  const isJcKe91 = p.name === 'JC-KE-91' || p.id === 25
 
   return {
     ...p,
@@ -603,7 +625,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe85
+    features: isJcKe91
+      ? [
+          'SKU: JC-KE-91 — Pavé crystal bow stud & open teardrop loop with suspended floating pearl',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          'Hand-selected luminous round freshwater pearl focal drop',
+          'Micro-pavé AAA cubic zirconia stones along the bow and teardrop halo',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe85
       ? [
           'SKU: JC-KE-85 — Micro-pavé crystal ribbon bow stud & dual cascading tennis streamer drop',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
@@ -689,7 +720,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe85
+    dimensions: isJcKe91
+      ? '24mm x 13mm / Ultra-Lightweight (3.4g per pair)'
+      : isJcKe85
       ? '28mm x 14mm / Ultra-Lightweight (3.5g per pair)'
       : isJcKe36
       ? '23mm x 19mm / Ultra-Lightweight (3.3g per pair)'
@@ -712,7 +745,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       ? '18K Gold Plated 925 Sterling Silver & AAA Cubic Zirconia'
       : isJcKe86
       ? '925 Sterling Silver, Triple Rhodium Plating'
-      : (isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe91 || isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? '18K Gold Plated 925 Sterling Silver, Pearls & CZ'
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
@@ -721,12 +754,12 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       ? 'High-Polish Warm Gold & Diamond Pavé Luster'
       : isJcKe86
       ? 'High-Luster Mirror Rhodium & Polished Silver'
-      : (isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe91 || isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'High-Polish Warm Gold with Gloss Pearl Sheen'
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
