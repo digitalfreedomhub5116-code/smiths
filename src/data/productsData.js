@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'JC-KE-38':
+    'Exude refined Korean luxury with the JC-KE-38 Pearl Arc Ear Jacket Earrings. Featuring a luminous round freshwater pearl stud worn on the lobe, paired with an interchangeable curved crescent arc of five graduated luster pearls fanning gracefully beneath the ear. Sculpted in warm 18K gold over certified 925 sterling silver, this convertible 2-in-1 design transitions effortlessly from minimalist pearl studs to statement red-carpet ear jacket radiance.',
   'JC-KE-55':
     'Embrace botanical radiance with the JC-KE-55 Laurel Leaf Pearl Ear Climbers. Sculpted in warm 18K gold plating over certified 925 sterling silver, each earring features an arching laurel branch encrusted with shimmering pavé cubic zirconia crystals, cradling a lustrous round pearl and finished with a sparkling solitaire accent stone. Hypoallergenic, featherlight, and ergonomically contoured for comfortable all-day wear.',
   'JC-KE-88':
@@ -210,6 +212,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 21,
+    name: 'JC-KE-38',
+    sku: 'JC-KE-38',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 32,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-38/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-38/hero-satin-pair.jpg',
+      '/images/products/jc-ke-38/model-worn.jpg',
+      '/images/products/jc-ke-38/detail-held.jpg',
+      '/images/products/jc-ke-38/macro-detail.jpg',
+      '/images/products/jc-ke-38/ear-profile.jpg',
+    ],
+  },
   {
     id: 20,
     name: 'JC-KE-55',
@@ -494,13 +515,14 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
   const isInfinityPearl = p.name === 'Infinity Double Pearl Drop Earrings' || p.id === 18
   const isJcKe88 = p.name === 'JC-KE-88' || p.id === 19
   const isJcKe55 = p.name === 'JC-KE-55' || p.id === 20
+  const isJcKe38 = p.name === 'JC-KE-38' || p.id === 21
 
   return {
     ...p,
@@ -515,7 +537,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe55
+    features: isJcKe38
+      ? [
+          'SKU: JC-KE-38 — Korean designer modular pearl stud & 5-pearl crescent arc ear jacket',
+          '2-in-1 Convertible Design: wear solo as classic pearl studs or paired with the crescent fan drop',
+          'Warm 18K Gold finish over certified 925 Sterling Silver core',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Multi-hole adjustable jacket post for customized earlobe height fitting',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe55
       ? [
           'SKU: JC-KE-55 — Signature botanical laurel leaf climber silhouette',
           'Lustrous round focal pearl with sparkling round-cut CZ accent',
@@ -565,7 +596,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe55
+    dimensions: isJcKe38
+      ? '21mm x 18mm / Ultra-Lightweight (3.2g per pair)'
+      : isJcKe55
       ? '20mm x 15mm / Ultra-Lightweight (3.0g per pair)'
       : isJcKe88
       ? '22mm x 16mm / Ultra-Lightweight (3.1g per pair)'
@@ -576,9 +609,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: (isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? '18K Gold Plated 925 Sterling Silver, Pearls & CZ' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
-    finish: (isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'High-Polish Warm Gold with Gloss Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
+    material: (isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? '18K Gold Plated 925 Sterling Silver, Pearls & CZ' : isScarf ? 'Pure Silk / Cashmere Blend' : '925 Sterling Silver',
+    finish: (isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'High-Polish Warm Gold with Gloss Pearl Sheen' : isScarf ? 'Lustrous Silk Satin' : 'High-Luster Rhodium & Polished Silver',
+    keyring: (isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings) ? 'Hypoallergenic Security Stud Post' : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
     reviews,
   }
