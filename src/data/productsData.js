@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'JC-KE-83':
+    'Evoke celestial wonder with the JC-KE-83 Enchanted Dancing Fairy Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver with a radiant 18K gold vermeil finish, each earring depicts an ethereal dancing fairy ballerina poised in graceful flight. Her luminous translucent wings are shaped from opalescent cat\'s eye moonstone cabochons that shimmer with pearlescent brilliance, accented by a shimmering micro-pavé cubic zirconia crystal ballerina skirt. Featherlight, hypoallergenic, and fitted with secure comfort-fit stud posts for unforgettable day-to-evening magic.',
   'JC-KE-84':
     'Channel opulent regal sophistication with the JC-KE-84 Lavender Cushion Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver with a rich 18K gold vermeil finish, each earring showcases an ethereal translucent lavender chalcedony cushion cabochon stud resting atop a mesmerizing pavé amethyst and purple sapphire crystal drop. Hypoallergenic, featherlight, and finished with secure comfort-fit stud posts for timeless evening luxury.',
   'JC-KE-91':
@@ -222,6 +224,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 27,
+    name: 'JC-KE-83',
+    sku: 'JC-KE-83',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 39,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-83/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-83/hero-satin-pair.jpg',
+      '/images/products/jc-ke-83/macro-satin-detail.jpg',
+      '/images/products/jc-ke-83/model-worn.jpg',
+      '/images/products/jc-ke-83/detail-held.jpg',
+      '/images/products/jc-ke-83/packaging-display.jpg',
+    ],
+  },
   {
     id: 26,
     name: 'JC-KE-84',
@@ -620,7 +641,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -633,6 +654,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe85 = p.name === 'JC-KE-85' || p.id === 24
   const isJcKe91 = p.name === 'JC-KE-91' || p.id === 25
   const isJcKe84 = p.name === 'JC-KE-84' || p.id === 26
+  const isJcKe83 = p.name === 'JC-KE-83' || p.id === 27
 
   return {
     ...p,
@@ -647,7 +669,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe84
+    features: isJcKe83
+      ? [
+          'SKU: JC-KE-83 — Sculptural dancing fairy ballerina silhouette with iridescent wings',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          "Luminous opalescent cat's eye moonstone cabochon wings with pearlescent glow",
+          'Handset micro-pavé AAA cubic zirconia crystal ballerina skirt',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe84
       ? [
           'SKU: JC-KE-84 — Translucent lavender cushion cabochon stud & pavé amethyst mosaic cushion drop',
           'Cast in certified 925 hallmarked Sterling Silver with rich 18K Gold finish',
@@ -751,7 +782,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe84
+    dimensions: isJcKe83
+      ? '27mm x 16mm / Ultra-Lightweight (3.4g per pair)'
+      : isJcKe84
       ? '26mm x 15mm / Ultra-Lightweight (3.6g per pair)'
       : isJcKe91
       ? '24mm x 13mm / Ultra-Lightweight (3.4g per pair)'
@@ -774,7 +807,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe84
+    material: isJcKe83
+      ? '18K Gold Plated 925 Sterling Silver, Opalescent Moonstone & CZ'
+      : isJcKe84
       ? '18K Gold Plated 925 Sterling Silver, Lavender Quartz & Amethyst CZ'
       : isJcKe85
       ? '18K Gold Plated 925 Sterling Silver & AAA Cubic Zirconia'
@@ -785,7 +820,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe84
+    finish: isJcKe83
+      ? 'High-Polish Warm Gold & Iridescent Fairy Luster'
+      : isJcKe84
       ? 'High-Polish Warm Gold & Royal Amethyst Luster'
       : isJcKe85
       ? 'High-Polish Warm Gold & Diamond Pavé Luster'
@@ -796,7 +833,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
