@@ -56,6 +56,8 @@ export const GENRES = [
 ]
 
 const JEWELLERY_DESCRIPTIONS = {
+  'JC-KE-36':
+    'Radiate celestial glamour with the JC-KE-36 Sunburst Pearl Fan Ear Jacket Earrings. Featuring a luminous freshwater pearl stud resting on the earlobe, anchored by an exquisite five-spoke gold sunburst fan set with graduated round pearls curving gracefully beneath. Sculpted in warm 18K gold vermeil over certified 925 hallmarked sterling silver, this convertible statement pair captures light with every turn, adding modern sculptural sophistication to any evening or everyday look.',
   'JC-KE-86':
     'Make a bold sculptural statement with the JC-KE-86 Croissant Ribbed Silver C-Hoop Earrings. Precision cast from certified 925 hallmarked sterling silver and finished with mirror-polished triple rhodium plating for enduring tarnish resistance. Featuring a three-tier fluted dome silhouette that catches light dynamically from every angle, these chunky lightweight hoops offer secure comfort-fit stud post closures for effortless day-to-night luxury.',
   'JC-KE-38':
@@ -214,6 +216,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 23,
+    name: 'JC-KE-36',
+    sku: 'JC-KE-36',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 34,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-36/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-36/hero-satin-pair.jpg',
+      '/images/products/jc-ke-36/model-worn.jpg',
+      '/images/products/jc-ke-36/detail-held.jpg',
+      '/images/products/jc-ke-36/ear-profile.jpg',
+      '/images/products/jc-ke-36/packaging-display.jpg',
+    ],
+  },
   {
     id: 22,
     name: 'JC-KE-86',
@@ -536,7 +557,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -545,6 +566,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe55 = p.name === 'JC-KE-55' || p.id === 20
   const isJcKe38 = p.name === 'JC-KE-38' || p.id === 21
   const isJcKe86 = p.name === 'JC-KE-86' || p.id === 22
+  const isJcKe36 = p.name === 'JC-KE-36' || p.id === 23
 
   return {
     ...p,
@@ -559,7 +581,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe86
+    features: isJcKe36
+      ? [
+          'SKU: JC-KE-36 — 5-pearl radiating sunburst fan ear jacket silhouette',
+          'Warm 18K Gold finish over certified 925 hallmarked Sterling Silver core',
+          'Hand-selected luminous freshwater pearl studs & matching arc pearls',
+          'Convertible 2-in-1 Design: wear solo as classic pearl studs or paired with the sunburst fan drop',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe86
       ? [
           'SKU: JC-KE-86 — Chunky three-tier fluted croissant sculpted C-hoop silhouette',
           'Cast in authentic hallmarked 925 Sterling Silver',
@@ -627,7 +658,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe86
+    dimensions: isJcKe36
+      ? '23mm x 19mm / Ultra-Lightweight (3.3g per pair)'
+      : isJcKe86
       ? '24mm x 15mm / Ultra-Lightweight (3.8g per pair)'
       : isJcKe38
       ? '21mm x 18mm / Ultra-Lightweight (3.2g per pair)'
@@ -644,19 +677,19 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'Adjustable Length / Standard Comfort Fit',
     material: isJcKe86
       ? '925 Sterling Silver, Triple Rhodium Plating'
-      : (isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? '18K Gold Plated 925 Sterling Silver, Pearls & CZ'
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
     finish: isJcKe86
       ? 'High-Luster Mirror Rhodium & Polished Silver'
-      : (isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe36 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'High-Polish Warm Gold with Gloss Pearl Sheen'
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
