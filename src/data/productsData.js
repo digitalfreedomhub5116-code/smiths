@@ -88,6 +88,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-27':
+    "Radiate celestial elegance and timeless vintage glamour with the JC-KE-27 Luminous Cat's Eye Bezel Stud Earrings. Handcrafted in certified 925 hallmarked sterling silver enveloped in opulent 18K gold vermeil, each earring centers a genuine, high-domed chatoyant white cat's eye cabochon stone. As light shifts, an ethereal, luminous slit of light dances across the milky opalescent surface, framed within a substantial, mirror-polished gold bezel rim. Sized to make a refined statement whether paired with sharp tailoring or evening silk, these classic round button studs sit comfortably flush to the earlobe. 100% hypoallergenic, nickel-free, and secured with comfort-fit stud backs for effortless all-day wear.",
   'JC-KE-20':
     'Channel Parisian chic and modern romantic minimalism with the JC-KE-20 Modernist Noir Enamel Heart Stud Earrings. Handcrafted in certified 925 hallmarked sterling silver layered in radiant 18K gold vermeil, each earring presents a sculptural, slightly asymmetrical modern folded heart silhouette. The heart basin is hand-filled with deep, mirror-gloss noir black enamel that provides a striking, high-contrast backdrop to the warm, high-polish gold bezel border. Ergonomically contoured to sit flat and flush against the earlobe, these versatile statement studs effortlessly balance playful sweetness with sophisticated edge. 100% hypoallergenic, featherlight, and equipped with comfort-fit security stud posts for day-to-night versatility.',
   'JC-KE-3':
@@ -298,7 +300,27 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
-            {
+              {
+    id: 65,
+    name: 'JC-KE-27',
+    sku: 'JC-KE-27',
+    slug: 'jc-ke-27',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 52,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-27/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-27/hero-satin-pair.jpg',
+      '/images/products/jc-ke-27/detail-hands-held.jpg',
+      '/images/products/jc-ke-27/model-worn-ear.jpg',
+      '/images/products/jc-ke-27/model-studio-portrait.jpg',
+      '/images/products/jc-ke-27/macro-cabochon-detail.jpg',
+    ],
+  },
+{
     id: 64,
     name: 'JC-KE-20',
     sku: 'JC-KE-20',
@@ -1428,7 +1450,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60 || p.id === 61 || p.id === 62 || p.id === 63 || p.id === 64
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60 || p.id === 61 || p.id === 62 || p.id === 63 || p.id === 64 || p.id === 65
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -1479,6 +1501,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe62 = p.name === 'JC-KE-62' || p.id === 62
   const isJcKe3 = p.name === 'JC-KE-3' || p.id === 63
   const isJcKe20 = p.name === 'JC-KE-20' || p.id === 64
+  const isJcKe27 = p.name === 'JC-KE-27' || p.id === 65
 
   return {
     ...p,
@@ -1493,7 +1516,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe20
+    features: isJcKe27
+      ? [
+          "SKU: JC-KE-27 — High-domed chatoyant white cat's eye cabochon centerpiece",
+          'Radiant 18K yellow gold vermeil bezel frame with mirror-gloss finish',
+          'Dynamic chatoyant optical effect shifting with ambient light and movement',
+          'Crafted in certified 925 hallmarked Sterling Silver with anti-tarnish barrier',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe20
       ? [
           'SKU: JC-KE-20 — Sculptural slightly asymmetrical modern folded heart silhouette',
           'Deep mirror-gloss midnight noir black enamel hand-filled basin',
@@ -1940,7 +1972,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe20
+    dimensions: isJcKe27
+      ? '13mm Diameter / Ultra-Lightweight (2.2g per pair)'
+      : isJcKe20
       ? '14mm Width x 15mm Height / Ultra-Lightweight (2.4g per pair)'
       : isJcKe3
       ? '24mm Width x 16mm Drop / Ultra-Lightweight (3.2g per pair)'
@@ -2039,7 +2073,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe20
+    material: isJcKe27
+      ? "18K Gold Vermeil 925 Sterling Silver & Luminous Chatoyant Cat's Eye Cabochon"
+      : isJcKe20
       ? '18K Gold Vermeil 925 Sterling Silver & Glossy Noir Enamel'
       : isJcKe3
       ? '18K Gold Vermeil 925 Sterling Silver & Graduated Freshwater Pearls'
@@ -2126,7 +2162,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe20
+    finish: isJcKe27
+      ? 'High-Polish 18K Yellow Gold Vermeil & Silky Chatoyant Lustre'
+      : isJcKe20
       ? 'Warm 18K Gold Vermeil Bezel & High-Gloss Midnight Noir Enamel'
       : isJcKe3
       ? 'Mirror-Polish 18K Gold Vermeil & High-Luster Freshwater Pearl Glow'
@@ -2215,7 +2253,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'High-Luster Rhodium & Polished Silver',
     keyring: isJcKe58
       ? 'Hypoallergenic Security Leverback Clasp'
-      : (isJcKe20 || isJcKe3 || isJcKe62 || isJcKe61 || isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe27 || isJcKe20 || isJcKe3 || isJcKe62 || isJcKe61 || isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
