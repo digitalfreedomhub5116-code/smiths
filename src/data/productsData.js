@@ -86,6 +86,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Embrace vintage Parisian romance and royal grace with the JC-KE-53 Golden Camellia Rose Pearl Wreath Stud Earrings. Sculpted in certified 925 hallmarked sterling silver layered in luminous 18K gold vermeil, each earring highlights an intricate openwork filigree camellia rose stud that crowns a circular garland of seven hand-matched, high-luster freshwater pearls. The delicate scalloped gold prongs cradle each iridescent pearl with timeless symmetry, creating a radiant halo of light on the lobe. Hypoallergenic, featherlight, and equipped with ergonomic comfort-fit stud posts for effortless day-to-evening sophistication.',
   'JC-KE-67':
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
+  'JC-KE-16':
+    'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
   'JC-KE-82':
     'Command bold two-tone sophistication with the JC-KE-82 Gold Dome & Textured Silver Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver, each earring pairs a luminous high-polish 18K gold vermeil dome stud with a striking hand-etched radiating silver fan drop reminiscent of a cascading seashell. The mesmerizing contrasting metals create a modern architectural statement that transitions effortlessly from daywear to black-tie elegance. Hypoallergenic and featherlight with secure comfort-fit stud posts.',
   'JC-KE-77':
@@ -244,6 +246,26 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 38,
+    name: 'JC-KE-16',
+    sku: 'JC-KE-16',
+    slug: 'jc-ke-16',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 48,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-16/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-16/hero-satin-pair.jpg',
+      '/images/products/jc-ke-16/detail-studio-pair.jpg',
+      '/images/products/jc-ke-16/macro-satin-detail.jpg',
+      '/images/products/jc-ke-16/detail-held.jpg',
+      '/images/products/jc-ke-16/model-portrait.jpg',
+    ],
+  },
   {
     id: 37,
     name: 'JC-KE-67',
@@ -849,7 +871,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -873,6 +895,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe80 = p.name === 'JC-KE-80' || p.id === 35
   const isJcKe53 = p.name === 'JC-KE-53' || p.id === 36
   const isJcKe67 = p.name === 'JC-KE-67' || p.id === 37
+  const isJcKe16 = p.name === 'JC-KE-16' || p.id === 38
 
   return {
     ...p,
@@ -887,7 +910,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe67
+    features: isJcKe16
+      ? [
+          'SKU: JC-KE-16 — Majestic royal swan stud handset with brilliant micro-pavé AAA cubic zirconia crystals',
+          'Articulated gold ribbon spiral cage cradling a luminous opalescent cat’s eye moonstone cabochon',
+          'Cast in certified 925 hallmarked Sterling Silver with a warm, lasting 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe67
       ? [
           'SKU: JC-KE-67 — Celestial 8-point starburst stud with handset micro-pavé AAA cubic zirconia crystals',
           'Articulated gold spiral ribbon cage cradling a luminous high-luster freshwater pearl drop',
@@ -1091,7 +1123,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe67
+    dimensions: isJcKe16
+      ? '30mm Drop x 14mm Width / Ultra-Lightweight (3.8g per pair)'
+      : isJcKe67
       ? '32mm Drop x 12mm Width / Ultra-Lightweight (3.6g per pair)'
       : isJcKe53
       ? '20mm x 20mm Halo / Ultra-Lightweight (3.4g per pair)'
@@ -1136,7 +1170,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe67
+    material: isJcKe16
+      ? '18K Gold Vermeil 925 Sterling Silver, Opalescent Moonstone & Micro-Pavé AAA CZ'
+      : isJcKe67
       ? '18K Gold Vermeil 925 Sterling Silver, High-Luster Pearls & Micro-Pavé AAA CZ'
       : isJcKe53
       ? '18K Gold Vermeil 925 Sterling Silver & Seven Freshwater Pearls'
@@ -1169,7 +1205,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe67
+    finish: isJcKe16
+      ? 'Warm 18K Gold Vermeil, Opalescent Moonstone Glow & Diamond Pavé'
+      : isJcKe67
       ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé'
       : isJcKe53
       ? 'Warm 18K Gold Vermeil & High-Luster Freshwater Pearl White'
@@ -1202,7 +1240,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
