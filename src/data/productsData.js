@@ -88,6 +88,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-58':
+    'Channel celestial brilliance and timeless romance with the JC-KE-58 Celestial Starburst Cluster Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring begins with an ergonomic huggie hoop centered with a lustrous button pearl. Cascading below is an asymmetrical constellation of faceted eight-pointed and four-pointed starlight starbursts hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals, interspersed with clustered freshwater pearls and culminating in a dramatic, high-luster swinging round pearl drop. Designed for fluid grace and radiant movement, this statement piece transitions effortlessly from daytime sophistication to black-tie grandeur.',
   'JC-KE-57':
     'Indulge in playful luxury and Parisian high-fashion elegance with the JC-KE-57 Pavé Crystal Leaf Twin Cherry Pearl Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring depicts a whimsical cherry blossom pair. The top stud motif features dual sculpted golden leaves handset with brilliant central baguette-cut stones and bordered with sparkling micro-pavé AAA cubic zirconia crystals. Sweeping downward are contoured polished golden stems suspending two matched, high-luster freshwater pearls that radiate a soft iridescent sheen. Featherlight, 100% hypoallergenic, and designed with ergonomic comfort-fit posts for effortless day-to-evening glamour.',
   'JC-KE-56':
@@ -252,6 +254,26 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 42,
+    name: 'JC-KE-58',
+    sku: 'JC-KE-58',
+    slug: 'jc-ke-58',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 54,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-58/hero-podium-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-58/hero-podium-pair.jpg',
+      '/images/products/jc-ke-58/detail-satin-pair.jpg',
+      '/images/products/jc-ke-58/model-portrait.jpg',
+      '/images/products/jc-ke-58/macro-starburst-detail.jpg',
+      '/images/products/jc-ke-58/detail-ear-macro.jpg',
+    ],
+  },
   {
     id: 41,
     name: 'JC-KE-57',
@@ -937,7 +959,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -965,6 +987,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe37 = p.name === 'JC-KE-37' || p.id === 39
   const isJcKe56 = p.name === 'JC-KE-56' || p.id === 40
   const isJcKe57 = p.name === 'JC-KE-57' || p.id === 41
+  const isJcKe58 = p.name === 'JC-KE-58' || p.id === 42
 
   return {
     ...p,
@@ -979,7 +1002,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe57
+    features: isJcKe58
+      ? [
+          'SKU: JC-KE-58 — Celestial starburst constellation with clustered freshwater pearls & swinging pearl drop',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          'Handset micro-pavé AAA cubic zirconia crystals along multi-point starlight starbursts',
+          'Graduated multi-pearl cluster featuring high-luster button, accent, and dramatic 10mm drop pearls',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure huggie leverback closure',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe57
       ? [
           'SKU: JC-KE-57 — Whimsical twin cherry silhouette with dual high-luster freshwater pearls',
           'Sculpted dual-leaf stud crown handset with center baguette-cut stones & micro-pavé AAA CZ',
@@ -1219,7 +1251,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe57
+    dimensions: isJcKe58
+      ? '45mm Drop x 18mm Width | 10mm Pearl Drop / Ultra-Lightweight (3.8g per pair)'
+      : isJcKe57
       ? '22mm Drop x 16mm Width / Ultra-Lightweight (3.4g per pair)'
       : isJcKe56
       ? '22mm Curvature x 15mm Width / Ultra-Lightweight (3.2g per pair)'
@@ -1272,7 +1306,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe57
+    material: isJcKe58
+      ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
+      : isJcKe57
       ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Baguette AAA CZ'
       : isJcKe56
       ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
@@ -1313,7 +1349,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe57
+    finish: isJcKe58
+      ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé'
+      : isJcKe57
       ? 'Warm 18K Gold Vermeil, Lustrous Pearl White & Diamond Sparkle'
       : isJcKe56
       ? 'Warm 18K Gold Vermeil, Lustrous Pearl White & Diamond Pavé'
@@ -1354,7 +1392,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: isJcKe58
+      ? 'Hypoallergenic Security Leverback Clasp'
+      : (isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
