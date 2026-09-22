@@ -88,6 +88,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-61':
+    'Infuse French-girl elegance and Parisian couture into your everyday styling with the JC-KE-61 Noir Velvet Bow Shimmer Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents a three-dimensional fluted ribbon bow finished in deep noir enamel with subtle micro-shimmer specks that catch the light like starlight on velvet. Contoured high-polish gold vermeil piping traces every graceful curve of the knotted loops and flowing ribbon tails, crowned by a sparkling round-cut AAA cubic zirconia stone nestled in the center knot. Featherlight, 100% hypoallergenic, and fitted with secure comfort-fit stud posts, this signature statement piece brings effortless vintage glamour to modern tailoring, evening gowns, and minimalist daywear alike.',
   'JC-KE-43':
     'Embody architectural modernism and perennial botanical grace with the JC-KE-43 Art Deco White Camellia Blossom Stud Earrings. Masterfully crafted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents a tiered, double-layer stylized camellia blossom finished in pristine ivory-white gloss enamel. The sculpted petals feature contoured high-polish gold piping that defines each gentle curve, culminating in a granulated caviar-bead golden floral stamen center. Ergonomically contoured to curve gracefully up the earlobe like an ear climber, these statement floral studs marry vintage Parisian charm with clean Scandinavian aesthetics. 100% hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for effortless day-to-evening luxury.',
   'JC-KE-2':
@@ -290,7 +292,26 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
-    {
+      {
+    id: 61,
+    name: 'JC-KE-61',
+    sku: 'JC-KE-61',
+    slug: 'jc-ke-61',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 48,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-61/hero-card-satin.jpg',
+    gallery: [
+      '/images/products/jc-ke-61/hero-card-satin.jpg',
+      '/images/products/jc-ke-61/model-worn-ear.jpg',
+      '/images/products/jc-ke-61/detail-hands-held.jpg',
+      '/images/products/jc-ke-61/macro-bow-detail.jpg',
+    ],
+  },
+{
     id: 60,
     name: 'JC-KE-43',
     sku: 'JC-KE-43',
@@ -1344,7 +1365,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60 || p.id === 61
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -1391,6 +1412,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe34 = p.name === 'JC-KE-34' || p.id === 58
   const isJcKe2 = p.name === 'JC-KE-2' || p.id === 59
   const isJcKe43 = p.name === 'JC-KE-43' || p.id === 60
+  const isJcKe61 = p.name === 'JC-KE-61' || p.id === 61
 
   return {
     ...p,
@@ -1405,7 +1427,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe43
+    features: isJcKe61
+      ? [
+          'SKU: JC-KE-61 — Three-dimensional sculpted ribbon bow silhouette in noir enamel with micro-shimmer',
+          'Contoured 18K gold vermeil perimeter piping defining the knotted loops and flowing tails',
+          'Round-cut brilliant AAA cubic zirconia crystal accent handset at the center bow knot',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe43
       ? [
           'SKU: JC-KE-43 — Tiered double-layer architectural camellia flower with pristine white gloss enamel',
           'High-polish 18K gold vermeil perimeter piping defining every sculpted petal contour',
@@ -1816,7 +1847,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe43
+    dimensions: isJcKe61
+      ? '20mm Width x 18mm Height / Ultra-Lightweight (3.2g per pair)'
+      : isJcKe43
       ? '26mm x 20mm / Ultra-Lightweight (3.4g per pair)'
       : isJcKe2
       ? '24mm x 24mm / Ultra-Lightweight (3.6g per pair)'
@@ -1907,7 +1940,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe43
+    material: isJcKe61
+      ? '18K Gold Vermeil 925 Sterling Silver, Shimmer Noir Enamel & AAA CZ Crystal'
+      : isJcKe43
       ? '18K Gold Vermeil 925 Sterling Silver & Glossy White Enamel'
       : isJcKe2
       ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & AAA Cubic Zirconia'
@@ -1986,7 +2021,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe43
+    finish: isJcKe61
+      ? 'Warm 18K Gold Vermeil, Shimmering Noir Enamel & Diamond Accent Knot'
+      : isJcKe43
       ? 'Warm 18K Gold Vermeil, Pristine White Gloss Enamel & Granulated Gold Stamen'
       : isJcKe2
       ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Leaf Sparkle'
@@ -2067,7 +2104,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'High-Luster Rhodium & Polished Silver',
     keyring: isJcKe58
       ? 'Hypoallergenic Security Leverback Clasp'
-      : (isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe61 || isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
