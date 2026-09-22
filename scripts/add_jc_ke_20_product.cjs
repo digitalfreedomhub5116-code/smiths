@@ -1,0 +1,223 @@
+const fs = require('fs');
+const path = require('path');
+const sharp = require('sharp');
+const { createClient } = require('@supabase/supabase-js');
+
+const brainDir = 'C:/Users/pruth/.gemini/antigravity/brain/026ab5d9-7a3a-4424-8999-8de03d9175e7';
+const uploadsDir = path.join(brainDir, '.user_uploaded');
+const publicDestDir = 'C:/Users/pruth/Downloads/smiths/public/images/products/jc-ke-20';
+const brainArtifactDir = path.join(brainDir, 'jc_ke_20');
+
+if (!fs.existsSync(publicDestDir)) fs.mkdirSync(publicDestDir, { recursive: true });
+if (!fs.existsSync(brainArtifactDir)) fs.mkdirSync(brainArtifactDir, { recursive: true });
+
+async function inpaintSparkleDynamic(srcPath) {
+  const { data: rawData, info } = await sharp(srcPath).raw().toBuffer({ resolveWithObject: true });
+  const { width: w, height: h, channels: ch } = info;
+  const data = Buffer.from(rawData);
+
+  // Detect sparkle peak in lower right corner
+  let maxScore = 0, cx = w - 100, cy = h - 100;
+  for (let y = h - 140; y <= h - 50; y++) {
+    for (let x = w - 140; x <= w - 50; x++) {
+      const idx = (y * w + x) * ch;
+      const c = (data[idx] + data[idx+1] + data[idx+2]) / 3;
+      let surr = 0, cnt = 0;
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI / 4) {
+        const sx = Math.round(x + 35 * Math.cos(angle));
+        const sy = Math.round(y + 35 * Math.sin(angle));
+        if (sx >= 0 && sx < w && sy >= 0 && sy < h) {
+          const sidx = (sy * w + sx) * ch;
+          surr += (data[sidx] + data[sidx+1] + data[sidx+2]) / 3;
+          cnt++;
+        }
+      }
+      surr /= cnt;
+      if (c - surr > maxScore) {
+        maxScore = c - surr;
+        cx = x;
+        cy = y;
+      }
+    }
+  }
+
+  const R = 32;
+  const buf = new Float32Array(data);
+
+  let sumR = 0, sumG = 0, sumB = 0, cnt = 0;
+  for (let dy = -R - 5; dy <= R + 5; dy++) {
+    for (let dx = -R - 5; dx <= R + 5; dx++) {
+      const dist = Math.hypot(dx, dy);
+      if (dist >= R + 1 && dist <= R + 5) {
+        const px = cx + dx, py = cy + dy;
+        if (px >= 0 && px < w && py >= 0 && py < h) {
+          const pIdx = (py * w + px) * ch;
+          sumR += data[pIdx]; sumG += data[pIdx + 1]; sumB += data[pIdx + 2]; cnt++;
+        }
+      }
+    }
+  }
+  const avgR = sumR / cnt, avgG = sumG / cnt, avgB = sumB / cnt;
+
+  for (let dy = -R; dy <= R; dy++)
+    for (let dx = -R; dx <= R; dx++)
+      if (Math.hypot(dx, dy) <= R) {
+        const px = cx + dx, py = cy + dy;
+        if (px >= 0 && px < w && py >= 0 && py < h) {
+          const pIdx = (py * w + px) * ch;
+          buf[pIdx] = avgR; buf[pIdx + 1] = avgG; buf[pIdx + 2] = avgB;
+        }
+      }
+
+  for (let iter = 0; iter < 800; iter++)
+    for (let dy = -R; dy <= R; dy++)
+      for (let dx = -R; dx <= R; dx++)
+        if (Math.hypot(dx, dy) <= R) {
+          const px = cx + dx, py = cy + dy;
+          if (px > 0 && px < w - 1 && py > 0 && py < h - 1) {
+            const pIdx = (py * w + px) * ch;
+            for (let c = 0; c < ch; c++)
+              buf[pIdx + c] = 0.25 * (
+                buf[((py - 1) * w + px) * ch + c] + buf[((py + 1) * w + px) * ch + c] +
+                buf[(py * w + (px - 1)) * ch + c] + buf[(py * w + (px + 1)) * ch + c]
+              );
+          }
+        }
+
+  for (let dy = -R; dy <= R; dy++)
+    for (let dx = -R; dx <= R; dx++)
+      if (Math.hypot(dx, dy) <= R) {
+        const px = cx + dx, py = cy + dy;
+        if (px >= 0 && px < w && py >= 0 && py < h) {
+          const pIdx = (py * w + px) * ch;
+          for (let c = 0; c < ch; c++)
+            data[pIdx + c] = Math.max(0, Math.min(255, Math.round(buf[pIdx + c])));
+        }
+      }
+
+  return { raw: data, width: w, height: h, channels: ch };
+}
+
+async function saveImg(imgObj, destPath, brainPath) {
+  const buf = await sharp(imgObj.raw, { raw: { width: imgObj.width, height: imgObj.height, channels: imgObj.channels } })
+    .jpeg({ quality: 95 }).toBuffer();
+  fs.writeFileSync(destPath, buf);
+  if (brainPath) fs.writeFileSync(brainPath, buf);
+  return buf;
+}
+
+async function cropAndSave(imgObj, crop, destPath, brainPath) {
+  const buf = await sharp(imgObj.raw, { raw: { width: imgObj.width, height: imgObj.height, channels: imgObj.channels } })
+    .extract(crop)
+    .jpeg({ quality: 95 }).toBuffer();
+  fs.writeFileSync(destPath, buf);
+  if (brainPath) fs.writeFileSync(brainPath, buf);
+  return buf;
+}
+
+async function main() {
+  console.log('--- Processing JC-KE-20 Images ---');
+
+  // 1. Hero: Pair held between fingertips with gold foil nails
+  console.log('Inpainting hero-hands-held.jpg (media_1790070389520.jpg)...');
+  const img_hero = await inpaintSparkleDynamic(path.join(uploadsDir, 'media_1790070389520.jpg'));
+  await saveImg(img_hero, path.join(publicDestDir, 'hero-hands-held.jpg'), path.join(brainArtifactDir, 'hero-hands-held.jpg'));
+
+  // 2. Model worn ear close-up
+  console.log('Inpainting model-worn-ear.jpg (media_1790070396971.jpg)...');
+  const img_model = await inpaintSparkleDynamic(path.join(uploadsDir, 'media_1790070396971.jpg'));
+  await saveImg(img_model, path.join(publicDestDir, 'model-worn-ear.jpg'), path.join(brainArtifactDir, 'model-worn-ear.jpg'));
+
+  // 3. Model studio portrait (clean REINA text & watermark)
+  console.log('Cleaning model-studio-portrait.jpg (media_1790070405192.jpg)...');
+  const img_portrait = await inpaintSparkleDynamic(path.join(uploadsDir, 'media_1790070405192.jpg'));
+  // Clean REINA text: x in 760..975, y in 595..635
+  for (let y = 595; y <= 635; y++) {
+    for (let x = 760; x <= 975; x++) {
+      const idx = (y * img_portrait.width + x) * img_portrait.channels;
+      const c = (img_portrait.raw[idx] + img_portrait.raw[idx+1] + img_portrait.raw[idx+2]) / 3;
+      if (c < 120) {
+        const refIdx = ((y - 45) * img_portrait.width + x) * img_portrait.channels;
+        img_portrait.raw[idx] = img_portrait.raw[refIdx];
+        img_portrait.raw[idx+1] = img_portrait.raw[refIdx+1];
+        img_portrait.raw[idx+2] = img_portrait.raw[refIdx+2];
+      }
+    }
+  }
+  await saveImg(img_portrait, path.join(publicDestDir, 'model-studio-portrait.jpg'), path.join(brainArtifactDir, 'model-studio-portrait.jpg'));
+
+  // 4. Macro crop of the two hearts from the hands photo
+  console.log('Generating macro-heart-detail.jpg...');
+  await cropAndSave(img_hero, { left: 360, top: 400, width: 280, height: 160 }, path.join(publicDestDir, 'macro-heart-detail.jpg'), path.join(brainArtifactDir, 'macro-heart-detail.jpg'));
+
+  console.log('✓ All 4 JC-KE-20 images processed!');
+
+  // Supabase sync
+  console.log('--- Syncing JC-KE-20 to Supabase Live Database ---');
+  const supabase = createClient(
+    'https://znvqgluajmxgdvyfnkzu.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpudnFnbHVham14Z2R2eWZua3p1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MDQxMjksImV4cCI6MjEwNTI4MDEyOX0.IqDzvx_MNHanK1lD4xxZO7qcyM7aZi5NfFxjyb-NCDE'
+  );
+
+  const productData = {
+    id: 64,
+    name: 'JC-KE-20',
+    full_name: 'JC-KE-20 Modernist Noir Enamel Heart Stud Earrings - Smiths Jewellery',
+    slug: 'jc-ke-20',
+    genre: 'EARRINGS',
+    price: 849,
+    original_price: 1799,
+    stock: 50,
+    rating: 4.90,
+    review_count: 54,
+    bad_count: 1,
+    description: "Channel Parisian chic and modern romantic minimalism with the JC-KE-20 Modernist Noir Enamel Heart Stud Earrings. Handcrafted in certified 925 hallmarked sterling silver layered in radiant 18K gold vermeil, each earring presents a sculptural, slightly asymmetrical modern folded heart silhouette. The heart basin is hand-filled with deep, mirror-gloss noir black enamel that provides a striking, high-contrast backdrop to the warm, high-polish gold bezel border. Ergonomically contoured to sit flat and flush against the earlobe, these versatile statement studs effortlessly balance playful sweetness with sophisticated edge. 100% hypoallergenic, featherlight, and equipped with comfort-fit security stud posts for day-to-night versatility.",
+    material: '18K Gold Vermeil 925 Sterling Silver & Glossy Noir Enamel',
+    dimensions: '14mm Width x 15mm Height / Ultra-Lightweight (2.4g per pair)',
+    finish: 'Warm 18K Gold Vermeil Bezel & High-Gloss Midnight Noir Enamel',
+    image: '/images/products/jc-ke-20/hero-hands-held.jpg',
+    gallery: [
+      '/images/products/jc-ke-20/hero-hands-held.jpg',
+      '/images/products/jc-ke-20/model-worn-ear.jpg',
+      '/images/products/jc-ke-20/model-studio-portrait.jpg',
+      '/images/products/jc-ke-20/macro-heart-detail.jpg',
+    ],
+    key_features: [
+      'SKU: JC-KE-20 — Sculptural slightly asymmetrical modern folded heart silhouette',
+      'Deep mirror-gloss midnight noir black enamel hand-filled basin',
+      'Warm 18K gold vermeil perimeter bezel framing every elegant contour',
+      'Cast in certified 925 hallmarked Sterling Silver with tarnish-resistant finish',
+      '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+    ],
+    is_active: true,
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data: existing } = await supabase.from('products').select('id').eq('id', 64);
+  if (existing && existing.length > 0) {
+    const { error } = await supabase.from('products').update(productData).eq('id', 64).select();
+    if (error) console.error('Update error:', error);
+    else console.log('✓ Supabase product 64 (JC-KE-20) updated!');
+  } else {
+    const { error } = await supabase.from('products').insert([productData]).select();
+    if (error) console.error('Insert error:', error);
+    else console.log('✓ Supabase product 64 (JC-KE-20) inserted!');
+  }
+
+  // Visibility
+  const visRec = { product_id: 64, is_hidden: false, is_featured: true, is_trending: true, updated_at: new Date().toISOString() };
+  const { data: exVis } = await supabase.from('product_visibility').select('product_id').eq('product_id', 64);
+  if (exVis && exVis.length > 0) await supabase.from('product_visibility').update(visRec).eq('product_id', 64);
+  else await supabase.from('product_visibility').insert([visRec]);
+
+  // Availability
+  const avlRec = { product_id: 64, in_stock: true, stock_quantity: 50, allow_backorder: false, updated_at: new Date().toISOString() };
+  const { data: exAvl } = await supabase.from('product_availability').select('product_id').eq('product_id', 64);
+  if (exAvl && exAvl.length > 0) await supabase.from('product_availability').update(avlRec).eq('product_id', 64);
+  else await supabase.from('product_availability').insert([avlRec]);
+
+  console.log('🎉 JC-KE-20 IMAGE GENERATION & DATABASE SYNC COMPLETE!');
+}
+
+main().catch(console.error);
