@@ -88,6 +88,12 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-72':
+    'Channel timeless botanical grace and Parisian sophistication with the JC-KE-72 Mother-of-Pearl Ginkgo Leaf Pearl Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in luminous 18K gold vermeil, each earring presents a sculptural Japanese ginkgo biloba fan leaf. The fluted fan silhouette is inlaid with glowing, iridescent ivory mother-of-pearl enamel bordered by an exquisite scalloped arc handset with brilliant micro-pavé AAA cubic zirconia crystals. Nestled beside the leaf crown on an elegant golden arch is a hand-selected round freshwater pearl with an iridescent orient. Designed with an ergonomic contoured stud post for all-day comfort, this modern classic radiates understated luxury.',
+  'JC-KE-40':
+    "Celebrate blooming femininity and botanical romance with the JC-KE-40 Pink Quartz Clover Pavé Crystal Stud Earrings. Masterfully crafted in certified 925 hallmarked sterling silver layered in warm 18K gold vermeil, each earring showcases a sculptural four-leaf clover silhouette. Three petals are inlaid with lustrous blush-pink cat's eye quartz cabochons that glow with a soft candlelit shimmer, while the alternating three petals are densely handset with brilliant round-cut AAA cubic zirconia crystals in antiqued gold prongs for dramatic tonal contrast. At the center where all petals converge, a polished gold knot of warm vermeil gleams as a precision focal point. Available in both romantic blush-pink and timeless ivory-white colorways, these sculptural studs are featherlight, 100% hypoallergenic, and fitted with secure comfort-fit stud posts for effortless day-to-evening elegance.",
+  'JC-KE-19':
+    'Dive into oceanic fantasy with the JC-KE-19 Mermaid Tail Pearl Ear Jacket Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in warm 18K gold vermeil, this enchanting 2-in-1 design pairs a lustrous high-luster round freshwater pearl stud sitting elegantly on the earlobe with a sweeping sculptural ear jacket worn behind. The jacket features a gracefully arching golden C-curve that flows into a bifurcated mermaid tail fin densely handset with brilliant micro-pavé AAA cubic zirconia crystals — capturing the shimmering scales of an oceanic fantasy. A smaller accent pearl nestles within the tail fork, completing the ethereal aquatic composition. Designed with hypoallergenic stud posts and smooth-slide jacket arm for effortless day-to-evening wearability. A timeless conversation starter that channels the magic of the deep.',
   'JC-KE-50':
     'Embrace timeless Parisian romance and botanical splendor with the JC-KE-50 Camellia Blooming Pearl Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents a layered, three-dimensional blooming camellia blossom. At its heart rests a luminous, hand-selected round freshwater pearl pistil, cradled within three gently cupped inner petals finished with lustrous ivory mother-of-pearl enamel and fine polished gold borders. Cascading outward is a second tier of five sculpted scalloped petals, bordered by delicate micro seed-pearl beading that catches light with subtle radiance. Designed with secure, hypoallergenic comfort-fit stud posts, this signature statement piece brings effortless haute-couture elegance to both daywear and evening soirées.',
   'JC-KE-58':
@@ -256,6 +262,65 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 46,
+    name: 'JC-KE-19',
+    sku: 'JC-KE-19',
+    slug: 'jc-ke-19',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 38,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-19/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-19/hero-satin-pair.jpg',
+      '/images/products/jc-ke-19/detail-card-display.jpg',
+      '/images/products/jc-ke-19/detail-hands-held.jpg',
+      '/images/products/jc-ke-19/macro-tail-fin-detail.jpg',
+    ],
+  },
+  {
+    id: 45,
+    name: 'JC-KE-40',
+    sku: 'JC-KE-40',
+    slug: 'jc-ke-40',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 42,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-40/hero-pink-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-40/hero-pink-pair.jpg',
+      '/images/products/jc-ke-40/detail-ivory-satin-pair.jpg',
+      '/images/products/jc-ke-40/detail-hands-cupped.jpg',
+      '/images/products/jc-ke-40/model-worn-profile.jpg',
+      '/images/products/jc-ke-40/macro-clover-detail.jpg',
+    ],
+  },
+  {
+    id: 44,
+    name: 'JC-KE-72',
+    sku: 'JC-KE-72',
+    slug: 'jc-ke-72',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 45,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-72/hero-plinth-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-72/hero-plinth-pair.jpg',
+      '/images/products/jc-ke-72/detail-satin-pair.jpg',
+      '/images/products/jc-ke-72/detail-hands-worn.jpg',
+      '/images/products/jc-ke-72/macro-ginkgo-detail.jpg',
+      '/images/products/jc-ke-72/detail-pearl-macro.jpg',
+    ],
+  },
   {
     id: 43,
     name: 'JC-KE-50',
@@ -981,7 +1046,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -1011,6 +1076,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe57 = p.name === 'JC-KE-57' || p.id === 41
   const isJcKe58 = p.name === 'JC-KE-58' || p.id === 42
   const isJcKe50 = p.name === 'JC-KE-50' || p.id === 43
+  const isJcKe72 = p.name === 'JC-KE-72' || p.id === 44
+  const isJcKe40 = p.name === 'JC-KE-40' || p.id === 45
+  const isJcKe19 = p.name === 'JC-KE-19' || p.id === 46
 
   return {
     ...p,
@@ -1025,7 +1093,34 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe50
+    features: isJcKe19
+      ? [
+          'SKU: JC-KE-19 — Convertible 2-in-1 freshwater pearl stud & sculptural mermaid tail ear jacket',
+          'Arching gold C-curve jacket with bifurcated pavé-set mermaid tail fin and accent pearl nestled in fork',
+          'Densely handset micro-pavé AAA cubic zirconia crystals replicating shimmering mermaid scales',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe40
+      ? [
+          "SKU: JC-KE-40 — Sculptural four-leaf clover with alternating cat's eye quartz & pavé CZ petals",
+          "Three blush-pink cat's eye quartz cabochons with soft candlelit shimmer — also in ivory-white",
+          'Three alternating petals densely handset with brilliant AAA cubic zirconia crystals in antique gold prongs',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe72
+      ? [
+          'SKU: JC-KE-72 — Sculptural ginkgo biloba fan leaf with mother-of-pearl enamel & floating pearl',
+          'Hand-selected round freshwater pearl with high-luster iridescent orient',
+          'Scalloped outer fan rim handset with brilliant micro-pavé AAA cubic zirconia stones',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe50
       ? [
           'SKU: JC-KE-50 — Sculptural 3D blooming camellia flower with tiered mother-of-pearl enamel petals',
           'Hand-selected round freshwater pearl center pistil cradled within golden petal rims',
@@ -1283,7 +1378,13 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe50
+    dimensions: isJcKe19
+      ? '38mm Arch x 16mm Tail Width / Ultra-Lightweight (3.8g per pair)'
+      : isJcKe40
+      ? '22mm x 22mm / Ultra-Lightweight (3.5g per pair)'
+      : isJcKe72
+      ? '24mm Drop x 18mm Fan Width | 9mm Luster Pearl / Ultra-Lightweight (3.6g per pair)'
+      : isJcKe50
       ? '22mm x 22mm / Ultra-Lightweight (3.4g per pair)'
       : isJcKe58
       ? '45mm Drop x 18mm Width | 10mm Pearl Drop / Ultra-Lightweight (3.8g per pair)'
@@ -1340,7 +1441,13 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe50
+    material: isJcKe19
+      ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
+      : isJcKe40
+      ? "18K Gold Vermeil 925 Sterling Silver, Cat's Eye Quartz Cabochons & AAA CZ Crystal"
+      : isJcKe72
+      ? '18K Gold Vermeil 925 Sterling Silver, Mother-of-Pearl Enamel, Freshwater Pearls & AAA CZ'
+      : isJcKe50
       ? '18K Gold Vermeil 925 Sterling Silver, Mother-of-Pearl Enamel & Seed Pearls'
       : isJcKe58
       ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
@@ -1385,7 +1492,13 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe50
+    finish: isJcKe19
+      ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé Tail Sparkle'
+      : isJcKe40
+      ? 'Warm 18K Gold Vermeil, Soft Blush-Pink Quartz Luster & Diamond Pavé Crystal Sparkle'
+      : isJcKe72
+      ? 'Warm 18K Gold Vermeil, Iridescent White Mother-of-Pearl Luster & Diamond Sparkle'
+      : isJcKe50
       ? 'Warm 18K Gold Vermeil, Iridescent Camellia Petal Luster & Seed Pearl Sheen'
       : isJcKe58
       ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé'
@@ -1432,7 +1545,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'High-Luster Rhodium & Polished Silver',
     keyring: isJcKe58
       ? 'Hypoallergenic Security Leverback Clasp'
-      : (isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
