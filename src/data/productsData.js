@@ -88,6 +88,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-62':
+    'Capture ethereal movement and botanical romance with the JC-KE-62 Pavé Butterfly Pearl Ear Climber Jacket. Masterfully sculpted in certified 925 hallmarked sterling silver plated in radiant 18K gold vermeil, this innovative two-in-one ear jacket silhouette pairs a luminous 8mm freshwater pearl stud on the lobe with an architectural bifurcated golden wire that wraps gracefully beneath. One branch blossoms into an exquisite butterfly motif encrusted with sparkling micro-pavé AAA cubic zirconia crystals, while the lower branch culminates in a delicate accent pearl. The swept open-frame architecture creates a floating negative-space illusion, bringing kinetic whimsy and haute-couture sophistication to every angle. Featherlight, 100% hypoallergenic, and fitted with secure comfort-fit stud posts for effortless day-to-evening allure.',
   'JC-KE-61':
     'Infuse French-girl elegance and Parisian couture into your everyday styling with the JC-KE-61 Noir Velvet Bow Shimmer Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents a three-dimensional fluted ribbon bow finished in deep noir enamel with subtle micro-shimmer specks that catch the light like starlight on velvet. Contoured high-polish gold vermeil piping traces every graceful curve of the knotted loops and flowing ribbon tails, crowned by a sparkling round-cut AAA cubic zirconia stone nestled in the center knot. Featherlight, 100% hypoallergenic, and fitted with secure comfort-fit stud posts, this signature statement piece brings effortless vintage glamour to modern tailoring, evening gowns, and minimalist daywear alike.',
   'JC-KE-43':
@@ -292,7 +294,26 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
-      {
+        {
+    id: 62,
+    name: 'JC-KE-62',
+    sku: 'JC-KE-62',
+    slug: 'jc-ke-62',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 47,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-62/hero-studio-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-62/hero-studio-pair.jpg',
+      '/images/products/jc-ke-62/model-worn-profile.jpg',
+      '/images/products/jc-ke-62/detail-hands-held.jpg',
+      '/images/products/jc-ke-62/macro-butterfly-detail.jpg',
+    ],
+  },
+{
     id: 61,
     name: 'JC-KE-61',
     sku: 'JC-KE-61',
@@ -1365,7 +1386,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60 || p.id === 61
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47 || p.id === 48 || p.id === 49 || p.id === 50 || p.id === 51 || p.id === 52 || p.id === 53 || p.id === 54 || p.id === 55 || p.id === 56 || p.id === 57 || p.id === 58 || p.id === 59 || p.id === 60 || p.id === 61 || p.id === 62
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -1413,6 +1434,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe2 = p.name === 'JC-KE-2' || p.id === 59
   const isJcKe43 = p.name === 'JC-KE-43' || p.id === 60
   const isJcKe61 = p.name === 'JC-KE-61' || p.id === 61
+  const isJcKe62 = p.name === 'JC-KE-62' || p.id === 62
 
   return {
     ...p,
@@ -1427,7 +1449,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe61
+    features: isJcKe62
+      ? [
+          'SKU: JC-KE-62 — Innovative 2-in-1 ear jacket with top freshwater pearl stud & swept ear climber branch',
+          'Bifurcated 18K gold vermeil arm featuring micro-pavé AAA cubic zirconia butterfly motif',
+          'Dual freshwater pearls: 8mm high-luster lobe pearl and miniature floating accent pearl',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe61
       ? [
           'SKU: JC-KE-61 — Three-dimensional sculpted ribbon bow silhouette in noir enamel with micro-shimmer',
           'Contoured 18K gold vermeil perimeter piping defining the knotted loops and flowing tails',
@@ -1847,7 +1878,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe61
+    dimensions: isJcKe62
+      ? '26mm Height x 22mm Width / Ultra-Lightweight (3.4g per pair)'
+      : isJcKe61
       ? '20mm Width x 18mm Height / Ultra-Lightweight (3.2g per pair)'
       : isJcKe43
       ? '26mm x 20mm / Ultra-Lightweight (3.4g per pair)'
@@ -1940,7 +1973,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe61
+    material: isJcKe62
+      ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
+      : isJcKe61
       ? '18K Gold Vermeil 925 Sterling Silver, Shimmer Noir Enamel & AAA CZ Crystal'
       : isJcKe43
       ? '18K Gold Vermeil 925 Sterling Silver & Glossy White Enamel'
@@ -2021,7 +2056,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe61
+    finish: isJcKe62
+      ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé Sparkle'
+      : isJcKe61
       ? 'Warm 18K Gold Vermeil, Shimmering Noir Enamel & Diamond Accent Knot'
       : isJcKe43
       ? 'Warm 18K Gold Vermeil, Pristine White Gloss Enamel & Granulated Gold Stamen'
@@ -2104,7 +2141,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'High-Luster Rhodium & Polished Silver',
     keyring: isJcKe58
       ? 'Hypoallergenic Security Leverback Clasp'
-      : (isJcKe61 || isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe62 || isJcKe61 || isJcKe43 || isJcKe2 || isJcKe34 || isJcKe33 || isJcKe32 || isJcKe30 || isJcKe29 || isJcKe28 || isJcKe26 || isJcKe4 || isJcKe23 || isJcKe9 || isJcKe7 || isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
