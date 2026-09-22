@@ -39,13 +39,30 @@ export default function ProductPage() {
     (p) => String(p.id) === String(productIdOrSlug) || p.slug === productIdOrSlug
   )
 
-  // Find fallback from default MOCK_PRODUCTS
-  const mockFallback = MOCK_PRODUCTS.find(
-    (m) => String(m.id) === String(productIdOrSlug) || m.slug === productIdOrSlug ||
-           (storeProduct && (String(m.id) === String(storeProduct.id) || m.slug === storeProduct.slug))
-  )
+  // Check if product was explicitly deleted
+  const localDeleted = (() => {
+    try {
+      const raw = localStorage.getItem('smiths_deleted_product_ids')
+      return raw ? JSON.parse(raw).map(Number) : []
+    } catch (e) {
+      return []
+    }
+  })()
 
-  const raw = storeProduct || mockFallback
+  const isDeleted =
+    (!isNaN(Number(productIdOrSlug)) && localDeleted.includes(Number(productIdOrSlug))) ||
+    (storeProduct && localDeleted.includes(Number(storeProduct.id)))
+
+  // Find fallback from default MOCK_PRODUCTS only to enrich an existing product
+  const mockFallback = !isDeleted
+    ? (storeProduct
+        ? MOCK_PRODUCTS.find((m) => Number(m.id) === Number(storeProduct.id) || m.slug === storeProduct.slug)
+        : (allProducts && allProducts.length === 0
+            ? MOCK_PRODUCTS.find((m) => (String(m.id) === String(productIdOrSlug) || m.slug === productIdOrSlug) && !localDeleted.includes(Number(m.id)))
+            : null))
+    : null
+
+  const raw = isDeleted ? null : (storeProduct || mockFallback)
 
   const product = raw
     ? {

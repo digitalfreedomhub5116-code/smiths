@@ -24,6 +24,22 @@ const setLocalData = (key, value) => {
 }
 
 const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
+const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smiths_deleted_product_ids'
+
+export const getLocalDeletedProductIds = () => {
+  try {
+    const data = localStorage.getItem(LOCAL_STORAGE_DELETED_PRODUCTS_KEY)
+    return data ? JSON.parse(data).map(Number) : []
+  } catch (e) {
+    return []
+  }
+}
+
+export const setLocalDeletedProductIds = (ids) => {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_DELETED_PRODUCTS_KEY, JSON.stringify(ids.map(Number)))
+  } catch (e) {}
+}
 
 // ── 0. CLOUD STORAGE (SUPABASE BUCKET: product-images) ──
 export async function uploadProductImage(fileOrBlobOrDataUrl, prefix = 'jewellery') {
@@ -104,75 +120,115 @@ export async function getProducts(options = {}) {
 
   if (isSupabaseConfigured && supabase) {
     try {
-      let query = supabase.from('products').select('*').order('id', { ascending: true })
-      if (!includeHidden) {
-        query = query.eq('is_hidden', false)
-      }
-      if (genre) {
-        query = query.eq('genre', genre)
-      }
-      const { data, error } = await query
-      if (!error && data && data.length > 0) {
-        const mapped = data.map((row) => {
-          const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(row.id) || m.slug === row.slug)
-          const fallbackReviews = mock?.reviews || buildProductReviews(row)
-          const rawRowGallery = Array.isArray(row.gallery) && row.gallery.length > 0 ? row.gallery : []
-          const cleanRowGallery = rawRowGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
+      // 1. Concurrently fetch products, visibility, availability, and deleted_product_ids
+      const [prodRes, visRes, availRes, settingsRes] = await Promise.allSettled([
+        supabase.from('products').select('*').order('id', { ascending: true }),
+        supabase.from('product_visibility').select('*'),
+        supabase.from('product_availability').select('*'),
+        supabase.from('admin_settings').select('value').eq('key', 'deleted_product_ids').maybeSingle()
+      ])
 
-          const fallbackGallery = cleanRowGallery.length > 0
-            ? cleanRowGallery
-            : (mock?.gallery || (mock?.image ? [mock.image] : [DEFAULT_JEWELLERY_IMAGE]))
+      const prodData = prodRes.status === 'fulfilled' && !prodRes.value.error ? prodRes.value.data : null
+      const visData = visRes.status === 'fulfilled' && !visRes.value.error ? visRes.value.data : []
+      const availData = availRes.status === 'fulfilled' && !availRes.value.error ? availRes.value.data : []
+      
+      const remoteDeleted = (settingsRes.status === 'fulfilled' && Array.isArray(settingsRes.value.data?.value))
+        ? settingsRes.value.data.value
+        : []
+      
+      const localDeleted = getLocalDeletedProductIds()
+      const allDeletedIds = Array.from(new Set([...remoteDeleted.map(Number), ...localDeleted.map(Number)]))
+      setLocalDeletedProductIds(allDeletedIds)
 
-          const coverImage = (row.image && !row.image.includes('photo-1618354691373-d851c5c3a990'))
-            ? row.image
-            : fallbackGallery[0] || mock?.image || DEFAULT_JEWELLERY_IMAGE
+      if (prodData && Array.isArray(prodData) && prodData.length > 0) {
+        const visMap = new Map((visData || []).map((v) => [Number(v.product_id), v]))
+        const availMap = new Map((availData || []).map((a) => [Number(a.product_id), a]))
 
-          return {
-            ...mock,
-            ...row,
-            id: Number(row.id) || row.id,
-            name: row.name,
-            fullName: row.full_name || `${row.name} - Smiths Jewellery`,
-            slug: row.slug || mock?.slug,
-            genre: row.genre || mock?.genre,
-            price: Number(row.price),
-            originalPrice: Number(row.original_price || mock?.originalPrice || 2599),
-            image: coverImage,
-            gallery: fallbackGallery,
-            inStock: row.is_active !== false,
-            isHidden: row.is_hidden === true,
-            rating: Number(row.rating) || mock?.rating || 4.8,
-            reviewCount: Number(row.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
-            reviews: Array.isArray(row.reviews) && row.reviews.length > 0 ? row.reviews : fallbackReviews,
-            description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery.`,
-            features: Array.isArray(row.features) && row.features.length > 0 ? row.features : (mock?.features || [
-              'Crafted from certified 925 Sterling Silver',
-              'Triple Rhodium Plated for enduring tarnish resistance',
-              'AAA Grade brilliant cubic zirconia stones',
-              '100% Hypoallergenic — Nickel-Free and Lead-Free',
-              'Includes Velvet Presentation Box & Authenticity Certificate',
-            ]),
-            dimensions: row.dimensions || mock?.dimensions || 'Standard Comfort Fit',
-            material: row.material || mock?.material || '925 Sterling Silver',
-            finish: row.finish || mock?.finish || 'High-Luster Rhodium & Polished Silver',
-            keyring: 'Hypoallergenic Security Clasp',
-            durability: 'Tarnish-Resistant Daily Wear',
-            discountBadge: mock?.discountBadge || '-50%',
-            discountPercent: mock?.discountPercent || 50,
-            isBestseller: mock?.isBestseller ?? (Number(row.id) === 1 || Number(row.id) === 5 || Number(row.id) === 17),
-          }
-        })
-        // Ensure any local mock products (including newly added designs) are merged if missing from DB
+        const mapped = prodData
+          .filter((row) => !allDeletedIds.includes(Number(row.id)))
+          .map((row) => {
+            const pId = Number(row.id) || row.id
+            const mock = MOCK_PRODUCTS.find((m) => Number(m.id) === pId || m.slug === row.slug)
+            const fallbackReviews = mock?.reviews || buildProductReviews(row)
+            const rawRowGallery = Array.isArray(row.gallery) && row.gallery.length > 0 ? row.gallery : []
+            const cleanRowGallery = rawRowGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
+
+            const fallbackGallery = cleanRowGallery.length > 0
+              ? cleanRowGallery
+              : (mock?.gallery || (mock?.image ? [mock.image] : [DEFAULT_JEWELLERY_IMAGE]))
+
+            const coverImage = (row.image && !row.image.includes('photo-1618354691373-d851c5c3a990'))
+              ? row.image
+              : fallbackGallery[0] || mock?.image || DEFAULT_JEWELLERY_IMAGE
+
+            const vis = visMap.get(pId)
+            const isHidden = vis ? Boolean(vis.is_hidden) : (row.is_active === false)
+
+            const avail = availMap.get(pId)
+            const inStock = avail ? Boolean(avail.in_stock) : (row.is_active !== false)
+            const stockQty = avail?.stock_quantity ?? (Number(row.stock) || 50)
+
+            return {
+              ...mock,
+              ...row,
+              id: pId,
+              name: row.name,
+              fullName: row.full_name || `${row.name} - Smiths Jewellery`,
+              slug: row.slug || mock?.slug,
+              genre: row.genre || mock?.genre || 'EARRINGS',
+              price: Number(row.price),
+              originalPrice: Number(row.original_price || mock?.originalPrice || Math.round(Number(row.price) * 1.8)),
+              stock: stockQty,
+              image: coverImage,
+              gallery: fallbackGallery,
+              inStock: inStock,
+              isHidden: isHidden,
+              rating: Number(row.rating) || mock?.rating || 4.8,
+              reviewCount: Number(row.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
+              reviews: Array.isArray(row.reviews) && row.reviews.length > 0 ? row.reviews : fallbackReviews,
+              description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery.`,
+              features: Array.isArray(row.features) && row.features.length > 0
+                ? row.features
+                : (Array.isArray(row.key_features) && row.key_features.length > 0 ? row.key_features : (mock?.features || [
+                  'Crafted from certified 925 Sterling Silver',
+                  'Triple Rhodium Plated for enduring tarnish resistance',
+                  'AAA Grade brilliant cubic zirconia stones',
+                  '100% Hypoallergenic — Nickel-Free and Lead-Free',
+                  'Includes Velvet Presentation Box & Authenticity Certificate',
+                ])),
+              dimensions: row.dimensions || mock?.dimensions || 'Standard Comfort Fit',
+              material: row.material || mock?.material || '925 Sterling Silver',
+              finish: row.finish || mock?.finish || 'High-Luster Rhodium & Polished Silver',
+              keyring: 'Hypoallergenic Security Clasp',
+              durability: 'Tarnish-Resistant Daily Wear',
+              discountBadge: mock?.discountBadge || '-50%',
+              discountPercent: mock?.discountPercent || 50,
+              isBestseller: mock?.isBestseller ?? (pId === 5 || pId === 17 || pId === 31),
+            }
+          })
+
+        // Filter out any mock products that were explicitly deleted
         const missingFromDb = MOCK_PRODUCTS.filter(
-          (m) => !mapped.some((item) => String(item.id) === String(m.id) || item.slug === m.slug)
+          (m) =>
+            !allDeletedIds.includes(Number(m.id)) &&
+            !mapped.some((item) => Number(item.id) === Number(m.id) || item.slug === m.slug)
         )
         if (missingFromDb.length > 0) {
           mapped.push(...missingFromDb)
         }
+
         mapped.sort((a, b) => Number(a.id) - Number(b.id))
         // Update persistent local cache
         setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, mapped)
-        return mapped
+
+        let filtered = mapped
+        if (!includeHidden) {
+          filtered = filtered.filter((p) => !p.isHidden)
+        }
+        if (genre) {
+          filtered = filtered.filter((p) => p.genre === genre)
+        }
+        return filtered
       }
     } catch (err) {
       console.warn('Supabase products fetch failed, using cached catalog', err)
@@ -181,8 +237,9 @@ export async function getProducts(options = {}) {
 
   // Fallback to active catalog
   const stored = getLocalData(LOCAL_STORAGE_PRODUCTS_KEY, null)
+  const localDeleted = getLocalDeletedProductIds()
   let catalog = stored && Array.isArray(stored) && stored.length > 0 ? stored : MOCK_PRODUCTS
-  let result = catalog
+  let result = catalog.filter((p) => !localDeleted.includes(Number(p.id)))
   if (!includeHidden) {
     result = result.filter((p) => !p.isHidden)
   }
@@ -205,10 +262,40 @@ export function initProductSync(onProductsUpdated) {
   if (isSupabaseConfigured && supabase) {
     try {
       const channel = supabase
-        .channel('realtime:store_products')
+        .channel('realtime:store_products_global')
         .on(
           'postgres_changes',
           { event: '*', schema: 'public', table: 'products' },
+          async () => {
+            const latest = await getProducts({ includeHidden: true })
+            if (latest && latest.length > 0 && onProductsUpdated) {
+              onProductsUpdated(latest)
+            }
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'product_visibility' },
+          async () => {
+            const latest = await getProducts({ includeHidden: true })
+            if (latest && latest.length > 0 && onProductsUpdated) {
+              onProductsUpdated(latest)
+            }
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'product_availability' },
+          async () => {
+            const latest = await getProducts({ includeHidden: true })
+            if (latest && latest.length > 0 && onProductsUpdated) {
+              onProductsUpdated(latest)
+            }
+          }
+        )
+        .on(
+          'postgres_changes',
+          { event: '*', schema: 'public', table: 'admin_settings' },
           async () => {
             const latest = await getProducts({ includeHidden: true })
             if (latest && latest.length > 0 && onProductsUpdated) {
@@ -230,18 +317,52 @@ export function initProductSync(onProductsUpdated) {
 }
 
 export async function getProductBySlugOrId(identifier) {
+  const localDeleted = getLocalDeletedProductIds()
+  const isNum = !isNaN(Number(identifier))
+  if (isNum && localDeleted.includes(Number(identifier))) {
+    return null
+  }
+
   const stored = getLocalData(LOCAL_STORAGE_PRODUCTS_KEY, null)
   const catalog = stored && Array.isArray(stored) && stored.length > 0 ? stored : MOCK_PRODUCTS
 
   if (isSupabaseConfigured && supabase) {
     try {
-      const isNum = !isNaN(Number(identifier))
+      // Check admin_settings deleted_product_ids
+      const { data: settingsRow } = await supabase
+        .from('admin_settings')
+        .select('value')
+        .eq('key', 'deleted_product_ids')
+        .maybeSingle()
+      const deletedIds = Array.isArray(settingsRow?.value) ? settingsRow.value.map(Number) : []
+      if (isNum && deletedIds.includes(Number(identifier))) {
+        return null
+      }
+
       const query = isNum
         ? supabase.from('products').select('*, product_reviews(*)').eq('id', Number(identifier)).single()
         : supabase.from('products').select('*, product_reviews(*)').eq('slug', identifier).single()
       const { data, error } = await query
       if (!error && data) {
-        const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(data.id) || m.slug === data.slug)
+        const pId = Number(data.id)
+        if (deletedIds.includes(pId) || localDeleted.includes(pId)) {
+          return null
+        }
+
+        // Fetch visibility and availability
+        const [visRes, availRes] = await Promise.allSettled([
+          supabase.from('product_visibility').select('*').eq('product_id', pId).maybeSingle(),
+          supabase.from('product_availability').select('*').eq('product_id', pId).maybeSingle(),
+        ])
+
+        const vis = visRes.status === 'fulfilled' ? visRes.value.data : null
+        const avail = availRes.status === 'fulfilled' ? availRes.value.data : null
+
+        const isHidden = vis ? Boolean(vis.is_hidden) : (data.is_active === false)
+        const inStock = avail ? Boolean(avail.in_stock) : (data.is_active !== false)
+        const stockQty = avail?.stock_quantity ?? (Number(data.stock) || 50)
+
+        const mock = MOCK_PRODUCTS.find((m) => Number(m.id) === pId || m.slug === data.slug)
         const fallbackReviews = mock?.reviews || buildProductReviews(data)
         const rawGallery = Array.isArray(data.gallery) && data.gallery.length > 0 ? data.gallery : []
         const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
@@ -257,7 +378,7 @@ export async function getProductBySlugOrId(identifier) {
         return {
           ...mock,
           ...data,
-          id: Number(data.id) || data.id,
+          id: pId,
           name: data.name,
           fullName: data.full_name || `${data.name} - Smiths Jewellery`,
           image: coverImage,
@@ -267,8 +388,9 @@ export async function getProductBySlugOrId(identifier) {
           features: Array.isArray(data.features) && data.features.length > 0 ? data.features : (mock?.features || []),
           rating: Number(data.rating) || mock?.rating || 4.8,
           reviewCount: Number(data.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
-          inStock: data.is_active !== false,
-          isHidden: data.is_hidden === true,
+          inStock: inStock,
+          stock: stockQty,
+          isHidden: isHidden,
         }
       }
     } catch (err) {
@@ -276,16 +398,16 @@ export async function getProductBySlugOrId(identifier) {
     }
   }
 
-  return (
-    catalog.find(
-      (p) => String(p.id) === String(identifier) || p.slug === identifier
-    ) || null
+  const found = catalog.find(
+    (p) => !localDeleted.includes(Number(p.id)) && (String(p.id) === String(identifier) || p.slug === identifier)
   )
+  return found || null
 }
 
 export async function saveProduct(product) {
-  const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(product.id) || m.slug === product.slug)
-  const defaultFallback = mock?.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
+  const pId = Number(product.id)
+  const mock = MOCK_PRODUCTS.find((m) => Number(m.id) === pId || m.slug === product.slug)
+  const defaultFallback = mock?.image || DEFAULT_JEWELLERY_IMAGE
   const rawGallery = Array.isArray(product.gallery) && product.gallery.length > 0 ? product.gallery : []
   const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
   const finalGallery = cleanGallery.length > 0 ? cleanGallery : [product.image || defaultFallback]
@@ -293,85 +415,154 @@ export async function saveProduct(product) {
     ? product.image
     : finalGallery[0] || defaultFallback
 
+  const isHidden = product.isHidden === true
+  const inStock = product.inStock !== false
+  const stockQty = inStock ? (Number(product.stock) || 50) : 0
+
   const stored = getLocalData(LOCAL_STORAGE_PRODUCTS_KEY, MOCK_PRODUCTS)
-  const idx = stored.findIndex((p) => String(p.id) === String(product.id))
+  const idx = stored.findIndex((p) => Number(p.id) === pId)
   let updated
+  const updatedProductObj = {
+    ...product,
+    id: pId,
+    image: primaryImage,
+    gallery: finalGallery,
+    inStock,
+    isHidden,
+    stock: stockQty,
+  }
+
   if (idx >= 0) {
     updated = [...stored]
-    updated[idx] = { ...updated[idx], ...product, image: primaryImage, gallery: finalGallery }
+    updated[idx] = { ...updated[idx], ...updatedProductObj }
   } else {
-    updated = [{ ...product, image: primaryImage, gallery: finalGallery }, ...stored]
+    updated = [updatedProductObj, ...stored]
   }
   setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, updated)
+
+  // Also remove from deleted IDs if it was previously marked deleted
+  const currentDeleted = getLocalDeletedProductIds()
+  if (currentDeleted.includes(pId)) {
+    const updatedDeleted = currentDeleted.filter((id) => Number(id) !== pId)
+    setLocalDeletedProductIds(updatedDeleted)
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('admin_settings').upsert({
+          key: 'deleted_product_ids',
+          value: updatedDeleted,
+          updated_at: new Date().toISOString(),
+        })
+      } catch (e) {}
+    }
+  }
 
   if (isSupabaseConfigured && supabase) {
     try {
       const cleanName = product.name || 'Silver Jewellery Piece'
       const slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
       const fullName = product.fullName || `${cleanName} - Smiths Jewellery`
-      const isHidden = product.isHidden === true
-      const isActive = product.inStock !== false
 
+      // 1. Clean payload matching EXACT schema of public.products table
       const payload = {
-        id: product.id,
+        id: pId,
         name: cleanName,
         full_name: fullName,
         slug: slug,
-        genre: product.genre || 'NECKLACES',
+        genre: product.genre || 'EARRINGS',
         price: Number(product.price) || 1299,
-        original_price: Number(product.originalPrice || product.original_price || 2599),
+        original_price: Number(product.originalPrice || product.original_price || Math.round(Number(product.price) * 1.8)),
+        stock: stockQty,
         description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
+        material: product.material || '925 Sterling Silver',
+        dimensions: product.dimensions || 'Standard Comfort Fit',
+        finish: product.finish || 'High-Luster Rhodium & Polished Silver',
         image: primaryImage,
         gallery: finalGallery,
-        is_active: isActive,
-        is_hidden: isHidden,
+        key_features: product.features || product.key_features || [
+          'Crafted from certified 925 Sterling Silver',
+          'Triple Rhodium Plated for enduring tarnish resistance',
+          'AAA Grade brilliant cubic zirconia stones',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free',
+          'Includes Velvet Presentation Box & Authenticity Certificate',
+        ],
+        is_active: inStock && !isHidden,
         updated_at: new Date().toISOString(),
       }
 
-      // 1. Main products table
       const { error: prodErr } = await supabase.from('products').upsert(payload)
       if (prodErr) {
-        console.warn('Supabase product upsert error:', prodErr.message)
+        console.error('Supabase product upsert error:', prodErr.message)
       }
 
       // 2. product_visibility table
-      await supabase.from('product_visibility').upsert({
-        product_id: product.id,
-        product_name: cleanName,
+      const { error: visErr } = await supabase.from('product_visibility').upsert({
+        product_id: pId,
         is_hidden: isHidden,
+        is_featured: Boolean(product.isFeatured || product.isBestseller),
+        is_trending: Boolean(product.isTrending),
         updated_at: new Date().toISOString(),
       })
+      if (visErr) {
+        console.error('Supabase visibility upsert error:', visErr.message)
+      }
 
       // 3. product_availability table
-      await supabase.from('product_availability').upsert({
-        product_id: product.id,
-        product_name: cleanName,
-        is_available: isActive,
-        stock: isActive ? (product.stock || 50) : 0,
+      const { error: availErr } = await supabase.from('product_availability').upsert({
+        product_id: pId,
+        in_stock: inStock,
+        stock_quantity: stockQty,
+        allow_backorder: false,
         updated_at: new Date().toISOString(),
       })
+      if (availErr) {
+        console.error('Supabase availability upsert error:', availErr.message)
+      }
     } catch (e) {
-      console.warn('Supabase product upsert error', e)
+      console.error('Supabase product save failed:', e)
     }
   }
 
-  return product
+  return updatedProductObj
 }
 
 export async function deleteProductFromDb(productId) {
+  const pId = Number(productId) || productId
+  
+  // 1. Update local storage
+  const currentDeleted = getLocalDeletedProductIds()
+  const updatedDeleted = Array.from(new Set([...currentDeleted.map(Number), Number(pId)]))
+  setLocalDeletedProductIds(updatedDeleted)
+
   const stored = getLocalData(LOCAL_STORAGE_PRODUCTS_KEY, MOCK_PRODUCTS)
-  const updated = stored.filter((p) => String(p.id) !== String(productId))
+  const updated = stored.filter((p) => Number(p.id) !== Number(pId))
   setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, updated)
 
+  // 2. Delete from Supabase & record in admin_settings
   if (isSupabaseConfigured && supabase) {
     try {
       await Promise.allSettled([
-        supabase.from('products').delete().eq('id', productId),
-        supabase.from('product_visibility').delete().eq('product_id', productId),
-        supabase.from('product_availability').delete().eq('product_id', productId),
+        supabase.from('products').delete().eq('id', pId),
+        supabase.from('product_visibility').delete().eq('product_id', pId),
+        supabase.from('product_availability').delete().eq('product_id', pId),
       ])
+
+      // Fetch latest admin_settings deleted_product_ids
+      const { data: currentSettings } = await supabase
+        .from('admin_settings')
+        .select('value')
+        .eq('key', 'deleted_product_ids')
+        .maybeSingle()
+
+      const remoteDeleted = Array.isArray(currentSettings?.value) ? currentSettings.value : []
+      const mergedDeleted = Array.from(new Set([...remoteDeleted.map(Number), Number(pId)]))
+
+      await supabase.from('admin_settings').upsert({
+        key: 'deleted_product_ids',
+        value: mergedDeleted,
+        updated_at: new Date().toISOString(),
+      })
     } catch (e) {
-      console.warn('Supabase delete product error:', e)
+      console.error('Supabase delete product error:', e)
     }
   }
 }

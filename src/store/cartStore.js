@@ -3,6 +3,16 @@ import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData
 import { getLocalCart, saveCartToAccount, saveProduct, deleteProductFromDb } from '../lib/db'
 
 const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
+const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smiths_deleted_product_ids'
+
+const getDeletedProductIds = () => {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_DELETED_PRODUCTS_KEY)
+    return raw ? JSON.parse(raw).map(Number) : []
+  } catch (e) {
+    return []
+  }
+}
 
 export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=900&q=80'
 
@@ -32,54 +42,62 @@ export const resolveProductImage = (item, catalog = []) => {
 
 // Helper to load products from localStorage with fallback to default catalog
 const loadInitialProducts = () => {
+  const localDeleted = getDeletedProductIds()
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_PRODUCTS_KEY)
     if (raw) {
       const parsed = JSON.parse(raw)
       if (Array.isArray(parsed) && parsed.length > 0) {
-        const mapped = parsed.map((p) => {
-          const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(p.id) || m.slug === p.slug)
-          const fallbackReviews = mock?.reviews || buildProductReviews(p)
-          const rawGallery = Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : []
-          const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
-          const defaultFallback = mock?.image || DEFAULT_FALLBACK_IMAGE
-          const fallbackGallery = cleanGallery.length > 0
-            ? cleanGallery
-            : (mock?.gallery || (mock?.image ? [mock.image] : [defaultFallback]))
+        const mapped = parsed
+          .filter((p) => !localDeleted.includes(Number(p.id)))
+          .map((p) => {
+            const pId = Number(p.id) || p.id
+            const mock = MOCK_PRODUCTS.find((m) => Number(m.id) === pId || m.slug === p.slug)
+            const fallbackReviews = mock?.reviews || buildProductReviews(p)
+            const rawGallery = Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : []
+            const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
+            const defaultFallback = mock?.image || DEFAULT_FALLBACK_IMAGE
+            const fallbackGallery = cleanGallery.length > 0
+              ? cleanGallery
+              : (mock?.gallery || (mock?.image ? [mock.image] : [defaultFallback]))
 
-          const coverImage = (p.image && !p.image.includes('photo-1618354691373-d851c5c3a990'))
-            ? p.image
-            : fallbackGallery[0] || defaultFallback
+            const coverImage = (p.image && !p.image.includes('photo-1618354691373-d851c5c3a990'))
+              ? p.image
+              : fallbackGallery[0] || defaultFallback
 
-          return {
-            ...mock,
-            ...p,
-            image: coverImage,
-            gallery: fallbackGallery,
-            reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-            description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`,
-            features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
-              'Crafted from certified 925 Sterling Silver',
-              'Triple Rhodium Plated for enduring tarnish resistance',
-              'AAA Grade brilliant cubic zirconia stones',
-              '100% Hypoallergenic — Nickel-Free and Lead-Free',
-              'Includes Velvet Presentation Box & Authenticity Certificate',
-            ]),
-            rating: Number(p.rating) || mock?.rating || 4.8,
-            reviewCount: Number(p.reviewCount) || mock?.reviewCount || fallbackReviews.length || 12,
-            discountBadge: p.discountBadge || mock?.discountBadge || '-50%',
-            discountPercent: p.discountPercent || mock?.discountPercent || 50,
-            isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 5),
-            inStock: p.inStock !== false,
-            isHidden: p.isHidden === true,
-          }
-        })
+            return {
+              ...mock,
+              ...p,
+              id: pId,
+              image: coverImage,
+              gallery: fallbackGallery,
+              reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
+              description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`,
+              features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
+                'Crafted from certified 925 Sterling Silver',
+                'Triple Rhodium Plated for enduring tarnish resistance',
+                'AAA Grade brilliant cubic zirconia stones',
+                '100% Hypoallergenic — Nickel-Free and Lead-Free',
+                'Includes Velvet Presentation Box & Authenticity Certificate',
+              ]),
+              rating: Number(p.rating) || mock?.rating || 4.8,
+              reviewCount: Number(p.reviewCount) || mock?.reviewCount || fallbackReviews.length || 12,
+              discountBadge: p.discountBadge || mock?.discountBadge || '-50%',
+              discountPercent: p.discountPercent || mock?.discountPercent || 50,
+              isBestseller: mock?.isBestseller ?? (pId === 1 || pId === 5 || pId === 31),
+              inStock: p.inStock !== false,
+              isHidden: p.isHidden === true,
+            }
+          })
 
-        // Merge any mock products missing from local storage
+        // Merge any mock products missing from local storage only if NOT deleted
         const missingMocks = MOCK_PRODUCTS.filter(
-          (m) => !mapped.some((item) => String(item.id) === String(m.id) || item.slug === m.slug)
+          (m) =>
+            !localDeleted.includes(Number(m.id)) &&
+            !mapped.some((item) => Number(item.id) === Number(m.id) || item.slug === m.slug)
         ).map((m) => ({
           ...m,
+          id: Number(m.id) || m.id,
           inStock: m.inStock !== false,
           isHidden: false,
         }))
@@ -90,11 +108,14 @@ const loadInitialProducts = () => {
   } catch (e) {
     console.warn('Failed to load stored products', e)
   }
-  return MOCK_PRODUCTS.map((p) => ({
-    ...p,
-    inStock: p.inStock !== false,
-    isHidden: false,
-  }))
+  return MOCK_PRODUCTS
+    .filter((p) => !localDeleted.includes(Number(p.id)))
+    .map((p) => ({
+      ...p,
+      id: Number(p.id) || p.id,
+      inStock: p.inStock !== false,
+      isHidden: false,
+    }))
 }
 
 const persistProducts = (products) => {
@@ -111,8 +132,11 @@ export const useCartStore = create((set, get) => ({
 
   setProducts: (products) => {
     if (!Array.isArray(products) || products.length === 0) return
-    const normalized = products.map((p) => {
-      const mock = MOCK_PRODUCTS.find((m) => String(m.id) === String(p.id) || m.slug === p.slug)
+    const localDeleted = getDeletedProductIds()
+    const valid = products.filter((p) => !localDeleted.includes(Number(p.id)))
+    const normalized = valid.map((p) => {
+      const pId = Number(p.id) || p.id
+      const mock = MOCK_PRODUCTS.find((m) => Number(m.id) === pId || m.slug === p.slug)
       const fallbackReviews = mock?.reviews || buildProductReviews(p)
       const rawGallery = Array.isArray(p.gallery) && p.gallery.length > 0 ? p.gallery : []
       const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
@@ -128,6 +152,7 @@ export const useCartStore = create((set, get) => ({
       return {
         ...mock,
         ...p,
+        id: pId,
         image: coverImage,
         gallery: fallbackGallery,
         reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
@@ -143,36 +168,40 @@ export const useCartStore = create((set, get) => ({
         reviewCount: Number(p.reviewCount) || mock?.reviewCount || fallbackReviews.length || 12,
         discountBadge: p.discountBadge || mock?.discountBadge || '-50%',
         discountPercent: p.discountPercent || mock?.discountPercent || 50,
-        isBestseller: mock?.isBestseller ?? (Number(p.id) === 1 || Number(p.id) === 5),
+        isBestseller: mock?.isBestseller ?? (pId === 1 || pId === 5 || pId === 31),
         inStock: p.inStock !== false,
         isHidden: p.isHidden === true,
       }
     }).sort((a, b) => Number(a.id) - Number(b.id))
 
-    // Also update current items and wishlist so they immediately adopt the authentic images
+    // Also update current items and wishlist so they immediately adopt authentic images and exclude deleted items
     const currentItems = get().items || []
-    const updatedItems = currentItems.map((item) => {
-      const match = normalized.find((p) => String(p.id) === String(item.id)) || MOCK_PRODUCTS.find((p) => String(p.id) === String(item.id))
-      const cleanImg = resolveProductImage(item, normalized)
-      return {
-        ...item,
-        image: cleanImg,
-        gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-        fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
-      }
-    })
+    const updatedItems = currentItems
+      .filter((item) => !localDeleted.includes(Number(item.id)))
+      .map((item) => {
+        const match = normalized.find((p) => Number(p.id) === Number(item.id)) || MOCK_PRODUCTS.find((p) => Number(p.id) === Number(item.id))
+        const cleanImg = resolveProductImage(item, normalized)
+        return {
+          ...item,
+          image: cleanImg,
+          gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
+          fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
+        }
+      })
 
     const currentWishlist = get().wishlist || []
-    const updatedWishlist = currentWishlist.map((item) => {
-      const match = normalized.find((p) => String(p.id) === String(item.id)) || MOCK_PRODUCTS.find((p) => String(p.id) === String(item.id))
-      const cleanImg = resolveProductImage(item, normalized)
-      return {
-        ...item,
-        image: cleanImg,
-        gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-        fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
-      }
-    })
+    const updatedWishlist = currentWishlist
+      .filter((item) => !localDeleted.includes(Number(item.id)))
+      .map((item) => {
+        const match = normalized.find((p) => Number(p.id) === Number(item.id)) || MOCK_PRODUCTS.find((p) => Number(p.id) === Number(item.id))
+        const cleanImg = resolveProductImage(item, normalized)
+        return {
+          ...item,
+          image: cleanImg,
+          gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
+          fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
+        }
+      })
 
     set({ products: normalized, items: updatedItems, wishlist: updatedWishlist })
     persistProducts(normalized)
@@ -329,11 +358,19 @@ export const useCartStore = create((set, get) => ({
   },
 
   deleteProduct: (productId) => {
-    const nextProducts = get().products.filter((p) => String(p.id) !== String(productId))
+    const pId = Number(productId) || productId
+    const localDeleted = getDeletedProductIds()
+    if (!localDeleted.includes(Number(pId))) {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_DELETED_PRODUCTS_KEY, JSON.stringify([...localDeleted, Number(pId)]))
+      } catch (e) {}
+    }
+
+    const nextProducts = get().products.filter((p) => Number(p.id) !== Number(pId))
     set({
       products: nextProducts,
-      items: get().items.filter((it) => String(it.id) !== String(productId)),
-      wishlist: get().wishlist.filter((it) => String(it.id) !== String(productId)),
+      items: get().items.filter((it) => Number(it.id) !== Number(pId)),
+      wishlist: get().wishlist.filter((it) => Number(it.id) !== Number(pId)),
     })
     persistProducts(nextProducts)
 
