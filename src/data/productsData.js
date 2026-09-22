@@ -72,6 +72,16 @@ const JEWELLERY_DESCRIPTIONS = {
     'Exude refined Korean luxury with the JC-KE-38 Pearl Arc Ear Jacket Earrings. Featuring a luminous round freshwater pearl stud worn on the lobe, paired with an interchangeable curved crescent arc of five graduated luster pearls fanning gracefully beneath the ear. Sculpted in warm 18K gold over certified 925 sterling silver, this convertible 2-in-1 design transitions effortlessly from minimalist pearl studs to statement red-carpet ear jacket radiance.',
   'JC-KE-55':
     'Embrace botanical radiance with the JC-KE-55 Laurel Leaf Pearl Ear Climbers. Sculpted in warm 18K gold plating over certified 925 sterling silver, each earring features an arching laurel branch encrusted with shimmering pavé cubic zirconia crystals, cradling a lustrous round pearl and finished with a sparkling solitaire accent stone. Hypoallergenic, featherlight, and ergonomically contoured for comfortable all-day wear.',
+  'JC-KE-87':
+    'Evoke vintage Parisian romance with the JC-KE-87 Mother of Pearl Flower Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver with a luminous 18K gold vermeil finish, each earring highlights a high-polish teardrop stud cascading down to an architectural five-petal fan flower drop. Inset with iridescent ivory mother-of-pearl enamel bordered by fine golden beading, each petal captures the light with shimmering pearlescent grace. Hypoallergenic, featherlight, and articulated for graceful motion.',
+  'JC-KE-89':
+    'Capture celestial brilliance with the JC-KE-89 Infinity Ribbon Solitaire CZ Stud Earrings. Sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring forms an exquisite interlocking crossover ribbon silhouette — one gleaming high-polish gold arm intersecting with a dazzling strand handset with micro-pavé AAA cubic zirconia crystals. Suspended at the center is a brilliant round diamond-cut solitaire crystal that floats with mesmerizing fire. Hypoallergenic, lightweight, and modern.',
+  'JC-KE-76':
+    'Channel winter wonderland splendor with the JC-KE-76 Starlight Snowflake Fringe Dangle Earrings. Mastercrafted in certified 925 hallmarked sterling silver with a triple rhodium plating for lasting mirror shine, each earring presents an intricately sculpted snowflake cluster hand-encrusted with brilliant round-cut AAA cubic zirconia stones. Flowing beneath are dual flexible liquid-silver snake chain fringe ribbons that shimmer with every movement. Hypoallergenic, featherlight, and unforgettable.',
+  'JC-KE-63':
+    'Adorn your ears with everlasting harmony wearing the JC-KE-63 Pearl & Diamond Wreath Halo Stud Earrings. Handcrafted in certified 925 hallmarked sterling silver layered in luxurious 18K gold vermeil, each earring forms an open circular garland wreath featuring six hand-selected round freshwater pearls alternating with sparkling round-cut AAA cubic zirconia gemstones. The balanced open-circle architecture creates a radiant crown on the lobe. Hypoallergenic, featherlight, and timeless.',
+  'JC-KE-80':
+    'Celebrate perennial spring elegance with the JC-KE-80 Sakura Blossom Halo Wreath Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring features a charming five-petal cherry blossom flower enameled in shimmering blush-pink with a delicate sparkling crystal pistil center. The bloom crowns a full halo circular ring hand-set with glittering round-cut AAA cubic zirconia stones. Hypoallergenic, featherlight, and infused with romantic charm.',
   'JC-KE-82':
     'Command bold two-tone sophistication with the JC-KE-82 Gold Dome & Textured Silver Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver, each earring pairs a luminous high-polish 18K gold vermeil dome stud with a striking hand-etched radiating silver fan drop reminiscent of a cascading seashell. The mesmerizing contrasting metals create a modern architectural statement that transitions effortlessly from daywear to black-tie elegance. Hypoallergenic and featherlight with secure comfort-fit stud posts.',
   'JC-KE-77':
@@ -230,6 +240,98 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 35,
+    name: 'JC-KE-80',
+    sku: 'JC-KE-80',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 48,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-80/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-80/hero-satin-pair.jpg',
+      '/images/products/jc-ke-80/macro-satin-detail.jpg',
+      '/images/products/jc-ke-80/detail-held.jpg',
+      '/images/products/jc-ke-80/model-worn.jpg',
+      '/images/products/jc-ke-80/model-portrait.jpg',
+    ],
+  },
+  {
+    id: 34,
+    name: 'JC-KE-63',
+    sku: 'JC-KE-63',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 39,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-63/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-63/hero-satin-pair.jpg',
+      '/images/products/jc-ke-63/macro-detail.jpg',
+      '/images/products/jc-ke-63/detail-held.jpg',
+      '/images/products/jc-ke-63/model-worn.jpg',
+      '/images/products/jc-ke-63/model-portrait.jpg',
+    ],
+  },
+  {
+    id: 33,
+    name: 'JC-KE-76',
+    sku: 'JC-KE-76',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 52,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-76/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-76/hero-satin-pair.jpg',
+      '/images/products/jc-ke-76/detail-held.jpg',
+      '/images/products/jc-ke-76/macro-satin-detail.jpg',
+      '/images/products/jc-ke-76/model-worn.jpg',
+    ],
+  },
+  {
+    id: 32,
+    name: 'JC-KE-89',
+    sku: 'JC-KE-89',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 46,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-89/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-89/hero-satin-pair.jpg',
+      '/images/products/jc-ke-89/macro-satin-detail.jpg',
+      '/images/products/jc-ke-89/model-worn.jpg',
+      '/images/products/jc-ke-89/model-portrait.jpg',
+    ],
+  },
+  {
+    id: 31,
+    name: 'JC-KE-87',
+    sku: 'JC-KE-87',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 43,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-87/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-87/hero-satin-pair.jpg',
+      '/images/products/jc-ke-87/detail-held.jpg',
+      '/images/products/jc-ke-87/model-worn.jpg',
+      '/images/products/jc-ke-87/model-portrait.jpg',
+    ],
+  },
   {
     id: 30,
     name: 'JC-KE-1',
@@ -702,7 +804,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -719,6 +821,11 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe82 = p.name === 'JC-KE-82' || p.id === 28
   const isJcKe77 = p.name === 'JC-KE-77' || p.id === 29
   const isJcKe1 = p.name === 'JC-KE-1' || p.id === 30
+  const isJcKe87 = p.name === 'JC-KE-87' || p.id === 31
+  const isJcKe89 = p.name === 'JC-KE-89' || p.id === 32
+  const isJcKe76 = p.name === 'JC-KE-76' || p.id === 33
+  const isJcKe63 = p.name === 'JC-KE-63' || p.id === 34
+  const isJcKe80 = p.name === 'JC-KE-80' || p.id === 35
 
   return {
     ...p,
@@ -733,7 +840,52 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe1
+    features: isJcKe80
+      ? [
+          'SKU: JC-KE-80 — Sakura cherry blossom floral stud with full crystal pavé wreath halo ring',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          'Shimmering blush-pink enamel flower petals with bezel crystal pistil center',
+          'Full circular garland halo set with brilliant AAA cubic zirconia crystals',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe63
+      ? [
+          'SKU: JC-KE-63 — Open circular wreath halo with alternating freshwater pearls and sparkling CZs',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          'Six hand-matched round freshwater pearls with high-luster iridescent sheen',
+          'Handset AAA round brilliant cubic zirconia stones in secure prong settings',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe76
+      ? [
+          'SKU: JC-KE-76 — Sculptural 6-point snowflake stud with liquid-silver fringe streamer dangles',
+          'Cast in certified 925 hallmarked Sterling Silver with enduring Triple Rhodium plating',
+          'Handset multi-facet AAA cubic zirconia cluster with brilliant crystal fire',
+          'Dual articulated flexible snake chain drops for fluid cascading motion',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe89
+      ? [
+          'SKU: JC-KE-89 — Modern crossover loop silhouette with floating round-cut diamond solitaire CZ',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          'Micro-pavé AAA cubic zirconia crystal ribbon strand paired with polished gold loop',
+          'Secure 4-prong floating solitaire center stone for maximum light reflection',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe87
+      ? [
+          'SKU: JC-KE-87 — Art deco 5-petal fan flower drop with iridescent ivory mother-of-pearl enamel',
+          'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
+          'High-polish teardrop stud post with articulated pendant jump ring connection',
+          'Intricate golden beaded center florets and scalloped petal borders',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe1
       ? [
           'SKU: JC-KE-1 — Botanical tulip bud motif with blush baroque pearl & green enamel leaves',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold vermeil',
@@ -874,7 +1026,17 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe1
+    dimensions: isJcKe80
+      ? '20mm x 16mm / Ultra-Lightweight (3.4g per pair)'
+      : isJcKe63
+      ? '18mm x 18mm / Ultra-Lightweight (3.2g per pair)'
+      : isJcKe76
+      ? '58mm x 14mm / Ultra-Lightweight (3.6g per pair)'
+      : isJcKe89
+      ? '22mm x 12mm / Ultra-Lightweight (3.2g per pair)'
+      : isJcKe87
+      ? '27mm x 18mm / Ultra-Lightweight (3.8g per pair)'
+      : isJcKe1
       ? '28mm x 14mm / Ultra-Lightweight (4.0g per pair)'
       : isJcKe77
       ? '22mm x 20mm / Ultra-Lightweight (3.8g per pair)'
@@ -905,7 +1067,17 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe1
+    material: isJcKe80
+      ? '18K Gold Plated 925 Sterling Silver, Pink Shimmer Enamel & AAA CZ'
+      : isJcKe63
+      ? '18K Gold Plated 925 Sterling Silver, Freshwater Pearls & AAA CZ'
+      : isJcKe76
+      ? '925 Sterling Silver, Triple Rhodium Plated & AAA Cubic Zirconia'
+      : isJcKe89
+      ? '18K Gold Plated 925 Sterling Silver & AAA Cubic Zirconia'
+      : isJcKe87
+      ? '18K Gold Plated 925 Sterling Silver & Mother of Pearl Enamel'
+      : isJcKe1
       ? '18K Gold Plated 925 Sterling Silver, Pink Baroque Pearl & Green Enamel'
       : isJcKe77
       ? '18K Gold Plated 925 Sterling Silver, Black Enamel & CZ'
@@ -924,7 +1096,17 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe1
+    finish: isJcKe80
+      ? 'Warm 18K Gold, Shimmering Blush Pink Enamel & Diamond Pavé'
+      : isJcKe63
+      ? 'High-Polish Warm Gold, Pearlescent Luster & Diamond Sparkle'
+      : isJcKe76
+      ? 'High-Luster Rhodium & Brilliant Diamond Snowflake Sparkle'
+      : isJcKe89
+      ? 'High-Polish Warm Gold Vermeil & Diamond Pavé Luster'
+      : isJcKe87
+      ? 'High-Polish Warm Gold & Iridescent Ivory Mother of Pearl Enamel'
+      : isJcKe1
       ? 'Warm 18K Gold Vermeil, Blush Baroque Pearl & Glossy Green Enamel'
       : isJcKe77
       ? 'High-Polish Warm Gold, Glossy Black Enamel & Diamond Pavé'
@@ -943,7 +1125,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
