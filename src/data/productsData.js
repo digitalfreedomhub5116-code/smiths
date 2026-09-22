@@ -83,7 +83,7 @@ const JEWELLERY_DESCRIPTIONS = {
   'JC-KE-80':
     'Celebrate perennial spring elegance with the JC-KE-80 Sakura Blossom Halo Wreath Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring features a charming five-petal cherry blossom flower enameled in shimmering blush-pink with a delicate sparkling crystal pistil center. The bloom crowns a full halo circular ring hand-set with glittering round-cut AAA cubic zirconia stones. Hypoallergenic, featherlight, and infused with romantic charm.',
   'JC-KE-53':
-    'Exude whimsical romance and timeless luxury with the JC-KE-53 Pavé Ribbon Bow Triple Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver with a rich 18K gold vermeil finish, each earring features an exquisite couture ribbon bow motif handset with brilliant micro-pavé cubic zirconia crystals. Suspended beneath are three luminous freshwater-luster pearls forming an organic cherry-cluster drop that sways with graceful luminescence. Featherlight, hypoallergenic, and fitted with secure comfort-fit stud posts for effortless day-to-evening allure.',
+    'Embrace vintage Parisian romance and royal grace with the JC-KE-53 Golden Camellia Rose Pearl Wreath Stud Earrings. Sculpted in certified 925 hallmarked sterling silver layered in luminous 18K gold vermeil, each earring highlights an intricate openwork filigree camellia rose stud that crowns a circular garland of seven hand-matched, high-luster freshwater pearls. The delicate scalloped gold prongs cradle each iridescent pearl with timeless symmetry, creating a radiant halo of light on the lobe. Hypoallergenic, featherlight, and equipped with ergonomic comfort-fit stud posts for effortless day-to-evening sophistication.',
   'JC-KE-82':
     'Command bold two-tone sophistication with the JC-KE-82 Gold Dome & Textured Silver Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver, each earring pairs a luminous high-polish 18K gold vermeil dome stud with a striking hand-etched radiating silver fan drop reminiscent of a cascading seashell. The mesmerizing contrasting metals create a modern architectural statement that transitions effortlessly from daywear to black-tie elegance. Hypoallergenic and featherlight with secure comfort-fit stud posts.',
   'JC-KE-77':
@@ -866,9 +866,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
     description,
     features: isJcKe53
       ? [
-          'SKU: JC-KE-53 — Dimensional couture ribbon bow handset with brilliant micro-pavé cubic zirconia crystals',
-          'Three graduated high-luster freshwater pearls forming an organic cherry-cluster drop',
-          'Cast in certified 925 hallmarked Sterling Silver with a warm 18K Gold Vermeil finish',
+          'SKU: JC-KE-53 — Dimensional openwork filigree camellia rose stud with full circular pearl wreath halo',
+          'Seven hand-selected round freshwater pearls featuring deep orient and shimmering iridescent luster',
+          'Cast in certified 925 hallmarked Sterling Silver with a warm, lasting 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
           'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
@@ -1060,7 +1060,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
     dimensions: isJcKe53
-      ? '22mm x 15mm / Ultra-Lightweight (3.6g per pair)'
+      ? '20mm x 20mm Halo / Ultra-Lightweight (3.4g per pair)'
       : isJcKe80
       ? '20mm x 16mm / Ultra-Lightweight (3.4g per pair)'
       : isJcKe63
@@ -1103,7 +1103,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
     material: isJcKe53
-      ? '18K Gold Vermeil 925 Sterling Silver, Triple Pearls & AAA CZ'
+      ? '18K Gold Vermeil 925 Sterling Silver & Seven Freshwater Pearls'
       : isJcKe80
       ? '18K Gold Plated 925 Sterling Silver, Pink Shimmer Enamel & AAA CZ'
       : isJcKe63
@@ -1134,7 +1134,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
     finish: isJcKe53
-      ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé'
+      ? 'Warm 18K Gold Vermeil & High-Luster Freshwater Pearl White'
       : isJcKe80
       ? 'Warm 18K Gold, Shimmering Blush Pink Enamel & Diamond Pavé'
       : isJcKe63
