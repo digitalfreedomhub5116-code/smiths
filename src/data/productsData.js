@@ -82,6 +82,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Adorn your ears with everlasting harmony wearing the JC-KE-63 Pearl & Diamond Wreath Halo Stud Earrings. Handcrafted in certified 925 hallmarked sterling silver layered in luxurious 18K gold vermeil, each earring forms an open circular garland wreath featuring six hand-selected round freshwater pearls alternating with sparkling round-cut AAA cubic zirconia gemstones. The balanced open-circle architecture creates a radiant crown on the lobe. Hypoallergenic, featherlight, and timeless.',
   'JC-KE-80':
     'Celebrate perennial spring elegance with the JC-KE-80 Sakura Blossom Halo Wreath Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring features a charming five-petal cherry blossom flower enameled in shimmering blush-pink with a delicate sparkling crystal pistil center. The bloom crowns a full halo circular ring hand-set with glittering round-cut AAA cubic zirconia stones. Hypoallergenic, featherlight, and infused with romantic charm.',
+  'JC-KE-53':
+    'Exude whimsical romance and timeless luxury with the JC-KE-53 Pavé Ribbon Bow Triple Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver with a rich 18K gold vermeil finish, each earring features an exquisite couture ribbon bow motif handset with brilliant micro-pavé cubic zirconia crystals. Suspended beneath are three luminous freshwater-luster pearls forming an organic cherry-cluster drop that sways with graceful luminescence. Featherlight, hypoallergenic, and fitted with secure comfort-fit stud posts for effortless day-to-evening allure.',
   'JC-KE-82':
     'Command bold two-tone sophistication with the JC-KE-82 Gold Dome & Textured Silver Fan Drop Earrings. Sculpted in certified 925 hallmarked sterling silver, each earring pairs a luminous high-polish 18K gold vermeil dome stud with a striking hand-etched radiating silver fan drop reminiscent of a cascading seashell. The mesmerizing contrasting metals create a modern architectural statement that transitions effortlessly from daywear to black-tie elegance. Hypoallergenic and featherlight with secure comfort-fit stud posts.',
   'JC-KE-77':
@@ -241,9 +243,30 @@ const RAW_PRODUCTS = [
 
   // ── EARRINGS ──
   {
+    id: 36,
+    name: 'JC-KE-53',
+    sku: 'JC-KE-53',
+    slug: 'jc-ke-53',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 44,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-53/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-53/hero-satin-pair.jpg',
+      '/images/products/jc-ke-53/macro-satin-detail.jpg',
+      '/images/products/jc-ke-53/detail-held.jpg',
+      '/images/products/jc-ke-53/model-worn.jpg',
+      '/images/products/jc-ke-53/model-portrait.jpg',
+    ],
+  },
+  {
     id: 35,
     name: 'JC-KE-80',
     sku: 'JC-KE-80',
+    slug: 'jc-ke-80',
     genre: 'EARRINGS',
     price: 849,
     originalPrice: 1799,
@@ -795,7 +818,7 @@ export function buildProductReviews(product = {}) {
 
 export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const reviews = buildProductReviews(p)
-  const slug = `${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
+  const slug = p.slug || `${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
   const fullName = `${p.name} - Smiths Jewellery`
   const description =
     JEWELLERY_DESCRIPTIONS[p.name] ||
@@ -804,7 +827,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -826,6 +849,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe76 = p.name === 'JC-KE-76' || p.id === 33
   const isJcKe63 = p.name === 'JC-KE-63' || p.id === 34
   const isJcKe80 = p.name === 'JC-KE-80' || p.id === 35
+  const isJcKe53 = p.name === 'JC-KE-53' || p.id === 36
 
   return {
     ...p,
@@ -840,7 +864,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe80
+    features: isJcKe53
+      ? [
+          'SKU: JC-KE-53 — Dimensional couture ribbon bow handset with brilliant micro-pavé cubic zirconia crystals',
+          'Three graduated high-luster freshwater pearls forming an organic cherry-cluster drop',
+          'Cast in certified 925 hallmarked Sterling Silver with a warm 18K Gold Vermeil finish',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe80
       ? [
           'SKU: JC-KE-80 — Sakura cherry blossom floral stud with full crystal pavé wreath halo ring',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold finish',
@@ -1026,7 +1059,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe80
+    dimensions: isJcKe53
+      ? '22mm x 15mm / Ultra-Lightweight (3.6g per pair)'
+      : isJcKe80
       ? '20mm x 16mm / Ultra-Lightweight (3.4g per pair)'
       : isJcKe63
       ? '18mm x 18mm / Ultra-Lightweight (3.2g per pair)'
@@ -1067,7 +1102,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe80
+    material: isJcKe53
+      ? '18K Gold Vermeil 925 Sterling Silver, Triple Pearls & AAA CZ'
+      : isJcKe80
       ? '18K Gold Plated 925 Sterling Silver, Pink Shimmer Enamel & AAA CZ'
       : isJcKe63
       ? '18K Gold Plated 925 Sterling Silver, Freshwater Pearls & AAA CZ'
@@ -1096,7 +1133,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe80
+    finish: isJcKe53
+      ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé'
+      : isJcKe80
       ? 'Warm 18K Gold, Shimmering Blush Pink Enamel & Diamond Pavé'
       : isJcKe63
       ? 'High-Polish Warm Gold, Pearlescent Luster & Diamond Sparkle'
@@ -1125,7 +1164,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Lustrous Silk Satin'
       : 'High-Luster Rhodium & Polished Silver',
-    keyring: (isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+    keyring: (isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',

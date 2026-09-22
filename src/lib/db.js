@@ -441,15 +441,23 @@ export async function saveProduct(product) {
   setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, updated)
 
   // Also remove from deleted IDs if it was previously marked deleted
-  const currentDeleted = getLocalDeletedProductIds()
-  if (currentDeleted.includes(pId)) {
-    const updatedDeleted = currentDeleted.filter((id) => Number(id) !== pId)
+  const currentDeleted = getLocalDeletedProductIds().map(Number)
+  const numPId = Number(pId)
+  if (currentDeleted.includes(numPId)) {
+    const updatedDeleted = currentDeleted.filter((id) => Number(id) !== numPId)
     setLocalDeletedProductIds(updatedDeleted)
     if (isSupabaseConfigured && supabase) {
       try {
+        const { data: currentSettings } = await supabase
+          .from('admin_settings')
+          .select('value')
+          .eq('key', 'deleted_product_ids')
+          .maybeSingle()
+        const remoteDeleted = Array.isArray(currentSettings?.value) ? currentSettings.value.map(Number) : []
+        const mergedDeleted = remoteDeleted.filter((id) => id !== numPId)
         await supabase.from('admin_settings').upsert({
           key: 'deleted_product_ids',
-          value: updatedDeleted,
+          value: mergedDeleted,
           updated_at: new Date().toISOString(),
         })
       } catch (e) {}
