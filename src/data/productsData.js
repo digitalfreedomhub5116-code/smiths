@@ -88,6 +88,8 @@ const JEWELLERY_DESCRIPTIONS = {
     'Capture cosmic wonder with the JC-KE-67 Celestial Starburst Spiral Pearl Drop Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, each earring presents an eight-point starlight starburst stud hand-encrusted with sparkling micro-pavé AAA cubic zirconia crystals. Articulated beneath is an architectural twisting ribbon spiral cage cradling a luminous iridescent freshwater pearl that floats weightlessly within. Balanced, articulated for fluid motion, and fitted with ergonomic comfort-fit stud posts for unforgettable day-to-evening allure.',
   'JC-KE-16':
     'Channel regal majesty and grace with the JC-KE-16 Royal Pavé Swan Opalescent Moonstone Drop Earrings. Sculpted in certified 925 hallmarked sterling silver plated in rich 18K gold vermeil, each earring presents an intricately sculpted royal swan stud with graceful arched neck and swept wings handset with brilliant micro-pavé AAA cubic zirconia stones. Suspended beneath is an articulated gold ribbon cage cradling a luminous opalescent cat’s eye moonstone cabochon that gleams with an ethereal milky light. Hypoallergenic, featherlight, and fitted with secure comfort-fit stud posts for unforgettable elegance.',
+  'JC-KE-22':
+    "Inspired by the quiet poetry of an autumn garden, the JC-KE-22 Dual Leaf Ombré Shell Stud Earrings are a masterclass in understated sculptural luxury. Precision-crafted in certified 925 hallmarked sterling silver with a warm 18K gold vermeil border, each earring presents two cascading marquise leaf forms arranged in a graceful overlapping composition. The upper leaf is inlaid with a luminous ivory-white mother-of-shell cabochon that glows with soft nacreous light, while the lower leaf is finished with a deeply sculpted slate-grey shell enamel featuring hand-etched botanical vein details that mimic nature's own intricate artistry. The warm polished gold bezel outlines each leaf with architectural precision, creating a sophisticated two-tone contrast of warm gold, cool grey, and luminous ivory. Featherlight and 100% hypoallergenic, these botanical statement studs wear effortlessly from minimalist daywear to refined evening looks.",
   'JC-KE-72':
     'Channel timeless botanical grace and Parisian sophistication with the JC-KE-72 Mother-of-Pearl Ginkgo Leaf Pearl Stud Earrings. Masterfully sculpted in certified 925 hallmarked sterling silver layered in luminous 18K gold vermeil, each earring presents a sculptural Japanese ginkgo biloba fan leaf. The fluted fan silhouette is inlaid with glowing, iridescent ivory mother-of-pearl enamel bordered by an exquisite scalloped arc handset with brilliant micro-pavé AAA cubic zirconia crystals. Nestled beside the leaf crown on an elegant golden arch is a hand-selected round freshwater pearl with an iridescent orient. Designed with an ergonomic contoured stud post for all-day comfort, this modern classic radiates understated luxury.',
   'JC-KE-40':
@@ -262,6 +264,25 @@ const RAW_PRODUCTS = [
   },
 
   // ── EARRINGS ──
+  {
+    id: 47,
+    name: 'JC-KE-22',
+    sku: 'JC-KE-22',
+    slug: 'jc-ke-22',
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
+    reviewCount: 36,
+    rating: 4.9,
+    badCount: 1,
+    image: '/images/products/jc-ke-22/hero-satin-pair.jpg',
+    gallery: [
+      '/images/products/jc-ke-22/hero-satin-pair.jpg',
+      '/images/products/jc-ke-22/model-worn-profile.jpg',
+      '/images/products/jc-ke-22/detail-hands-held.jpg',
+      '/images/products/jc-ke-22/macro-leaf-detail.jpg',
+    ],
+  },
   {
     id: 46,
     name: 'JC-KE-19',
@@ -1046,7 +1067,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
   const discountBadge = `-${discountPercent}%`
-  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46
+  const isBestseller = p.id === 1 || p.id === 5 || p.id === 8 || p.id === 15 || p.id === 17 || p.id === 18 || p.id === 19 || p.id === 20 || p.id === 21 || p.id === 22 || p.id === 23 || p.id === 24 || p.id === 25 || p.id === 26 || p.id === 27 || p.id === 28 || p.id === 29 || p.id === 30 || p.id === 31 || p.id === 32 || p.id === 33 || p.id === 34 || p.id === 35 || p.id === 36 || p.id === 37 || p.id === 38 || p.id === 39 || p.id === 40 || p.id === 41 || p.id === 42 || p.id === 43 || p.id === 44 || p.id === 45 || p.id === 46 || p.id === 47
 
   const isScarf = p.genre === 'SCARFS'
   const isAuraEarrings = p.name === 'Aura Criss-Cross Pearl Stud Earrings' || p.id === 17
@@ -1079,6 +1100,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const isJcKe72 = p.name === 'JC-KE-72' || p.id === 44
   const isJcKe40 = p.name === 'JC-KE-40' || p.id === 45
   const isJcKe19 = p.name === 'JC-KE-19' || p.id === 46
+  const isJcKe22 = p.name === 'JC-KE-22' || p.id === 47
 
   return {
     ...p,
@@ -1093,7 +1115,16 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
         ? p.gallery
         : [p.image || DEFAULT_JEWELLERY_IMAGE],
     description,
-    features: isJcKe19
+    features: isJcKe22
+      ? [
+          'SKU: JC-KE-22 — Sculptural dual cascading marquise leaf composition with ombré ivory-to-grey shell inlay',
+          'Upper leaf: luminous ivory-white mother-of-shell cabochon with nacreous glow',
+          'Lower leaf: slate-grey shell enamel with hand-etched botanical vein detailing',
+          'Warm 18K Gold Vermeil architectural bezel outlines each leaf with precision',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
+          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+        ]
+      : isJcKe19
       ? [
           'SKU: JC-KE-19 — Convertible 2-in-1 freshwater pearl stud & sculptural mermaid tail ear jacket',
           'Arching gold C-curve jacket with bifurcated pavé-set mermaid tail fin and accent pearl nestled in fork',
@@ -1378,7 +1409,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '100% Hypoallergenic — Nickel-Free and Lead-Free',
           'Includes Velvet Presentation Box & Authenticity Certificate',
         ],
-    dimensions: isJcKe19
+    dimensions: isJcKe22
+      ? '28mm Drop x 16mm Width / Ultra-Lightweight (3.4g per pair)'
+      : isJcKe19
       ? '38mm Arch x 16mm Tail Width / Ultra-Lightweight (3.8g per pair)'
       : isJcKe40
       ? '22mm x 22mm / Ultra-Lightweight (3.5g per pair)'
@@ -1441,7 +1474,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? '90cm x 90cm'
       : 'Adjustable Length / Standard Comfort Fit',
-    material: isJcKe19
+    material: isJcKe22
+      ? '18K Gold Vermeil 925 Sterling Silver, White Shell Cabochon & Grey Shell Enamel'
+      : isJcKe19
       ? '18K Gold Vermeil 925 Sterling Silver, Freshwater Pearls & Micro-Pavé AAA CZ'
       : isJcKe40
       ? "18K Gold Vermeil 925 Sterling Silver, Cat's Eye Quartz Cabochons & AAA CZ Crystal"
@@ -1492,7 +1527,9 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : isScarf
       ? 'Pure Silk / Cashmere Blend'
       : '925 Sterling Silver',
-    finish: isJcKe19
+    finish: isJcKe22
+      ? 'Warm 18K Gold Vermeil Bezel, Luminous White Shell & Hand-Etched Grey Shell Vein Enamel'
+      : isJcKe19
       ? 'Warm 18K Gold Vermeil, High-Luster Pearl White & Diamond Pavé Tail Sparkle'
       : isJcKe40
       ? 'Warm 18K Gold Vermeil, Soft Blush-Pink Quartz Luster & Diamond Pavé Crystal Sparkle'
@@ -1545,7 +1582,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
       : 'High-Luster Rhodium & Polished Silver',
     keyring: isJcKe58
       ? 'Hypoallergenic Security Leverback Clasp'
-      : (isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
+      : (isJcKe22 || isJcKe72 || isJcKe40 || isJcKe19 || isJcKe50 || isJcKe57 || isJcKe56 || isJcKe37 || isJcKe16 || isJcKe67 || isJcKe53 || isJcKe80 || isJcKe63 || isJcKe76 || isJcKe89 || isJcKe87 || isJcKe1 || isJcKe77 || isJcKe82 || isJcKe83 || isJcKe84 || isJcKe91 || isJcKe85 || isJcKe36 || isJcKe86 || isJcKe38 || isJcKe55 || isJcKe88 || isInfinityPearl || isAuraEarrings)
       ? 'Hypoallergenic Security Stud Post'
       : 'Hypoallergenic Security Clasp',
     durability: 'Tarnish-Resistant Daily Wear',
