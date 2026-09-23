@@ -446,21 +446,26 @@ export async function saveProduct(product) {
   if (currentDeleted.includes(numPId)) {
     const updatedDeleted = currentDeleted.filter((id) => Number(id) !== numPId)
     setLocalDeletedProductIds(updatedDeleted)
-    if (isSupabaseConfigured && supabase) {
-      try {
-        const { data: currentSettings } = await supabase
-          .from('admin_settings')
-          .select('value')
-          .eq('key', 'deleted_product_ids')
-          .maybeSingle()
-        const remoteDeleted = Array.isArray(currentSettings?.value) ? currentSettings.value.map(Number) : []
+  }
+
+  if (isSupabaseConfigured && supabase) {
+    try {
+      const { data: currentSettings } = await supabase
+        .from('admin_settings')
+        .select('value')
+        .eq('key', 'deleted_product_ids')
+        .maybeSingle()
+      const remoteDeleted = Array.isArray(currentSettings?.value) ? currentSettings.value.map(Number) : []
+      if (remoteDeleted.includes(numPId)) {
         const mergedDeleted = remoteDeleted.filter((id) => id !== numPId)
         await supabase.from('admin_settings').upsert({
           key: 'deleted_product_ids',
           value: mergedDeleted,
           updated_at: new Date().toISOString(),
         })
-      } catch (e) {}
+      }
+    } catch (e) {
+      console.warn('Could not clean up deleted_product_ids in Supabase:', e)
     }
   }
 
@@ -480,6 +485,9 @@ export async function saveProduct(product) {
         price: Number(product.price) || 1299,
         original_price: Number(product.originalPrice || product.original_price || Math.round(Number(product.price) * 1.8)),
         stock: stockQty,
+        rating: Number(product.rating) || 4.9,
+        review_count: Number(product.reviewCount || product.review_count) || 24,
+        bad_count: Number(product.badCount || product.bad_count) || 1,
         description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
         material: product.material || '925 Sterling Silver',
         dimensions: product.dimensions || 'Standard Comfort Fit',
@@ -500,6 +508,7 @@ export async function saveProduct(product) {
       const { error: prodErr } = await supabase.from('products').upsert(payload)
       if (prodErr) {
         console.error('Supabase product upsert error:', prodErr.message)
+        throw new Error(prodErr.message)
       }
 
       // 2. product_visibility table
@@ -527,6 +536,7 @@ export async function saveProduct(product) {
       }
     } catch (e) {
       console.error('Supabase product save failed:', e)
+      throw e
     }
   }
 

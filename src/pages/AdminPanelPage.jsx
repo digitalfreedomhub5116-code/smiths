@@ -53,10 +53,12 @@ import {
   Send,
   Users,
   MousePointerClick,
-  Zap
+  Zap,
+  Loader2,
 } from 'lucide-react'
 import { GENRES, MOCK_PRODUCTS } from '../data/productsData'
 import { useCartStore, DEFAULT_FALLBACK_IMAGE } from '../store/cartStore'
+import { supabase, isSupabaseConfigured } from '../lib/supabase'
 import {
   saveProduct,
   deleteProductFromDb,
@@ -826,11 +828,13 @@ export default function AdminPanelPage() {
 
   // Add Product Modal State
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [isPublishingProduct, setIsPublishingProduct] = useState(false)
+  const [isSavingEditProduct, setIsSavingEditProduct] = useState(false)
   const [newProduct, setNewProduct] = useState({
     name: '',
-    genre: 'NECKLACES',
-    price: 1299,
-    originalPrice: 2499,
+    genre: 'EARRINGS',
+    price: 849,
+    originalPrice: 1799,
     description: '',
     image: '',
     gallery: [],
@@ -1440,89 +1444,169 @@ export default function AdminPanelPage() {
     e.preventDefault()
     if (!editingProduct) return
 
-    const rawEditingGallery = Array.isArray(editingProduct.gallery) && editingProduct.gallery.length > 0 ? editingProduct.gallery : []
-    const cleanEditingGallery = rawEditingGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
-    const defaultCover = DEFAULT_FALLBACK_IMAGE
-    const finalGallery =
-      cleanEditingGallery.length > 0
-        ? cleanEditingGallery
-        : (editingProduct.image && !editingProduct.image.includes('photo-1618354691373-d851c5c3a990') ? [editingProduct.image] : [defaultCover])
+    setIsSavingEditProduct(true)
+    try {
+      const rawEditingGallery = Array.isArray(editingProduct.gallery) && editingProduct.gallery.length > 0 ? editingProduct.gallery : []
+      const cleanEditingGallery = rawEditingGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
+      const defaultCover = DEFAULT_FALLBACK_IMAGE
+      const finalGallery =
+        cleanEditingGallery.length > 0
+          ? cleanEditingGallery
+          : (editingProduct.image && !editingProduct.image.includes('photo-1618354691373-d851c5c3a990') ? [editingProduct.image] : [defaultCover])
 
-    const finalCover = finalGallery[0] || (editingProduct.image && !editingProduct.image.includes('photo-1618354691373-d851c5c3a990') ? editingProduct.image : defaultCover)
+      const finalCover = finalGallery[0] || (editingProduct.image && !editingProduct.image.includes('photo-1618354691373-d851c5c3a990') ? editingProduct.image : defaultCover)
 
-    const productPayload = {
-      ...editingProduct,
-      price: Number(editingProduct.price),
-      originalPrice: Number(editingProduct.originalPrice || Math.round(editingProduct.price * 1.8)),
-      inStock: editingProduct.inStock !== false,
-      isHidden: editingProduct.isHidden === true,
-      image: finalCover,
-      gallery: finalGallery,
+      const productPayload = {
+        ...editingProduct,
+        price: Number(editingProduct.price),
+        originalPrice: Number(editingProduct.originalPrice || Math.round(editingProduct.price * 1.8)),
+        inStock: editingProduct.inStock !== false,
+        isHidden: editingProduct.isHidden === true,
+        image: finalCover,
+        gallery: finalGallery,
+      }
+
+      // 1. Sync to database handler
+      await saveProduct(productPayload)
+
+      // 2. Update global store (affects Home, Category, Product Detail, Cart, Wishlist)
+      updateProduct(productPayload)
+
+      showToast(`Product "${productPayload.name}" updated globally across the entire store!`, 'success')
+      setEditingProduct(null)
+    } catch (err) {
+      console.error('Failed to update product globally:', err)
+      showToast(`Failed to update product: ${err.message || err}`, 'error')
+    } finally {
+      setIsSavingEditProduct(false)
     }
-
-    // Update global store (affects Home, Category, Product Detail, Cart, Wishlist)
-    updateProduct(productPayload)
-    // Sync to database handler
-    await saveProduct(productPayload)
-
-    showToast(`Product "${productPayload.name}" updated globally across the entire store!`)
-    setEditingProduct(null)
   }
 
   // ── ADD PRODUCT (GLOBAL INSERT) ──
   const handleAddProduct = async (e) => {
     e.preventDefault()
-    if (!newProduct.name || !newProduct.price) return
 
-    const defaultCover =
-      (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990') ? newProduct.image : null) ||
-      (newProduct.gallery && newProduct.gallery.find((g) => !g.includes('photo-1618354691373-d851c5c3a990'))) ||
-      DEFAULT_FALLBACK_IMAGE
-
-    const gallery =
-      newProduct.gallery && newProduct.gallery.length > 0
-        ? newProduct.gallery.filter((g) => !g.includes('photo-1618354691373-d851c5c3a990'))
-        : [defaultCover]
-
-    const productCover = gallery[0] || defaultCover
-
-    const maxId = Math.max(0, ...products.map((p) => Number(p.id) || 0))
-    const nextId = maxId > 0 ? maxId + 1 : 26
-    const slug = `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver-jewellery`
-
-    const productToAdd = {
-      id: nextId,
-      name: cleanName,
-      slug,
-      fullName: `${cleanName} Fine Jewellery`,
-      genre: newProduct.genre || 'NECKLACES',
-      price: Number(newProduct.price),
-      originalPrice: Number(newProduct.originalPrice || Math.round(newProduct.price * 1.8)),
-      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} finished with radiant rhodium luster.`,
-      image: productCover,
-      gallery: gallery,
-      inStock: newProduct.inStock !== false,
-      isHidden: newProduct.isHidden === true,
+    const cleanName = (newProduct.name || '').trim()
+    if (!cleanName) {
+      showToast('Please enter a product title.', 'error')
+      return
     }
 
-    // Add to global store
-    addProduct(productToAdd)
-    // Sync to db
-    await saveProduct(productToAdd)
+    const priceNum = Number(newProduct.price)
+    if (!priceNum || isNaN(priceNum) || priceNum <= 0) {
+      showToast('Please enter a valid selling price.', 'error')
+      return
+    }
 
-    setIsAddModalOpen(false)
-    setNewProduct({
-      name: '',
-      genre: 'MARVEL',
-      price: 299,
-      originalPrice: 599,
-      description: '',
-      image: '',
-      gallery: [],
-      inStock: true,
-      isHidden: false,
-    })
-    showToast(`New product "${productToAdd.name}" is now live worldwide!`)
+    setIsPublishingProduct(true)
+
+    try {
+      const rawGallery = Array.isArray(newProduct.gallery) && newProduct.gallery.length > 0 ? newProduct.gallery : []
+      const cleanGallery = rawGallery.filter((g) => g && !g.includes('photo-1618354691373-d851c5c3a990'))
+      const defaultCover =
+        (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990') ? newProduct.image : null) ||
+        cleanGallery[0] ||
+        DEFAULT_FALLBACK_IMAGE
+
+      const finalGallery = cleanGallery.length > 0 ? cleanGallery : [defaultCover]
+      const productCover =
+        (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990'))
+          ? newProduct.image
+          : finalGallery[0] || defaultCover
+
+      // Calculate next unique ID across local state, mock products, and remote Supabase database
+      let maxId = Math.max(
+        0,
+        ...products.map((p) => Number(p.id) || 0),
+        ...MOCK_PRODUCTS.map((p) => Number(p.id) || 0)
+      )
+
+      if (isSupabaseConfigured && supabase) {
+        try {
+          const { data: latestProds } = await supabase
+            .from('products')
+            .select('id')
+            .order('id', { ascending: false })
+            .limit(1)
+          if (latestProds && latestProds.length > 0) {
+            const dbMax = Number(latestProds[0].id) || 0
+            if (dbMax > maxId) maxId = dbMax
+          }
+        } catch (idErr) {
+          console.warn('Failed querying latest product id from Supabase:', idErr)
+        }
+      }
+
+      const nextId = maxId + 1
+
+      const baseSlug = cleanName
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '') || `jewellery-piece-${nextId}`
+      const slug = baseSlug.startsWith('jc-ke-') ? baseSlug : `${baseSlug}-silver`
+      const fullName = `${cleanName} - Smiths Jewellery`
+
+      const origPrice =
+        Number(newProduct.originalPrice) && Number(newProduct.originalPrice) > priceNum
+          ? Number(newProduct.originalPrice)
+          : Math.round(priceNum * 1.8)
+
+      const productToAdd = {
+        id: nextId,
+        name: cleanName,
+        slug,
+        fullName,
+        genre: newProduct.genre || 'EARRINGS',
+        price: priceNum,
+        originalPrice: origPrice,
+        stock: newProduct.inStock !== false ? 50 : 0,
+        description:
+          newProduct.description?.trim() ||
+          `Blossom with refinement wearing the handcrafted ${cleanName}. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, featuring signature styling. Hypoallergenic, nickel-free, and designed for everlasting everyday brilliance.`,
+        material: '18K Gold Vermeil / 925 Sterling Silver & AAA Cubic Zirconia',
+        dimensions: 'Standard Comfort Fit / Ultra-Lightweight',
+        finish: 'Warm 18K Gold Vermeil & High-Luster Polish',
+        keyring: 'Hypoallergenic Security Stud Post',
+        durability: 'Tarnish-Resistant Daily Wear',
+        features: [
+          `SKU: ${cleanName} — Certified 925 Sterling Silver fine jewellery`,
+          'AAA Grade brilliant cubic zirconia stones with diamond-like fire',
+          '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
+          'Ergonomic comfort-fit design for secure, all-day featherlight wear',
+          'Arrives in Smiths Signature Midnight Velvet Keepsake Box with Authenticity Certificate',
+        ],
+        image: productCover,
+        gallery: finalGallery,
+        inStock: newProduct.inStock !== false,
+        isHidden: newProduct.isHidden === true,
+      }
+
+      // 1. Sync to Supabase & LocalStorage
+      await saveProduct(productToAdd)
+
+      // 2. Add to global store
+      addProduct(productToAdd)
+
+      setIsAddModalOpen(false)
+      setNewProduct({
+        name: '',
+        genre: 'EARRINGS',
+        price: 849,
+        originalPrice: 1799,
+        description: '',
+        image: '',
+        gallery: [],
+        inStock: true,
+        isHidden: false,
+      })
+
+      showToast(`Product "${productToAdd.name}" published globally and live across the store!`, 'success')
+    } catch (err) {
+      console.error('Failed to publish product globally:', err)
+      showToast(`Failed to publish product: ${err.message || err}`, 'error')
+    } finally {
+      setIsPublishingProduct(false)
+    }
   }
 
   // ── DELETE PRODUCT ──
@@ -3524,7 +3608,7 @@ export default function AdminPanelPage() {
                   {/* Genre Filter Pills & Factory Reset */}
                   <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 md:pb-0">
                     <div className="flex items-center gap-1.5">
-                      {['ALL', 'MARVEL', 'DC', 'ANIME', 'CARS', 'VALORANT'].map((genre) => {
+                      {['ALL', 'EARRINGS', 'NECKLACES', 'BRACELETS', 'RINGS', 'SCARFS', 'COMBOS'].map((genre) => {
                         const isActive = genreFilter === genre
                         return (
                           <button
@@ -3788,7 +3872,7 @@ export default function AdminPanelPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                           <label className="block text-xs font-semibold text-cream-muted mb-1.5">
-                            Universe / Genre
+                            Jewellery Category
                           </label>
                           <select
                             value={editingProduct.genre}
@@ -3800,11 +3884,12 @@ export default function AdminPanelPage() {
                             }
                             className="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-charcoal-light text-sm text-cream focus:outline-none focus:border-gold/50 cursor-pointer"
                           >
-                            <option value="MARVEL">Marvel</option>
-                            <option value="DC">DC</option>
-                            <option value="ANIME">Anime</option>
-                            <option value="CARS">Cars</option>
-                            <option value="VALORANT">Valorant</option>
+                            <option value="EARRINGS">Earrings</option>
+                            <option value="NECKLACES">Necklaces</option>
+                            <option value="BRACELETS">Bracelets</option>
+                            <option value="RINGS">Rings</option>
+                            <option value="SCARFS">Scarfs</option>
+                            <option value="COMBOS">Combos</option>
                           </select>
                         </div>
 
@@ -3885,7 +3970,7 @@ export default function AdminPanelPage() {
                       {/* 5. Description */}
                       <div>
                         <label className="block text-xs font-semibold text-cream-muted mb-1.5">
-                          Product Lore / Description
+                          Product Description
                         </label>
                         <textarea
                           rows="3"
@@ -3908,7 +3993,7 @@ export default function AdminPanelPage() {
                           </label>
                           <input
                             type="text"
-                            value={editingProduct.dimensions || '64mm * 43mm'}
+                            value={editingProduct.dimensions || 'Standard Comfort Fit'}
                             onChange={(e) =>
                               setEditingProduct({
                                 ...editingProduct,
@@ -3924,7 +4009,7 @@ export default function AdminPanelPage() {
                           </label>
                           <input
                             type="text"
-                            value={editingProduct.material || 'Biodegradable PLA'}
+                            value={editingProduct.material || '925 Sterling Silver / 18K Gold Vermeil'}
                             onChange={(e) =>
                               setEditingProduct({
                                 ...editingProduct,
@@ -3940,7 +4025,7 @@ export default function AdminPanelPage() {
                           </label>
                           <input
                             type="text"
-                            value={editingProduct.finish || 'Antique Gold Finish'}
+                            value={editingProduct.finish || 'High-Luster Rhodium & Polished Gold'}
                             onChange={(e) =>
                               setEditingProduct({
                                 ...editingProduct,
@@ -3952,11 +4037,11 @@ export default function AdminPanelPage() {
                         </div>
                         <div>
                           <label className="block text-[11px] font-semibold text-cream-muted mb-1">
-                            Keyring
+                            Clasp / Post
                           </label>
                           <input
                             type="text"
-                            value={editingProduct.keyring || 'Strong and Durable Keyring'}
+                            value={editingProduct.keyring || 'Hypoallergenic Security Post / Clasp'}
                             onChange={(e) =>
                               setEditingProduct({
                                 ...editingProduct,
@@ -4036,16 +4121,27 @@ export default function AdminPanelPage() {
                         <button
                           type="button"
                           onClick={() => setEditingProduct(null)}
-                          className="px-4 py-2 rounded-lg border border-charcoal-light text-xs text-cream-muted hover:text-cream font-medium transition-colors cursor-pointer"
+                          disabled={isSavingEditProduct}
+                          className="px-4 py-2 rounded-lg border border-charcoal-light text-xs text-cream-muted hover:text-cream font-medium transition-colors cursor-pointer disabled:opacity-50"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
-                          className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.25)] flex items-center gap-2 cursor-pointer"
+                          disabled={isSavingEditProduct}
+                          className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.25)] flex items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                         >
-                          <Globe className="w-4 h-4" />
-                          <span>Save & Deploy Globally</span>
+                          {isSavingEditProduct ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
+                              <span>Deploying Globally...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Globe className="w-4 h-4" />
+                              <span>Save & Deploy Globally</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     </form>
@@ -4097,7 +4193,7 @@ export default function AdminPanelPage() {
                           onChange={(e) =>
                             setNewProduct({ ...newProduct, name: e.target.value })
                           }
-                          placeholder="e.g. Wolverine, Skyline R34, Sukuna"
+                          placeholder="e.g. JC-KE-58, Pavé Tulip Pearl Ear Climber, Solitaire Silver Pendant"
                           className="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-charcoal-light text-sm text-cream placeholder-cream-muted/40 focus:outline-none focus:border-gold/50"
                         />
                       </div>
@@ -4106,7 +4202,7 @@ export default function AdminPanelPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
                           <label className="block text-xs font-semibold text-cream-muted mb-1.5">
-                            Universe / Genre
+                            Jewellery Category
                           </label>
                           <select
                             value={newProduct.genre}
@@ -4115,11 +4211,12 @@ export default function AdminPanelPage() {
                             }
                             className="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-charcoal-light text-sm text-cream focus:outline-none focus:border-gold/50 cursor-pointer"
                           >
-                            <option value="MARVEL">Marvel</option>
-                            <option value="DC">DC</option>
-                            <option value="ANIME">Anime</option>
-                            <option value="CARS">Cars</option>
-                            <option value="VALORANT">Valorant</option>
+                            <option value="EARRINGS">Earrings</option>
+                            <option value="NECKLACES">Necklaces</option>
+                            <option value="BRACELETS">Bracelets</option>
+                            <option value="RINGS">Rings</option>
+                            <option value="SCARFS">Scarfs</option>
+                            <option value="COMBOS">Combos</option>
                           </select>
                         </div>
 
@@ -4202,7 +4299,7 @@ export default function AdminPanelPage() {
                               description: e.target.value,
                             })
                           }
-                          placeholder="Cast in antique gold bio-degradable PLA. Bursting out of the frame..."
+                          placeholder="Handcrafted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil..."
                           className="w-full px-3.5 py-2.5 rounded-lg bg-obsidian border border-charcoal-light text-sm text-cream placeholder-cream-muted/40 focus:outline-none focus:border-gold/50 resize-none"
                         />
                       </div>
@@ -4275,16 +4372,27 @@ export default function AdminPanelPage() {
                         <button
                           type="button"
                           onClick={() => setIsAddModalOpen(false)}
-                          className="px-4 py-2 rounded-lg border border-charcoal-light text-xs text-cream-muted hover:text-cream font-medium transition-colors cursor-pointer"
+                          disabled={isPublishingProduct}
+                          className="px-4 py-2 rounded-lg border border-charcoal-light text-xs text-cream-muted hover:text-cream font-medium transition-colors cursor-pointer disabled:opacity-50"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
-                          className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.2)] flex items-center gap-2 cursor-pointer"
+                          disabled={isPublishingProduct}
+                          className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.2)] flex items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                         >
-                          <Globe className="w-4 h-4" />
-                          <span>Publish Globally</span>
+                          {isPublishingProduct ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
+                              <span>Publishing Globally...</span>
+                            </>
+                          ) : (
+                            <>
+                              <Globe className="w-4 h-4" />
+                              <span>Publish Globally</span>
+                            </>
+                          )}
                         </button>
                       </div>
                     </form>
