@@ -148,7 +148,12 @@ const normalizeOrderItems = (rawOrder, catalogPool = []) => {
 // Helper function to read dropped image file and resize via Canvas to optimize storage and speed
 function readFileAsOptimizedDataUrl(file, maxWidth = 1200, quality = 0.85) {
   return new Promise((resolve, reject) => {
-    if (!file || !file.type.startsWith('image/')) {
+    if (!file) {
+      return reject(new Error('No file provided.'))
+    }
+
+    const isImage = file.type?.startsWith('image/') || /\.(png|jpe?g|webp|gif|bmp|svg|avif|heic|heif)$/i.test(file.name || '')
+    if (!isImage) {
       return reject(new Error('Please upload a valid image file (PNG, JPG, WEBP).'))
     }
 
@@ -156,24 +161,31 @@ function readFileAsOptimizedDataUrl(file, maxWidth = 1200, quality = 0.85) {
     reader.onerror = () => reject(new Error('Failed to read image file.'))
     reader.onload = (event) => {
       const img = new Image()
-      img.onerror = () => resolve(event.target.result)
+      img.onerror = () => {
+        // Fallback: If canvas decoding fails, resolve raw data url
+        resolve(event.target.result)
+      }
       img.onload = () => {
-        let width = img.width
-        let height = img.height
+        try {
+          let width = img.width
+          let height = img.height
 
-        if (width > maxWidth) {
-          height = Math.round((height * maxWidth) / width)
-          width = maxWidth
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width)
+            width = maxWidth
+          }
+
+          const canvas = document.createElement('canvas')
+          canvas.width = width
+          canvas.height = height
+          const ctx = canvas.getContext('2d')
+          ctx.drawImage(img, 0, 0, width, height)
+
+          const dataUrl = canvas.toDataURL('image/jpeg', quality)
+          resolve(dataUrl)
+        } catch (e) {
+          resolve(event.target.result)
         }
-
-        const canvas = document.createElement('canvas')
-        canvas.width = width
-        canvas.height = height
-        const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0, width, height)
-
-        const dataUrl = canvas.toDataURL('image/jpeg', quality)
-        resolve(dataUrl)
       }
       img.src = event.target.result
     }
@@ -188,6 +200,7 @@ function ImageDropzone({
   onChange,
   onRemove,
   subtext = 'Drag and drop PNG, JPG or WEBP (auto-compressed for instant global display)',
+  onUploadingChange,
 }) {
   const [isDragging, setIsDragging] = useState(false)
   const [urlInput, setUrlInput] = useState('')
@@ -197,6 +210,7 @@ function ImageDropzone({
   const handleFile = async (file) => {
     if (!file) return
     setIsProcessing(true)
+    onUploadingChange?.(true)
     try {
       // 1. Compress file client-side for rapid transmission
       const dataUrl = await readFileAsOptimizedDataUrl(file)
@@ -208,6 +222,7 @@ function ImageDropzone({
       alert('Failed to upload image to cloud storage: ' + (err.message || err))
     } finally {
       setIsProcessing(false)
+      onUploadingChange?.(false)
     }
   }
 
@@ -352,7 +367,7 @@ function ImageDropzone({
 }
 
 // ── REUSABLE MULTI-IMAGE GALLERY DROPZONE WITH ORDER CONTROLS & DRAG-REORDER ──
-function GalleryDropzone({ gallery = [], onUpdateGallery }) {
+function GalleryDropzone({ gallery = [], onUpdateGallery, onUploadingChange }) {
   const [isDragging, setIsDragging] = useState(false)
   const [urlInput, setUrlInput] = useState('')
   const [draggedCardIdx, setDraggedCardIdx] = useState(null)
@@ -364,24 +379,28 @@ function GalleryDropzone({ gallery = [], onUpdateGallery }) {
   const handleFiles = async (files) => {
     if (!files || files.length === 0) return
     setIsUploading(true)
-    const newImages = []
+    onUploadingChange?.(true)
     const filesArray = Array.from(files)
-    for (let i = 0; i < filesArray.length; i++) {
-      const file = filesArray[i]
-      setUploadProgress(`Uploading ${i + 1} of ${filesArray.length} to Cloud Storage...`)
-      try {
-        const dataUrl = await readFileAsOptimizedDataUrl(file)
-        const cdnUrl = await uploadProductImage(dataUrl, 'gallery')
-        newImages.push(cdnUrl)
-      } catch (err) {
-        console.error('Error uploading gallery image:', err)
+    let currentGallery = [...gallery]
+    try {
+      for (let i = 0; i < filesArray.length; i++) {
+        const file = filesArray[i]
+        setUploadProgress(`Uploading photo ${i + 1} of ${filesArray.length} to Cloud CDN...`)
+        try {
+          const dataUrl = await readFileAsOptimizedDataUrl(file)
+          const cdnUrl = await uploadProductImage(dataUrl, 'gallery')
+          currentGallery = [...currentGallery, cdnUrl]
+          onUpdateGallery(currentGallery)
+        } catch (err) {
+          console.error('Error uploading gallery image:', err)
+          alert(`Failed to upload ${file.name || 'image'}: ${err.message || err}`)
+        }
       }
+    } finally {
+      setIsUploading(false)
+      setUploadProgress('')
+      onUploadingChange?.(false)
     }
-    if (newImages.length > 0) {
-      onUpdateGallery([...gallery, ...newImages])
-    }
-    setIsUploading(false)
-    setUploadProgress('')
   }
 
   const handleDrop = (e) => {
@@ -830,6 +849,12 @@ export default function AdminPanelPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isPublishingProduct, setIsPublishingProduct] = useState(false)
   const [isSavingEditProduct, setIsSavingEditProduct] = useState(false)
+  const [isAddUploadingCover, setIsAddUploadingCover] = useState(false)
+  const [isAddUploadingGallery, setIsAddUploadingGallery] = useState(false)
+  const [isEditUploadingCover, setIsEditUploadingCover] = useState(false)
+  const [isEditUploadingGallery, setIsEditUploadingGallery] = useState(false)
+  const isAddUploadingImages = isAddUploadingCover || isAddUploadingGallery
+  const isEditUploadingImages = isEditUploadingCover || isEditUploadingGallery
   const [newProduct, setNewProduct] = useState({
     name: '',
     genre: 'EARRINGS',
@@ -1444,6 +1469,11 @@ export default function AdminPanelPage() {
     e.preventDefault()
     if (!editingProduct) return
 
+    if (isEditUploadingImages) {
+      showToast('Please wait for photos to finish uploading to Cloud CDN before deploying.', 'error')
+      return
+    }
+
     setIsSavingEditProduct(true)
     try {
       const rawEditingGallery = Array.isArray(editingProduct.gallery) && editingProduct.gallery.length > 0 ? editingProduct.gallery : []
@@ -1485,6 +1515,11 @@ export default function AdminPanelPage() {
   // ── ADD PRODUCT (GLOBAL INSERT) ──
   const handleAddProduct = async (e) => {
     e.preventDefault()
+
+    if (isAddUploadingImages) {
+      showToast('Please wait for photos to finish uploading to Cloud CDN before publishing.', 'error')
+      return
+    }
 
     const cleanName = (newProduct.name || '').trim()
     if (!cleanName) {
@@ -1543,7 +1578,27 @@ export default function AdminPanelPage() {
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '') || `jewellery-piece-${nextId}`
-      const slug = baseSlug.startsWith('jc-ke-') ? baseSlug : `${baseSlug}-silver`
+      let slug = baseSlug.startsWith('jc-ke-') ? baseSlug : `${baseSlug}-silver`
+
+      // Verify slug uniqueness to prevent Supabase 23505 duplicate key crash
+      const existingProductWithSlug = products.find((p) => p.slug === slug && Number(p.id) !== nextId)
+      if (existingProductWithSlug) {
+        slug = `${slug}-${nextId}`
+      }
+      if (isSupabaseConfigured && supabase) {
+        try {
+          const { data: dbSlugRow } = await supabase
+            .from('products')
+            .select('id')
+            .eq('slug', slug)
+            .maybeSingle()
+          if (dbSlugRow && Number(dbSlugRow.id) !== nextId) {
+            slug = `${slug}-${nextId}`
+          }
+        } catch (slugErr) {
+          console.warn('Slug uniqueness check error:', slugErr)
+        }
+      }
       const fullName = `${cleanName} - Smiths Jewellery`
 
       const origPrice =
@@ -3950,6 +4005,7 @@ export default function AdminPanelPage() {
                             setEditingProduct({ ...editingProduct, image: '' })
                           }
                           subtext="Drag and drop photo here to instantly update worldwide"
+                          onUploadingChange={setIsEditUploadingCover}
                         />
                       </div>
 
@@ -3964,8 +4020,17 @@ export default function AdminPanelPage() {
                               image: newGallery[0] || editingProduct.image,
                             })
                           }}
+                          onUploadingChange={setIsEditUploadingGallery}
                         />
                       </div>
+
+                      {/* Upload in Progress Alert */}
+                      {isEditUploadingImages && (
+                        <div className="p-3 rounded-xl bg-gold/15 border border-gold/40 text-gold text-xs flex items-center gap-2.5 animate-pulse">
+                          <Loader2 className="w-4 h-4 animate-spin shrink-0 text-gold" />
+                          <span className="font-semibold">Uploading photos to Supabase Cloud CDN... Please wait before deploying.</span>
+                        </div>
+                      )}
 
                       {/* 5. Description */}
                       <div>
@@ -4128,13 +4193,18 @@ export default function AdminPanelPage() {
                         </button>
                         <button
                           type="submit"
-                          disabled={isSavingEditProduct}
+                          disabled={isSavingEditProduct || isEditUploadingImages}
                           className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.25)] flex items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                         >
                           {isSavingEditProduct ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
                               <span>Deploying Globally...</span>
+                            </>
+                          ) : isEditUploadingImages ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
+                              <span>Uploading Photos to Cloud CDN...</span>
                             </>
                           ) : (
                             <>
@@ -4268,6 +4338,7 @@ export default function AdminPanelPage() {
                             })
                           }}
                           onRemove={() => setNewProduct({ ...newProduct, image: '' })}
+                          onUploadingChange={setIsAddUploadingCover}
                         />
                       </div>
 
@@ -4282,8 +4353,17 @@ export default function AdminPanelPage() {
                               image: newGallery[0] || newProduct.image,
                             })
                           }}
+                          onUploadingChange={setIsAddUploadingGallery}
                         />
                       </div>
+
+                      {/* Upload in Progress Alert */}
+                      {isAddUploadingImages && (
+                        <div className="p-3 rounded-xl bg-gold/15 border border-gold/40 text-gold text-xs flex items-center gap-2.5 animate-pulse">
+                          <Loader2 className="w-4 h-4 animate-spin shrink-0 text-gold" />
+                          <span className="font-semibold">Uploading photos to Supabase Cloud CDN... Please wait before publishing.</span>
+                        </div>
+                      )}
 
                       {/* Description */}
                       <div>
@@ -4379,13 +4459,18 @@ export default function AdminPanelPage() {
                         </button>
                         <button
                           type="submit"
-                          disabled={isPublishingProduct}
+                          disabled={isPublishingProduct || isAddUploadingImages}
                           className="px-5 py-2 rounded-lg bg-gold text-obsidian font-bold text-xs hover:bg-gold-dark transition-transform hover:scale-[1.02] shadow-[0_0_15px_rgba(207,181,59,0.2)] flex items-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                         >
                           {isPublishingProduct ? (
                             <>
                               <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
                               <span>Publishing Globally...</span>
+                            </>
+                          ) : isAddUploadingImages ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin text-obsidian" />
+                              <span>Uploading Photos to Cloud CDN...</span>
                             </>
                           ) : (
                             <>

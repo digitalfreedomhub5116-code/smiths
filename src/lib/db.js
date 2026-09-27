@@ -64,17 +64,24 @@ export async function uploadProductImage(fileOrBlobOrDataUrl, prefix = 'jeweller
     let mimeType = 'image/jpeg'
 
     if (typeof fileOrBlobOrDataUrl === 'string' && fileOrBlobOrDataUrl.startsWith('data:')) {
-      const parts = fileOrBlobOrDataUrl.split(';base64,')
-      mimeType = parts[0].split(':')[1] || 'image/jpeg'
-      const byteCharacters = atob(parts[1])
-      const byteNumbers = new Array(byteCharacters.length)
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i)
+      try {
+        const res = await fetch(fileOrBlobOrDataUrl)
+        blob = await res.blob()
+        mimeType = blob.type || 'image/jpeg'
+        const rawExt = mimeType.split('/')[1] || 'jpg'
+        extension = rawExt === 'jpeg' ? 'jpg' : rawExt
+      } catch (fetchErr) {
+        const parts = fileOrBlobOrDataUrl.split(';base64,')
+        mimeType = parts[0].split(':')[1] || 'image/jpeg'
+        const byteCharacters = atob(parts[1])
+        const byteNumbers = new Uint8Array(byteCharacters.length)
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i)
+        }
+        blob = new Blob([byteNumbers], { type: mimeType })
+        const rawExt = mimeType.split('/')[1] || 'jpg'
+        extension = rawExt === 'jpeg' ? 'jpg' : rawExt
       }
-      const byteArray = new Uint8Array(byteNumbers)
-      blob = new Blob([byteArray], { type: mimeType })
-      const rawExt = mimeType.split('/')[1] || 'jpg'
-      extension = rawExt === 'jpeg' ? 'jpg' : rawExt
     } else if (fileOrBlobOrDataUrl instanceof Blob || fileOrBlobOrDataUrl instanceof File) {
       blob = fileOrBlobOrDataUrl
       mimeType = fileOrBlobOrDataUrl.type || 'image/jpeg'
@@ -217,7 +224,7 @@ export async function getProducts(options = {}) {
           mapped.push(...missingFromDb)
         }
 
-        mapped.sort((a, b) => Number(a.id) - Number(b.id))
+        mapped.sort((a, b) => Number(b.id) - Number(a.id))
         // Update persistent local cache
         setLocalData(LOCAL_STORAGE_PRODUCTS_KEY, mapped)
 
@@ -472,8 +479,24 @@ export async function saveProduct(product) {
   if (isSupabaseConfigured && supabase) {
     try {
       const cleanName = product.name || 'Silver Jewellery Piece'
-      const slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
+      let slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
       const fullName = product.fullName || `${cleanName} - Smiths Jewellery`
+
+      // Verify slug uniqueness in Supabase before upsert to prevent 23505 duplicate key crash
+      try {
+        const { data: existingSlugRow } = await supabase
+          .from('products')
+          .select('id')
+          .eq('slug', slug)
+          .neq('id', pId)
+          .maybeSingle()
+
+        if (existingSlugRow) {
+          slug = `${slug}-${pId}`
+        }
+      } catch (slugCheckErr) {
+        console.warn('Could not verify slug uniqueness:', slugCheckErr)
+      }
 
       // 1. Clean payload matching EXACT schema of public.products table
       const payload = {
