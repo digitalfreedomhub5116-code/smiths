@@ -25,6 +25,15 @@ import WishlistDrawer from '../components/WishlistDrawer'
 import OptimizedImage from '../components/OptimizedImage'
 import { getOptimizedImageUrl } from '../lib/imageOptimizer'
 
+const FASHION_JEWELLERY_DISCLAIMER =
+  'Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.'
+
+const hasWarrantyDisclaimer = (text) => {
+  if (!text || typeof text !== 'string') return false
+  const lower = text.toLowerCase()
+  return lower.includes('warranty') || lower.includes('guarantee')
+}
+
 export default function ProductPage() {
   const { productIdOrSlug } = useParams()
   const navigate = useNavigate()
@@ -755,9 +764,16 @@ export default function ProductPage() {
             <h2 className="font-heading text-2xl sm:text-3xl font-bold text-cream">
               Product Description
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-cream-muted/90">
-              {product.description}
-            </p>
+            <div className="mt-4 space-y-3 text-base leading-relaxed text-cream-muted/90">
+              <p className="whitespace-pre-line">
+                {product.description}
+              </p>
+              {!hasWarrantyDisclaimer(product.description) && (
+                <p>
+                  {FASHION_JEWELLERY_DISCLAIMER}
+                </p>
+              )}
+            </div>
 
             {/* Full Specifications Table */}
             <div className="mt-8 rounded-2xl border border-charcoal-light bg-charcoal/50 overflow-hidden">

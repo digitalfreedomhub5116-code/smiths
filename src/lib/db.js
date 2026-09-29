@@ -193,7 +193,7 @@ export async function getProducts(options = {}) {
               rating: Number(row.rating) || mock?.rating || 4.8,
               reviewCount: Number(row.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
               reviews: Array.isArray(row.reviews) && row.reviews.length > 0 ? row.reviews : fallbackReviews,
-              description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery.`,
+              description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
               features: Array.isArray(row.features) && row.features.length > 0
                 ? row.features
                 : (Array.isArray(row.key_features) && row.key_features.length > 0 ? row.key_features : (mock?.features || [
@@ -391,7 +391,7 @@ export async function getProductBySlugOrId(identifier) {
           image: coverImage,
           gallery: fallbackGallery,
           reviews: Array.isArray(data.reviews) && data.reviews.length > 0 ? data.reviews : fallbackReviews,
-          description: data.description || mock?.description || `Handcrafted 925 sterling silver ${data.name} from Smiths Jewellery.`,
+          description: data.description || mock?.description || `Handcrafted 925 sterling silver ${data.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
           features: Array.isArray(data.features) && data.features.length > 0 ? data.features : (mock?.features || []),
           rating: Number(data.rating) || mock?.rating || 4.8,
           reviewCount: Number(data.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
@@ -511,7 +511,7 @@ export async function saveProduct(product) {
         rating: Number(product.rating) || 4.9,
         review_count: Number(product.reviewCount || product.review_count) || 24,
         bad_count: Number(product.badCount || product.bad_count) || 1,
-        description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
+        description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
         material: product.material || '925 Sterling Silver',
         dimensions: product.dimensions || 'Standard Comfort Fit',
         finish: product.finish || 'High-Luster Rhodium & Polished Silver',

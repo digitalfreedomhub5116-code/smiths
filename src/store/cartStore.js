@@ -72,7 +72,7 @@ const loadInitialProducts = () => {
               image: coverImage,
               gallery: fallbackGallery,
               reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-              description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`,
+              description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
               features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
                 'Crafted from certified 925 Sterling Silver',
                 'Triple Rhodium Plated for enduring tarnish resistance',
@@ -156,7 +156,7 @@ export const useCartStore = create((set, get) => ({
         image: coverImage,
         gallery: fallbackGallery,
         reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-        description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} finished with radiant rhodium luster.`,
+        description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} finished with radiant rhodium luster. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
         features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
           'Solid 925 Sterling Silver with anti-tarnish rhodium plating',
           'Hypoallergenic, nickel-free and lead-free for sensitive skin',
@@ -319,7 +319,7 @@ export const useCartStore = create((set, get) => ({
       genre: newProduct.genre || 'NECKLACES',
       price: Number(newProduct.price) || 1299,
       originalPrice: Number(newProduct.originalPrice || 2599),
-      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery.`,
+      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
       image: productCover,
       gallery: gallery,
       reviewCount: 7,

@@ -1510,7 +1510,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const fullName = `${p.name} - Smiths Jewellery`
   const description =
     JEWELLERY_DESCRIPTIONS[p.name] ||
-    `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery.`
+    `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`
 
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)

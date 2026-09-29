@@ -1617,7 +1617,7 @@ export default function AdminPanelPage() {
         stock: newProduct.inStock !== false ? 50 : 0,
         description:
           newProduct.description?.trim() ||
-          `Blossom with refinement wearing the handcrafted ${cleanName}. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, featuring signature styling. Hypoallergenic, nickel-free, and designed for everlasting everyday brilliance.`,
+          `Blossom with refinement wearing the handcrafted ${cleanName}. Masterfully sculpted in certified 925 hallmarked sterling silver layered in rich 18K gold vermeil, featuring signature styling. Hypoallergenic, nickel-free, and designed for everlasting everyday brilliance. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
         material: '18K Gold Vermeil / 925 Sterling Silver & AAA Cubic Zirconia',
         dimensions: 'Standard Comfort Fit / Ultra-Lightweight',
         finish: 'Warm 18K Gold Vermeil & High-Luster Polish',
