@@ -182,7 +182,7 @@ async function main() {
   const productData = {
     id: 42,
     name: 'JC-KE-58',
-    full_name: 'JC-KE-58 Celestial Starburst Cluster Pearl Drop Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-58 Celestial Starburst Cluster Pearl Drop Earrings - Smits Jewellery',
     slug: 'jc-ke-58',
     genre: 'EARRINGS',
     price: 849,
@@ -209,7 +209,7 @@ async function main() {
       'Handset micro-pavé AAA cubic zirconia crystals along multi-point starlight starbursts',
       'Graduated multi-pearl cluster featuring high-luster button, accent, and dramatic 10mm drop pearls',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure huggie leverback closure',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

@@ -2,8 +2,8 @@ import { create } from 'zustand'
 import { MOCK_PRODUCTS, GENRES, buildProductReviews } from '../data/productsData'
 import { getLocalCart, saveCartToAccount, saveProduct, deleteProductFromDb } from '../lib/db'
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
-const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smiths_deleted_product_ids'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smits_jewellery_products_v2'
+const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smits_deleted_product_ids'
 
 const getDeletedProductIds = () => {
   try {
@@ -72,7 +72,7 @@ const loadInitialProducts = () => {
               image: coverImage,
               gallery: fallbackGallery,
               reviews: Array.isArray(p.reviews) && p.reviews.length > 0 ? p.reviews : fallbackReviews,
-              description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
+              description: p.description || mock?.description || `Handcrafted 925 sterling silver ${p.name} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
               features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
                 'Crafted from certified 925 Sterling Silver',
                 'Triple Rhodium Plated for enduring tarnish resistance',
@@ -160,7 +160,7 @@ export const useCartStore = create((set, get) => ({
         features: Array.isArray(p.features) && p.features.length > 0 ? p.features : (mock?.features || [
           'Solid 925 Sterling Silver with anti-tarnish rhodium plating',
           'Hypoallergenic, nickel-free and lead-free for sensitive skin',
-          'Signature Smiths midnight velvet keepsake box included',
+          'Signature Smits midnight velvet keepsake box included',
           'Authenticity certificate with purity guarantee',
           'Handcrafted precision polish and luster',
         ]),
@@ -185,7 +185,7 @@ export const useCartStore = create((set, get) => ({
           ...item,
           image: cleanImg,
           gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-          fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
+          fullName: match?.fullName || item.fullName || `${item.name} - Smits Jewellery`,
         }
       })
 
@@ -199,7 +199,7 @@ export const useCartStore = create((set, get) => ({
           ...item,
           image: cleanImg,
           gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : [cleanImg],
-          fullName: match?.fullName || item.fullName || `${item.name} - Smiths Jewellery`,
+          fullName: match?.fullName || item.fullName || `${item.name} - Smits Jewellery`,
         }
       })
 
@@ -225,7 +225,7 @@ export const useCartStore = create((set, get) => ({
         const fullName =
           updatedProduct.fullName ||
           p.fullName ||
-          `${updatedProduct.name || p.name} - Smiths Jewellery`
+          `${updatedProduct.name || p.name} - Smits Jewellery`
 
         const fallbackReviews = p.reviews || mock?.reviews || buildProductReviews(p)
         const fallbackGallery = Array.isArray(updatedProduct.gallery) && updatedProduct.gallery.length > 0
@@ -299,7 +299,7 @@ export const useCartStore = create((set, get) => ({
     const slug =
       newProduct.slug ||
       `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
-    const fullName = newProduct.fullName || `${cleanName} - Smiths Jewellery`
+    const fullName = newProduct.fullName || `${cleanName} - Smits Jewellery`
     const defaultCover =
       (newProduct.image && !newProduct.image.includes('photo-1618354691373-d851c5c3a990') ? newProduct.image : null) ||
       (newProduct.gallery && newProduct.gallery.find((g) => !g.includes('photo-1618354691373-d851c5c3a990'))) ||
@@ -319,7 +319,7 @@ export const useCartStore = create((set, get) => ({
       genre: newProduct.genre || 'NECKLACES',
       price: Number(newProduct.price) || 1299,
       originalPrice: Number(newProduct.originalPrice || 2599),
-      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
+      description: newProduct.description || `Handcrafted 925 sterling silver ${cleanName} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
       image: productCover,
       gallery: gallery,
       reviewCount: 7,
@@ -431,7 +431,7 @@ export const useCartStore = create((set, get) => ({
         ...item,
         image: cleanImg,
         gallery: (match?.gallery && match.gallery.length > 0) ? match.gallery : (item.gallery || [cleanImg]),
-        fullName: item.fullName || match?.fullName || `${item.name} - Smiths Jewellery`,
+        fullName: item.fullName || match?.fullName || `${item.name} - Smits Jewellery`,
       }
     })
     set({ items: sanitized })
@@ -466,7 +466,7 @@ export const useCartStore = create((set, get) => ({
         ...product,
         image: cleanImg,
         gallery: cleanGallery,
-        fullName: product.fullName || match?.fullName || `${product.name} - Smiths Jewellery`,
+        fullName: product.fullName || match?.fullName || `${product.name} - Smits Jewellery`,
       }
 
       // Add product & trigger glowing highlight animation on navbar heart!
@@ -507,7 +507,7 @@ export const useCartStore = create((set, get) => ({
       ...product,
       image: cleanImg,
       gallery: cleanGallery,
-      fullName: product.fullName || match?.fullName || `${product.name} - Smiths Jewellery`,
+      fullName: product.fullName || match?.fullName || `${product.name} - Smits Jewellery`,
     }
 
     const existing = get().items.find((item) => item.id === product.id)

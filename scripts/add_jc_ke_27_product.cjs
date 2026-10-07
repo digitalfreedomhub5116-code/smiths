@@ -279,7 +279,7 @@ async function main() {
   const productData = {
     id: 65,
     name: 'JC-KE-27',
-    full_name: "JC-KE-27 Luminous Cat's Eye Bezel Stud Earrings - Smiths Jewellery",
+    full_name: "JC-KE-27 Luminous Cat's Eye Bezel Stud Earrings - Smits Jewellery",
     slug: 'jc-ke-27',
     genre: 'EARRINGS',
     price: 849,
@@ -306,7 +306,7 @@ async function main() {
       'Dynamic chatoyant optical effect shifting with ambient light and movement',
       'Crafted in certified 925 hallmarked Sterling Silver with anti-tarnish barrier',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

@@ -52,7 +52,7 @@ const featuresInsert = `    features: isJcKe70
           'Luminous round freshwater pearl centerpiece with deep iridescent luster',
           'Cast in certified 925 hallmarked Sterling Silver with 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe73`;
 content = content.replace("    features: isJcKe73", featuresInsert);

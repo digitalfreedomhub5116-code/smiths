@@ -152,7 +152,7 @@ const PRODUCTS_CONFIG = [
   {
     id: 31,
     name: 'JC-KE-87',
-    fullName: 'JC-KE-87 - Smiths Jewellery',
+    fullName: 'JC-KE-87 - Smits Jewellery',
     slug: 'jc-ke-87',
     genre: 'EARRINGS',
     price: 849,
@@ -178,13 +178,13 @@ const PRODUCTS_CONFIG = [
       'High-polish teardrop stud post with articulated pendant jump ring connection',
       'Intricate golden beaded center florets and scalloped petal borders',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ]
   },
   {
     id: 32,
     name: 'JC-KE-89',
-    fullName: 'JC-KE-89 - Smiths Jewellery',
+    fullName: 'JC-KE-89 - Smits Jewellery',
     slug: 'jc-ke-89',
     genre: 'EARRINGS',
     price: 849,
@@ -210,13 +210,13 @@ const PRODUCTS_CONFIG = [
       'Micro-pavé AAA cubic zirconia crystal ribbon strand paired with polished gold loop',
       'Secure 4-prong floating solitaire center stone for maximum light reflection',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ]
   },
   {
     id: 33,
     name: 'JC-KE-76',
-    fullName: 'JC-KE-76 - Smiths Jewellery',
+    fullName: 'JC-KE-76 - Smits Jewellery',
     slug: 'jc-ke-76',
     genre: 'EARRINGS',
     price: 849,
@@ -242,13 +242,13 @@ const PRODUCTS_CONFIG = [
       'Handset multi-facet AAA cubic zirconia cluster with brilliant crystal fire',
       'Dual articulated flexible snake chain drops for fluid cascading motion',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ]
   },
   {
     id: 34,
     name: 'JC-KE-63',
-    fullName: 'JC-KE-63 - Smiths Jewellery',
+    fullName: 'JC-KE-63 - Smits Jewellery',
     slug: 'jc-ke-63',
     genre: 'EARRINGS',
     price: 849,
@@ -275,13 +275,13 @@ const PRODUCTS_CONFIG = [
       'Six hand-matched round freshwater pearls with high-luster iridescent sheen',
       'Handset AAA round brilliant cubic zirconia stones in secure prong settings',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ]
   },
   {
     id: 35,
     name: 'JC-KE-80',
-    fullName: 'JC-KE-80 - Smiths Jewellery',
+    fullName: 'JC-KE-80 - Smits Jewellery',
     slug: 'jc-ke-80',
     genre: 'EARRINGS',
     price: 849,
@@ -308,7 +308,7 @@ const PRODUCTS_CONFIG = [
       'Shimmering blush-pink enamel flower petals with bezel crystal pistil center',
       'Full circular garland halo set with brilliant AAA cubic zirconia crystals',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ]
   }
 ];

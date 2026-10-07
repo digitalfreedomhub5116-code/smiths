@@ -201,7 +201,7 @@ async function main() {
   const productData = {
     id: 24,
     name: 'JC-KE-85',
-    full_name: 'JC-KE-85 - Smiths Jewellery',
+    full_name: 'JC-KE-85 - Smits Jewellery',
     slug: 'jc-ke-85',
     genre: 'EARRINGS',
     price: 849,
@@ -228,7 +228,7 @@ async function main() {
       'Hand-set AAA brilliant diamond-cut cubic zirconia crystals with diamond sparkle',
       'Articulated dual-strand drop ribbons for fluid light-catching motion',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

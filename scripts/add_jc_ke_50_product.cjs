@@ -173,7 +173,7 @@ async function main() {
   const productData = {
     id: 43,
     name: 'JC-KE-50',
-    full_name: 'JC-KE-50 Camellia Blooming Pearl Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-50 Camellia Blooming Pearl Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-50',
     genre: 'EARRINGS',
     price: 849,
@@ -200,7 +200,7 @@ async function main() {
       'Delicate perimeter halo accented with hand-set miniature micro seed-pearl beading',
       'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

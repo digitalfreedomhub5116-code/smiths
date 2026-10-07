@@ -11,7 +11,7 @@ export class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    console.error('Smiths Jewellery UI Exception:', error, errorInfo)
+    console.error('Smits Jewellery UI Exception:', error, errorInfo)
   }
 
   handleReset = () => {

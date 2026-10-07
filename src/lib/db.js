@@ -1,9 +1,9 @@
 import { supabase, isSupabaseConfigured } from './supabase'
 import { MOCK_PRODUCTS, GENRES, buildProductReviews, DEFAULT_JEWELLERY_IMAGE } from '../data/productsData'
 
-const LOCAL_STORAGE_ORDERS_KEY = 'smiths_jewellery_orders'
-const LOCAL_STORAGE_USER_KEY = 'smiths_jewellery_user'
-const LOCAL_STORAGE_ADDRESSES_KEY = 'smiths_jewellery_addresses'
+const LOCAL_STORAGE_ORDERS_KEY = 'smits_jewellery_orders'
+const LOCAL_STORAGE_USER_KEY = 'smits_jewellery_user'
+const LOCAL_STORAGE_ADDRESSES_KEY = 'smits_jewellery_addresses'
 
 // Helper for local storage
 const getLocalData = (key, fallback = []) => {
@@ -23,8 +23,8 @@ const setLocalData = (key, value) => {
   }
 }
 
-const LOCAL_STORAGE_PRODUCTS_KEY = 'smiths_jewellery_products_v2'
-const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smiths_deleted_product_ids'
+const LOCAL_STORAGE_PRODUCTS_KEY = 'smits_jewellery_products_v2'
+const LOCAL_STORAGE_DELETED_PRODUCTS_KEY = 'smits_deleted_product_ids'
 
 export const getLocalDeletedProductIds = () => {
   try {
@@ -180,7 +180,7 @@ export async function getProducts(options = {}) {
               ...row,
               id: pId,
               name: row.name,
-              fullName: row.full_name || `${row.name} - Smiths Jewellery`,
+              fullName: row.full_name || `${row.name} - Smits Jewellery`,
               slug: row.slug || mock?.slug,
               genre: row.genre || mock?.genre || 'EARRINGS',
               price: Number(row.price),
@@ -193,7 +193,7 @@ export async function getProducts(options = {}) {
               rating: Number(row.rating) || mock?.rating || 4.8,
               reviewCount: Number(row.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
               reviews: Array.isArray(row.reviews) && row.reviews.length > 0 ? row.reviews : fallbackReviews,
-              description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
+              description: row.description || mock?.description || `Handcrafted 925 sterling silver ${row.name} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
               features: Array.isArray(row.features) && row.features.length > 0
                 ? row.features
                 : (Array.isArray(row.key_features) && row.key_features.length > 0 ? row.key_features : (mock?.features || [
@@ -387,11 +387,11 @@ export async function getProductBySlugOrId(identifier) {
           ...data,
           id: pId,
           name: data.name,
-          fullName: data.full_name || `${data.name} - Smiths Jewellery`,
+          fullName: data.full_name || `${data.name} - Smits Jewellery`,
           image: coverImage,
           gallery: fallbackGallery,
           reviews: Array.isArray(data.reviews) && data.reviews.length > 0 ? data.reviews : fallbackReviews,
-          description: data.description || mock?.description || `Handcrafted 925 sterling silver ${data.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
+          description: data.description || mock?.description || `Handcrafted 925 sterling silver ${data.name} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
           features: Array.isArray(data.features) && data.features.length > 0 ? data.features : (mock?.features || []),
           rating: Number(data.rating) || mock?.rating || 4.8,
           reviewCount: Number(data.review_count) || mock?.reviewCount || fallbackReviews.length || 12,
@@ -480,7 +480,7 @@ export async function saveProduct(product) {
     try {
       const cleanName = product.name || 'Silver Jewellery Piece'
       let slug = product.slug || `${cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
-      const fullName = product.fullName || `${cleanName} - Smiths Jewellery`
+      const fullName = product.fullName || `${cleanName} - Smits Jewellery`
 
       // Verify slug uniqueness in Supabase before upsert to prevent 23505 duplicate key crash
       try {
@@ -511,7 +511,7 @@ export async function saveProduct(product) {
         rating: Number(product.rating) || 4.9,
         review_count: Number(product.reviewCount || product.review_count) || 24,
         bad_count: Number(product.badCount || product.bad_count) || 1,
-        description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
+        description: product.description || `Handcrafted 925 sterling silver ${cleanName} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`,
         material: product.material || '925 Sterling Silver',
         dimensions: product.dimensions || 'Standard Comfort Fit',
         finish: product.finish || 'High-Luster Rhodium & Polished Silver',
@@ -618,14 +618,14 @@ export async function createOrder(orderPayload) {
       id: 'evt-1',
       status: 'PLACED',
       activity: 'Order placed & payment verified',
-      location: 'Smiths Online Store',
+      location: 'Smits Online Store',
       event_time: new Date().toISOString(),
     },
     {
       id: 'evt-2',
       status: 'CONFIRMED',
       activity: 'Order confirmed: Jewellery queued for velvet gift box packaging & authenticity certification',
-      location: 'Smiths Studio, Bengaluru',
+      location: 'Smits Studio, Bengaluru',
       event_time: new Date(Date.now() + 1000 * 60 * 5).toISOString(),
     },
   ]
@@ -766,7 +766,7 @@ export async function createOrder(orderPayload) {
               order_id: orderRecord.id,
               status: evt.status || 'PLACED',
               activity: evt.activity || 'Order placed',
-              location: evt.location || 'Smiths Online Store',
+              location: evt.location || 'Smits Online Store',
               event_time: evt.event_time || new Date().toISOString(),
             }))
             const { error: trkErr } = await supabase.from('tracking_events').insert(trkRows)
@@ -944,7 +944,7 @@ export function advanceOrderStatus(orderNumber) {
     }
 
     const activityMap = {
-      PACKED: { activity: 'Jewellery piece carefully inspected, certified, and sealed in signature velvet gift box', location: 'Smiths Fulfillment Hub, Bengaluru' },
+      PACKED: { activity: 'Jewellery piece carefully inspected, certified, and sealed in signature velvet gift box', location: 'Smits Fulfillment Hub, Bengaluru' },
       SHIPPED: { activity: 'Handed over to courier partner (Delhivery Air)', location: 'Bengaluru Sort Facility' },
       IN_TRANSIT: { activity: 'Package in transit between distribution hubs', location: 'National Sorting Center' },
       OUT_FOR_DELIVERY: { activity: 'Out for delivery with courier delivery executive', location: order.shipping_address?.city || 'Local Delivery Hub' },
@@ -1614,7 +1614,7 @@ export function initAuthListener(onUserChange) {
 }
 
 // ── 6. PERSISTENT ACCOUNT CART ──
-const LOCAL_STORAGE_CART_KEY = 'smiths_jewellery_cart'
+const LOCAL_STORAGE_CART_KEY = 'smits_jewellery_cart'
 
 export function getLocalCart() {
   const current = getCurrentCustomer()
@@ -1828,7 +1828,7 @@ export async function getUserOrders(user = null) {
 }
 
 // ── 8. AUTOMATED ADMIN NOTIFICATIONS (INSTANT GMAIL & WHATSAPP) ──
-const LOCAL_STORAGE_NOTIFICATION_SETTINGS_KEY = 'smiths_admin_notification_settings'
+const LOCAL_STORAGE_NOTIFICATION_SETTINGS_KEY = 'smits_admin_notification_settings'
 export const DEFAULT_ADMIN_WHATSAPP = '918530085116'
 export const DEFAULT_ADMIN_EMAIL = 'digitalfreedomhub5116@gmail.com'
 
@@ -1943,11 +1943,11 @@ export function formatOrderWhatsAppMessage(order) {
   })
 
   // Deep-link to admin panel orders tab filtered to this order
-  const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smithsjewellery.com'
+  const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smitsjewellery.com'
   const adminUrl = `${origin}/admin-panel-access?tab=orders&search=${encodeURIComponent(orderNum)}`
 
   return (
-    `🚨 *NEW ORDER RECEIVED - Smiths Jewellery* 🚨\n\n` +
+    `🚨 *NEW ORDER RECEIVED - Smits Jewellery* 🚨\n\n` +
     `📦 *Order:* ${orderNum}\n` +
     `👤 *Customer:* ${custName}\n` +
     `📞 *Phone:* ${custPhone}\n` +
@@ -2029,7 +2029,7 @@ export async function sendTestWhatsAppNotification(phone, apiKey) {
   }
 
   const testMessage =
-    `✅ *Smiths Jewellery WhatsApp Notification Connected!*\n\n` +
+    `✅ *Smits Jewellery WhatsApp Notification Connected!*\n\n` +
     `🎉 Your automated order alert system is now active.\n` +
     `Whenever a customer places an order, you will receive full customer details, ordered products, and a direct link to generate the AWB.\n\n` +
     `📱 Admin Phone: +${cleanPhone}\n` +
@@ -2104,7 +2104,7 @@ export async function sendAdminOrderEmail(order) {
       : '• 1x Silver Jewellery'
     const addr = order.shipping_address || {}
     const fullAddr = [addr.address_line, addr.landmark, addr.city, addr.state, addr.pincode].filter(Boolean).join(', ')
-    const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smithsjewellery.com'
+    const origin = typeof window !== 'undefined' && window.location?.origin ? window.location.origin : 'https://smitsjewellery.com'
     const adminLink = `${origin}/admin-panel-access?tab=orders&search=${encodeURIComponent(orderNum)}`
 
     const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(targetEmail)}`, {
@@ -2114,7 +2114,7 @@ export async function sendAdminOrderEmail(order) {
         'Accept': 'application/json',
       },
       body: JSON.stringify({
-        _subject: `🚨 NEW ORDER #${orderNum} - ₹${total} (${isPrepaid ? 'PREPAID / PAID' : 'COD'}) - Smiths Jewellery`,
+        _subject: `🚨 NEW ORDER #${orderNum} - ₹${total} (${isPrepaid ? 'PREPAID / PAID' : 'COD'}) - Smits Jewellery`,
         _template: 'table',
         _captcha: 'false',
         'Order Number': orderNum,

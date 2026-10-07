@@ -51,7 +51,7 @@ export default function ProductPage() {
   // Check if product was explicitly deleted
   const localDeleted = (() => {
     try {
-      const raw = localStorage.getItem('smiths_deleted_product_ids')
+      const raw = localStorage.getItem('smits_deleted_product_ids') || localStorage.getItem('smiths_deleted_product_ids')
       return raw ? JSON.parse(raw).map(Number) : []
     } catch (e) {
       return []
@@ -349,6 +349,8 @@ export default function ProductPage() {
 
     // Save in sessionStorage for single-product Direct Buy Now checkout session
     try {
+      sessionStorage.setItem('smits_buy_now_item', JSON.stringify(buyNowPayload))
+      sessionStorage.setItem('smits_checkout_step', '1')
       sessionStorage.setItem('smiths_buy_now_item', JSON.stringify(buyNowPayload))
       sessionStorage.setItem('smiths_checkout_step', '1')
     } catch (e) {}
@@ -375,7 +377,7 @@ export default function ProductPage() {
     if (navigator.share) {
       navigator.share({
         title: product.fullName,
-        text: `Check out the ${product.fullName} on Smiths Jewellery`,
+        text: `Check out the ${product.fullName} on Smits Jewellery`,
         url: window.location.href,
       }).catch(() => {})
     } else {
@@ -801,7 +803,7 @@ export default function ProductPage() {
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
                   <span className="text-cream-muted/60">Packaging</span>
-                  <span className="col-span-2 font-semibold text-cream">Signature Smiths Midnight Velvet Keepsake Box & Authenticity Certificate</span>
+                  <span className="col-span-2 font-semibold text-cream">Signature Smits Midnight Velvet Keepsake Box & Authenticity Certificate</span>
                 </div>
                 <div className="grid grid-cols-3 px-6 py-3.5">
                   <span className="text-cream-muted/60">Collection</span>

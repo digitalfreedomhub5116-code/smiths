@@ -50,7 +50,7 @@ const featuresInsert = `    features: isJcKe3
           'High-mirror polished 3D puffed heart silhouette cast in certified 925 Sterling Silver',
           'Layered in rich, tarnish-resistant 18K Gold Vermeil for an everlasting warm luster',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe62`;
 content = content.replace("    features: isJcKe62", featuresInsert);

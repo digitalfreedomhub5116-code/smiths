@@ -143,7 +143,7 @@ async function main() {
   const productData = {
     id: 66,
     name: 'JC-KE-73',
-    full_name: 'JC-KE-73 Pavé Ribbon Floating Pearl Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-73 Pavé Ribbon Floating Pearl Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-73',
     genre: 'EARRINGS',
     price: 849,
@@ -169,7 +169,7 @@ async function main() {
       'Mirror-image left and right ear design ergonomically contoured to hug the earlobe',
       'Handcrafted in certified 925 hallmarked Sterling Silver with 18K gold vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

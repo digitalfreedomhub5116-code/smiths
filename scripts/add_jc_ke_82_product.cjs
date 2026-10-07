@@ -172,7 +172,7 @@ async function main() {
   const productData = {
     id: 28,
     name: 'JC-KE-82',
-    full_name: 'JC-KE-82 - Smiths Jewellery',
+    full_name: 'JC-KE-82 - Smits Jewellery',
     slug: 'jc-ke-82',
     genre: 'EARRINGS',
     price: 849,
@@ -199,7 +199,7 @@ async function main() {
       'Radiant high-polish 18K gold vermeil dome contrasted with brushed rhodium fan',
       'Precision hand-etched radiating fan drop with seashell texture',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

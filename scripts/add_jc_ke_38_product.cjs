@@ -96,7 +96,7 @@ async function main() {
   const productData = {
     id: 21,
     name: 'JC-KE-38',
-    full_name: 'JC-KE-38 - Smiths Jewellery',
+    full_name: 'JC-KE-38 - Smits Jewellery',
     slug: 'jc-ke-38',
     genre: 'EARRINGS',
     price: 849,
@@ -123,7 +123,7 @@ async function main() {
       'Warm 18K Gold plating over certified 925 Sterling Silver core',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
       'Multi-hole adjustable jacket post for customized earlobe height fitting',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

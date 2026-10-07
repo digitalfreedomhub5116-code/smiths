@@ -39,7 +39,7 @@ async function main() {
   const productData = {
     id: 22,
     name: 'JC-KE-86',
-    full_name: 'JC-KE-86 - Smiths Jewellery',
+    full_name: 'JC-KE-86 - Smits Jewellery',
     slug: 'jc-ke-86',
     genre: 'EARRINGS',
     price: 849,
@@ -66,7 +66,7 @@ async function main() {
       'Triple Rhodium Plated for enduring tarnish resistance and high-mirror shine',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
       'Secure stud post backings with snug friction clutch',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

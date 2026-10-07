@@ -50,7 +50,7 @@ const featuresInsert = `    features: isJcKe61
           'Round-cut brilliant AAA cubic zirconia crystal accent handset at the center bow knot',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe43`;
 content = content.replace("    features: isJcKe43", featuresInsert);

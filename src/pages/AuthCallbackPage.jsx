@@ -68,7 +68,8 @@ export default function AuthCallbackPage() {
         }
       }
 
-      const returnTo = sessionStorage.getItem('smiths_oauth_return_to') || '/'
+      const returnTo = sessionStorage.getItem('smits_oauth_return_to') || sessionStorage.getItem('smiths_oauth_return_to') || '/'
+      sessionStorage.removeItem('smits_oauth_return_to')
       sessionStorage.removeItem('smiths_oauth_return_to')
 
       setTimeout(() => {
@@ -87,7 +88,7 @@ export default function AuthCallbackPage() {
     <div className="min-h-screen bg-obsidian flex flex-col items-center justify-center text-cream p-4 text-center">
       <div className="h-10 w-10 rounded-full border-2 border-gold border-t-transparent animate-spin mb-4" />
       <p className="text-sm font-heading font-semibold tracking-wide text-cream mb-1">{statusText}</p>
-      <p className="text-xs text-cream-muted/60">Securing your session with Smiths Jewellery...</p>
+      <p className="text-xs text-cream-muted/60">Securing your session with Smits Jewellery...</p>
     </div>
   )
 }

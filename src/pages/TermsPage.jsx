@@ -37,7 +37,7 @@ export default function TermsPage() {
             Terms of Service & Usage Agreement
           </h1>
           <p className="mt-4 text-sm sm:text-base text-cream-muted leading-relaxed max-w-2xl">
-            Governing the access, registration, authentication, and purchasing of fine 925 sterling silver jewellery crafted by Smiths Jewellery.
+            Governing the access, registration, authentication, and purchasing of fine 925 sterling silver jewellery crafted by Smits Jewellery.
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-gold/80">
             <span>Effective Date: September 2026</span>
@@ -60,7 +60,7 @@ export default function TermsPage() {
                 Binding Legal Agreement Upon Account Access & Orders
               </h2>
               <p className="mt-2 text-xs sm:text-sm text-cream-muted leading-relaxed">
-                <strong className="text-gold font-bold">PLEASE READ CAREFULLY:</strong> By accessing, browsing, registering an account, authenticating via email OTP or Google Sign-In, or placing an order (prepaid or Cash on Delivery) with Smiths Jewellery, you expressly, voluntarily, and unconditionally agree to be legally bound by every provision, covenant, and restriction contained within these Terms of Service. If you do not agree with any clause of these terms, you must immediately discontinue use of this platform and abstain from placing orders.
+                <strong className="text-gold font-bold">PLEASE READ CAREFULLY:</strong> By accessing, browsing, registering an account, authenticating via email OTP or Google Sign-In, or placing an order (prepaid or Cash on Delivery) with Smits Jewellery, you expressly, voluntarily, and unconditionally agree to be legally bound by every provision, covenant, and restriction contained within these Terms of Service. If you do not agree with any clause of these terms, you must immediately discontinue use of this platform and abstain from placing orders.
               </p>
             </div>
           </div>
@@ -75,7 +75,7 @@ export default function TermsPage() {
               <span>Account Creation, Authentication & Client Obligations</span>
             </h2>
             <p>
-              By creating an account, logging in, or maintaining an active profile on Smiths Jewellery, you warrant that you are at least 18 years of age (or possess valid parental/guardian supervision if a minor) and that all information submitted during account registration and checkout is truthful, accurate, and up to date.
+              By creating an account, logging in, or maintaining an active profile on Smits Jewellery, you warrant that you are at least 18 years of age (or possess valid parental/guardian supervision if a minor) and that all information submitted during account registration and checkout is truthful, accurate, and up to date.
             </p>
             <p>
               You assume full legal and operational responsibility for maintaining the confidentiality of your login credentials, magic link tokens, and browser session access. Any activity originating from your authenticated session or verified mobile telephone number shall be deemed authorized by you. If you suspect unauthorized access to your account, you must immediately contact our studio support helpline at <strong className="text-gold font-mono">7470012222</strong>.
@@ -89,13 +89,13 @@ export default function TermsPage() {
               <span>Intellectual Property & Proprietary Designs</span>
             </h2>
             <p>
-              Smiths Jewellery conceives, crafts, and presents proprietary silver jewellery designs. All custom CAD models, casting molds, rhodium finishing techniques, hallmark engravings, product photography, editorial typography, brand hallmarks, and digital user interfaces are the proprietary intellectual property of Smiths Jewellery.
+              Smits Jewellery conceives, crafts, and presents proprietary silver jewellery designs. All custom CAD models, casting molds, rhodium finishing techniques, hallmark engravings, product photography, editorial typography, brand hallmarks, and digital user interfaces are the proprietary intellectual property of Smits Jewellery.
             </p>
             <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-4 text-xs text-rose-300">
               <strong className="font-bold text-rose-200 uppercase tracking-wider block mb-1">
                 Strict Prohibition Against Duplication & Resale:
               </strong>
-              You may not mold, cast, clone, copy, or counterfeit any Smiths Jewellery physical piece or digital asset without prior explicit written commercial licensing signed by our executive directors.
+              You may not mold, cast, clone, copy, or counterfeit any Smits Jewellery physical piece or digital asset without prior explicit written commercial licensing signed by our executive directors.
             </div>
           </section>
 
@@ -106,7 +106,7 @@ export default function TermsPage() {
               <span>Solid 925 Sterling Silver & Hand-Finished Tolerances</span>
             </h2>
             <p>
-              Unlike generic mass-produced fast-fashion alloys, every single Smiths Jewellery piece is crafted using genuine 925 sterling silver, followed by meticulous hand-polishing, rhodium anti-tarnish plating, and precision gemstone setting.
+              Unlike generic mass-produced fast-fashion alloys, every single Smits Jewellery piece is crafted using genuine 925 sterling silver, followed by meticulous hand-polishing, rhodium anti-tarnish plating, and precision gemstone setting.
             </p>
             <p>
               As a client, you understand and celebrate that handcrafted fine jewellery inherently exhibits microscopic artisanal tolerances and subtle hand-burnished metallic luster gradients. These characteristics are hallmarks of authentic smithing and purity; they do not constitute defects or non-conformance.
@@ -123,7 +123,7 @@ export default function TermsPage() {
               All prices displayed on the store are denominated in Indian National Rupees (INR - ₹) and include all statutory taxes unless explicitly broken down on the checkout summary. We reserve the absolute right to revise catalog pricing, apply drop-exclusive discounts, or discontinue product lines without prior announcement.
             </p>
             <p>
-              In the event that an item is listed at an incorrect price due to typographical or technological system failure, Smiths Jewellery reserves the right to decline, halt, or cancel orders placed for such mispriced items, with prompt issuance of an immediate 100% refund.
+              In the event that an item is listed at an incorrect price due to typographical or technological system failure, Smits Jewellery reserves the right to decline, halt, or cancel orders placed for such mispriced items, with prompt issuance of an immediate 100% refund.
             </p>
           </section>
 
@@ -134,7 +134,7 @@ export default function TermsPage() {
               <span>Cash on Delivery (COD) Rules & Strict Anti-Fraud Policy</span>
             </h2>
             <p>
-              To provide maximum accessibility across India, Smiths Jewellery offers Cash on Delivery (COD) on eligible domestic postal pin codes. By choosing Cash on Delivery:
+              To provide maximum accessibility across India, Smits Jewellery offers Cash on Delivery (COD) on eligible domestic postal pin codes. By choosing Cash on Delivery:
             </p>
             <ul className="list-disc list-inside space-y-2 pl-2 text-cream-muted">
               <li>
@@ -159,7 +159,7 @@ export default function TermsPage() {
               Orders are typically queued for crafting, hand-polishing, rhodium lustering, and multi-point quality inspection within 24 to 48 working hours. Once packaged in our signature midnight velvet presentation boxes, parcels are handed over to national express logistics aggregators (Shiprocket / Delhivery / BlueDart / DTDC / Xpressbees).
             </p>
             <p>
-              Standard transit timelines range between 3 to 7 business days depending on destination geography (Metropolitan cities versus remote northeast/island regions). Smiths Jewellery provides real-time digital tracking links and Air Waybill (AWB) numbers. Delays caused by force majeure, severe weather disruptions, festive courier backlog, or regional transit restrictions lie outside our direct control, and buyers agree not to hold the Studio liable for carrier delays once custody is transferred.
+              Standard transit timelines range between 3 to 7 business days depending on destination geography (Metropolitan cities versus remote northeast/island regions). Smits Jewellery provides real-time digital tracking links and Air Waybill (AWB) numbers. Delays caused by force majeure, severe weather disruptions, festive courier backlog, or regional transit restrictions lie outside our direct control, and buyers agree not to hold the Studio liable for carrier delays once custody is transferred.
             </p>
           </section>
 
@@ -184,7 +184,7 @@ export default function TermsPage() {
                 In the rare event of transit breakage or packaging compromise, customers MUST record an unedited, continuous, single-shot video beginning from the uncut, sealed exterior courier mailer bag, clearly showing the shipping label, package opening, and defect inspection.
               </p>
               <p className="text-cream-muted">
-                Submit the unboxing recording within 48 hours of delivery to <strong className="text-gold">support@smithsjewellery.com</strong> or WhatsApp helpline <strong className="text-gold">7470012222</strong>. Verified damage claims will receive an immediate free replacement dispatched with express air priority.
+                Submit the unboxing recording within 48 hours of delivery to <strong className="text-gold">support@smitsjewellery.com</strong> or WhatsApp helpline <strong className="text-gold">7470012222</strong>. Verified damage claims will receive an immediate free replacement dispatched with express air priority.
               </p>
             </div>
           </section>
@@ -199,7 +199,7 @@ export default function TermsPage() {
               <strong>Customer Cancellations:</strong> Orders may be cancelled by the customer only prior to the allocation of an Air Waybill (AWB) and dispatch handover. Once an order enters final preparation or has been handed to courier logistics, cancellations cannot be accepted.
             </p>
             <p>
-              <strong>Seller Cancellations:</strong> Smiths Jewellery reserves the right to cancel any order if verification checks fail, suspected fraudulent payment patterns arise, the shipping address is undeliverable by all courier partners, or product availability ceases. In all seller-initiated cancellations, the buyer will receive an immediate notification and 100% full refund to the original payment source within 24–48 hours.
+              <strong>Seller Cancellations:</strong> Smits Jewellery reserves the right to cancel any order if verification checks fail, suspected fraudulent payment patterns arise, the shipping address is undeliverable by all courier partners, or product availability ceases. In all seller-initiated cancellations, the buyer will receive an immediate notification and 100% full refund to the original payment source within 24–48 hours.
             </p>
           </section>
 
@@ -210,10 +210,10 @@ export default function TermsPage() {
               <span>Limitation of Liability & Indemnification</span>
             </h2>
             <p>
-              To the fullest extent permissible under Indian jurisprudence, Smiths Jewellery, its founders, silversmiths, artisans, and supply chain partners shall not be held liable for any incidental, consequential, special, or indirect damages arising out of the use, misuse, or inability to use our products or web interface. Our total aggregate liability for any claim arising under these terms shall strictly not exceed the total rupee amount paid by the customer for the specific order giving rise to the claim.
+              To the fullest extent permissible under Indian jurisprudence, Smits Jewellery, its founders, silversmiths, artisans, and supply chain partners shall not be held liable for any incidental, consequential, special, or indirect damages arising out of the use, misuse, or inability to use our products or web interface. Our total aggregate liability for any claim arising under these terms shall strictly not exceed the total rupee amount paid by the customer for the specific order giving rise to the claim.
             </p>
             <p>
-              You agree to indemnify, defend, and hold harmless Smiths Jewellery from and against any third-party claims, liabilities, losses, damages, or legal expenses resulting from your violation of these Terms or your infringement of any rights of a third party.
+              You agree to indemnify, defend, and hold harmless Smits Jewellery from and against any third-party claims, liabilities, losses, damages, or legal expenses resulting from your violation of these Terms or your infringement of any rights of a third party.
             </p>
           </section>
 
@@ -224,7 +224,7 @@ export default function TermsPage() {
               <span>Governing Law & Exclusive Legal Jurisdiction</span>
             </h2>
             <p>
-              These Terms of Service and any contractual relationship formed between Smiths Jewellery and the client shall be governed exclusively by, and interpreted strictly in accordance with, the laws of the Republic of India.
+              These Terms of Service and any contractual relationship formed between Smits Jewellery and the client shall be governed exclusively by, and interpreted strictly in accordance with, the laws of the Republic of India.
             </p>
             <p>
               Any legal dispute, arbitration, claim, or controversy arising directly or indirectly out of these terms, order fulfillment, or product condition shall be submitted to the exclusive jurisdiction of the competent judicial courts located in Maharashtra, India.
@@ -251,8 +251,8 @@ export default function TermsPage() {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gold shrink-0" />
                 <span className="text-cream font-medium">Official Legal & Support Email:</span>
-                <a href="mailto:support@smithsjewellery.com" className="text-gold font-bold hover:underline font-mono">
-                  support@smithsjewellery.com
+                <a href="mailto:support@smitsjewellery.com" className="text-gold font-bold hover:underline font-mono">
+                  support@smitsjewellery.com
                 </a>
               </div>
               <div className="flex items-center gap-3 text-xs text-cream-muted">

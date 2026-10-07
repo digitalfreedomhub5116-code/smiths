@@ -52,7 +52,7 @@ const featuresInsert = `    features: isJcKe65
           'Ergonomic U-curve huggie wrap post that sweeps beneath the lobe for a floating illusion',
           'Cast in certified 925 hallmarked Sterling Silver with radiant 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears and all-day comfort',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe70`;
 content = content.replace("    features: isJcKe70", featuresInsert);

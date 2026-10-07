@@ -24,7 +24,7 @@ export default function FeatureBanner() {
               <div className="relative overflow-hidden rounded-2xl border border-silver/30 bg-charcoal shadow-2xl shadow-black">
                 <img
                   src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=900&q=80"
-                  alt="Smiths Jewellery Fine Silver Craftsmanship"
+                  alt="Smits Jewellery Fine Silver Craftsmanship"
                   className="w-full h-auto object-cover rounded-xl transition-transform duration-700 ease-out group-hover:scale-102"
                   loading="lazy"
                 />
@@ -46,7 +46,7 @@ export default function FeatureBanner() {
 
             {/* Paragraph Body */}
             <p className="mt-5 text-sm sm:text-base lg:text-lg leading-relaxed text-cream-muted/90 max-w-2xl font-sans">
-              At Smiths Jewellery, every creation is sculpted from certified 925 sterling silver, fortified with protective rhodium for everlasting mirror luster, and set with precision-cut stones. We honor silversmithing traditions while celebrating modern, sophisticated silhouettes.
+              At Smits Jewellery, every creation is sculpted from certified 925 sterling silver, fortified with protective rhodium for everlasting mirror luster, and set with precision-cut stones. We honor silversmithing traditions while celebrating modern, sophisticated silhouettes.
             </p>
 
             {/* Subtle Brand Accent Line */}

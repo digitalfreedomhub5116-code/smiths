@@ -131,7 +131,7 @@ async function main() {
   const productData = {
     id: 61,
     name: 'JC-KE-61',
-    full_name: 'JC-KE-61 Noir Velvet Bow Shimmer Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-61 Noir Velvet Bow Shimmer Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-61',
     genre: 'EARRINGS',
     price: 849,
@@ -157,7 +157,7 @@ async function main() {
       'Round-cut brilliant AAA cubic zirconia crystal accent handset at the center bow knot',
       'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

@@ -50,7 +50,7 @@ const featuresInsert = `    features: isJcKe20
           'Warm 18K gold vermeil perimeter bezel framing every elegant contour',
           'Cast in certified 925 hallmarked Sterling Silver with tarnish-resistant finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe3`;
 content = content.replace("    features: isJcKe3", featuresInsert);

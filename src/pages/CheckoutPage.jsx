@@ -68,7 +68,7 @@ export default function CheckoutPage() {
   // Single-product Buy Now session check
   const [buyNowItem, setBuyNowItem] = useState(() => {
     try {
-      const raw = sessionStorage.getItem('smiths_buy_now_item')
+      const raw = (sessionStorage.getItem('smits_buy_now_item') || sessionStorage.getItem('smiths_buy_now_item'))
       return raw ? JSON.parse(raw) : null
     } catch (e) {
       return null
@@ -85,12 +85,12 @@ export default function CheckoutPage() {
   const handleItemQuantityChange = (itemId, newQty) => {
     if (isBuyNowMode) {
       if (newQty <= 0) {
-        try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
+        try { sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {} } catch (e) {}
         setBuyNowItem(null)
       } else {
         const updated = { ...buyNowItem, quantity: newQty }
         setBuyNowItem(updated)
-        try { sessionStorage.setItem('smiths_buy_now_item', JSON.stringify(updated)) } catch (e) {}
+        try { sessionStorage.setItem('smits_buy_now_item', JSON.stringify(updated)) } catch (e) {}
       }
     } else {
       updateQuantity(itemId, newQty)
@@ -100,7 +100,7 @@ export default function CheckoutPage() {
   // Remove item helper for both Buy Now and regular cart
   const handleItemRemove = (itemId) => {
     if (isBuyNowMode) {
-      try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
+      try { sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {} } catch (e) {}
       setBuyNowItem(null)
     } else {
       removeItem(itemId)
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
   // Stepper: 1: 'address', 2: 'payment', 3: 'confirm'
   const [currentStep, setCurrentStepState] = useState(() => {
     try {
-      const saved = Number(sessionStorage.getItem('smiths_checkout_step'))
+      const saved = Number((sessionStorage.getItem('smits_checkout_step') || sessionStorage.getItem('smiths_checkout_step')))
       return saved >= 1 && saved <= 3 ? saved : 1
     } catch (e) {
       return 1
@@ -120,7 +120,7 @@ export default function CheckoutPage() {
   const setCurrentStep = (step) => {
     setCurrentStepState(step)
     try {
-      sessionStorage.setItem('smiths_checkout_step', String(step))
+      sessionStorage.setItem('smits_checkout_step', String(step))
     } catch (e) {}
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -128,11 +128,11 @@ export default function CheckoutPage() {
   // Synchronize on mount to ensure Buy Now items and step 1 are guaranteed
   useEffect(() => {
     try {
-      const raw = sessionStorage.getItem('smiths_buy_now_item')
+      const raw = (sessionStorage.getItem('smits_buy_now_item') || sessionStorage.getItem('smiths_buy_now_item'))
       if (raw) {
         setBuyNowItem(JSON.parse(raw))
       }
-      const savedStep = Number(sessionStorage.getItem('smiths_checkout_step'))
+      const savedStep = Number((sessionStorage.getItem('smits_checkout_step') || sessionStorage.getItem('smiths_checkout_step')))
       if (savedStep >= 1 && savedStep <= 3) {
         setCurrentStepState(savedStep)
       } else {
@@ -144,8 +144,8 @@ export default function CheckoutPage() {
   // Terminate checkout session completely and return to store
   const handleCancelCheckout = () => {
     try {
-      sessionStorage.removeItem('smiths_checkout_step')
-      sessionStorage.removeItem('smiths_buy_now_item')
+      sessionStorage.removeItem('smits_checkout_step'); try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
+      sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
     } catch (e) {}
     setBuyNowItem(null)
     setCurrentStepState(1)
@@ -156,8 +156,8 @@ export default function CheckoutPage() {
   // Terminate checkout session and open normal side cart drawer on store
   const handleOpenCartFromCheckout = () => {
     try {
-      sessionStorage.removeItem('smiths_checkout_step')
-      sessionStorage.removeItem('smiths_buy_now_item')
+      sessionStorage.removeItem('smits_checkout_step'); try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
+      sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
     } catch (e) {}
     setBuyNowItem(null)
     setCurrentStepState(1)
@@ -173,12 +173,12 @@ export default function CheckoutPage() {
     const handleRestart = () => {
       setCurrentStepState(1)
       try {
-        sessionStorage.setItem('smiths_checkout_step', '1')
+        sessionStorage.setItem('smits_checkout_step', '1')
       } catch (e) {}
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    window.addEventListener('smiths_restart_checkout', handleRestart)
-    return () => window.removeEventListener('smiths_restart_checkout', handleRestart)
+    window.addEventListener('smits_restart_checkout', handleRestart)
+    return () => window.removeEventListener('smits_restart_checkout', handleRestart)
   }, [])
 
   // Auth state
@@ -197,7 +197,7 @@ export default function CheckoutPage() {
   const [addresses, setAddresses] = useState([])
   const [selectedAddressId, setSelectedAddressIdState] = useState(() => {
     try {
-      return sessionStorage.getItem('smiths_selected_address_id') || null
+      return (sessionStorage.getItem('smits_selected_address_id') || sessionStorage.getItem('smiths_selected_address_id')) || null
     } catch (e) {
       return null
     }
@@ -206,8 +206,8 @@ export default function CheckoutPage() {
   const setSelectedAddressId = (id) => {
     setSelectedAddressIdState(id)
     try {
-      if (id) sessionStorage.setItem('smiths_selected_address_id', String(id))
-      else sessionStorage.removeItem('smiths_selected_address_id')
+      if (id) sessionStorage.setItem('smits_selected_address_id', String(id))
+      else sessionStorage.removeItem('smits_selected_address_id'); try { sessionStorage.removeItem('smiths_selected_address_id') } catch (e) {}
     } catch (e) {}
   }
 
@@ -233,7 +233,7 @@ export default function CheckoutPage() {
   // Step 2 & 3 state (Persistent payment method)
   const [paymentMethod, setPaymentMethodState] = useState(() => {
     try {
-      return sessionStorage.getItem('smiths_payment_method') || 'COD'
+      return (sessionStorage.getItem('smits_payment_method') || sessionStorage.getItem('smiths_payment_method')) || 'COD'
     } catch (e) {
       return 'COD'
     }
@@ -242,7 +242,7 @@ export default function CheckoutPage() {
   const setPaymentMethod = (method) => {
     setPaymentMethodState(method)
     try {
-      sessionStorage.setItem('smiths_payment_method', method)
+      sessionStorage.setItem('smits_payment_method', method)
     } catch (e) {}
   }
 
@@ -294,7 +294,7 @@ export default function CheckoutPage() {
 
       if (addrs && addrs.length > 0) {
         // Prioritize previously selected address from session, or default, or first
-        const savedId = sessionStorage.getItem('smiths_selected_address_id')
+        const savedId = (sessionStorage.getItem('smits_selected_address_id') || sessionStorage.getItem('smiths_selected_address_id'))
         const matched = savedId && addrs.find((a) => String(a.id) === String(savedId))
         if (matched) {
           setSelectedAddressIdState(matched.id)
@@ -561,8 +561,8 @@ export default function CheckoutPage() {
           key: razorpayKey,
           amount: amountPaise,
           currency: 'INR',
-          name: 'SMITHS JEWELLERY',
-          description: `Smiths Silver Jewellery (${items.reduce((s, it) => s + it.quantity, 0)} items)`,
+          name: 'SMITS JEWELLERY',
+          description: `Smits Silver Jewellery (${items.reduce((s, it) => s + it.quantity, 0)} items)`,
           image: typeof window !== 'undefined' && window.location?.origin ? `${window.location.origin}/favicon.png` : '/favicon.png',
           prefill: {
             name: selectedAddress.full_name,
@@ -572,7 +572,7 @@ export default function CheckoutPage() {
           notes: {
             shipping_city: selectedAddress.city,
             shipping_pincode: selectedAddress.pincode,
-            order_source: 'smithsjewellery.in',
+            order_source: 'smitsjewellery.in',
           },
           theme: {
             color: '#E2E8F0',
@@ -598,12 +598,12 @@ export default function CheckoutPage() {
               const order = await createOrder(paidPayload)
               trackOrderCompleted(order)
               if (isBuyNowMode) {
-                try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
+                try { sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {} } catch (e) {}
                 setBuyNowItem(null)
               } else {
                 useCartStore.getState().clearCart()
               }
-              try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
+              try { sessionStorage.removeItem('smits_checkout_step'); try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {} } catch (e) {}
               closeCart()
               navigate(
                 `/order-confirmed?orderId=${order.order_number}&total=${totalAmount}&method=PREPAID&paymentId=${encodeURIComponent(
@@ -651,12 +651,12 @@ export default function CheckoutPage() {
 
       // Clear cart locally and from account (if regular cart checkout)
       if (isBuyNowMode) {
-        try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {}
+        try { sessionStorage.removeItem('smits_buy_now_item'); try { sessionStorage.removeItem('smiths_buy_now_item') } catch (e) {} } catch (e) {}
         setBuyNowItem(null)
       } else {
         useCartStore.getState().clearCart()
       }
-      try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {}
+      try { sessionStorage.removeItem('smits_checkout_step'); try { sessionStorage.removeItem('smiths_checkout_step') } catch (e) {} } catch (e) {}
       closeCart()
 
       // Redirect to Order Confirmed
@@ -683,7 +683,7 @@ export default function CheckoutPage() {
             <ArrowLeft className="h-4 w-4" />
             <span>Return to Store</span>
           </button>
-          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITHS</span>
+          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITS</span>
           <button
             type="button"
             onClick={handleCancelCheckout}
@@ -711,7 +711,7 @@ export default function CheckoutPage() {
         </div>
 
         <div className="border-t border-charcoal-light py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Smiths Jewellery. All rights reserved.
+          © 2026 Smits Jewellery. All rights reserved.
         </div>
       </div>
     )
@@ -732,7 +732,7 @@ export default function CheckoutPage() {
             <ArrowLeft className="h-4 w-4" />
             <span>Return to Store</span>
           </button>
-          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITHS</span>
+          <span className="font-heading text-base font-bold tracking-widest text-cream">SMITS</span>
           <button
             type="button"
             onClick={handleCancelCheckout}
@@ -877,7 +877,7 @@ export default function CheckoutPage() {
         </div>
 
         <div className="border-t border-charcoal-light py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Smiths Jewellery. All rights reserved.
+          © 2026 Smits Jewellery. All rights reserved.
         </div>
       </div>
     )
@@ -910,7 +910,7 @@ export default function CheckoutPage() {
             {/* Brand Title */}
             <div className="flex items-center gap-2">
               <span className="font-heading text-base font-extrabold tracking-[0.2em] text-cream">
-                SMITHS
+                SMITS
               </span>
             </div>
 
@@ -1233,7 +1233,7 @@ export default function CheckoutPage() {
               <div className="rounded-2xl border border-gold/20 bg-charcoal/80 p-6 space-y-4 animate-fade-in-up">
                 <div className="flex items-center justify-between pb-3 border-b border-charcoal-light">
                   <h3 className="font-heading text-lg font-bold text-cream">
-                    {authMode === 'signup' ? 'Create Smiths Account' : 'Sign in to Smiths Jewellery'}
+                    {authMode === 'signup' ? 'Create Smits Account' : 'Sign in to Smits Jewellery'}
                   </h3>
                   <button
                     onClick={() => setIsAuthFormOpen(false)}

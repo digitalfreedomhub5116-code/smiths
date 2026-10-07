@@ -162,7 +162,7 @@ async function main() {
   const productData = {
     id: 64,
     name: 'JC-KE-20',
-    full_name: 'JC-KE-20 Modernist Noir Enamel Heart Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-20 Modernist Noir Enamel Heart Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-20',
     genre: 'EARRINGS',
     price: 849,
@@ -188,7 +188,7 @@ async function main() {
       'Warm 18K gold vermeil perimeter bezel framing every elegant contour',
       'Cast in certified 925 hallmarked Sterling Silver with tarnish-resistant finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

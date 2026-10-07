@@ -1,7 +1,7 @@
 /**
- * Smiths Jewellery Analytics & Event Tracking Engine
+ * Smits Jewellery Analytics & Event Tracking Engine
  * Integrates with:
- * 1. Supabase Database (Real-time live visitor and funnel data for Smiths Jewellery Admin Panel)
+ * 1. Supabase Database (Real-time live visitor and funnel data for Smits Jewellery Admin Panel)
  * 2. Microsoft Clarity (Session recordings, heatmaps, AI summaries)
  */
 import { supabase } from './supabase'

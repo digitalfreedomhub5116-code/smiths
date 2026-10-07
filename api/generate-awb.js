@@ -135,7 +135,7 @@ export default async function handler(req, res) {
 
     if (!action && req.url && req.url.includes('?')) {
       try {
-        const parsedUrl = new URL(req.url, 'https://smithsjewellery.in')
+        const parsedUrl = new URL(req.url, 'https://smitsjewellery.in')
         action = action || parsedUrl.searchParams.get('action')
         orderParam = orderParam || parsedUrl.searchParams.get('orderId') || parsedUrl.searchParams.get('order_id')
         shipmentParam = shipmentParam || parsedUrl.searchParams.get('shipmentId') || parsedUrl.searchParams.get('shipment_id')
@@ -359,7 +359,7 @@ export default async function handler(req, res) {
 
     const rawPhone = String(order.customer_phone || rawAddress.phone || '').replace(/[^0-9]/g, '')
     const phone = rawPhone.slice(-10) // Clean 10-digit Indian mobile number
-    const email = order.customer_email || rawAddress.email || 'orders@smithsjewellery.com'
+    const email = order.customer_email || rawAddress.email || 'orders@smitsjewellery.com'
 
     const streetAddress = (rawAddress.street_address || rawAddress.address || '').trim()
     const city = (rawAddress.city || '').trim()
@@ -404,7 +404,7 @@ export default async function handler(req, res) {
     const orderItems = order.order_items || order.items || []
     const formattedItems = orderItems.length > 0
       ? orderItems.map((it, idx) => ({
-          name: it.name || it.product_name || 'Smiths Silver Jewellery Piece',
+          name: it.name || it.product_name || 'Smits Silver Jewellery Piece',
           sku: it.sku || `SMT-JW-${it.product_id || it.id || idx + 1}`,
           units: Number(it.quantity || 1),
           selling_price: Number(it.price || 1299),
@@ -414,7 +414,7 @@ export default async function handler(req, res) {
         }))
       : [
           {
-            name: 'Smiths 925 Sterling Silver Jewellery Piece',
+            name: 'Smits 925 Sterling Silver Jewellery Piece',
             sku: 'SMT-JW-01',
             units: 1,
             selling_price: Number(order.total_amount || 1299),
@@ -440,7 +440,7 @@ export default async function handler(req, res) {
       order_date: formatShiprocketDate(order.created_at),
       pickup_location: pickupLocationId,
       channel_id: process.env.SHIPROCKET_CHANNEL_ID || '12100778',
-      comment: 'Smiths Jewellery - Luxury Silver Jewellery, Handle with Care',
+      comment: 'Smits Jewellery - Luxury Silver Jewellery, Handle with Care',
       billing_customer_name: firstName,
       billing_last_name: lastName,
       billing_address: streetAddress,
@@ -727,7 +727,7 @@ async function updateDatabaseWithAwb({
         shipment_id: targetShipmentId,
         status: 'SHIPPED',
         activity: `AWB Generated (${awbCode}) via ${courierPartner}. Handed over to courier partner.`,
-        location: 'Smiths Jewellery Fulfillment Hub, Mumbai',
+        location: 'Smits Jewellery Fulfillment Hub, Mumbai',
         event_time: nowIso,
       })
     }

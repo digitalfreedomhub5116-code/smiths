@@ -49,7 +49,7 @@ export default function OrderTrackingPage() {
   const [searchLoading, setSearchLoading] = useState(false)
   const [notFound, setNotFound] = useState(false)
 
-  // 6 Checkpoints matching Smiths Jewellery fulfillment pipeline
+  // 6 Checkpoints matching Smits Jewellery fulfillment pipeline
   const STAGES = [
     {
       key: 'PLACED',
@@ -652,7 +652,7 @@ function OrderCard({
                 </span>
                 <div className="flex items-center gap-3">
                   <a
-                    href={`mailto:support@smithsjewellery.com?subject=Help with Cancelled Order ${order.order_number}`}
+                    href={`mailto:support@smitsjewellery.com?subject=Help with Cancelled Order ${order.order_number}`}
                     className="inline-flex items-center gap-1.5 text-gold hover:underline font-semibold cursor-pointer"
                   >
                     <Headphones className="h-3.5 w-3.5" />
@@ -678,7 +678,7 @@ function OrderCard({
                 <div className="pt-1">
                   <span className="font-mono text-xs text-gold font-bold italic">01</span>
                   <h5 className="font-heading text-sm font-bold text-cream">Order Placed</h5>
-                  <p className="text-xs text-cream-muted/70">Order confirmed on Smiths Jewellery</p>
+                  <p className="text-xs text-cream-muted/70">Order confirmed on Smits Jewellery</p>
                 </div>
               </div>
 

@@ -151,7 +151,7 @@ async function main() {
   const productData = {
     id: 63,
     name: 'JC-KE-3',
-    full_name: 'JC-KE-3 Molten Gold Heart Pearl Fan Ear Jacket - Smiths Jewellery',
+    full_name: 'JC-KE-3 Molten Gold Heart Pearl Fan Ear Jacket - Smits Jewellery',
     slug: 'jc-ke-3',
     genre: 'EARRINGS',
     price: 849,
@@ -177,7 +177,7 @@ async function main() {
       'High-mirror polished 3D puffed heart silhouette cast in certified 925 Sterling Silver',
       'Layered in rich, tarnish-resistant 18K Gold Vermeil for an everlasting warm luster',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

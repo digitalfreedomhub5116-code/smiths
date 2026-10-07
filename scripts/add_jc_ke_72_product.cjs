@@ -171,7 +171,7 @@ async function main() {
   const productData = {
     id: 44,
     name: 'JC-KE-72',
-    full_name: 'JC-KE-72 Mother-of-Pearl Ginkgo Leaf Pearl Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-72 Mother-of-Pearl Ginkgo Leaf Pearl Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-72',
     genre: 'EARRINGS',
     price: 849,
@@ -198,7 +198,7 @@ async function main() {
       'Scalloped outer fan rim handset with brilliant micro-pavé AAA cubic zirconia stones',
       'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

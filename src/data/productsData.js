@@ -173,7 +173,7 @@ const JEWELLERY_DESCRIPTIONS = {
   'Minimalist Polished Silver Cuff':
     'Pure architectural symmetry. Forged from cold-rolled solid silver, this open-ended cuff flexes gently to contour your wrist perfectly. High-mirror finish gives it an immaculate liquid chrome glow.',
   'Silver Cuban Link Chain Bracelet':
-    'Bold, weighty, and unapologetically stylish. Interlocking flat-beveled silver links drape comfortably around the wrist, secured with a custom Smiths engraved box lock.',
+    'Bold, weighty, and unapologetically stylish. Interlocking flat-beveled silver links drape comfortably around the wrist, secured with a custom Smits engraved box lock.',
   'Aurora Crystal Teardrop Earrings':
     'Catching every glance with graceful motion, the Aurora Teardrop Earrings showcase faceted crystal briolettes suspended from slender sterling silver hooks. Feather-light and hypoallergenic.',
   'Classic Princess-Cut Solitaire Studs':
@@ -189,7 +189,7 @@ const JEWELLERY_DESCRIPTIONS = {
   'Midnight Cashmere Touch Winter Scarf':
     'Ultra-soft brushed wool and cashmere blend with subtle silver metallic thread weaving throughout the fringe. Wraps you in warmth while delivering refined luxury aesthetics.',
   'The Royal Silver Ensemble':
-    'The definitive luxury pairing. Combines our bestselling Luxe Solitaire Silver Pendant with matching Princess-Cut Solitaire Studs, nestled inside a signature Smiths velvet presentation box.',
+    'The definitive luxury pairing. Combines our bestselling Luxe Solitaire Silver Pendant with matching Princess-Cut Solitaire Studs, nestled inside a signature Smits velvet presentation box.',
   'Signature Luxe Gift Box':
     'The ultimate gesture of affection. Uniting the Minimalist Polished Silver Cuff and the Monogram Silver Silk Scarf inside a ribbon-tied velvet gift box complete with an authenticity certificate.',
 }
@@ -1507,10 +1507,10 @@ export function buildProductReviews(product = {}) {
 export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
   const reviews = buildProductReviews(p)
   const slug = p.slug || `${p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}-silver`
-  const fullName = `${p.name} - Smiths Jewellery`
+  const fullName = `${p.name} - Smits Jewellery`
   const description =
     JEWELLERY_DESCRIPTIONS[p.name] ||
-    `Handcrafted 925 sterling silver ${p.name} from Smiths Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`
+    `Handcrafted 925 sterling silver ${p.name} from Smits Jewellery. Please note: This piece is crafted as fashion jewellery and does not carry an after-sales warranty or guarantee.`
 
   const originalPrice = p.originalPrice || 2599
   const discountPercent = Math.round(((originalPrice - p.price) / originalPrice) * 100)
@@ -1592,7 +1592,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Ergonomic U-curve huggie wrap post that sweeps beneath the lobe for a floating illusion',
           'Cast in certified 925 hallmarked Sterling Silver with radiant 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears and all-day comfort',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe70
       ? [
@@ -1602,7 +1602,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Luminous round freshwater pearl centerpiece with deep iridescent luster',
           'Cast in certified 925 hallmarked Sterling Silver with 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe73
       ? [
@@ -1611,7 +1611,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Mirror-image left and right ear design ergonomically contoured to hug the earlobe',
           'Handcrafted in certified 925 hallmarked Sterling Silver with 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe27
       ? [
@@ -1620,7 +1620,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Dynamic chatoyant optical effect shifting with ambient light and movement',
           'Crafted in certified 925 hallmarked Sterling Silver with anti-tarnish barrier',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe20
       ? [
@@ -1629,7 +1629,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Warm 18K gold vermeil perimeter bezel framing every elegant contour',
           'Cast in certified 925 hallmarked Sterling Silver with tarnish-resistant finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe3
       ? [
@@ -1638,7 +1638,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'High-mirror polished 3D puffed heart silhouette cast in certified 925 Sterling Silver',
           'Layered in rich, tarnish-resistant 18K Gold Vermeil for an everlasting warm luster',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe62
       ? [
@@ -1647,7 +1647,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Dual freshwater pearls: 8mm high-luster lobe pearl and miniature floating accent pearl',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe61
       ? [
@@ -1656,7 +1656,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Round-cut brilliant AAA cubic zirconia crystal accent handset at the center bow knot',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe43
       ? [
@@ -1665,7 +1665,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Granulated caviar-beading floral center stamen catching soft radiant light',
           'Cast in certified 925 hallmarked Sterling Silver with rich 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe2
       ? [
@@ -1674,7 +1674,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Harmonious open-center architecture radiates light around the earlobe with regal symmetry',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe34
       ? [
@@ -1683,7 +1683,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Dramatic 48mm drop length designed to elongate the jawline and neck with effortless motion',
           'Cast in certified 925 hallmarked Sterling Silver with rich 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe33
       ? [
@@ -1692,7 +1692,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Organic textured rim cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
           'Bold contemporary sculptural presence with remarkable featherlight comfort for all-day wear',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe32
       ? [
@@ -1701,7 +1701,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'High-luster round freshwater pearl center body with iridescent overtone',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe30
       ? [
@@ -1710,7 +1710,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Mirror-polished bevel-edged teardrop loop in certified 925 Sterling Silver layered in 18K Gold Vermeil',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
           'Minimalist architectural symmetry creates a lightweight, floating visual effect on the lobe',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe29
       ? [
@@ -1719,7 +1719,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Scalloped golden borders sculpted in certified 925 Sterling Silver layered in 18K Gold Vermeil',
           'Dramatic monochromatic haute-couture contrast of midnight black, warm gold, and pearl white',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe28
       ? [
@@ -1728,7 +1728,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Contoured ergonomic cuff curvature designed to hug the earlobe seamlessly without pinching',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe26
       ? [
@@ -1737,7 +1737,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Precision cast in certified 925 hallmarked Sterling Silver with triple rhodium mirror plating',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
           'Fluid negative-space architecture delivers captivating kinetic brilliance with every movement',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe4
       ? [
@@ -1746,7 +1746,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Ethereal translucent ivory mother-of-pearl luster that catches soft radiant light',
           'Solid certified 925 hallmarked Sterling Silver post mounts',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe23
       ? [
@@ -1755,7 +1755,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Magnificent oversized center pearl with deep orient and high mirror luster',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe9
       ? [
@@ -1764,7 +1764,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Delicate open-circle architecture creates an ethereal negative-space halo on the lobe',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe7
       ? [
@@ -1773,7 +1773,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Swept sculptural 18K gold vermeil arch frame with 9mm center pearl & floating accent mini pearl',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe22
       ? [
@@ -1782,7 +1782,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Lower leaf: slate-grey shell enamel with hand-etched botanical vein detailing',
           'Warm 18K Gold Vermeil architectural bezel outlines each leaf with precision',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe19
       ? [
@@ -1791,7 +1791,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Densely handset micro-pavé AAA cubic zirconia crystals replicating shimmering mermaid scales',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe40
       ? [
@@ -1800,7 +1800,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Three alternating petals densely handset with brilliant AAA cubic zirconia crystals in antique gold prongs',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe72
       ? [
@@ -1809,7 +1809,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Scalloped outer fan rim handset with brilliant micro-pavé AAA cubic zirconia stones',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe50
       ? [
@@ -1818,7 +1818,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Delicate perimeter halo accented with hand-set miniature micro seed-pearl beading',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe58
       ? [
@@ -1827,7 +1827,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Handset micro-pavé AAA cubic zirconia crystals along multi-point starlight starbursts',
           'Graduated multi-pearl cluster featuring high-luster button, accent, and dramatic 10mm drop pearls',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure huggie leverback closure',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe57
       ? [
@@ -1836,7 +1836,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Polished 18K Gold Vermeil arched cherry stems sculpted over 925 Sterling Silver base',
           'Hand-selected round freshwater pearls with rich iridescent overtone and deep luster',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe56
       ? [
@@ -1845,7 +1845,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Dual high-luster freshwater pearls (primary lobe stud and accent bud)',
           'Cast in certified 925 hallmarked Sterling Silver with a warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe37
       ? [
@@ -1854,7 +1854,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Cast in certified 925 hallmarked Sterling Silver with a warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe16
       ? [
@@ -1863,7 +1863,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Cast in certified 925 hallmarked Sterling Silver with a warm, lasting 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe67
       ? [
@@ -1872,7 +1872,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Cast in certified 925 hallmarked Sterling Silver with a warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe53
       ? [
@@ -1881,7 +1881,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Cast in certified 925 hallmarked Sterling Silver with a warm, lasting 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Ergonomic comfort-fit post backings for secure, all-day featherlight wear',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe80
       ? [
@@ -1890,7 +1890,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Shimmering blush-pink enamel flower petals with bezel crystal pistil center',
           'Full circular garland halo set with brilliant AAA cubic zirconia crystals',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe63
       ? [
@@ -1899,7 +1899,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Six hand-matched round freshwater pearls with high-luster iridescent sheen',
           'Handset AAA round brilliant cubic zirconia stones in secure prong settings',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe76
       ? [
@@ -1908,7 +1908,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Handset multi-facet AAA cubic zirconia cluster with brilliant crystal fire',
           'Dual articulated flexible snake chain drops for fluid cascading motion',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe89
       ? [
@@ -1917,7 +1917,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Micro-pavé AAA cubic zirconia crystal ribbon strand paired with polished gold loop',
           'Secure 4-prong floating solitaire center stone for maximum light reflection',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe87
       ? [
@@ -1926,7 +1926,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'High-polish teardrop stud post with articulated pendant jump ring connection',
           'Intricate golden beaded center florets and scalloped petal borders',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe1
       ? [
@@ -1936,7 +1936,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Glossy vivid green enamel marquise leaf pair on golden stem',
           'Pavé horseshoe loop set with hand-placed AAA cubic zirconia crystals',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe77
       ? [
@@ -1945,7 +1945,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Hand-set brilliant round-cut AAA cubic zirconia crystals along all bow edges',
           'Glossy black enamel petal fill for couture contrast',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe82
       ? [
@@ -1954,7 +1954,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Radiant high-polish 18K gold vermeil dome contrasted with brushed rhodium fan',
           'Precision hand-etched radiating fan drop with seashell texture',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe83
       ? [
@@ -1963,7 +1963,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           "Luminous opalescent cat's eye moonstone cabochon wings with pearlescent glow",
           'Handset micro-pavé AAA cubic zirconia crystal ballerina skirt',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe84
       ? [
@@ -1972,7 +1972,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Multi-tone pavé amethyst and purple sapphire cubic zirconia crystal setting',
           'Luminous lavender chalcedony / quartz translucent cushion cabochon',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe91
       ? [
@@ -1981,7 +1981,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Hand-selected luminous round freshwater pearl focal drop',
           'Micro-pavé AAA cubic zirconia stones along the bow and teardrop halo',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe85
       ? [
@@ -1990,7 +1990,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Hand-set AAA brilliant diamond-cut cubic zirconia crystals with diamond sparkle',
           'Articulated dual-strand drop ribbons for fluid light-catching motion',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe36
       ? [
@@ -1999,7 +1999,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Hand-selected luminous freshwater pearl studs & matching arc pearls',
           'Convertible 2-in-1 Design: wear solo as classic pearl studs or paired with the sunburst fan drop',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe86
       ? [
@@ -2008,7 +2008,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Triple Rhodium Plated for enduring tarnish resistance and high-mirror shine',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Secure stud post backings with snug friction clutch',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe38
       ? [
@@ -2017,7 +2017,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Warm 18K Gold finish over certified 925 Sterling Silver core',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Multi-hole adjustable jacket post for customized earlobe height fitting',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe55
       ? [
@@ -2026,7 +2026,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Micro-pavé crystal leaves along contoured ear climber branch',
           'Warm 18K Gold finish over certified 925 Sterling Silver core',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe88
       ? [
@@ -2035,7 +2035,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Warm 18K Gold finish over certified 925 Sterling Silver core',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Comfort-fit stud post backings with secure friction clutch',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isInfinityPearl
       ? [
@@ -2044,7 +2044,7 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           '18K Warm Gold finish over certified 925 Sterling Silver core',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Comfort-fit post backings with secure friction closure',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isAuraEarrings
       ? [
@@ -2053,14 +2053,14 @@ export const MOCK_PRODUCTS = RAW_PRODUCTS.map((p) => {
           'Warm 18K Gold finish over certified 925 Sterling Silver base',
           '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
           'Comfort-fit post backings with secure silicone friction clutch',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isScarf
       ? [
           '100% Pure Mulberry Silk / Cashmere blend texture',
           'Hand-rolled and stitched edges',
           'Breathable, lightweight and rich drape',
-          'Arrives in Smiths Signature Gift Packaging',
+          'Arrives in Smits Signature Gift Packaging',
         ]
       : [
           'Crafted from certified 925 Sterling Silver',

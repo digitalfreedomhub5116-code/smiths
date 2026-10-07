@@ -115,8 +115,9 @@ export default function CartDrawer() {
       return
     }
     try {
+      sessionStorage.removeItem('smits_buy_now_item')
       sessionStorage.removeItem('smiths_buy_now_item')
-      sessionStorage.setItem('smiths_checkout_step', '1')
+      sessionStorage.setItem('smits_checkout_step', '1')
     } catch (e) {}
     closeCart()
     navigate('/checkout')
@@ -126,8 +127,9 @@ export default function CartDrawer() {
     setCurrentUser(user)
     setIsAuthOpen(false)
     try {
+      sessionStorage.removeItem('smits_buy_now_item')
       sessionStorage.removeItem('smiths_buy_now_item')
-      sessionStorage.setItem('smiths_checkout_step', '1')
+      sessionStorage.setItem('smits_checkout_step', '1')
     } catch (e) {}
     closeCart()
     navigate('/checkout')

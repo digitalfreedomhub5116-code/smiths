@@ -124,7 +124,7 @@ async function main() {
   const productData = {
     id: 25,
     name: 'JC-KE-91',
-    full_name: 'JC-KE-91 - Smiths Jewellery',
+    full_name: 'JC-KE-91 - Smits Jewellery',
     slug: 'jc-ke-91',
     genre: 'EARRINGS',
     price: 849,
@@ -151,7 +151,7 @@ async function main() {
       'Hand-selected luminous round freshwater pearl focal drop',
       'Micro-pavé AAA cubic zirconia stones along the bow and teardrop halo',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

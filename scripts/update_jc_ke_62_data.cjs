@@ -50,7 +50,7 @@ const featuresInsert = `    features: isJcKe62
           'Dual freshwater pearls: 8mm high-luster lobe pearl and miniature floating accent pearl',
           'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe61`;
 content = content.replace("    features: isJcKe61", featuresInsert);

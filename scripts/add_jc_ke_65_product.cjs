@@ -201,7 +201,7 @@ async function main() {
   const productData = {
     id: 68,
     name: 'JC-KE-65',
-    full_name: 'JC-KE-65 Onyx Clover & Pavé Star Curated Ear Wrap Huggie Set - Smiths Jewellery',
+    full_name: 'JC-KE-65 Onyx Clover & Pavé Star Curated Ear Wrap Huggie Set - Smits Jewellery',
     slug: 'jc-ke-65',
     genre: 'EARRINGS',
     price: 849,
@@ -229,7 +229,7 @@ async function main() {
       'Ergonomic U-curve huggie wrap post that sweeps beneath the lobe for a floating illusion',
       'Cast in certified 925 hallmarked Sterling Silver with radiant 18K gold vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears and all-day comfort',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

@@ -130,7 +130,7 @@ async function main() {
   const productData = {
     id: 48,
     name: 'JC-KE-7',
-    full_name: 'JC-KE-7 Mother-of-Pearl Butterfly Pearl Arch Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-7 Mother-of-Pearl Butterfly Pearl Arch Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-7',
     genre: 'EARRINGS',
     price: 849,
@@ -156,7 +156,7 @@ async function main() {
       'Swept sculptural 18K gold vermeil arch frame with 9mm center pearl & floating accent mini pearl',
       'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

@@ -59,7 +59,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     return sendJson(res, 200, {
       status: 'active',
-      service: 'Smiths Jewellery Shiprocket Webhook Listener',
+      service: 'Smits Jewellery Shiprocket Webhook Listener',
       timestamp: new Date().toISOString(),
     })
   }

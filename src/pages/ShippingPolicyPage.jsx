@@ -89,7 +89,7 @@ export default function ShippingPolicyPage() {
               <span>Order Processing & Workshop Queue</span>
             </h2>
             <p>
-              Each Smiths Jewellery piece is crafted using 925 sterling silver, followed by meticulous hand-polishing, rhodium lustering, and gemstone inspection.
+              Each Smits Jewellery piece is crafted using 925 sterling silver, followed by meticulous hand-polishing, rhodium lustering, and gemstone inspection.
             </p>
             <p>
               Orders confirmed before 2:00 PM IST on working business days enter the print queue on the same day. Standard turnaround from queue entry to courier handover is 24 to 48 hours. During limited drop windows or high-volume festive seasons, please allow up to 72 hours for careful artisanal inspection before dispatch.
@@ -157,8 +157,8 @@ export default function ShippingPolicyPage() {
               <div className="flex items-center gap-3">
                 <Mail className="h-4 w-4 text-gold shrink-0" />
                 <span className="text-cream font-medium">Dispatch Desk Email:</span>
-                <a href="mailto:support@smithsjewellery.com" className="text-gold font-bold hover:underline font-mono">
-                  support@smithsjewellery.com
+                <a href="mailto:support@smitsjewellery.com" className="text-gold font-bold hover:underline font-mono">
+                  support@smitsjewellery.com
                 </a>
               </div>
             </div>

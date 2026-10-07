@@ -105,7 +105,7 @@ async function main() {
   const productData = {
     id: 29,
     name: 'JC-KE-77',
-    full_name: 'JC-KE-77 - Smiths Jewellery',
+    full_name: 'JC-KE-77 - Smits Jewellery',
     slug: 'jc-ke-77',
     genre: 'EARRINGS',
     price: 849,
@@ -131,7 +131,7 @@ async function main() {
       'Hand-set brilliant round-cut AAA cubic zirconia crystals along all bow edges',
       'Glossy black enamel petal fill for couture contrast',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

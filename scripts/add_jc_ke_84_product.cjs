@@ -114,7 +114,7 @@ async function main() {
   const productData = {
     id: 26,
     name: 'JC-KE-84',
-    full_name: 'JC-KE-84 - Smiths Jewellery',
+    full_name: 'JC-KE-84 - Smits Jewellery',
     slug: 'jc-ke-84',
     genre: 'EARRINGS',
     price: 849,
@@ -141,7 +141,7 @@ async function main() {
       'Multi-tone pavé amethyst and purple sapphire cubic zirconia crystal setting',
       'Luminous lavender chalcedony / quartz translucent cushion cabochon',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

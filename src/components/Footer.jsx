@@ -25,7 +25,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <span className="font-heading text-xl font-bold tracking-[0.2em] text-cream">
-              SMITHS <span className="font-serif italic font-normal text-silver">Jewellery</span>
+              SMITS <span className="font-serif italic font-normal text-silver">Jewellery</span>
             </span>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-cream-muted/70">
               Fine 925 sterling silver jewellery, luxury silk scarfs, and curated gift combos. Handcrafted with liquid rhodium polish for timeless radiance.
@@ -97,7 +97,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-10 flex flex-col items-center gap-3 border-t border-charcoal-light pt-6 sm:flex-row sm:justify-between">
           <p className="text-xs text-cream-muted/40">
-            © 2026 Smiths Jewellery. All rights reserved.
+            © 2026 Smits Jewellery. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             <Link

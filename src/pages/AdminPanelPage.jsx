@@ -701,17 +701,17 @@ function GalleryDropzone({ gallery = [], onUpdateGallery, onUploadingChange }) {
   )
 }
 
-const MASTER_ADMIN_PASSWORD = 'smiths@5116'
-const AUTH_KEY_DEVICE = 'smiths_admin_device_authenticated'
-const AUTH_KEY_SESSION = 'smiths_admin_session_authenticated'
+const MASTER_ADMIN_PASSWORD = 'smits@5116'
+const AUTH_KEY_DEVICE = 'smits_admin_device_authenticated'
+const AUTH_KEY_SESSION = 'smits_admin_session_authenticated'
 
 export default function AdminPanelPage() {
   // Authentication & Device Remember State
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
     try {
       if (typeof window !== 'undefined') {
-        const isDeviceAuth = localStorage.getItem(AUTH_KEY_DEVICE) === 'true'
-        const isSessionAuth = sessionStorage.getItem(AUTH_KEY_SESSION) === 'true'
+        const isDeviceAuth = (localStorage.getItem(AUTH_KEY_DEVICE) || localStorage.getItem('smiths_admin_device_authenticated')) === 'true'
+        const isSessionAuth = (sessionStorage.getItem(AUTH_KEY_SESSION) || sessionStorage.getItem('smiths_admin_session_authenticated')) === 'true'
         return isDeviceAuth || isSessionAuth
       }
     } catch (e) {}
@@ -869,8 +869,8 @@ export default function AdminPanelPage() {
 
   // Settings State
   const [settings, setSettings] = useState({
-    storeName: 'Smiths Jewellery',
-    contactEmail: 'support@smithsjewellery.com',
+    storeName: 'Smits Jewellery',
+    contactEmail: 'support@smitsjewellery.com',
     contactPhone: '+91 74700 12222',
     defaultShippingFee: 0,
     freeShippingThreshold: 0,
@@ -1043,7 +1043,7 @@ export default function AdminPanelPage() {
               order_number: o.order_number || o.id,
               customer_name: o.customer_name || 'Client',
               customer_phone: o.customer_phone || '+91 98765 00000',
-              customer_email: o.customer_email || 'orders@smithsjewellery.com',
+              customer_email: o.customer_email || 'orders@smitsjewellery.com',
               shipping_address: o.shipping_address || {
                 address: 'Fulfillment Order',
                 city: 'Mumbai',
@@ -1110,7 +1110,7 @@ export default function AdminPanelPage() {
           orderId: targetOrder.db_id || targetOrder.id || orderId,
           orderNumber: targetOrder.order_number || targetOrder.id || orderId,
           orderData: targetOrder,
-          reason: 'Cancelled by seller in Smiths Jewellery Admin Portal',
+          reason: 'Cancelled by seller in Smits Jewellery Admin Portal',
         }),
       })
 
@@ -1127,7 +1127,7 @@ export default function AdminPanelPage() {
             return {
               ...o,
               status: 'CANCELLED',
-              cancellation_reason: 'Cancelled by seller in Smiths Jewellery Admin Portal',
+              cancellation_reason: 'Cancelled by seller in Smits Jewellery Admin Portal',
               cancelled_at: new Date().toISOString(),
             }
           }
@@ -1260,7 +1260,7 @@ export default function AdminPanelPage() {
             order_number: o.order_number || o.id,
             customer_name: o.customer_name || 'Client',
             customer_phone: o.customer_phone || '+91 98765 00000',
-            customer_email: o.customer_email || 'orders@smithsjewellery.com',
+            customer_email: o.customer_email || 'orders@smitsjewellery.com',
             shipping_address: o.shipping_address || {
               address: 'Fulfillment Order',
               city: 'Mumbai',
@@ -1925,7 +1925,7 @@ export default function AdminPanelPage() {
             to="/"
             className="font-heading text-lg font-bold tracking-[0.2em] text-cream hover:text-gold transition-colors"
           >
-            SMITHS
+            SMITS
           </Link>
           <Link
             to="/"
@@ -2005,7 +2005,7 @@ export default function AdminPanelPage() {
 
         {/* Minimal Footer */}
         <footer className="relative z-10 border-t border-gold/10 py-4 text-center text-xs text-cream-muted/40">
-          © 2026 Smiths Jewellery · Confidential Management Console
+          © 2026 Smits Jewellery · Confidential Management Console
         </footer>
       </div>
     )
@@ -2057,7 +2057,7 @@ export default function AdminPanelPage() {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-heading text-lg font-black tracking-[0.25em] text-cream">
-                  SMITHS
+                  SMITS
                 </span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-gold/15 text-gold border border-gold/30 font-semibold tracking-wider">
                   ADMIN
@@ -2178,7 +2178,7 @@ export default function AdminPanelPage() {
                 )}
               </h1>
               <p className="text-xs text-cream-muted/60 hidden sm:block">
-                Smiths Jewellery Enterprise Dashboard • Realtime Synchronization
+                Smits Jewellery Enterprise Dashboard • Realtime Synchronization
               </p>
             </div>
           </div>
@@ -4821,13 +4821,13 @@ export default function AdminPanelPage() {
                     <input
                       type="text"
                       readOnly
-                      value={`${typeof window !== 'undefined' ? window.location.origin : 'https://smithsjewellery.in'}/api/shiprocket-webhook`}
+                      value={`${typeof window !== 'undefined' ? window.location.origin : 'https://smitsjewellery.in'}/api/shiprocket-webhook`}
                       className="flex-1 px-3 py-2 rounded-lg bg-charcoal border border-charcoal-light text-xs font-mono text-cream focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={() => {
-                        const url = `${typeof window !== 'undefined' ? window.location.origin : 'https://smithsjewellery.in'}/api/shiprocket-webhook`
+                        const url = `${typeof window !== 'undefined' ? window.location.origin : 'https://smitsjewellery.in'}/api/shiprocket-webhook`
                         navigator.clipboard?.writeText(url)
                         showToast('Shiprocket Webhook URL copied to clipboard!', 'success')
                       }}

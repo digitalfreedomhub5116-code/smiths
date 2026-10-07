@@ -41,7 +41,7 @@ export default function Navbar({ visible = true }) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <span className="font-heading text-lg sm:text-xl font-bold tracking-[0.22em] text-cream transition-colors group-hover:text-silver">
-              SMITHS <span className="font-serif italic text-silver font-normal text-sm sm:text-base tracking-widest text-silver-light">Jewellery</span>
+              SMITS <span className="font-serif italic text-silver font-normal text-sm sm:text-base tracking-widest text-silver-light">Jewellery</span>
             </span>
           </Link>
 

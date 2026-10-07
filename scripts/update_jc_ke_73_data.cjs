@@ -50,7 +50,7 @@ const featuresInsert = `    features: isJcKe73
           'Mirror-image left and right ear design ergonomically contoured to hug the earlobe',
           'Handcrafted in certified 925 hallmarked Sterling Silver with 18K gold vermeil finish',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe27`;
 content = content.replace("    features: isJcKe27", featuresInsert);

@@ -1,4 +1,4 @@
-# Smiths Jewellery 💍✨
+# Smits Jewellery 💍✨
 
 > **Elegance in 925 Sterling Silver & Obsidian Black**  
 > Luxury handcrafted fine jewellery designed for the contemporary connoisseur.
@@ -7,9 +7,9 @@
 
 ## 🌟 Overview
 
-**Smiths Jewellery** is a high-performance, modern direct-to-consumer e-commerce experience showcasing fine 925 sterling silver necklaces, tennis bracelets, earrings, statement rings, luxury silk scarfs, and gift combos.
+**Smits Jewellery** is a high-performance, modern direct-to-consumer e-commerce experience showcasing fine 925 sterling silver necklaces, tennis bracelets, earrings, statement rings, luxury silk scarfs, and gift combos.
 
-Built with a bespoke **brushed silver on obsidian black (`#080808`)** aesthetic, Smiths Jewellery blends timeless elegance, glassmorphic metallic accents, and high-speed checkout flows.
+Built with a bespoke **brushed silver on obsidian black (`#080808`)** aesthetic, Smits Jewellery blends timeless elegance, glassmorphic metallic accents, and high-speed checkout flows.
 
 ---
 
@@ -92,4 +92,4 @@ VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
 
 ## 🛡️ License
 
-Private & Proprietary — © 2026 Smiths Jewellery. All rights reserved.
+Private & Proprietary — © 2026 Smits Jewellery. All rights reserved.

@@ -128,7 +128,7 @@ async function main() {
   const productData = {
     id: 47,
     name: 'JC-KE-22',
-    full_name: 'JC-KE-22 Dual Leaf Ombre Shell Stud Earrings - Smiths Jewellery',
+    full_name: 'JC-KE-22 Dual Leaf Ombre Shell Stud Earrings - Smits Jewellery',
     slug: 'jc-ke-22',
     genre: 'EARRINGS',
     price: 849,
@@ -154,7 +154,7 @@ async function main() {
       'Lower leaf: slate-grey shell enamel with hand-etched botanical vein detailing',
       'Warm 18K Gold Vermeil architectural bezel outlines each leaf with precision',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

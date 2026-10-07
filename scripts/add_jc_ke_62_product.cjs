@@ -114,7 +114,7 @@ async function main() {
   const productData = {
     id: 62,
     name: 'JC-KE-62',
-    full_name: 'JC-KE-62 Pavé Butterfly Pearl Ear Climber Jacket - Smiths Jewellery',
+    full_name: 'JC-KE-62 Pavé Butterfly Pearl Ear Climber Jacket - Smits Jewellery',
     slug: 'jc-ke-62',
     genre: 'EARRINGS',
     price: 849,
@@ -140,7 +140,7 @@ async function main() {
       'Dual freshwater pearls: 8mm high-luster lobe pearl and miniature floating accent pearl',
       'Cast in certified 925 hallmarked Sterling Silver with warm 18K Gold Vermeil finish',
       '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
     ],
     is_active: true,
     updated_at: new Date().toISOString(),

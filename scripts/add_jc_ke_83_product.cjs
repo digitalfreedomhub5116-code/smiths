@@ -114,7 +114,7 @@ async function main() {
   const productData = {
     id: 27,
     name: 'JC-KE-83',
-    full_name: 'JC-KE-83 - Smiths Jewellery',
+    full_name: 'JC-KE-83 - Smits Jewellery',
     slug: 'jc-ke-83',
     genre: 'EARRINGS',
     price: 849,
@@ -141,7 +141,7 @@ async function main() {
       'Luminous opalescent cat\'s eye moonstone cabochon wings with pearlescent glow',
       'Handset micro-pavé AAA cubic zirconia crystal ballerina skirt',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

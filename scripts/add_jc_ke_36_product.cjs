@@ -21,7 +21,7 @@ async function main() {
   const productData = {
     id: 23,
     name: 'JC-KE-36',
-    full_name: 'JC-KE-36 - Smiths Jewellery',
+    full_name: 'JC-KE-36 - Smits Jewellery',
     slug: 'jc-ke-36',
     genre: 'EARRINGS',
     price: 849,
@@ -48,7 +48,7 @@ async function main() {
       'Hand-selected luminous freshwater pearl studs & matching arc pearls',
       'Convertible 2-in-1 Design: wear solo as classic pearl studs or paired with the sunburst fan drop',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

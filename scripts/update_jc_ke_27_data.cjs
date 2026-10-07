@@ -51,7 +51,7 @@ const featuresInsert = `    features: isJcKe27
           'Dynamic chatoyant optical effect shifting with ambient light and movement',
           'Crafted in certified 925 hallmarked Sterling Silver with anti-tarnish barrier',
           '100% Hypoallergenic — Nickel-Free and Lead-Free with secure comfort-fit stud posts',
-          'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate',
+          'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate',
         ]
       : isJcKe20`;
 content = content.replace("    features: isJcKe20", featuresInsert);

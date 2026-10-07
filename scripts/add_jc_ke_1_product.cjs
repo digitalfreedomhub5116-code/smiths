@@ -108,7 +108,7 @@ async function main() {
   const productData = {
     id: 30,
     name: 'JC-KE-1',
-    full_name: 'JC-KE-1 - Smiths Jewellery',
+    full_name: 'JC-KE-1 - Smits Jewellery',
     slug: 'jc-ke-1',
     genre: 'EARRINGS',
     price: 849,
@@ -135,7 +135,7 @@ async function main() {
       'Glossy vivid green enamel marquise leaf pair on golden stem',
       'Pavé horseshoe loop set with hand-placed AAA cubic zirconia crystals',
       '100% Hypoallergenic — Nickel-Free and Lead-Free for sensitive ears',
-      'Arrives in Smiths Signature Velvet Presentation Box with Authenticity Certificate'
+      'Arrives in Smits Signature Velvet Presentation Box with Authenticity Certificate'
     ],
     is_active: true,
     updated_at: new Date().toISOString()

@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden bg-black">
         <img
           src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1600&q=85"
-          alt="Smiths Jewellery — Fine 925 Sterling Silver & Luxury Accessories"
+          alt="Smits Jewellery — Fine 925 Sterling Silver & Luxury Accessories"
           className="h-full w-full object-cover object-center filter contrast-105 brightness-90"
           loading="eager"
         />
